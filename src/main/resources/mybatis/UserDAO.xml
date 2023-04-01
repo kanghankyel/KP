@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kidsplace.kidsplace.dao.UserDAO">
+
+    <resultMap id="memberMap" type="com.kidsplace.kidsplace.commons.UserVO">
+        <id property="uNum" column="uNum" />
+        <id property="uId" column="uId" />
+        <id property="uPassword" column="uPassword" />
+        <id property="uName" column="uName" />
+        <id property="uPhoneNum" column="uPhoneNum" />
+        <id property="uBirth" column="uBirth" />
+        <id property="uPostCode" column="uPostCode" />
+        <id property="uAddr" column="uAddr" />
+        <id property="uDetailAddr" column="uDetailAddr" />
+        <id property="regdate" column="regdate" />
+        <id property="updatedate" column="updatedate" />
+        <id property="visitdate" column="visitdate" />
+        <id property="member" column="member" />
+
+        <collection property="uAuthList" resultMap="authMap" />
+    </resultMap>
+
+    <resultMap id="authMap" type="com.kidsplace.kidsplace.commons.AuthVO">
+        <id property="uId" column="uId"/>
+        <id property="uAuth" column="uAuth"/>
+    </resultMap>
+
+    <!--아이디 중복체크 겸 로그인 기능구현-->
+    <!--UserVO getMemberByID(String u_id) throws Exception;-->
+    <!--resultType="net.kidsland.user.UserVO"-->
+    <!--
+        이렇게 하는 이유
+        kidslandUser table(DB)에는 auth(인증정보)관련 테이블이 없다.
+        하지만 UserVO(java)에는 auth가 있다.
+        따라서 resultMap에 auth를 포함하는 UserVO타입을 선언해주고,
+        아래에서 받아온 객체를 그곳에 넣어 활용한다.
+        그러면 두 테이블에서 가져온 데이터를 합쳐 완성본인 VO를 반환할 수 있다.
+    -->
+    <select id="getMemberByID" resultMap="memberMap">
+        SELECT
+            user.*
+          , auth.uAuth
+        FROM
+            kidslandUser user
+        INNER JOIN
+            kidslandUserAuth auth ON user.uId = auth.uId
+        WHERE
+            user.uId = #{uId, jdbcType=VARCHAR}
+        AND
+            user.member = 'Y';
+    </select>
+
+    <!--휴대폰 번호 중복 체크-->
+    <!--UserVO getMemberByPhoneNum(String uPhoneNum);-->
+    <select id="getMemberByPhoneNum" parameterType="java.lang.String" resultMap="memberMap">
+        SELECT user.*, uAuth
+        FROM kidslandUser AS user
+        LEFT OUTER JOIN kidslandUserAuth AS auth
+        on user.uId = auth.uId
+        WHERE user.uPhoneNum = #{uPhoneNum} AND user.member = 'Y';
+    </select>
+
+
+    <!--회원가입-->
+    <!--void signUp(UserVO vo) throws Exception;-->
+    <insert id="signUp" parameterType="com.kidsplace.kidsplace.commons.UserVO">
+        INSERT INTO
+            kidslandUser(uNum, uId, uPassword, uName, uPhoneNum, uBirth, uPostCode, uAddr, uDetailAddr)
+        VALUES
+            (
+             (SELECT resultTable.resultNum FROM (SELECT IFNULL(MAX(uNum), 0) + 1 AS resultNum FROM kidslandUser) resultTable)
+            , #{uId}
+            , #{uPassword}
+            , #{uName}
+            , #{uPhoneNum}
+            , #{uBirth}
+            , #{uPostCode}
+            , #{uAddr}
+            , #{uDetailAddr})
+    </insert>
+
+
+    <!--가입한 회원에게 기본권환 부여-->
+    <!--void insertAuth(String uId) throws Exception;-->
+    <insert id="insertAuth" parameterType="com.kidsplace.kidsplace.commons.UserVO">
+        INSERT INTO kidslandUserAuth(uId, uAuth) VALUES(#{uId}, 'ROLE_USER')
+    </insert>
+
+    <!--회원 아이디 찾기-->
+    <!--String findId(UserVO vo) throws Exception;-->
+    <select id="findId" parameterType="com.kidsplace.kidsplace.commons.UserVO" resultType="java.lang.String">
+        SELECT uId
+        FROM kidslandUser
+        WHERE uName = #{uName} AND uPhoneNum = #{uPhoneNum}
+    </select>
+
+    <!--회원 비밀번호 찾기 - 정확히는 변경 페이지로 인증(해당 아이디의 사용자가 존재하는지 확인)-->
+    <!--UserVO findPass(UserVO vo) throws Exception;-->
+    <select id="findPass" parameterType="com.kidsplace.kidsplace.commons.UserVO" resultMap="memberMap">
+        SELECT user.*, uAuth
+        FROM kidslandUser AS user
+        LEFT OUTER JOIN kidslandUserAuth AS auth
+        on user.uId = auth.uId
+        WHERE user.uId = #{uId} AND user.uName = #{uName} AND user.uPhoneNum = #{uPhoneNum} AND user.member = 'Y';
+    </select>
+
+    <!--비밀번호 변경-->
+    <!--void changePass(String uPassword) throws Exception;-->
+    <update id="changePass" parameterType="com.kidsplace.kidsplace.commons.UserVO">
+        UPDATE kidslandUser SET uPassword = #{uPassword} WHERE uNum = #{uNum}
+    </update>
+
+
+    <!--회원정보 업데이트-->
+    <!--UserVO update(UserVO vo) throws Exception;-->
+    <update id="update" parameterType="com.kidsplace.kidsplace.commons.UserVO">
+        UPDATE kidslandUser SET uName = #{uName}, uPhoneNum = #{uPhoneNum}, uPostCode = #{uPostCode}, uAddr = #{uAddr}, uDetailAddr = #{uDetailAddr} WHERE uNum = #{uNum}
+    </update>
+
+
+    <!--회원 방문시간 업데이트-->
+    <!--void updateVisitDate(Uservo vo) throws Exception;-->
+    <update id="updateVisit" parameterType="com.kidsplace.kidsplace.commons.UserVO">
+        UPDATE kidslandUser SET visitdate = NOW() WHERE uId = #{uId}
+    </update>
+
+</mapper>

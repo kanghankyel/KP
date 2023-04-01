@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+    <div th:include="/fragment/head"></div>
+    <div th:include="/fragment/header"></div>
+    <div th:include="/fragment/nav"></div>
+
+    <div class="content">
+        <div class="image_banner">
+            <div class="notice_banner">
+                <h1>공 &nbsp; 지 &nbsp; 사 &nbsp; 항 &nbsp; 상 &nbsp; 세</h1>
+            </div>
+        </div>
+        <div class="inner">
+            <h2>공지사항 상세보기</h2>
+            <hr>
+            <table class="board_write_table board_detail_table">
+                <tr th:each="noticeDetail : ${noticeDetail}">
+                    <th>제목</th>
+                    <td colspan="3"  id="deleteTitle" th:text="${noticeDetail.nTitle}"></td>                    
+                </tr>
+                <tr>
+                    <th>카테고리</th>
+                    <td id="deleteCategory" th:text="${noticeDetail.nCategory}"></td>
+                    <th>작성자</th>
+                    <td id="deleteWriter" th:text="${noticeDetail.nWriter}"></td>
+                </tr>
+                <tr>
+                    <td colspan="4" id="deleteContent" th:text="${noticeDetail.nContent}"></td>
+                </tr>
+            </table>
+            <div class="board_write_table_btn_box">
+                <div class="board_table_btn" sec:authorize="hasRole('ROLE_ADMIN')"><input type="button" value="수 정" th:onclick="|location.href='@{/community/noticeEdit(nNum = ${noticeDetail.nNum})}'|"></div>
+                <div class="board_table_btn" sec:authorize="hasRole('ROLE_ADMIN')"><input type="button" value="삭 제" onclick="noticeDeleteYN()"></div>
+            </div>
+        </div>
+    </div>
+
+    <div th:include="/fragment/footer"></div>
+
+
+
+    <!--  script  -->
+    <script>
+        function noticeDeleteYN(){
+            let DeleteYN = confirm("삭제하시겠습니까?")
+            if(DeleteYN){
+                noticeDeleteComplete();
+            }else{
+                alert("취소되었습니다.");
+            }
+        }
+
+        function noticeDeleteComplete(){
+            const urlParams = new URLSearchParams(location.search);
+            let nNum = urlParams.get("nNum");
+            console.log(nNum);
+            fetch('http://localhost:9000/community/noticeDelete', {
+                method: 'post',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    nNum: nNum,
+                    nCategory: document.getElementById("deleteCategory").value,
+                    nWriter: document.getElementById("deleteWriter").value,
+                    nTitle: document.getElementById("deleteTitle").value,
+                    nContent: document.getElementById("deleteContent").value
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        console.log(data);
+                        alert("공지사항 삭제가 완료되었습니다.");
+                        location.href="http://localhost:9000/community/notice";
+                    }else{
+                        alert("공지사항 삭제에 실패하였습니다. 다시 시도해주세요.");
+                    }
+                })
+                .catch((error) => console.log(error));
+        }
+    </script>
+
+    <script>
+        function noticeEditCancel(){
+            alert("공지사항 수정을 취소하였습니다.");
+            history.back();
+        }
+    </script>
+</body>
+</html>

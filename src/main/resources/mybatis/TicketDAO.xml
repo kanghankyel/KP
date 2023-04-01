@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kidsplace.kidsplace.dao.TicketDAO">
+
+    <resultMap id="TDMap" type="com.kidsplace.kidsplace.commons.TicketDetailVO">
+        <result property="tType" column="tType" />
+        <result property="tName" column="tName" />
+        <result property="tPrice" column="tPrice" />
+        <result property="tDate" column="uNamtDatee" />
+        <result property="tUpdate" column="tUpdate" />
+        <result property="tDeletedate" column="tDeletedate" />
+        <result property="tDelete" column="tDelete" />
+    </resultMap>
+
+    <resultMap id="ticketMap" type="com.kidsplace.kidsplace.commons.TicketVO">
+        <result property="tNum" column="tNum"/>
+        <result property="uNum" column="uNum"/>
+        <result property="tType" column="tType"/>
+        <result property="uName" column="uName"/>
+        <result property="market" column="market"/>
+        <result property="tArea" column="tArea"/>
+        <result property="sellDAte" column="sellDAte"/>
+        <result property="useDAte" column="useDAte"/>
+        <result property="used" column="used"/>
+
+        <collection property="TDList" resultMap="TDMap" />
+    </resultMap>
+
+    <!--  티켓정보 리스트 불러오기  -->
+    <select id="ticketDetailList" resultMap="TDMap">
+        SELECT
+            tType
+           ,tName
+           ,tPrice
+           ,tDate
+           ,date_format(tDate, '%Y-%m-%d') AS tDate
+           ,tUpdate
+           ,tDeletedate
+           ,tDelete
+        FROM
+            kidslandTicketDetail
+        WHERE
+            tDelete = 'N'
+        ORDER BY
+            tType;
+    </select>
+
+    <!-- 티켓구매 -->
+    <insert id="ticketInsert">
+        INSERT INTO
+            kidslandTicket(tNum, uNum, tType, uName, market, tArea)
+        VALUES
+            ((SELECT resultTable.resultNum FROM (SELECT IFNULL(MAX(tNum), 0) + 1 AS resultNum FROM kidslandTicket) resultTable)
+            , #{uNum}
+            , #{tType}
+            , #{uName}
+            , #{market}
+            , #{tArea})
+    </insert>
+
+</mapper>

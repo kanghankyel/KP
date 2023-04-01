@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+    <div th:include="/fragment/head"></div>
+    <div th:include="/fragment/header"></div>
+    <div th:include="/fragment/nav"></div>
+
+    <div class="content">
+        <div class="image_banner">
+            <div class="ticket_banner">
+                <h1>티 &nbsp; 켓 &nbsp; 예 &nbsp; 매</h1>
+            </div>
+        </div>
+        <div class="inner">
+            <h2>티켓예매</h2>
+            <hr>
+            <table class="ticket_board">
+                <tr>
+                    <th>구분</th>
+                    <th>종류</th>
+                    <th>대상내용</th>
+                    <th>가격</th>
+                    <th>비고</th>
+                </tr>
+                <tr>
+                    <td rowspan="2">종일권</td>
+                    <td>유/초등학생권</td>
+                    <td>유아/초등학생 대상</td>
+                    <td>20,000원</td>
+                    <td rowspan="2"></td>
+                </tr>
+                <tr>
+                    <td>일반권</td>
+                    <td>중학생 이상</td>
+                    <td>18,000원</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">오후권</td>
+                    <td>유/초등학생권</td>
+                    <td>유아/초등학생 대상</td>
+                    <td>15,000원</td>
+                    <td rowspan="2"></td>
+                </tr>
+                <tr>
+                    <td>일반권</td>
+                    <td>중학생 이상</td>
+                    <td>13,000원</td>
+                </tr>
+                <tr>
+                    <td>단체</td>
+                    <td>단체할인권</td>
+                    <td>20인 이상의 단체</td>
+                    <td></td>
+                    <td>별도문의</td>
+                </tr>
+                <tr>
+                    <td>특별할인</td>
+                    <td>공통</td>
+                    <td>장애인 [복지카드 지참 시, 동반 1인까지]<br>
+                        65세 이상 경로 우대[주민등록증], 국가유공자[복지카드] 및<br>
+                        교원증 소지한 교사(본인에 한함)</td>
+                    <td>9,000원</td>
+                    <td>신분증 및<br>
+                        증빙 서류<br>
+                        필히 지참</td>
+                </tr>
+                <tr>
+                    <td colspan="2" rowspan="2">기타</td>
+                    <td>24개월 미만 유아[부모 동반 시]</td>
+                    <td>무료</td>
+                    <td rowspan="2"></td>
+                </tr>
+                <tr>
+                    <td>기타 이벤트 할인권</td>
+                    <td>행사 할인율 적용</td>
+                </tr>
+            </table>
+
+            <table>
+                <tr th:each="ticketDetail : ${ticketDetail}">
+                    <td><span th:text="${ticketDetail.tType}"></span></td>
+                    <td><span th:text="${ticketDetail.tName}"></span></td>
+                    <td><span th:text="${ticketDetail.tPrice}"></span></td>
+                    <td><span th:text="${ticketDetail.tDate}"></span></td>
+                    <td><span th:text="${ticketDetail.tUpdate}"></span></td>
+                    <td><span th:text="${ticketDetail.tDeletedate}"></span></td>
+                    <td><span th:text="${ticketDetail.tDelete}"></span></td>
+                </tr>
+            </table>
+
+            
+            <!-- <div class="ticketBox">
+                <select id="ticketCategory">
+                    <option>( 티켓종류를 선택하세요 )</option>
+                    <option value="1">유/초등학생, 종일권</option>
+                    <option value="2">유/초등학생, 오후권</option>
+                    <option value="3">일반, 종일권</option>
+                    <option value="4">일반, 오후권</option>
+                </select>
+                <select id="ticketCount">
+                    <option>( 티켓수량 )</option>
+                    <option th:each="num : ${#numbers.sequence(1,10)}" th:value="${num}" th:text="${num}"></option>
+                </select>
+                <input type="button" value="추가" onclick="ticketAdd()">
+            </div> -->
+
+            <table>
+                <tr>
+                    <th><label for="inputuNum">유저번호</label></th>
+                    <td><input type="text" th:value="${#authentication.principal.member.uNum}" id="inputuNum" name="uNum" readonly></td>
+                </tr>
+                <tr>
+                    <th><label for="inputtType">티켓번호</label></th>
+                    <td><input type="text" id="inputtType" name="tType"></td>
+                </tr>
+                <tr>
+                    <th><label for="inputuName">구입자 이름</label></th>
+                    <td><input type="text" th:value="${#authentication.principal.member.uName}" id="inputuName" name="uName" readonly></td>
+                </tr>
+                <tr>
+                    <th><label for="inputmarket">구입처</label></th>
+                    <td><input type="text" id="inputmarket" name="market" value="KIDSPLACE" readonly></td>
+                </tr>
+                <tr>
+                    <th><label for="inputtArea">이용처</label></th>
+                    <td><input type="text" id="inputtArea" name="tArea"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="button" value="티켓구매" onclick="insertTicket()">
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+    
+    <div th:include="/fragment/footer"></div>
+
+    <!--  티켓구매 정보 제출(fetch로 기능)  -->
+    <script>
+        function insertTicket(){
+            fetch(urlparam + '/ticket/ticketBuy', {
+                method: 'post',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    uNum: document.getElementById("inputuNum").value,
+                    tType: document.getElementById("inputtType").value,
+                    uName: document.getElementById("inputuName").value,
+                    market: document.getElementById("inputmarket").value,
+                    tArea: document.getElementById("inputtArea").value
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        console.log(data);
+                        alert("티켓예매가 완료되었습니다.");
+                        location.href= urlparam + "/ticket/ticketHistory";
+                    }else{
+                        alert("티켓예매가 실패하였습니다. 다시 시도해주세요.");
+                    }
+                })
+                .catch((error) => console.log(error));
+        }
+    </script>
+
+
+
+
+
+    <!--  티켓예매 항목 선택 정보 가져오기(fetch로 기능)  -->
+    <!-- <script>
+        function selectTicket(){
+            fetch('http://localhost:9000/ticket/ticketBuy', {
+                method: 'post',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    uId: document.getElementById("inputId").value,
+                    uPassword: document.getElementById("inputPw").value,
+                    uName: document.getElementById("inputName").value,
+                    uPhoneNum: document.getElementById("inputPhone").value,
+                    uBirth: document.getElementById("inputBirth").value,
+                    uPostCode: document.getElementById("sample6_postcode").value,
+                    uAddr: document.getElementById("sample6_address").value,
+                    uDetailAddr: document.getElementById("sample6_detailAddress").value
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        alert("회원가입이 완료되었습니다.");
+                        location.href="http://localhost:9000/user/login";
+                    }else{
+                        alert("회원가입에 실패하였습니다. 다시 시도해주세요.");
+                    }
+                })
+                .catch((error) => console.log(error));
+        }
+    </script> -->
+</body>
+</html>

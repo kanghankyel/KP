@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kidsplace.kidsplace.dao.CommunityDAO">
+
+    <resultMap id="noticeMap" type="com.kidsplace.kidsplace.commons.NoticeVO">
+        <result property="nNum" column="nNum" />
+        <result property="nCategory" column="nCategory" />
+        <result property="nWriter" column="nWriter" />
+        <result property="nTitle" column="nTitle" />
+        <result property="nContent" column="nContent" />
+        <result property="nDate" column="nDate" />
+        <result property="nDelete" column="nDelete" />
+    </resultMap>
+
+    <!--  공지사항 리스트 불러오기  -->
+    <select id="noticeList" resultMap="noticeMap">
+        SELECT
+            nNum,nCategory,nWriter,nTitle,nContent,date_format(nDate, '%Y-%m-%d') AS nDate,nDelete
+        FROM
+            kidslandNotice
+        WHERE
+            nDelete = 'N'
+        ORDER BY
+            nNum;
+    </select>
+
+    <!--  공지사항 해당 항목 불러오기  -->
+    <select id="noticeRead" resultMap="noticeMap">
+        SELECT
+            nNum,nCategory,nWriter,nTitle,nContent,date_format(nDate, '%Y/%m/%d') AS nDate,nDelete
+        FROM
+            kidslandNotice
+        WHERE
+            nDelete = 'N'
+        AND
+            nNum = #{uNum, jdbcType=VARCHAR}
+    </select>
+
+    <!-- 공지사항 작성 -->
+    <insert id="noticeWrite">
+        INSERT INTO
+            kidslandNotice(nNum, nCategory, nWriter, nTitle, nContent)
+        VALUES
+            ((SELECT resultTable.resultNum FROM (SELECT IFNULL(MAX(nNum), 0) + 1 AS resultNum FROM kidslandNotice) resultTable)
+            , #{nCategory}
+            , #{nWriter}
+            , #{nTitle}
+            , #{nContent})
+    </insert>
+
+    <!-- 공지사항 수정 -->
+    <update id="noticeEdit">
+        UPDATE
+            kidslandNotice
+        SET
+            nCategory = #{nCategory}
+          , nWriter = #{nWriter}
+          , nTitle = #{nTitle}
+          , nContent = #{nContent}
+          , nUpdate = CURRENT_TIMESTAMP
+        WHERE
+            nNum = #{nNum}
+    </update>
+
+    <!-- 공지사항 삭제 -->
+    <update id="noticeDelete">
+        UPDATE
+            kidslandNotice
+        SET
+            nDelete = 'Y'
+        WHERE
+            nNum = #{nNum}
+    </update>
+
+</mapper>

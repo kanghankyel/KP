@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<th:block>
+    <header th:fragment="headerFragment">
+        <div class="inner">
+            <div>
+                <h6><a th:href="@{/}">365일 즐거운 놀이공간 / KidsPlace</a></h6>
+            </div>
+            <!-- <div>
+                <h6 sec:authentication="principal.member.uName"></h6>
+            </div> -->
+            <div>
+                <h6 sec:authorize="isAnonymous()"><a th:href="@{/user/signup}">회원가입</a></h6>
+                <h6 sec:authorize="isAnonymous()"><a th:href="@{/user/login}">로그인</a></h6>
+                <h6 sec:authorize="isAuthenticated()"><a th:href="@{/logout}">로그아웃</a></h6>
+                <h6 sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/user/mypage}">마이페이지</a></h6>
+                <h6 sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin/admin}">관리자페이지</a></h6>
+                <h6><a th:href="@{/community/notice}">공지사항</a></h6>
+                <h6><a th:href="@{#}">고객센터</a></h6>
+                <h6><a th:href="@{#}">오시는길</a></h6>
+            </div>
+        </div>
+    </header>
+</th:block>
+</html>

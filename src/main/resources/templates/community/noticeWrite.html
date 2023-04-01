@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+    <div th:include="/fragment/head"></div>
+    <div th:include="/fragment/header"></div>
+    <div th:include="/fragment/nav"></div>
+
+    <div class="content">
+        <div class="image_banner">
+            <div class="notice_banner">
+                <h1>공 &nbsp; 지 &nbsp; 사 &nbsp; 항 &nbsp; 작 &nbsp; 성</h1>
+            </div>
+        </div>
+        <div class="inner">
+            <h2>공지사항 작성</h2>
+            <hr>
+            <table class="board_write_table">
+                <tr>
+                    <th>제목</th>
+                    <td colspan="3"><input type="text" id="inputTitle"></td>                    
+                </tr>
+                <tr>
+                    <th>카테고리</th>
+                    <td><input type="text" id="inputCategory"></td>
+                    <th>작성자</th>
+                    <td><input type="text" id="inputWriter" value="관리자" readonly></td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td colspan="3">
+                        <textarea name="notice_textarea" id="inputContent"></textarea>
+                    </td>
+                </tr>
+            </table>
+            <div class="board_write_table_btn_box">
+                <div class="board_table_btn" sec:authorize="hasRole('ROLE_ADMIN')"><input type="button" value="작 성" onclick="noticeWriteComplete()"></div>
+                <div class="board_table_btn" sec:authorize="hasRole('ROLE_ADMIN')"><input type="button" value="취 소" onclick="noticeWriteCancel()"></div>
+            </div>
+        </div>
+    </div>
+
+    <div th:include="/fragment/footer"></div>
+
+
+
+    <!--  script  -->
+    <script>
+        function noticeWriteComplete(){
+            fetch('http://localhost:9000/community/noticeWrite', {
+                method: 'post',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    nCategory: document.getElementById("inputCategory").value,
+                    nWriter: document.getElementById("inputWriter").value,
+                    nTitle: document.getElementById("inputTitle").value,
+                    nContent: document.getElementById("inputContent").value
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        console.log(data);
+                        alert("공지사항 작성이 완료되었습니다.");
+                        location.href="http://localhost:9000/community/notice";
+                    }else{
+                        alert("공지사항 작성에 실패하였습니다. 다시 시도해주세요.");
+                    }
+                })
+                .catch((error) => console.log(error));
+        }
+    </script>
+
+    <script>
+        function noticeWriteCancel(){
+            alert("공지사항 작성을 취소하였습니다.");
+            history.back();
+        }
+    </script>
+</body>
+</html>

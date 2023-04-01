@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:include="/fragment/head"></div>
+    <div th:include="/fragment/header"></div>
+    <div th:include="/fragment/nav"></div>
+
+    <div class="content">
+        <div class="inner">
+            <h2>로그인 페이지 테스트</h2>
+            <hr>
+            <table>
+                <tr>
+                    <th><label for="loginId">아이디</label></th>
+                    <td><input type="text" id="loginId" name="uId"></td>
+                </tr>
+                <tr>
+                    <th><label for="loginPw">비밀번호</label></th>
+                    <td><input type="password" id="loginPw" name="uPassword"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="button" value="로그인" onclick="loginUser()"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div th:include="/fragment/footer"></div>
+
+
+
+    <!--  ##################################  script  ##################################  -->
+    <!--  로그인 여부 비동기 script  -->
+    <script>
+        window.addEventListener('load', function () {
+            document.getElementById('loginPw').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    loginUser();
+                }
+            })
+        });
+
+        function loginUser(){
+            console.log(document.getElementById("loginId").value);
+            console.log(document.getElementById("loginPw").value);
+            fetch('/user/login', {
+                method: 'post',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    uId: document.getElementById("loginId").value,
+                    uPassword: document.getElementById("loginPw").value
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        console.log(data);
+                        alert("로그인이 완료되었습니다.");
+                        location.href = "http://localhost:9000";
+                    }else{
+                        alert("로그인에 실패하였습니다. 다시 시도해주세요.");
+                    }
+                })
+                .catch((error) => console.log(error));
+        }
+    </script>
+</body>
+</html>

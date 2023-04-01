@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+    <div th:include="/fragment/head"></div>
+    <div th:include="/fragment/header"></div>
+    <div th:include="/fragment/nav"></div>
+
+    <div class="content">
+        <div class="image_banner">
+            <div class="ticket_banner">
+                <h1>티 &nbsp; 켓 &nbsp; 구 &nbsp; 매 &nbsp; 내 &nbsp; 역</h1>
+            </div>
+        </div>
+        <div class="inner">
+            <h2>티켓구매내역</h2>
+            <hr>
+        </div>
+    </div>
+    
+    <div th:include="/fragment/footer"></div>
+
+
+</body>
+</html>

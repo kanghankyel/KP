@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:include="/fragment/head"></div>
+    <div th:include="/fragment/header"></div>
+
+    <section class="banner">
+        <div class="slide">
+            <a th:href="@{#}"><img th:src="@{#}">임시 이미지(home에는 슬라이드 이벤트 배너가 들어갈 예정)</a>
+        </div>
+    </section>
+
+    <div th:include="/fragment/nav"></div>
+
+    <section class="content">
+        <div class="inner">
+            <h1>main home page</h1>
+            <h1>변경완료</h1>
+            <h2 th:text="${data}">성공하면 이 글 사라짐</h2>
+
+
+            <div class="imgbanner">
+                <img src="../../static/image/notice_banner.jpg" alt="">
+                <img th:src="@{image/notice_banner.jpg}" alt="">
+            </div>
+        </div>
+    </section>
+
+    <div th:include="/fragment/footer"></div>
+</body>
+</html>

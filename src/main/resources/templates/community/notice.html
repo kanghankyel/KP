@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+    <div th:include="/fragment/head"></div>
+    <div th:include="/fragment/header"></div>
+    <div th:include="/fragment/nav"></div>
+
+    <div class="content">
+        <div class="image_banner">
+            <div class="notice_banner">
+                <h1>공 &nbsp; 지 &nbsp; 사 &nbsp; 항</h1>
+            </div>
+        </div>
+        <div class="inner">
+            <h2>공지사항</h2>
+            <hr>
+            <table class="board_table">
+                <tr>
+                    <th>No</th>
+                    <th>카테고리</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>등록일</th>
+                </tr>
+                <tr th:each="notice : ${notice}" th:if="${not #strings.isEmpty(notice)}">
+                    <td><a th:href="@{/community/noticeDetail(nNum = ${notice.nNum})}"><div th:text="${notice.nNum}"></div></a></td>
+                    <td><a th:href="@{/community/noticeDetail(nNum = ${notice.nNum})}"><div th:text="${notice.nCategory}"></div></a></td>
+                    <td><a th:href="@{/community/noticeDetail(nNum = ${notice.nNum})}"><div th:text="${notice.nTitle}"></div></a></td>
+                    <td><a th:href="@{/community/noticeDetail(nNum = ${notice.nNum})}"><div th:text="${notice.nWriter}"></div></a></td>
+                    <td><a th:href="@{/community/noticeDetail(nNum = ${notice.nNum})}"><div th:text="${notice.nDate}"></div></a></td>
+                </tr>
+                <tr th:each="notice : ${notice}" th:if="${#strings.isEmpty(notice)}">
+                    <td colspan="6">게시된 공지사항이 없습니다.</td>
+                </tr>
+            </table>
+            <div class="board_table_btn" sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/community/noticeWrite}">글쓰기</a></div>
+        </div>
+    </div>
+    
+    <div th:include="/fragment/footer"></div>
+</body>
+</html>

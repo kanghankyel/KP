@@ -36,7 +36,7 @@ public class CommunityController {
     // 공지사항 항목 개별 선택(공지사항 보기)
     @GetMapping("/noticeDetail")
     public String NoticeDetail (int nNum, Model model){
-//        logger.warn(String.valueOf(nNum));
+       // logger.warn(String.valueOf(nNum));
         NoticeVO noticeVO = communityService.noticeRead(nNum);
         model.addAttribute("noticeDetail", noticeVO);
         return "/community/noticeDetail";
@@ -64,7 +64,7 @@ public class CommunityController {
     // 공지사항 수정 페이지 이동 및 해당 정보 출력
     @GetMapping("/noticeEdit")
     public String NoticeEdit (int nNum, Model model){
-//        logger.warn(String.valueOf(nNum));
+       // logger.warn(String.valueOf(nNum));
         NoticeVO noticeVO = communityService.noticeRead(nNum);
         model.addAttribute("noticeDetail", noticeVO);
         return "/community/noticeEdit";

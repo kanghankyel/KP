@@ -28,8 +28,8 @@ public class TicketServicempl implements TicketService {
     @Override
     @Transactional
     public Boolean ticketInsert(TicketVO ticketVO) {
-        logger.warn("티켓구매 데이터 입력");
-        logger.warn(String.valueOf(ticketVO));
+        // logger.warn("티켓구매 데이터 입력");
+        // logger.warn(String.valueOf(ticketVO));
         try{
             int result = ticketDAO.ticketInsert(ticketVO);
             if (result > 0) {
@@ -42,6 +42,11 @@ public class TicketServicempl implements TicketService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public List<TicketVO> ticketList() {
+        return ticketDAO.ticketList();
     }
 
 }

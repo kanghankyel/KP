@@ -29,15 +29,13 @@ public class TicketController {
 
     // 티켓예매 페이지 이동
     @GetMapping("/ticketBuy")
-    public String ticketBuy(Model model){
-        List<TicketDetailVO> ticketDetailList = ticketService.ticketDetailList();
-        model.addAttribute("ticketDetail", ticketDetailList);
+    public String TicketPage(){
         return "/ticket/ticketBuy";
     }
 
     // 티켓구입 정보 저장
     @PostMapping("/ticketBuy")
-    public ResponseEntity<Boolean> ticketBuy(@RequestBody TicketVO ticketVO){
+    public ResponseEntity<Boolean> TicketBuy(@RequestBody TicketVO ticketVO){
         try{
             ticketService.ticketInsert(ticketVO);
             return new ResponseEntity<>(true, HttpStatus.OK);
@@ -48,9 +46,11 @@ public class TicketController {
         }
     }
 
-    // 티켓구매내역 페이지 이동
+    // 티켓구매내역(개인) 리스트 구현
     @GetMapping("/ticketHistory")
-    public String ticketHistory(){
+    public String TicketList (Model model){
+        List<TicketVO> ticketlist = ticketService.ticketList();
+        model.addAttribute("ticket", ticketlist);
         return "/ticket/ticketHistory";
     }
 

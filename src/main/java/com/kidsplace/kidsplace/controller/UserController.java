@@ -66,8 +66,8 @@ public class UserController {
     @PreAuthorize("permitAll()")
     public ResponseEntity<Boolean> login(@RequestBody UserVO userVO){
         try{
-            logger.warn("등록된 회원 정보 확인");
-            logger.warn(userVO.toString());
+            // logger.warn("등록된 회원 정보 확인");
+            // logger.warn(userVO.toString());
 
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userVO.getuId(), userVO.getuPassword());
 

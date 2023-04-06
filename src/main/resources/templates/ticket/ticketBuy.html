@@ -78,71 +78,75 @@
                     <td>행사 할인율 적용</td>
                 </tr>
             </table>
-
-            <table>
-                <tr th:each="ticketDetail : ${ticketDetail}">
-                    <td><span th:text="${ticketDetail.tType}"></span></td>
-                    <td><span th:text="${ticketDetail.tName}"></span></td>
-                    <td><span th:text="${ticketDetail.tPrice}"></span></td>
-                    <td><span th:text="${ticketDetail.tDate}"></span></td>
-                    <td><span th:text="${ticketDetail.tUpdate}"></span></td>
-                    <td><span th:text="${ticketDetail.tDeletedate}"></span></td>
-                    <td><span th:text="${ticketDetail.tDelete}"></span></td>
-                </tr>
-            </table>
-
             
-            <!-- <div class="ticketBox">
-                <select id="ticketCategory">
-                    <option>( 티켓종류를 선택하세요 )</option>
-                    <option value="1">유/초등학생, 종일권</option>
-                    <option value="2">유/초등학생, 오후권</option>
-                    <option value="3">일반, 종일권</option>
-                    <option value="4">일반, 오후권</option>
-                </select>
-                <select id="ticketCount">
-                    <option>( 티켓수량 )</option>
-                    <option th:each="num : ${#numbers.sequence(1,10)}" th:value="${num}" th:text="${num}"></option>
-                </select>
-                <input type="button" value="추가" onclick="ticketAdd()">
-            </div> -->
-
-            <table>
-                <tr>
-                    <th><label for="inputuNum">유저번호</label></th>
-                    <td><input type="text" th:value="${#authentication.principal.member.uNum}" id="inputuNum" name="uNum" readonly></td>
-                </tr>
-                <tr>
-                    <th><label for="inputtType">티켓번호</label></th>
-                    <td><input type="text" id="inputtType" name="tType"></td>
-                </tr>
-                <tr>
-                    <th><label for="inputuName">구입자 이름</label></th>
-                    <td><input type="text" th:value="${#authentication.principal.member.uName}" id="inputuName" name="uName" readonly></td>
-                </tr>
-                <tr>
-                    <th><label for="inputmarket">구입처</label></th>
-                    <td><input type="text" id="inputmarket" name="market" value="KIDSPLACE" readonly></td>
-                </tr>
-                <tr>
-                    <th><label for="inputtArea">이용처</label></th>
-                    <td><input type="text" id="inputtArea" name="tArea"></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <input type="button" value="티켓구매" onclick="insertTicket()">
-                    </td>
-                </tr>
-            </table>
-
+            <div id="ticketbox">
+                <div><input type="hidden" th:value="${#authentication.principal.member.uNum}" id="inputuNum" name="uNum" readonly></div>
+                <div>
+                    <select name="tType" id="inputtType">
+                        <option value="none1">( 티켓종류를 선택하세요 )</option>
+                        <option th:each="ticketDetail : ${ticketDetail}" th:value="${ticketDetail.tType}"><div th:text="${ticketDetail.tName}"></div></option>
+                    </select>
+                </div>
+                <div><input type="hidden" th:value="${#authentication.principal.member.uName}" id="inputuName" name="uName" readonly></div>
+                <div><input type="hidden" id="inputmarket" name="market" value="KIDSPLACE" readonly></div>
+                <div>
+                    <select name="tArea" id="inputtArea">
+                        <option value="none2">( 사용지역을 선택하세요 )</option>
+                        <option value="경기 킨텍스">경기 킨텍스</option>
+                        <option value="부산 벡스코">부산 벡스코</option>
+                        <option value="대구 엑스코">대구 엑스코</option>
+                        <option value="광주 김대중컨벤션">광주 김대중컨벤션</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="ticketCount">
+                        <option>( 티켓수량 )</option>
+                        <option th:each="num : ${#numbers.sequence(1,30)}" th:value="${num}" th:text="${num}"></option>
+                    </select>
+                </div>
+            </div>
+            <div id="ticketbtnbox">
+                <div><input type="button" value="추가" onclick="plusTicket()"></div>
+                <div><input type="button" value="티켓구매" onclick="insertTicket()"></div>
+            </div>
+            <!-- 지금 요소를 추가해도 적용이 안됨 -->
+            <!-- 지금 요소를 추가해도 적용이 안됨 -->
+            <!-- 지금 요소를 추가해도 적용이 안됨 -->
         </div>
     </div>
     
     <div th:include="/fragment/footer"></div>
 
+
+
+    <!-- script -->
+    <!-- cloneNode() 함수를 통해 div 내부요소까지 복제-->
+    <script>
+        function plusTicket(){
+        // 'test' node 선택
+        const ticketbox1 = document.getElementById('ticketbox');
+        // 노드 복사하기
+        const ticketbox2 = ticketbox1.cloneNode(true);
+        // 복사된 Node id 변경하기
+        ticketbox2.id = 'ticketbox';
+        // 복사한 노드 붙여넣기
+        ticketbox1.after(ticketbox2);
+        }
+    </script>
+
     <!--  티켓구매 정보 제출(fetch로 기능)  -->
     <script>
         function insertTicket(){
+            // 유효성 검사
+            if(document.getElementById("inputtType").value == 'none1'){
+                alert("티켓종류를 선택해주세요.");
+                return false;
+            }else if(document.getElementById("inputtArea").value == 'none2'){
+                alert("사용지역을 선택해주세요.");
+                return false;
+            }
+
+            // fetch
             fetch(urlparam + '/ticket/ticketBuy', {
                 method: 'post',
                 headers: {"Content-Type": "application/json"},
@@ -167,39 +171,5 @@
                 .catch((error) => console.log(error));
         }
     </script>
-
-
-
-
-
-    <!--  티켓예매 항목 선택 정보 가져오기(fetch로 기능)  -->
-    <!-- <script>
-        function selectTicket(){
-            fetch('http://localhost:9000/ticket/ticketBuy', {
-                method: 'post',
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({
-                    uId: document.getElementById("inputId").value,
-                    uPassword: document.getElementById("inputPw").value,
-                    uName: document.getElementById("inputName").value,
-                    uPhoneNum: document.getElementById("inputPhone").value,
-                    uBirth: document.getElementById("inputBirth").value,
-                    uPostCode: document.getElementById("sample6_postcode").value,
-                    uAddr: document.getElementById("sample6_address").value,
-                    uDetailAddr: document.getElementById("sample6_detailAddress").value
-                })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data) {
-                        alert("회원가입이 완료되었습니다.");
-                        location.href="http://localhost:9000/user/login";
-                    }else{
-                        alert("회원가입에 실패하였습니다. 다시 시도해주세요.");
-                    }
-                })
-                .catch((error) => console.log(error));
-        }
-    </script> -->
 </body>
 </html>

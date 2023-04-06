@@ -73,27 +73,5 @@
         </div>
         <div class="sub_nav_bg"></div>
     </nav>
-
-
-    <!--  nav script  -->
-    <script>
-        const main = document.querySelectorAll(".main_nav");
-        const nav = document.querySelectorAll(".nav");
-        const subbg = document.querySelectorAll(".sub_nav_bg");
-
-        for(let i=0; i<main.length; i++){
-            main[i].addEventListener("mouseover", function(){
-                main[i].classList.add("on");
-                subbg[i].classList.add("on");
-            })
-        }
-
-        for(let i=0; i<nav.length; i++){
-            nav[i].addEventListener("mouseout", function(){
-                main[i].classList.remove("on");
-                subbg[i].classList.remove("on");
-            })
-        }
-    </script>
 </th:block>
 </html>

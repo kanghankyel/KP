@@ -25,7 +25,7 @@ public class CommunityServicempl implements CommunityService {
 
     @Override
     public NoticeVO noticeRead(int nNum) {
-//        logger.warn(String.valueOf(nNum));
+       // logger.warn(String.valueOf(nNum));
         NoticeVO noticeVO = communityDAO.noticeRead(nNum);
         return noticeVO;
     }
@@ -39,8 +39,8 @@ public class CommunityServicempl implements CommunityService {
     @Override
     @Transactional
     public Boolean noticeEdit(NoticeVO noticeVO) {
-        logger.warn("공지사항 수정 데이터");
-        logger.warn(String.valueOf(noticeVO));
+        // logger.warn("공지사항 수정 데이터");
+        // logger.warn(String.valueOf(noticeVO));
         try{
             int result = communityDAO.noticeEdit(noticeVO);
             if (result > 0) {
@@ -57,8 +57,8 @@ public class CommunityServicempl implements CommunityService {
 
     @Override
     public Boolean noticeDelete(NoticeVO noticeVO) {
-        logger.warn("공지사항 삭제 데이터");
-        logger.warn(String.valueOf(noticeVO));
+        // logger.warn("공지사항 삭제 데이터");
+        // logger.warn(String.valueOf(noticeVO));
         try{
             int result = communityDAO.noticeDelete(noticeVO);
             if (result > 0){

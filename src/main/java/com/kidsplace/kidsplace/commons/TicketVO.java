@@ -1,7 +1,5 @@
 package com.kidsplace.kidsplace.commons;
 
-import java.util.Date;
-
 public class TicketVO {
 
     private int tNum;
@@ -10,15 +8,15 @@ public class TicketVO {
     private String uName;
     private String market;
     private String tArea;
-    private Date sellDate;
-    private Date useDate;
+    private String sellDate;
+    private String useDate;
     private String used;
 
     public TicketVO(){
 
     }
-    public TicketVO(int tNum, int uNum, int tType, String uName, String market, String tArea, Date sellDate,
-            Date useDate, String used) {
+    public TicketVO(int tNum, int uNum, int tType, String uName, String market, String tArea, String sellDate,
+            String useDate, String used) {
         this.tNum = tNum;
         this.uNum = uNum;
         this.tType = tType;
@@ -66,16 +64,16 @@ public class TicketVO {
     public void settArea(String tArea) {
         this.tArea = tArea;
     }
-    public Date getSellDate() {
+    public String getSellDate() {
         return sellDate;
     }
-    public void setSellDate(Date sellDate) {
+    public void setSellDate(String sellDate) {
         this.sellDate = sellDate;
     }
-    public Date getUseDate() {
+    public String getUseDate() {
         return useDate;
     }
-    public void setUseDate(Date useDate) {
+    public void setUseDate(String useDate) {
         this.useDate = useDate;
     }
     public String getUsed() {

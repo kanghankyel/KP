@@ -35,7 +35,7 @@
         WHERE
             nDelete = 'N'
         AND
-            nNum = #{uNum, jdbcType=VARCHAR}
+            nNum = #{nNum, jdbcType=VARCHAR}
     </select>
 
     <!-- 공지사항 작성 -->

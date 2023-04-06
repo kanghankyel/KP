@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <body>
-    <h1>admin page</h1>
+    <div th:include="/fragment/head"></div>
+    <div th:include="/fragment/header"></div>
+    <div th:include="/fragment/nav"></div>
+
+    <div class="content">
+        <div class="image_banner">
+            <div class="notice_banner">
+                <h1>관 &nbsp; 리 &nbsp; 자 &nbsp; 페 &nbsp; 이 &nbsp; 지</h1>
+            </div>
+        </div>
+        <div class="inner">
+            <h2>관리자 페이지</h2>
+            <hr>
+            <!-- 티켓 종류 테이블 -->
+            <table class="ticket_board">
+                <tr>
+                    <td>티켓번호</td>
+                    <td>티켓이름</td>
+                    <td>티켓가격</td>
+                    <td>티켓여부</td>
+                </tr>
+                <tr th:each="ticketDetail : ${ticketDetail}">
+                    <td><span th:text="${ticketDetail.tType}"></span></td>
+                    <td><span th:text="${ticketDetail.tName}"></span></td>
+                    <td><span th:text="${ticketDetail.tPrice}"></span></td>
+                    <td><span th:text="${ticketDetail.tDelete}"></span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+    <div th:include="/fragment/footer"></div>
 </body>
 </html>

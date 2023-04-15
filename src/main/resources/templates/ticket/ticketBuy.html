@@ -150,13 +150,16 @@
             fetch(urlparam + '/ticket/ticketBuy', {
                 method: 'post',
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({
+                body: JSON.stringify([{
                     uNum: document.getElementById("inputuNum").value,
                     tType: document.getElementById("inputtType").value,
                     uName: document.getElementById("inputuName").value,
                     market: document.getElementById("inputmarket").value,
-                    tArea: document.getElementById("inputtArea").value
-                })
+                    tArea: document.getElementById("inputtArea").value,
+                    // test: document.getElementsByClassName("test")[0].value
+                }, {
+
+                }])
             })
                 .then(response => response.json())
                 .then(data => {

@@ -1,5 +1,6 @@
 package com.kidsplace.kidsplace.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -28,8 +29,16 @@ public class TicketController {
     TicketService ticketService;
 
     // 티켓예매 페이지 이동
+    // @GetMapping("/ticketBuy")
+    // public String TicketPage(){
+    //     return "/ticket/ticketBuy";
+    // }
+    
+    // 티켓예매 페이지 이동 + 티켓정보
     @GetMapping("/ticketBuy")
-    public String TicketPage(){
+    public String TicketInfo(Model model){
+        List<TicketDetailVO> ticketDetailList = ticketService.ticketDetailList();
+        model.addAttribute("ticketDetail", ticketDetailList);
         return "/ticket/ticketBuy";
     }
 

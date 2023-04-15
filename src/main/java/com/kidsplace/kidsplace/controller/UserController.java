@@ -96,4 +96,10 @@ public class UserController {
         }
     }
 
+    // 마이페이지 페이지 이동
+    @GetMapping("/mypage")
+    public String mypage(){
+        return "/user/mypage";
+    }
+
 }

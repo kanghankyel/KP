@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <body>
-    <h1>mypage page</h1>
+    <div th:include="/fragment/head"></div>
+    <div th:include="/fragment/header"></div>
+    <div th:include="/fragment/nav"></div>
+
+    <div class="content">
+        <div class="image_banner">
+            <div class="notice_banner">
+                <h1>마 &nbsp; 이 &nbsp; 페 &nbsp; 이 &nbsp; 지</h1>
+            </div>
+        </div>
+        <div class="inner">
+            <h2>마이페이지</h2>
+            <hr>
+            <div>
+                <div><input type="text" th:value="${#authentication.principal.member.uNum}" id="inputuNum" name="uNum" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.uId}" id="inputuId" name="uId" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.uPassword}" id="inputuPassword" name="uPassword" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.uName}" id="inputuName" name="uName" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.uPhoneNum}" id="inputuPhoneNum" name="uPhoneNum" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.uBirth}" id="inputuBirth" name="uBirth" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.uPostCode}" id="inputuPostCode" name="uPostCode" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.uAddr}" id="inputuAddr" name="uAddr" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.uDetailAddr}" id="inputuDetailAddr" name="uDetailAddr" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.regdate}" id="inputregdate" name="regdate" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.updatedate}" id="inputupdatedate" name="updatedate" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.visitdate}" id="inputvisitdate" name="visitdate" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.member}" id="inputmember" name="member" readonly></div>
+            </div>
+        </div>
+    </div>
+    
+    <div th:include="/fragment/footer"></div>
 </body>
 </html>

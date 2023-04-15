@@ -17,21 +17,26 @@
         <div class="inner">
             <h2>관리자 페이지</h2>
             <hr>
-            <!-- 티켓 종류 테이블 -->
-            <table class="ticket_board">
-                <tr>
-                    <td>티켓번호</td>
-                    <td>티켓이름</td>
-                    <td>티켓가격</td>
-                    <td>티켓여부</td>
-                </tr>
-                <tr th:each="ticketDetail : ${ticketDetail}">
-                    <td><span th:text="${ticketDetail.tType}"></span></td>
-                    <td><span th:text="${ticketDetail.tName}"></span></td>
-                    <td><span th:text="${ticketDetail.tPrice}"></span></td>
-                    <td><span th:text="${ticketDetail.tDelete}"></span></td>
-                </tr>
-            </table>
+            <div class="admin_href">
+                <div><a th:href="@{../admin/adminUser}">유저리스트 페이지 이동</a></div>
+                <div><a th:href="@{../admin/adminTicket}">티켓리스트 페이지 이동</a></div>
+            </div>
+            <h2>관리자 정보</h2>
+            <div>
+                <div><input type="text" th:value="${#authentication.principal.member.uNum}" id="inputuNum" name="uNum" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.uId}" id="inputuId" name="uId" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.uPassword}" id="inputuPassword" name="uPassword" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.uName}" id="inputuName" name="uName" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.uPhoneNum}" id="inputuPhoneNum" name="uPhoneNum" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.uBirth}" id="inputuBirth" name="uBirth" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.uPostCode}" id="inputuPostCode" name="uPostCode" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.uAddr}" id="inputuAddr" name="uAddr" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.uDetailAddr}" id="inputuDetailAddr" name="uDetailAddr" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.regdate}" id="inputregdate" name="regdate" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.updatedate}" id="inputupdatedate" name="updatedate" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.visitdate}" id="inputvisitdate" name="visitdate" readonly></div>
+                <div><input type="text" th:value="${#authentication.principal.member.member}" id="inputmember" name="member" readonly></div>
+            </div>
         </div>
     </div>
     

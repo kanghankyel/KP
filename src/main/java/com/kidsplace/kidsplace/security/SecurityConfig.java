@@ -35,7 +35,7 @@ public class SecurityConfig {
 
                 .authorizeRequests()
                 //.antMatchers("/").permitAll()
-                //.antMatchers("/user/**").permitAll()
+                // .antMatchers("/ticket/ticketBuy").permitAll()
                 //.antMatchers("/community/noticeEdit", "/community/noticeWrite").hasRole("ROLE_ADMIN")
                 .anyRequest().permitAll()
 

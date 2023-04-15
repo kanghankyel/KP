@@ -1,6 +1,5 @@
 package com.kidsplace.kidsplace.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -43,10 +42,17 @@ public class TicketController {
     }
 
     // 티켓구입 정보 저장
+    // connection 수에 따라 반복문을 sql단 또는 java단 선택 사용.(sql insert는 한번에 하나의 정보 주입. select는 예외)
     @PostMapping("/ticketBuy")
-    public ResponseEntity<Boolean> TicketBuy(@RequestBody TicketVO ticketVO){
+    public ResponseEntity<Boolean> TicketBuy(@RequestBody List<TicketVO> ticketVO){
+        System.out.println(ticketVO);
         try{
-            ticketService.ticketInsert(ticketVO);
+            // 반복자(iterator 또는 향상된 for문을 이용해 정보를 개별로 전달.
+            for(TicketVO item : ticketVO) {
+                for (int i=0; i<item.gettCount();i++) {
+                    ticketService.ticketInsert(item);
+                }
+            }
             return new ResponseEntity<>(true, HttpStatus.OK);
         }catch (Exception e){
             logger.error("티켓예매 정보 저장에 실패하였습니다.");

@@ -11,12 +11,14 @@ public class TicketVO {
     private String sellDate;
     private String useDate;
     private String used;
+    // 티켓수량 vo객체 추가
+    private int tCount;
 
     public TicketVO(){
 
     }
     public TicketVO(int tNum, int uNum, int tType, String uName, String market, String tArea, String sellDate,
-            String useDate, String used) {
+            String useDate, String used, int tCount) {
         this.tNum = tNum;
         this.uNum = uNum;
         this.tType = tType;
@@ -26,6 +28,7 @@ public class TicketVO {
         this.sellDate = sellDate;
         this.useDate = useDate;
         this.used = used;
+        this.tCount = tCount;
     }
     
     public int gettNum() {
@@ -82,12 +85,16 @@ public class TicketVO {
     public void setUsed(String used) {
         this.used = used;
     }
-
+    public int gettCount() {
+        return tCount;
+    }
+    public void settCount(int tCount) {
+        this.tCount = tCount;
+    }
     @Override
     public String toString() {
         return "TicketVO [tNum=" + tNum + ", uNum=" + uNum + ", tType=" + tType + ", uName=" + uName + ", market="
                 + market + ", tArea=" + tArea + ", sellDate=" + sellDate + ", useDate=" + useDate + ", used=" + used
-                + "]";
+                + ", tCount=" + tCount + "]";
     }
-    
 }

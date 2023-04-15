@@ -80,17 +80,17 @@
             </table>
             
             <div id="ticketbox">
-                <div><input type="hidden" th:value="${#authentication.principal.member.uNum}" id="inputuNum" name="uNum" readonly></div>
+                <div><input type="hidden" th:value="${#authentication.principal.member.uNum}" class="inputuNum" name="uNum" readonly></div>
                 <div>
-                    <select name="tType" id="inputtType">
+                    <select name="tType" class="inputtType">
                         <option value="none1">( 티켓종류를 선택하세요 )</option>
                         <option th:each="ticketDetail : ${ticketDetail}" th:value="${ticketDetail.tType}"><div th:text="${ticketDetail.tName}"></div></option>
                     </select>
                 </div>
-                <div><input type="hidden" th:value="${#authentication.principal.member.uName}" id="inputuName" name="uName" readonly></div>
-                <div><input type="hidden" id="inputmarket" name="market" value="KIDSPLACE" readonly></div>
+                <div><input type="hidden" th:value="${#authentication.principal.member.uName}" class="inputuName" name="uName" readonly></div>
+                <div><input type="hidden" class="inputmarket" name="market" value="KIDSPLACE" readonly></div>
                 <div>
-                    <select name="tArea" id="inputtArea">
+                    <select name="tArea" class="inputtArea">
                         <option value="none2">( 사용지역을 선택하세요 )</option>
                         <option value="경기 킨텍스">경기 킨텍스</option>
                         <option value="부산 벡스코">부산 벡스코</option>
@@ -99,7 +99,7 @@
                     </select>
                 </div>
                 <div>
-                    <select id="ticketCount">
+                    <select class="ticketCount">
                         <option>( 티켓수량 )</option>
                         <option th:each="num : ${#numbers.sequence(1,30)}" th:value="${num}" th:text="${num}"></option>
                     </select>
@@ -138,27 +138,37 @@
     <script>
         function insertTicket(){
             // 유효성 검사
-            if(document.getElementById("inputtType").value == 'none1'){
+            if(document.getElementsByClassName("inputtType")[0].value == 'none1'){
                 alert("티켓종류를 선택해주세요.");
                 return false;
-            }else if(document.getElementById("inputtArea").value == 'none2'){
+            }else if(document.getElementsByClassName("inputtArea")[0].value == 'none2'){
                 alert("사용지역을 선택해주세요.");
                 return false;
             }
 
+            console.log(document.getElementsByClassName("ticketCount")[0].value);
+            console.log(document.getElementsByClassName("ticketCount")[1].value);
+
             // fetch
+            // List[]형태로 전송
             fetch(urlparam + '/ticket/ticketBuy', {
                 method: 'post',
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify([{
-                    uNum: document.getElementById("inputuNum").value,
-                    tType: document.getElementById("inputtType").value,
-                    uName: document.getElementById("inputuName").value,
-                    market: document.getElementById("inputmarket").value,
-                    tArea: document.getElementById("inputtArea").value,
+                    uNum: document.getElementsByClassName("inputuNum")[0].value,
+                    tType: document.getElementsByClassName("inputtType")[0].value,
+                    uName: document.getElementsByClassName("inputuName")[0].value,
+                    market: document.getElementsByClassName("inputmarket")[0].value,
+                    tArea: document.getElementsByClassName("inputtArea")[0].value,
+                    tCount: document.getElementsByClassName("ticketCount")[0].value,
                     // test: document.getElementsByClassName("test")[0].value
                 }, {
-
+                    uNum: document.getElementsByClassName("inputuNum")[1].value,
+                    tType: document.getElementsByClassName("inputtType")[1].value,
+                    uName: document.getElementsByClassName("inputuName")[1].value,
+                    market: document.getElementsByClassName("inputmarket")[1].value,
+                    tArea: document.getElementsByClassName("inputtArea")[1].value,
+                    tCount: document.getElementsByClassName("ticketCount")[1].value,
                 }])
             })
                 .then(response => response.json())

@@ -1,5 +1,8 @@
 package com.kidsplace.kidsplace.service;
 
+import java.util.List;
+
+import com.kidsplace.kidsplace.commons.AuthVO;
 import com.kidsplace.kidsplace.commons.UserVO;
 
 public interface UserService {
@@ -34,5 +37,8 @@ public interface UserService {
 
     //회원탈퇴
     void withdraw(UserVO vo) throws Exception;
+
+    // 회원리스트
+    // List<UserVO> userList();
 
 }

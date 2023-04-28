@@ -17,21 +17,37 @@
         <div class="inner">
             <h2>관리자 페이지</h2>
             <hr>
-            <!-- 유저 -->
-            <!-- 티켓 종류 테이블 -->
-            <h2>티켓 종류 테이블</h2>
+            <h2>유저 테이블</h2>
             <table class="ticket_board">
                 <tr>
-                    <td>티켓번호</td>
-                    <td>티켓이름</td>
-                    <td>티켓가격</td>
-                    <td>티켓여부</td>
+                    <td>회원코드</td>
+                    <td>아이디</td>
+                    <td>비밀번호</td>
+                    <td>이름</td>
+                    <td>전화번호</td>
+                    <td>생년월일</td>
+                    <td>우편번호</td>
+                    <td>주소</td>
+                    <td>상세주소</td>
+                    <td>생성일</td>
+                    <td>수정일</td>
+                    <td>방문일</td>
+                    <td>회원여부</td>
                 </tr>
-                <tr th:each="ticketDetail : ${ticketDetail}">
-                    <td><span th:text="${ticketDetail.tType}"></span></td>
-                    <td><span th:text="${ticketDetail.tName}"></span></td>
-                    <td><span th:text="${ticketDetail.tPrice}"></span></td>
-                    <td><span th:text="${ticketDetail.tDelete}"></span></td>
+                <tr th:each="useruser : ${useruser}">
+                    <td><span th:text="${useruser.uNum}"></span></td>
+                    <td><span th:text="${useruser.uId}"></span></td>
+                    <td><span th:text="${useruser.uPassword}"></span></td>
+                    <td><span th:text="${useruser.uName}"></span></td>
+                    <td><span th:text="${useruser.uPhoneNum}"></span></td>
+                    <td><span th:text="${useruser.uBirth}"></span></td>
+                    <td><span th:text="${useruser.uPostCode}"></span></td>
+                    <td><span th:text="${useruser.uAddr}"></span></td>
+                    <td><span th:text="${useruser.uDetailAddr}"></span></td>
+                    <td><span th:text="${useruser.regdate}"></span></td>
+                    <td><span th:text="${useruser.updatedate}"></span></td>
+                    <td><span th:text="${useruser.visitdate}"></span></td>
+                    <td><span th:text="${useruser.member}"></span></td>
                 </tr>
             </table>
         </div>

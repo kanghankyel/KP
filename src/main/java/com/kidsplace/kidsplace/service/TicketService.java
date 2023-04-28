@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.kidsplace.kidsplace.commons.Criteria;
 import com.kidsplace.kidsplace.commons.TicketDetailVO;
 import com.kidsplace.kidsplace.commons.TicketVO;
 
@@ -17,5 +18,8 @@ public interface TicketService {
 
     // 티켓구매내역(개인) 리스트 구현
     List<TicketVO> ticketList();
+
+    // 티켓구매내역 리스트 페이징 구현
+    List<TicketVO> getTicketList(Criteria cri);
 
 }

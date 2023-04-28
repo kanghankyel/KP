@@ -78,4 +78,17 @@
             tNum;
     </select>
 
+    <select id="getTicketListWithPaging" resultMap="ticketMap">
+        <![CDATA[
+            SELECT tNum, uNum, tType, uName, market, tArea, sellDate, useDate, used
+                FROM (
+                    SELECT @ROWNUM := @ROWNUM + 1 as rnum, tNum, uNum, tType, uName, market, tArea, sellDate, useDate, used
+                    FROM kidslandTicket, (SELECT @ROWNUM :=0) A
+                    ORDER BY tNum DESC
+                ) RESULT
+            WHERE rnum > (#{pageNum} - 1) * #{amount}
+            LIMIT #{amount}
+        ]]>
+    </select>
+
 </mapper>

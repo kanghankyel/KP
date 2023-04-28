@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.kidsplace.kidsplace.commons.Criteria;
 import com.kidsplace.kidsplace.commons.TicketDetailVO;
 import com.kidsplace.kidsplace.commons.TicketVO;
 
@@ -18,5 +19,11 @@ public interface TicketDAO {
 
     // 티켓구매내역(개인) 리스트 구현
     List<TicketVO> ticketList();
+
+
+
+    // mapper패키지인 BoardDAO인터페이스에 Criteria클래스를 파라미터로 사용하는 메소드를 추가
+    // 페이징 처리 후 리스트 조회
+    List<TicketVO> getTicketListWithPaging(Criteria cri);
 
 }

@@ -3,6 +3,9 @@ package com.kidsplace.kidsplace.service;
 import com.kidsplace.kidsplace.commons.AuthVO;
 import com.kidsplace.kidsplace.commons.UserVO;
 import com.kidsplace.kidsplace.dao.UserDAO;
+
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,4 +79,10 @@ public class UserServicempl implements UserService {
     public void withdraw(UserVO vo) throws Exception {
 
     }
+
+    // @Override
+    // public List<UserVO> userList() {
+    //     return userDAO.userList();
+    // }
+
 }

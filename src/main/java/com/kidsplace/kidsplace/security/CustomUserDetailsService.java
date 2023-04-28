@@ -32,7 +32,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         UserVO vo = null;
         try{
             // 아이디로 검색된 사용자가 존재하고 있는지부터 검색
-            System.out.println(username);
+            System.out.println("전달받은 아이디 : " + username);
             vo = userDAO.getMemberByID(username);           // username은 시큐리티에서 날아오는 아이디
             if (vo != null){
                 logger.info(username + " -> 존재하는 유저입니다.");

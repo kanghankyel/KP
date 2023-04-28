@@ -2,6 +2,9 @@ package com.kidsplace.kidsplace.dao;
 
 import com.kidsplace.kidsplace.commons.AuthVO;
 import com.kidsplace.kidsplace.commons.UserVO;
+
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
@@ -44,5 +47,8 @@ public interface UserDAO {
     //회원탈퇴
     @Update("UPDATE kidslandUser SET member = 'N' WHERE uId = #{uId}")
     void withdraw(UserVO vo) throws Exception;
+
+    // 회원리스트
+    // List<UserVO> userList();
 
 }

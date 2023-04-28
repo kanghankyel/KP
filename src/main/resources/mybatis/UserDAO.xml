@@ -126,4 +126,29 @@
         UPDATE kidslandUser SET visitdate = NOW() WHERE uId = #{uId}
     </update>
 
+
+    <!-- 회원리스트 -->
+    <!-- <select id="userList">
+        SELECT
+            uNum
+           ,uId
+           ,uPassword
+           ,uName
+           ,uPhoneNum
+           ,uBirth
+           ,uPostCode
+           ,uAddr
+           ,uDetailAddr
+           ,date_format(regdate, '%Y-%m-%d') AS regdate
+           ,date_format(updatedate, '%Y-%m-%d') AS updatedate
+           ,date_format(visitdate, '%Y-%m-%d') AS visitdate
+           ,member
+        FROM
+            kidslandUser
+        WHERE
+            member = 'Y'
+        ORDER BY
+            uNum;
+    <select> -->
+
 </mapper>

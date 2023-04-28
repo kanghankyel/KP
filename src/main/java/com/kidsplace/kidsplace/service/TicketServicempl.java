@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kidsplace.kidsplace.commons.Criteria;
 import com.kidsplace.kidsplace.commons.TicketDetailVO;
 import com.kidsplace.kidsplace.commons.TicketVO;
 import com.kidsplace.kidsplace.dao.TicketDAO;
@@ -47,6 +48,12 @@ public class TicketServicempl implements TicketService {
     @Override
     public List<TicketVO> ticketList() {
         return ticketDAO.ticketList();
+    }
+
+    @Override
+    public List<TicketVO> getTicketList(Criteria cri) {
+        logger.info("get List with Criteria" + cri);
+        return ticketDAO.getTicketListWithPaging(cri);
     }
 
 }

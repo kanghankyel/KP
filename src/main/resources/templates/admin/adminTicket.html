@@ -17,8 +17,6 @@
         <div class="inner">
             <h2>관리자 페이지</h2>
             <hr>
-            <!-- 유저 -->
-            <!-- 티켓 종류 테이블 -->
             <h2>티켓 종류 테이블</h2>
             <table class="ticket_board">
                 <tr>
@@ -49,24 +47,42 @@
                     <th>사용일자</th>
                     <th>사용유무</th>
                 </tr>
-                <tr th:each="ticket : ${ticket}">
-                    <td><div th:text="${ticket.tNum}"></div></td>
-                    <td><div th:text="${ticket.uNum}"></div></td>
-                    <td><div th:text="${ticket.tType}"></div></td>
-                    <td><div th:text="${ticket.uName}"></div></td>
-                    <td><div th:text="${ticket.market}"></div></td>
-                    <td><div th:text="${ticket.tArea}"></div></td>
-                    <td><div th:text="${ticket.sellDate}"></div></td>
-                    <td><div th:text="${ticket.useDate}"></div></td>
-                    <td><div th:text="${ticket.used}"></div></td>
+                <tr th:each="ticketList : ${ticketList}">
+                    <td><div th:text="${ticketList.tNum}"></div></td>
+                    <td><div th:text="${ticketList.uNum}"></div></td>
+                    <td><div th:text="${ticketList.tType}"></div></td>
+                    <td><div th:text="${ticketList.uName}"></div></td>
+                    <td><div th:text="${ticketList.market}"></div></td>
+                    <td><div th:text="${ticketList.tArea}"></div></td>
+                    <td><div th:text="${ticketList.sellDate}"></div></td>
+                    <td><div th:text="${ticketList.useDate}"></div></td>
+                    <td><div th:text="${ticketList.used}"></div></td>
                 </tr>
-                <tr th:each="ticket : ${ticket}" th:if="${#strings.isEmpty(ticket)}">
+                <tr th:each="ticketList : ${ticketList}" th:if="${#strings.isEmpty(ticketList)}">
                     <td colspan="9">구매한 티켓이 없습니다.</td>
                 </tr>
             </table>
+
+            <div class="paginationBox">
+                <ul class="pagination">
+                    <li th:if="${pageMaker.prev}">
+                        <a th:href="@{pageMaker.startPage - 1}">이전</a>
+                    </li>
+                    <!-- 페이지번호 오류가 있음(생성되지 않아야 할 번호까지 생성이 됨.) -->
+                    <li th:each="num : ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}" th:class="${num == pageMaker.cri.pageNum} ? 'active'">
+                        <a th:href="@{/admin/adminTicket?pageNum={page} (page = ${num})}" th:text="${num}"></a>
+                    </li>
+                    <li th:if="${pageMaker.next}">
+                        <a th:href="@{pageMaker.endPage + 1}">다음</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     
     <div th:include="/fragment/footer"></div>
+
+
+    <!-- script -->
 </body>
 </html>

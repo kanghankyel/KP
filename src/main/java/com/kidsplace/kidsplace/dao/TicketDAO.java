@@ -26,4 +26,7 @@ public interface TicketDAO {
     // 페이징 처리 후 리스트 조회
     List<TicketVO> getTicketListWithPaging(Criteria cri);
 
+    // 페이징 total 카운트
+    int getTotalCount(Criteria cri);
+
 }

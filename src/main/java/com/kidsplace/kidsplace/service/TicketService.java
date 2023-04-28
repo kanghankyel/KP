@@ -22,4 +22,7 @@ public interface TicketService {
     // 티켓구매내역 리스트 페이징 구현
     List<TicketVO> getTicketList(Criteria cri);
 
+    // 페이징 total 카운트
+    int getTotal(Criteria cri);
+
 }

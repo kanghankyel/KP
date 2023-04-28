@@ -91,4 +91,13 @@
         ]]>
     </select>
 
+    <select id="getTotalCount" resultType="int">
+        SELECT
+            count(*)
+        FROM
+            kidslandTicket
+        WHERE
+            tNum > 0;
+    </select>
+
 </mapper>

@@ -56,4 +56,10 @@ public class TicketServicempl implements TicketService {
         return ticketDAO.getTicketListWithPaging(cri);
     }
 
+    @Override
+    public int getTotal(Criteria cri) {
+        logger.info("get total count");
+        return ticketDAO.getTotalCount(cri);
+    }
+
 }

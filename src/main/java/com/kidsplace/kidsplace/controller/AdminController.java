@@ -46,8 +46,10 @@ public class AdminController {
         // model.addAttribute("ticket", ticketlist);
         // 티켓구매리스트 페이징
         logger.info("티켓리스트 : " + cri);
+        int total = ticketService.getTotal(cri);
+        logger.info("total : " + total);
         model.addAttribute("ticketList", ticketService.getTicketList(cri));
-        model.addAttribute("pageMaker", new PageDTO(cri, 123));
+        model.addAttribute("pageMaker", new PageDTO(cri, total));
         return "/admin/adminTicket";
     }
 

@@ -74,10 +74,13 @@
            ,used
         FROM
             kidslandTicket
+        WHERE
+            uNum = #{uNum}
         ORDER BY
             tNum;
     </select>
 
+    <!-- 티켓구매내역 리스트 페이징 -->
     <select id="getTicketListWithPaging" resultMap="ticketMap">
         <![CDATA[
             SELECT tNum, uNum, tType, uName, market, tArea, sellDate, useDate, used
@@ -91,13 +94,14 @@
         ]]>
     </select>
 
+    <!-- 티켓구매내역 total 카운트 -->
     <select id="getTotalCount" resultType="int">
         SELECT
             count(*)
         FROM
             kidslandTicket
         WHERE
-            tNum > 0;
+            1 = 1
     </select>
 
 </mapper>

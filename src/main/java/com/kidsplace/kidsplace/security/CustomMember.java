@@ -33,7 +33,7 @@ public class CustomMember extends User {
 
         //전역변수 member 갱신하기
         this.member = vo;
-        //세션 객체에 활용할 수 있는 vo가 없기 때문에(security가 인가를 해준 것이기 때문에) jsp에서 활용할 수 있도록 직접 넣어준다.
+        //세션 객체에 활용할 수 있는 vo가 없기 때문에(security가 인가를 해준 것이기 때문에) html에서 활용할 수 있도록 직접 넣어준다.
     }
 
     public static Collection<? extends GrantedAuthority> authorities(List<AuthVO> authList) {

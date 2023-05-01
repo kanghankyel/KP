@@ -18,7 +18,7 @@ public interface TicketDAO {
     int ticketInsert(TicketVO ticketVO);
 
     // 티켓구매내역(개인) 리스트 구현
-    List<TicketVO> ticketList();
+    List<TicketVO> ticketList(int uNum);
 
 
 

@@ -1,6 +1,7 @@
 package com.kidsplace.kidsplace.service;
 
 import com.kidsplace.kidsplace.commons.NoticeVO;
+import com.kidsplace.kidsplace.commons.Pagination;
 import com.kidsplace.kidsplace.dao.CommunityDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -71,6 +73,17 @@ public class CommunityServicempl implements CommunityService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public List<NoticeVO> noticePaging(Pagination pagination) {
+        logger.info("get List with SearchDTO");
+        return communityDAO.noticePaging(pagination);
+    }
+
+    @Override
+    public int noticeCount() {
+        return communityDAO.noticeCount();
     }
 
 }

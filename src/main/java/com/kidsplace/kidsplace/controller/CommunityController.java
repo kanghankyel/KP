@@ -1,6 +1,7 @@
 package com.kidsplace.kidsplace.controller;
 
 import com.kidsplace.kidsplace.commons.NoticeVO;
+import com.kidsplace.kidsplace.commons.Pagination;
 import com.kidsplace.kidsplace.service.CommunityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,9 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -27,9 +30,17 @@ public class CommunityController {
 
     // 공지사항 페이지 이동 및 리스트 구현
     @GetMapping("/notice")
-    public String NoticeList (Model model){
-        List<NoticeVO> noticelist = communityService.noticeList();
+    public String NoticeList (Model model
+                            , @RequestParam(name = "page", required = false, defaultValue = "1") int page){
+        // List<NoticeVO> noticelist = communityService.noticeList();
+        // model.addAttribute("notice", noticelist);
+        // 아래는 페이징 처리
+        int noticeCount = communityService.noticeCount();
+        Pagination pagination = new Pagination(noticeCount, page);
+        List<NoticeVO> noticelist = communityService.noticePaging(pagination);
         model.addAttribute("notice", noticelist);
+        model.addAttribute("page", pagination);
+        System.out.println(pagination.toString());
         return "/community/notice";
     }
 

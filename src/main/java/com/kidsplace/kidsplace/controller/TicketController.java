@@ -7,6 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kidsplace.kidsplace.commons.TicketDetailVO;
 import com.kidsplace.kidsplace.commons.TicketVO;
+import com.kidsplace.kidsplace.commons.UserVO;
+import com.kidsplace.kidsplace.security.CustomMember;
+import com.kidsplace.kidsplace.security.CustomUserDetailsService;
 import com.kidsplace.kidsplace.service.TicketService;
 
 @Controller
@@ -63,8 +69,11 @@ public class TicketController {
 
     // 티켓구매내역(개인) 리스트 구현
     @GetMapping("/ticketHistory")
-    public String TicketList (Model model){
-        List<TicketVO> ticketlist = ticketService.ticketList();
+    public String TicketList (@AuthenticationPrincipal CustomMember customMember, Model model){
+        int uNum = customMember.getMember().getuNum();
+        // System.out.println(uNum);
+        // System.out.println(customMember.getMember().getuNum());
+        List<TicketVO> ticketlist = ticketService.ticketList(uNum);
         model.addAttribute("ticket", ticketlist);
         return "/ticket/ticketHistory";
     }

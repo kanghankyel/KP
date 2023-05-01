@@ -17,6 +17,7 @@
         <div class="inner">
             <h2>티켓구매내역</h2>
             <hr>
+            <h1 th:value="${#authentication.principal.member.uNum}"></h1>
             <table>
                 <tr>
                     <th>티켓번호</th>
@@ -29,7 +30,7 @@
                     <th>사용일자</th>
                     <th>사용유무</th>
                 </tr>
-                <tr th:each="ticket : ${ticket}" th:if="${ticket.uNum == #authentication.principal.member.uNum}">
+                <tr th:each="ticket : ${ticket}" th:if="${not #lists.isEmpty(ticket)}">
                     <td><div th:text="${ticket.tNum}"></div></td>
                     <td><div th:text="${ticket.uNum}"></div></td>
                     <td><div th:text="${ticket.tType}"></div></td>
@@ -40,8 +41,8 @@
                     <td><div th:text="${ticket.useDate}"></div></td>
                     <td><div th:text="${ticket.used}"></div></td>
                 </tr>
-                <tr th:each="ticket : ${ticket}" th:if="${#strings.isEmpty(ticket)}">
-                    <td colspan="9">구매한 티켓이 없습니다.</td>
+                <tr th:unless="${not #lists.isEmpty(ticket)}">
+                    <td colspan="9">구매된 티켓이 없습니다.</td>
                 </tr>
             </table>
         </div>

@@ -46,8 +46,8 @@ public class TicketServicempl implements TicketService {
     }
 
     @Override
-    public List<TicketVO> ticketList() {
-        return ticketDAO.ticketList();
+    public List<TicketVO> ticketList(int uNum) {
+        return ticketDAO.ticketList(uNum);
     }
 
     @Override

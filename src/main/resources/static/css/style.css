@@ -680,4 +680,9 @@ footer .inner>div:nth-child(4){
     display: block;
     width: 100%;
     height: 100%;
+    transition: 0.2s;
+}
+.pagination li a:hover{
+    background-color: rgb(100, 131, 226);
+    color: #eee;
 }

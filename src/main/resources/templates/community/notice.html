@@ -25,6 +25,7 @@
                     <th>작성자</th>
                     <th>등록일</th>
                 </tr>
+                <!-- 마지막 추가 리스트는 반영이 안됨. -->
                 <tr th:each="notice : ${notice}" th:if="${not #lists.isEmpty(notice)}">
                     <td><a th:href="@{/community/noticeDetail(nNum = ${notice.nNum})}"><div th:text="${notice.nNum}"></div></a></td>
                     <td><a th:href="@{/community/noticeDetail(nNum = ${notice.nNum})}"><div th:text="${notice.nCategory}"></div></a></td>
@@ -55,6 +56,7 @@
                         </li>
                     </th:block>
                 </ul>
+                <!-- <input type="hidden" th:value="${page}"> -->
                 <p th:text="${page}"></p>
             </div>
 

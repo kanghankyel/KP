@@ -17,7 +17,7 @@ public class Pagination {
 
     private int page;
     private int recordSize = 10;
-    private int pageSize = 5;
+    private int pageSize = 10;
 
     public Pagination(int totalRecordCount, int page){
         this.page = page;

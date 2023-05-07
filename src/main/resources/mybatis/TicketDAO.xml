@@ -4,6 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kidsplace.kidsplace.dao.TicketDAO">
 
+    <resultMap id="memberMap" type="com.kidsplace.kidsplace.commons.UserVO">
+        <id property="uNum" column="uNum" />
+        <id property="uId" column="uId" />
+        <id property="uPassword" column="uPassword" />
+        <id property="uName" column="uName" />
+        <id property="uPhoneNum" column="uPhoneNum" />
+        <id property="uBirth" column="uBirth" />
+        <id property="uPostCode" column="uPostCode" />
+        <id property="uAddr" column="uAddr" />
+        <id property="uDetailAddr" column="uDetailAddr" />
+        <id property="regdate" column="regdate" />
+        <id property="updatedate" column="updatedate" />
+        <id property="visitdate" column="visitdate" />
+        <id property="member" column="member" />
+    </resultMap>
+
     <resultMap id="TDMap" type="com.kidsplace.kidsplace.commons.TicketDetailVO">
         <result property="tType" column="tType" />
         <result property="tName" column="tName" />
@@ -18,6 +34,7 @@
         <result property="tNum" column="tNum"/>
         <result property="uNum" column="uNum"/>
         <result property="tType" column="tType"/>
+        <result property="tName" column="tName"/>
         <result property="uName" column="uName"/>
         <result property="market" column="market"/>
         <result property="tArea" column="tArea"/>
@@ -27,6 +44,43 @@
 
         <!-- <collection property="TDList" resultMap="TDMap" /> -->
     </resultMap>
+
+    <sql id="ticketSearch">
+        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tNum)">
+            AND tNum LIKE '%' + #{ticketVO.tNum} + '%'
+        </if>
+        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.uNum)">
+            AND uNum LIKE '%' + #{ticketVO.uNum} + '%'
+        </if>
+        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tType)">
+            AND tType LIKE '%' + #{ticketVO.tType} + '%'
+        </if>
+        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tName)">
+            AND tName LIKE '%' + #{ticketVO.tName} + '%'
+        </if>
+        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.uName)">
+            AND uName LIKE '%' + #{ticketVO.uName} + '%'
+        </if>
+        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.market)">
+            AND market LIKE '%' + #{ticketVO.market} + '%'
+        </if>
+        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tArea)">
+            AND tArea LIKE '%' + #{ticketVO.tArea} + '%'
+        </if>
+        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.sellDate)">
+            AND sellDate LIKE '%' + #{ticketVO.sellDate} + '%'
+        </if>
+        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.useDate)">
+            AND useDate LIKE '%' + #{ticketVO.useDate} + '%'
+        </if>
+        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.used)">
+            AND used LIKE '%' + #{ticketVO.used} + '%'
+        </if>
+    </sql>
+
+    <sql id="searchParam">
+        LIKE '%' + #{searchParam} + '%'
+    </sql>
 
     <!--  티켓정보 리스트 불러오기  -->
     <select id="ticketDetailList" resultMap="TDMap">
@@ -80,22 +134,75 @@
             tNum;
     </select>
 
-    <!-- 티켓구매내역 리스트 페이징 -->
-    <select id="getTicketListWithPaging" resultMap="ticketMap">
-        <![CDATA[
-            SELECT tNum, uNum, tType, uName, market, tArea, sellDate, useDate, used
-                FROM (
-                    SELECT @ROWNUM := @ROWNUM + 1 as rnum, tNum, uNum, tType, uName, market, tArea, sellDate, useDate, used
-                    FROM kidslandTicket, (SELECT @ROWNUM :=0) A
-                    ORDER BY tNum DESC
-                ) RESULT
-            WHERE rnum > (#{pageNum} - 1) * #{amount}
-            LIMIT #{amount}
-        ]]>
+    <!-- 티켓구매내역(개인) 리스트 페이징 -->
+    <select id="ticketPaging" resultMap="ticketMap">
+        SELECT
+            a.tNum
+           ,a.uNum
+           ,b.tName
+           ,c.uName
+           ,a.market
+           ,a.tArea
+           ,date_format(a.sellDate, '%Y-%m-%d') AS sellDate
+           ,date_format(a.useDate, '%Y-%m-%d') AS useDate
+           ,used
+        FROM
+            kidslandTicket AS a
+        INNER JOIN
+            kidslandTicketDetail AS b
+                ON a.tType = b.tType
+        INNER JOIN
+            kidslandUser AS c
+                ON a.uNum = c.uNum
+        WHERE
+            a.uNum = #{uNum}
+        ORDER BY
+            tNum DESC
+        LIMIT
+            #{pagination.limitStart}, #{pagination.recordSize}
     </select>
 
-    <!-- 티켓구매내역 total 카운트 -->
-    <select id="getTotalCount" resultType="int">
+    <!-- 티켓구매내역(개인) 리스트 카운팅 -->
+    <select id="ticketCount" resultType="int">
+        SELECT
+            count(*)
+        FROM
+            kidslandTicket
+        WHERE
+            uNum = #{uNum}
+    </select>
+
+    <!-- 티켓구매내역(전체) 리스트 페이징 -->
+    <select id="ticketAllPaging" resultMap="ticketMap">
+        SELECT
+            a.tNum
+           ,a.uNum
+           ,b.tName
+           ,c.uPhoneNum
+           ,c.uName
+           ,a.market
+           ,a.tArea
+           ,date_format(a.sellDate, '%Y-%m-%d') AS sellDate
+           ,date_format(a.useDate, '%Y-%m-%d') AS useDate
+           ,a.used
+        FROM
+            kidslandTicket AS a
+        INNER JOIN
+            kidslandTicketDetail AS b
+                ON a.tType = b.tType
+        INNER JOIN
+            kidslandUser AS c
+                ON a.uNum = c.uNum
+        WHERE
+            1 = 1
+        ORDER BY
+            a.tNum DESC
+        LIMIT
+            #{pagination.limitStart}, #{pagination.recordSize}
+    </select>
+
+    <!-- 티켓구매내역(전체) 리스트 카운팅 -->
+    <select id="ticketAllCount" resultType="int">
         SELECT
             count(*)
         FROM
@@ -104,4 +211,34 @@
             1 = 1
     </select>
 
+    <!-- 티켓환불요청 -->
+    <update id="ticketRefund">
+        UPDATE
+            kidslandTicket
+        SET
+            used = 'R'
+        WHERE
+            tNum = #{tNum}
+    </update>
+
+    <!-- 티켓사용처리 -->
+    <update id="ticketUseCheck">
+        UPDATE
+            kidslandTicket
+        SET
+            useDate = CURRENT_TIMESTAMP
+          , used = 'Y'
+        WHERE
+            tNum = #{tNum}
+    </update>
+
+    <!-- 티켓환불처리 -->
+    <update id="ticketRefundCheck">
+        UPDATE
+            kidslandTicket
+        SET
+            used = 'C'
+        WHERE
+            tNum = #{tNum}
+    </update>
 </mapper>

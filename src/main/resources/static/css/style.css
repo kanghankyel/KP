@@ -669,6 +669,7 @@ footer .inner>div:nth-child(4){
     box-sizing: border-box;
     color: royalblue;
     border: 1px solid #bbb;
+    z-index: 999;
 }
 .pagination li.active{
     width: 30px;

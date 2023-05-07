@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kidsplace.kidsplace.commons.Pagination;
 import com.kidsplace.kidsplace.commons.TicketDetailVO;
 import com.kidsplace.kidsplace.commons.TicketVO;
 import com.kidsplace.kidsplace.security.CustomMember;
@@ -65,13 +67,43 @@ public class TicketController {
 
     // 티켓구매내역(개인) 리스트 구현
     @GetMapping("/ticketHistory")
-    public String TicketList (@AuthenticationPrincipal CustomMember customMember, Model model){
+    public String TicketList (Model model
+                            , @AuthenticationPrincipal CustomMember customMember
+                            , @RequestParam(name = "page", required = false, defaultValue = "1") int page){
+        // int uNum = customMember.getMember().getuNum();
+        // // System.out.println(customMember.getMember().getuNum());
+        // List<TicketVO> ticketlist = ticketService.ticketList(uNum);
+        // model.addAttribute("ticket", ticketlist);
+        // return "/ticket/ticketHistory";
+
         int uNum = customMember.getMember().getuNum();
-        // System.out.println(uNum);
-        // System.out.println(customMember.getMember().getuNum());
-        List<TicketVO> ticketlist = ticketService.ticketList(uNum);
+        // ###################### ticketDAO단에서 ticketCount값을 0으로 받아옴
+        int ticketCount = ticketService.ticketCount(uNum);
+        // System.out.println("ticketCount : " + ticketCount);
+        Pagination pagination = new Pagination(ticketCount, page);
+        System.out.println("uNum : " + customMember.getMember().getuNum());
+        List<TicketVO> ticketlist = ticketService.ticketPaging(pagination, uNum);
         model.addAttribute("ticket", ticketlist);
+        model.addAttribute("page", pagination);
+        System.out.println(pagination.toString());
         return "/ticket/ticketHistory";
+    }
+
+    // 티켓환불요청
+    @PostMapping("/ticketHistory")
+    public ResponseEntity<Boolean> ticketRefund(@RequestBody TicketVO ticketVO){
+        try{
+            boolean result = ticketService.ticketRefund(ticketVO);
+            if(result){
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e){
+            logger.error("티켓환불 요청에 실패하였습니다.");
+            e.printStackTrace();
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
     }
 
 }

@@ -15,9 +15,12 @@ public class Pagination {
     private boolean existPrevPage;      // 이전 페이지 존재 여부
     private boolean existNextPage;      // 다음 페이지 존재 여부
 
+    // private String searchType;            // 검색 카테고리
+    // private String keyword;             // 검색 키워드
+
     private int page;
     private int recordSize = 10;
-    private int pageSize = 10;
+    private int pageSize = 5;
 
     public Pagination(int totalRecordCount, int page){
         this.page = page;
@@ -40,7 +43,7 @@ public class Pagination {
             // 첫 페이지 번호 계산
             // 1. 0을 제외한 startPage는 5배수 +1의 값이다.
             // 2. 5 초과의 경우 page보다 작은 수 중 가장 큰 5의 배수 중 +1한 값이다.
-            startPage = ((page / pageSize) * pageSize) + 1;
+            startPage = (((page - 1) / pageSize) * pageSize) + 1;
 
             // 끝 페이지 번호 계산
             endPage = startPage + pageSize - 1;
@@ -51,7 +54,7 @@ public class Pagination {
 
         }
         // LIMIT 시작 위치 계산
-        limitStart = (page - 1) * pageSize + 1;
+        limitStart = (page - 1) * recordSize;
 
         // 이전 페이지 존재 여부 확인
         existPrevPage = startPage != 1;

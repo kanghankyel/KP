@@ -20,9 +20,21 @@ public class CommunityServicempl implements CommunityService {
     @Autowired
     private CommunityDAO communityDAO;
 
+    // @Override
+    // public List<NoticeVO> noticeList() {
+    //     return communityDAO.noticeList();
+    // }
+
     @Override
-    public List<NoticeVO> noticeList() {
-        return communityDAO.noticeList();
+    public List<NoticeVO> noticePaging(Pagination pagination) {
+        logger.info("get List with SearchDTO");
+        return communityDAO.noticePaging(pagination);
+    }
+
+    @Override
+    public int noticeCount() {
+        // System.out.println("noticeCount : " + communityDAO.noticeCount());
+        return communityDAO.noticeCount();
     }
 
     @Override
@@ -73,17 +85,6 @@ public class CommunityServicempl implements CommunityService {
             e.printStackTrace();
             return false;
         }
-    }
-
-    @Override
-    public List<NoticeVO> noticePaging(Pagination pagination) {
-        logger.info("get List with SearchDTO");
-        return communityDAO.noticePaging(pagination);
-    }
-
-    @Override
-    public int noticeCount() {
-        return communityDAO.noticeCount();
     }
 
 }

@@ -5,6 +5,8 @@ public class TicketVO {
     private int tNum;
     private int uNum;
     private int tType;
+    private String tName;
+    private String uPhoneNum;
     private String uName;
     private String market;
     private String tArea;
@@ -17,11 +19,13 @@ public class TicketVO {
     public TicketVO(){
 
     }
-    public TicketVO(int tNum, int uNum, int tType, String uName, String market, String tArea, String sellDate,
+    public TicketVO(int tNum, int uNum, int tType, String tName, String uPhoneNum, String uName, String market, String tArea, String sellDate,
             String useDate, String used, int tCount) {
         this.tNum = tNum;
         this.uNum = uNum;
         this.tType = tType;
+        this.tName = tName;
+        this.uPhoneNum = uPhoneNum;
         this.uName = uName;
         this.market = market;
         this.tArea = tArea;
@@ -48,6 +52,18 @@ public class TicketVO {
     }
     public void settType(int tType) {
         this.tType = tType;
+    }
+    public String gettName() {
+        return tName;
+    }
+    public void settName(String tName) {
+        this.tName = tName;
+    }
+    public String getuPhoneNum() {
+        return uPhoneNum;
+    }
+    public void setuPhoneNum(String uPhoneNum) {
+        this.uPhoneNum = uPhoneNum;
     }
     public String getuName() {
         return uName;
@@ -91,10 +107,12 @@ public class TicketVO {
     public void settCount(int tCount) {
         this.tCount = tCount;
     }
+
     @Override
     public String toString() {
-        return "TicketVO [tNum=" + tNum + ", uNum=" + uNum + ", tType=" + tType + ", uName=" + uName + ", market="
-                + market + ", tArea=" + tArea + ", sellDate=" + sellDate + ", useDate=" + useDate + ", used=" + used
-                + ", tCount=" + tCount + "]";
+        return "TicketVO [tNum=" + tNum + ", uNum=" + uNum + ", tType=" + tType + ", tName=" + tName + ", uPhoneNum="
+                + uPhoneNum + ", uName=" + uName + ", market=" + market + ", tArea=" + tArea + ", sellDate=" + sellDate
+                + ", useDate=" + useDate + ", used=" + used + ", tCount=" + tCount + "]";
     }
+   
 }

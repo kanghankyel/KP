@@ -32,6 +32,7 @@ public class CommunityController {
     @GetMapping("/notice")
     public String NoticeList (Model model
                             , @RequestParam(name = "page", required = false, defaultValue = "1") int page){
+        // 임시 리스트
         // List<NoticeVO> noticelist = communityService.noticeList();
         // model.addAttribute("notice", noticelist);
         // 아래는 페이징 처리

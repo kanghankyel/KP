@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kidsplace.kidsplace.commons.Criteria;
+import com.kidsplace.kidsplace.commons.Pagination;
 import com.kidsplace.kidsplace.commons.TicketDetailVO;
 import com.kidsplace.kidsplace.commons.TicketVO;
 import com.kidsplace.kidsplace.dao.TicketDAO;
@@ -51,15 +52,82 @@ public class TicketServicempl implements TicketService {
     }
 
     @Override
-    public List<TicketVO> getTicketList(Criteria cri) {
-        logger.info("get List with Criteria" + cri);
-        return ticketDAO.getTicketListWithPaging(cri);
+    public List<TicketVO> ticketPaging(Pagination pagination, int uNum) {
+        logger.info("get List with SearchDTO");
+        return ticketDAO.ticketPaging(pagination, uNum);
     }
 
     @Override
-    public int getTotal(Criteria cri) {
-        logger.info("get total count");
-        return ticketDAO.getTotalCount(cri);
+    public int ticketCount(int uNum) {
+        int result = ticketDAO.ticketCount(uNum);
+        System.out.println("ticketCount : " + result);
+        return result;
+    }
+
+    @Override
+    public List<TicketVO> ticketAllPaging(Pagination pagination) {
+        logger.info("get List with SearchDTO");
+        return ticketDAO.ticketAllPaging(pagination);
+    }
+
+    @Override
+    public int ticketAllCount() {
+        // System.out.println("noticeCount : " + communityDAO.noticeCount());
+        return ticketDAO.ticketAllCount();
+    }
+
+    @Override
+    public boolean ticketRefund(TicketVO ticketVO) {
+        // logger.warn("티켓환불요청 데이터");
+        // logger.warn(String.valueOf(ticketVO));
+        try{
+            int result = ticketDAO.ticketRefund(ticketVO);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            logger.error("티켓환불요청 데이터 오류");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean ticketUseCheck(TicketVO ticketVO) {
+        // logger.warn("티켓사용처리 데이터");
+        // logger.warn(String.valueOf(ticketVO));
+        try{
+            int result = ticketDAO.ticketUseCheck(ticketVO);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            logger.error("티켓사용처리 데이터 오류");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean ticketRefundCheck(TicketVO ticketVO) {
+        // logger.warn("티켓환불처리 데이터");
+        // logger.warn(String.valueOf(ticketVO));
+        try{
+            int result = ticketDAO.ticketRefundCheck(ticketVO);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            logger.error("티켓환불처리 데이터 오류");
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

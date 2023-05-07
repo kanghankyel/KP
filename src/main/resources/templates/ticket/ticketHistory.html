@@ -17,9 +17,10 @@
         <div class="inner">
             <h2>티켓구매내역</h2>
             <hr>
-            <h1 th:value="${#authentication.principal.member.uNum}"></h1>
-            <table>
+            <!-- <h1 th:value="${#authentication.principal.member.uNum}"></h1> -->
+            <table class="ticket_board">
                 <tr>
+                    <th>No</th>
                     <th>티켓번호</th>
                     <th>유저번호</th>
                     <th>티켓종류</th>
@@ -28,28 +29,88 @@
                     <th>사용장소</th>
                     <th>구매일자</th>
                     <th>사용일자</th>
-                    <th>사용유무</th>
+                    <th>티켓상태</th>
+                    <th>비고</th>
                 </tr>
                 <tr th:each="ticket : ${ticket}" th:if="${not #lists.isEmpty(ticket)}">
-                    <td><div th:text="${ticket.tNum}"></div></td>
+                    <td><div th:text="${(page.page - 1) * page.recordSize + ticketStat.index + 1}"></div></td>
+                    <td><div th:text="${ticket.tNum}"></div><input type="hidden" id="tNum" th:value="${ticket.tNum}"></td>
                     <td><div th:text="${ticket.uNum}"></div></td>
-                    <td><div th:text="${ticket.tType}"></div></td>
+                    <td><div th:text="${ticket.tName}"></div></td>
                     <td><div th:text="${ticket.uName}"></div></td>
                     <td><div th:text="${ticket.market}"></div></td>
                     <td><div th:text="${ticket.tArea}"></div></td>
                     <td><div th:text="${ticket.sellDate}"></div></td>
-                    <td><div th:text="${ticket.useDate}"></div></td>
-                    <td><div th:text="${ticket.used}"></div></td>
+                    <td>
+                        <div th:text="${ticket.useDate}"></div>
+                        <div th:if="${#lists.isEmpty(ticket.useDate)}">-</div>
+                    </td>
+                    <td>
+                        <input type="hidden" id="used" th:value="${ticket.used}">
+                        <div th:if="${ticket.used == 'N'}">예매완료</div>
+                        <div th:if="${ticket.used == 'Y'}">사용완료</div>
+                        <div th:if="${ticket.used == 'R'}">환불요청</div>
+                        <div th:if="${ticket.used == 'C'}">환불완료</div>
+                    </td>
+                    <td>
+                        <div th:if="${ticket.used == 'N'}"><input type="button" value="환불요청" th:tNum="${ticket.tNum}" th:onclick="refundTicket(this.getAttribute('tNum'))"></div>
+                    </td>
                 </tr>
                 <tr th:unless="${not #lists.isEmpty(ticket)}">
                     <td colspan="9">구매된 티켓이 없습니다.</td>
                 </tr>
             </table>
+
+            <div class="paginationBox">
+                <ul class="pagination">
+                    <th:block th:if="${page.existPrevPage}">
+                        <li>
+                            <a th:href="@{/ticket/ticketHistory?page={prev} (prev = ${page.startPage - 1})}">이전</a>
+                        </li>
+                    </th:block>
+                    <th:block th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}">
+                        <li th:class="${num == page.page} ? 'active'">
+                            <a th:href="@{/ticket/ticketHistory?page={page} (page = ${num})}" th:text="${num}"></a>
+                        </li>
+                    </th:block>
+                    <th:block th:if="${page.existNextPage}">
+                        <li>
+                            <a th:href="@{/ticket/ticketHistory?page={next} (next = ${page.endPage + 1})}">다음</a>
+                        </li>
+                    </th:block>
+                </ul>
+                <p th:text="${page}"></p>
+            </div>
         </div>
     </div>
     
     <div th:include="/fragment/footer"></div>
 
 
+    
+    <!--  script  -->
+    <script>
+        function refundTicket(tNum){
+            // const urlParams = new URLSearchParams(location.search);
+            fetch(urlparam + '/ticket/ticketHistory', {
+                method: 'post',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    tNum: tNum
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        console.log(data);
+                        alert("티켓환불요청이 완료되었습니다.");
+                        location.href= urlparam + "/ticket/ticketHistory";
+                    }else{
+                        alert("티켓환불요청에 실패하였습니다. 다시 시도해주세요.");
+                    }
+                })
+                .catch((error) => console.log(error));
+        }
+    </script>
 </body>
 </html>

@@ -3,8 +3,10 @@ package com.kidsplace.kidsplace.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.kidsplace.kidsplace.commons.Criteria;
+import com.kidsplace.kidsplace.commons.Pagination;
 import com.kidsplace.kidsplace.commons.TicketDetailVO;
 import com.kidsplace.kidsplace.commons.TicketVO;
 
@@ -20,13 +22,25 @@ public interface TicketDAO {
     // 티켓구매내역(개인) 리스트 구현
     List<TicketVO> ticketList(int uNum);
 
+    // 티켓구매내역(개인) 리스트 페이징
+    List<TicketVO> ticketPaging(@Param("pagination") Pagination pagination, @Param("uNum") int uNum);
 
+    // 티켓구매내역(개인) 리스트 카운팅
+    int ticketCount(@Param("uNum") int uNum);
 
-    // mapper패키지인 BoardDAO인터페이스에 Criteria클래스를 파라미터로 사용하는 메소드를 추가
-    // 페이징 처리 후 리스트 조회
-    List<TicketVO> getTicketListWithPaging(Criteria cri);
+    // 티켓구매내역(전체) 리스트 페이징
+    List<TicketVO> ticketAllPaging(@Param("pagination") Pagination pagination);
 
-    // 페이징 total 카운트
-    int getTotalCount(Criteria cri);
+    // 티켓구매내역(전체) 리스트 카운팅
+    int ticketAllCount();
+
+    // 티켓환불요청
+    int ticketRefund(TicketVO ticketVO);
+
+    // 티켓사용처리
+    int ticketUseCheck(TicketVO ticketVO);
+
+    // 티켓환불처리
+    int ticketRefundCheck(TicketVO ticketVO);
 
 }

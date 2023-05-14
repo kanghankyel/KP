@@ -54,13 +54,13 @@
 
     <!--휴대폰 번호 중복 체크-->
     <!--UserVO getMemberByPhoneNum(String uPhoneNum);-->
-    <select id="getMemberByPhoneNum" parameterType="java.lang.String" resultMap="memberMap">
+    <!-- <select id="getMemberByPhoneNum" parameterType="java.lang.String" resultMap="memberMap">
         SELECT user.*, uAuth
         FROM kidslandUser AS user
         LEFT OUTER JOIN kidslandUserAuth AS auth
         on user.uId = auth.uId
         WHERE user.uPhoneNum = #{uPhoneNum} AND user.member = 'Y';
-    </select>
+    </select> -->
 
 
     <!--회원가입-->
@@ -90,65 +90,81 @@
 
     <!--회원 아이디 찾기-->
     <!--String findId(UserVO vo) throws Exception;-->
-    <select id="findId" parameterType="com.kidsplace.kidsplace.commons.UserVO" resultType="java.lang.String">
+    <!-- <select id="findId" parameterType="com.kidsplace.kidsplace.commons.UserVO" resultType="java.lang.String">
         SELECT uId
         FROM kidslandUser
         WHERE uName = #{uName} AND uPhoneNum = #{uPhoneNum}
-    </select>
+    </select> -->
 
     <!--회원 비밀번호 찾기 - 정확히는 변경 페이지로 인증(해당 아이디의 사용자가 존재하는지 확인)-->
     <!--UserVO findPass(UserVO vo) throws Exception;-->
-    <select id="findPass" parameterType="com.kidsplace.kidsplace.commons.UserVO" resultMap="memberMap">
+    <!-- <select id="findPass" parameterType="com.kidsplace.kidsplace.commons.UserVO" resultMap="memberMap">
         SELECT user.*, uAuth
         FROM kidslandUser AS user
         LEFT OUTER JOIN kidslandUserAuth AS auth
         on user.uId = auth.uId
         WHERE user.uId = #{uId} AND user.uName = #{uName} AND user.uPhoneNum = #{uPhoneNum} AND user.member = 'Y';
-    </select>
+    </select> -->
 
     <!--비밀번호 변경-->
     <!--void changePass(String uPassword) throws Exception;-->
-    <update id="changePass" parameterType="com.kidsplace.kidsplace.commons.UserVO">
+    <!-- <update id="changePass" parameterType="com.kidsplace.kidsplace.commons.UserVO">
         UPDATE kidslandUser SET uPassword = #{uPassword} WHERE uNum = #{uNum}
-    </update>
+    </update> -->
 
 
     <!--회원정보 업데이트-->
     <!--UserVO update(UserVO vo) throws Exception;-->
-    <update id="update" parameterType="com.kidsplace.kidsplace.commons.UserVO">
+    <!-- <update id="update" parameterType="com.kidsplace.kidsplace.commons.UserVO">
         UPDATE kidslandUser SET uName = #{uName}, uPhoneNum = #{uPhoneNum}, uPostCode = #{uPostCode}, uAddr = #{uAddr}, uDetailAddr = #{uDetailAddr} WHERE uNum = #{uNum}
-    </update>
+    </update> -->
 
 
     <!--회원 방문시간 업데이트-->
     <!--void updateVisitDate(Uservo vo) throws Exception;-->
-    <update id="updateVisit" parameterType="com.kidsplace.kidsplace.commons.UserVO">
+    <!-- <update id="updateVisit" parameterType="com.kidsplace.kidsplace.commons.UserVO">
         UPDATE kidslandUser SET visitdate = NOW() WHERE uId = #{uId}
-    </update>
+    </update> -->
 
 
-    <!-- 회원리스트 -->
-    <!-- <select id="userList">
+    <!-- 회원 리스트 페이징 -->
+    <select id="userList" resultMap="memberMap">
         SELECT
-            uNum
-           ,uId
-           ,uPassword
-           ,uName
-           ,uPhoneNum
-           ,uBirth
-           ,uPostCode
-           ,uAddr
-           ,uDetailAddr
-           ,date_format(regdate, '%Y-%m-%d') AS regdate
-           ,date_format(updatedate, '%Y-%m-%d') AS updatedate
-           ,date_format(visitdate, '%Y-%m-%d') AS visitdate
-           ,member
+            a.uNum
+          , a.uId
+          , a.uPassword
+          , a.uName
+          , a.uPhoneNum
+          , a.uBirth
+          , a.uPostCode
+          , a.uAddr
+          , a.uDetailAddr
+          , a.regdate
+          , a.updatedate
+          , a.visitdate
+          , a.member
+          , b.uAuth
+        FROM
+            kidslandUser AS a
+        INNER JOIN
+            kidslandUserAuth AS b
+                ON a.uId = b.uId
+        WHERE
+            1 = 1
+        ORDER BY
+            a.uNum DESC
+        LIMIT
+            #{pagination.limitStart}, #{pagination.recordSize}
+    </select>
+
+    <!-- 회원 리스트 카운팅 -->
+    <select id="userCount" resultType="int">
+        SELECT
+            count(*)
         FROM
             kidslandUser
         WHERE
-            member = 'Y'
-        ORDER BY
-            uNum;
-    <select> -->
+            1 = 1
+    </select>
 
 </mapper>

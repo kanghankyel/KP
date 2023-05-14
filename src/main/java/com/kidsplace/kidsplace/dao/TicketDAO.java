@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.kidsplace.kidsplace.commons.Criteria;
 import com.kidsplace.kidsplace.commons.Pagination;
 import com.kidsplace.kidsplace.commons.TicketDetailVO;
 import com.kidsplace.kidsplace.commons.TicketVO;

@@ -9,47 +9,86 @@
     <div th:include="/fragment/nav"></div>
 
     <div class="content">
-        <div class="image_banner">
+        <section class="image_banner">
             <div class="notice_banner">
                 <h1>관 &nbsp; 리 &nbsp; 자 &nbsp; 페 &nbsp; 이 &nbsp; 지</h1>
             </div>
-        </div>
-        <div class="inner">
-            <h2>관리자 페이지</h2>
-            <hr>
-            <h2>유저 테이블</h2>
-            <table class="ticket_board">
-                <tr>
-                    <td>회원코드</td>
-                    <td>아이디</td>
-                    <td>비밀번호</td>
-                    <td>이름</td>
-                    <td>전화번호</td>
-                    <td>생년월일</td>
-                    <td>우편번호</td>
-                    <td>주소</td>
-                    <td>상세주소</td>
-                    <td>생성일</td>
-                    <td>수정일</td>
-                    <td>방문일</td>
-                    <td>회원여부</td>
-                </tr>
-                <tr th:each="useruser : ${useruser}">
-                    <td><span th:text="${useruser.uNum}"></span></td>
-                    <td><span th:text="${useruser.uId}"></span></td>
-                    <td><span th:text="${useruser.uPassword}"></span></td>
-                    <td><span th:text="${useruser.uName}"></span></td>
-                    <td><span th:text="${useruser.uPhoneNum}"></span></td>
-                    <td><span th:text="${useruser.uBirth}"></span></td>
-                    <td><span th:text="${useruser.uPostCode}"></span></td>
-                    <td><span th:text="${useruser.uAddr}"></span></td>
-                    <td><span th:text="${useruser.uDetailAddr}"></span></td>
-                    <td><span th:text="${useruser.regdate}"></span></td>
-                    <td><span th:text="${useruser.updatedate}"></span></td>
-                    <td><span th:text="${useruser.visitdate}"></span></td>
-                    <td><span th:text="${useruser.member}"></span></td>
-                </tr>
-            </table>
+        </section>
+        <div class="admin_content">
+            <section class="admin_left">
+                <article class="admin_href">
+                    <div><a th:href="@{../admin/admin}">관리자 페이지 이동</a></div>
+                    <div><a th:href="@{../admin/adminUser}">유저리스트 페이지 이동</a></div>
+                    <div><a th:href="@{../admin/adminTicket}">티켓리스트 페이지 이동</a></div>
+                </article>
+            </section>
+            <section class="inner admin_right">
+                <h2>관리자 페이지</h2>
+                <hr>
+                <h2>유저 테이블</h2>
+                <table class="ticket_board">
+                    <tr>
+                        <td>회원코드</td>
+                        <td>아이디</td>
+                        <!-- <td>비밀번호</td> -->
+                        <td>이름</td>
+                        <td>전화번호</td>
+                        <td>생년월일</td>
+                        <td>우편번호</td>
+                        <td>주소</td>
+                        <td>상세주소</td>
+                        <td>생성일</td>
+                        <td>수정일</td>
+                        <td>방문일</td>
+                        <td>회원여부</td>
+                        <td>회원등급</td>
+                    </tr>
+                    <tr th:each="user : ${user}">
+                        <td><span th:text="${user.uNum}"></span></td>
+                        <td><span th:text="${user.uId}"></span></td>
+                        <!-- <td><span th:text="${user.uPassword}"></span></td> -->
+                        <td><span th:text="${user.uName}"></span></td>
+                        <td><span th:text="${user.uPhoneNum}"></span></td>
+                        <td><span th:text="${user.uBirth}"></span></td>
+                        <td><span th:text="${user.uPostCode}"></span></td>
+                        <td><span th:text="${user.uAddr}"></span></td>
+                        <td><span th:text="${user.uDetailAddr}"></span></td>
+                        <td><span th:text="${#dates.format(user.regdate, 'yy-MM-dd')}"></span></td>
+                        <td><span th:text="${user.updatedate}"></span></td>
+                        <td><span th:text="${user.visitdate}"></span></td>
+                        <td><span th:text="${user.member}"></span></td>
+                        <td>
+                            <span th:if="${user.uAuthList[0].uAuth == 'ROLE_USER'}">고객</span>
+                            <span th:if="${user.uAuthList[0].uAuth == 'ROLE_ADMIN'}">관리자</span>
+                        </td>
+                        <!-- <td><span th:if="${ticket.used == 'N'}"><input type="button" value="사용" th:tNum="${ticket.tNum}" th:onclick="useCheckTicket(this.getAttribute('tNum'))"></span></td> -->
+                    </tr>
+                </table>
+    
+                <div class="paginationBox">
+                    <th:block th:if="${page.startPage != 0}">
+                        <ul class="pagination">
+                            <th:block th:if="${page.existPrevPage}">
+                                <li>
+                                    <a th:href="@{/admin/adminUser?page={prev} (prev = ${page.startPage - 1})}">이전</a>
+                                </li>
+                            </th:block>
+                            <th:block th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}">
+                                <li th:class="${num == page.page} ? 'active'">
+                                    <a th:href="@{/admin/adminUser?page={page} (page = ${num})}" th:text="${num}"></a>
+                                </li>
+                            </th:block>
+                            <th:block th:if="${page.existNextPage}">
+                                <li>
+                                    <a th:href="@{/admin/adminUser?page={next} (next = ${page.endPage + 1})}">다음</a>
+                                </li>
+                            </th:block>
+                        </ul>
+                        <!-- <input type="hidden" th:value="${page}"> -->
+                        <p th:text="${page}"></p>
+                    </th:block>
+                </div>
+            </section>
         </div>
     </div>
     

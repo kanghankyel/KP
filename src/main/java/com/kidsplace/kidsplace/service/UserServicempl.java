@@ -1,6 +1,7 @@
 package com.kidsplace.kidsplace.service;
 
 import com.kidsplace.kidsplace.commons.AuthVO;
+import com.kidsplace.kidsplace.commons.Pagination;
 import com.kidsplace.kidsplace.commons.UserVO;
 import com.kidsplace.kidsplace.dao.UserDAO;
 
@@ -84,5 +85,16 @@ public class UserServicempl implements UserService {
     // public List<UserVO> userList() {
     //     return userDAO.userList();
     // }
+
+    @Override
+    public List<UserVO> userList(Pagination pagination) {
+        logger.info("get List with SearchDTO");
+        return userDAO.userList(pagination);
+    }
+
+    @Override
+    public int userCount() {
+        return userDAO.userCount();
+    }
 
 }

@@ -9,37 +9,85 @@
     <div th:include="/fragment/nav"></div>
 
     <div class="content">
-        <div class="image_banner">
+        <section class="image_banner">
             <div class="notice_banner">
                 <h1>관 &nbsp; 리 &nbsp; 자 &nbsp; 페 &nbsp; 이 &nbsp; 지</h1>
             </div>
-        </div>
-        <div class="inner">
-            <h2>관리자 페이지</h2>
-            <hr>
-            <div class="admin_href">
-                <div><a th:href="@{../admin/adminUser}">유저리스트 페이지 이동</a></div>
-                <div><a th:href="@{../admin/adminTicket}">티켓리스트 페이지 이동</a></div>
-            </div>
-            <h2>관리자 정보</h2>
-            <div>
-                <div><input type="text" th:value="${#authentication.principal.member.uNum}" id="inputuNum" name="uNum" readonly></div>
-                <div><input type="text" th:value="${#authentication.principal.member.uId}" id="inputuId" name="uId" readonly></div>
-                <div><input type="text" th:value="${#authentication.principal.member.uPassword}" id="inputuPassword" name="uPassword" readonly></div>
-                <div><input type="text" th:value="${#authentication.principal.member.uName}" id="inputuName" name="uName" readonly></div>
-                <div><input type="text" th:value="${#authentication.principal.member.uPhoneNum}" id="inputuPhoneNum" name="uPhoneNum" readonly></div>
-                <div><input type="text" th:value="${#authentication.principal.member.uBirth}" id="inputuBirth" name="uBirth" readonly></div>
-                <div><input type="text" th:value="${#authentication.principal.member.uPostCode}" id="inputuPostCode" name="uPostCode" readonly></div>
-                <div><input type="text" th:value="${#authentication.principal.member.uAddr}" id="inputuAddr" name="uAddr" readonly></div>
-                <div><input type="text" th:value="${#authentication.principal.member.uDetailAddr}" id="inputuDetailAddr" name="uDetailAddr" readonly></div>
-                <div><input type="text" th:value="${#authentication.principal.member.regdate}" id="inputregdate" name="regdate" readonly></div>
-                <div><input type="text" th:value="${#authentication.principal.member.updatedate}" id="inputupdatedate" name="updatedate" readonly></div>
-                <div><input type="text" th:value="${#authentication.principal.member.visitdate}" id="inputvisitdate" name="visitdate" readonly></div>
-                <div><input type="text" th:value="${#authentication.principal.member.member}" id="inputmember" name="member" readonly></div>
-            </div>
+        </section>
+        <div class="admin_content">
+            <section class="admin_left">
+                <article class="admin_href">
+                    <div><a th:href="@{../admin/admin}">관리자 페이지 이동</a></div>
+                    <div><a th:href="@{../admin/adminUser}">유저리스트 페이지 이동</a></div>
+                    <div><a th:href="@{../admin/adminTicket}">티켓리스트 페이지 이동</a></div>
+                </article>
+            </section>
+            <section class="inner admin_right">
+                <h2>관리자 페이지</h2>
+                <hr>
+                <h2>관리자 정보</h2>
+                <article>
+                    <div>
+                        <div><input type="text" th:value="${#authentication.principal.member.uNum}" id="inputuNum" name="uNum" readonly></div>
+                        <div><input type="text" th:value="${#authentication.principal.member.uId}" id="inputuId" name="uId" readonly></div>
+                        <!-- <div><input type="text" th:value="${#authentication.principal.member.uPassword}" id="inputuPassword" name="uPassword" readonly></div> -->
+                        <div><input type="text" th:value="${#authentication.principal.member.uName}" id="inputuName" name="uName" readonly></div>
+                        <div><input type="text" th:value="${#authentication.principal.member.uPhoneNum}" id="inputuPhoneNum" name="uPhoneNum" readonly></div>
+                        <div><input type="text" th:value="${#authentication.principal.member.uBirth}" id="inputuBirth" name="uBirth" readonly></div>
+                        <div><input type="text" th:value="${#authentication.principal.member.uPostCode}" id="inputuPostCode" name="uPostCode" readonly></div>
+                        <div><input type="text" th:value="${#authentication.principal.member.uAddr}" id="inputuAddr" name="uAddr" readonly></div>
+                        <div><input type="text" th:value="${#authentication.principal.member.uDetailAddr}" id="inputuDetailAddr" name="uDetailAddr" readonly></div>
+                        <!-- <div><input type="text" th:value="${#authentication.principal.member.regdate}" id="inputregdate" name="regdate" readonly></div> -->
+                        <!-- <div><input type="text" th:value="${#authentication.principal.member.updatedate}" id="inputupdatedate" name="updatedate" readonly></div> -->
+                        <!-- <div><input type="text" th:value="${#authentication.principal.member.visitdate}" id="inputvisitdate" name="visitdate" readonly></div> -->
+                        <!-- <div><input type="text" th:value="${#authentication.principal.member.member}" id="inputmember" name="member" readonly></div> -->
+                    </div>
+                    <div>
+                        <div sec:authorize="hasRole('ROLE_ADMIN')"><input type="button" value="회원수정" th:onclick="|location.href='@{/admin/adminEdit(uNum = ${#authentication.principal.member.uNum})}'|"></div>
+                        <div sec:authorize="hasRole('ROLE_ADMIN')"><input type="button" value="회원탈퇴" onclick="adminDeleteYN()"></div>
+                    </div>
+                </article>
+            </section>
         </div>
     </div>
     
     <div th:include="/fragment/footer"></div>
+
+
+    <!--  script  -->
+    <script>
+        function adminDeleteYN(){
+            let DeleteYN = confirm("회원탈퇴 하시겠습니까?")
+            if(DeleteYN){
+                adminDeleteComplete();
+            }else{
+                alert("취소되었습니다.");
+            }
+        }
+
+        function adminDeleteComplete(){
+            const urlParams = new URLSearchParams(location.search);
+            let uNum = urlParams.get("uNum");
+            console.log(uNum);
+            fetch(urlparam + '/admin/admin', {
+                method: 'post',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    uNum: uNum
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        console.log(data);
+                        alert("회원탈퇴가 완료되었습니다.");
+                        location.href= urlparam + "/admin/admin";
+                    }else{
+                        alert("회원탈퇴에 실패하였습니다. 다시 시도해주세요.");
+                    }
+                })
+                .catch((error) => console.log(error));
+        }
+    </script>
 </body>
 </html>

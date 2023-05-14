@@ -30,6 +30,9 @@ public class Pagination {
         }
     }
 
+    public Pagination(int noticeCount, int page2, NoticeVO noticeVO) {
+    }
+
     private void calculation(){
 
         // 전체 페이지 수 계산

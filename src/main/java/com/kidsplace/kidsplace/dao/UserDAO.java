@@ -1,6 +1,7 @@
 package com.kidsplace.kidsplace.dao;
 
 import com.kidsplace.kidsplace.commons.AuthVO;
+import com.kidsplace.kidsplace.commons.Pagination;
 import com.kidsplace.kidsplace.commons.UserVO;
 
 import java.util.List;
@@ -8,9 +9,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
-import org.springframework.stereotype.Repository;
 
-@Repository
 @Mapper
 public interface UserDAO {
 
@@ -48,7 +47,10 @@ public interface UserDAO {
     @Update("UPDATE kidslandUser SET member = 'N' WHERE uId = #{uId}")
     void withdraw(UserVO vo) throws Exception;
 
-    // 회원리스트
-    // List<UserVO> userList();
+    // 회원 리스트 페이징
+    List<UserVO> userList(@Param("pagination") Pagination pagination);
+
+    // 회원 리스트 카운팅
+    int userCount();
 
 }

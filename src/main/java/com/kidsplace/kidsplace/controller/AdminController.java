@@ -15,11 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kidsplace.kidsplace.commons.Criteria;
-import com.kidsplace.kidsplace.commons.PageDTO;
 import com.kidsplace.kidsplace.commons.Pagination;
 import com.kidsplace.kidsplace.commons.TicketDetailVO;
 import com.kidsplace.kidsplace.commons.TicketVO;
+import com.kidsplace.kidsplace.commons.UserVO;
 import com.kidsplace.kidsplace.service.TicketService;
 import com.kidsplace.kidsplace.service.UserService;
 
@@ -48,9 +47,6 @@ public class AdminController {
         // 티켓정보
         List<TicketDetailVO> ticketDetailList = ticketService.ticketDetailList();
         model.addAttribute("ticketDetail", ticketDetailList);
-        // 티켓구매리스트
-        // List<TicketVO> ticketlist = ticketService.ticketList();
-        // model.addAttribute("ticket", ticketlist);
         // 티켓구매리스트 페이징
         int ticketAllCount = ticketService.ticketAllCount();
         Pagination pagination = new Pagination(ticketAllCount, page);
@@ -95,19 +91,18 @@ public class AdminController {
         }
     }
 
-    // @GetMapping("/adminTicket")
-    // public void TicketList(Criteria cri, Model model){
-    //     logger.info("티켓리스트 : " + cri);
-    //     model.addAttribute("ticketList", ticketService.getTicketList(cri));
-    // } 
+    // 관리자페이지 회원리스트 페이지 이동 및 회원리스트 구현
+    @GetMapping("/adminUser")
+    public String UserList(Model model
+                        , @RequestParam(name = "page", required = false, defaultValue = "1") int page){
+        int userCount = userService.userCount();
+        Pagination pagination = new Pagination(userCount, page);
+        List<UserVO> userlist = userService.userList(pagination);
+        // System.out.println(userlist); 
+        model.addAttribute("user", userlist);
+        model.addAttribute("page", pagination);
+        return "/admin/adminUser";
+    }
 
-    // // 관리자페이지 회원리스트 페이지 이동 및 회원리스트 구현
-    // @GetMapping("/adminUser")
-    // public String UserList(Model model){
-    //     List<UserVO> userlist = userService.userList();
-    //     model.addAttribute("user", userlist);
-    //     return "/admin/adminUser";
-    // }
-    
     
 }

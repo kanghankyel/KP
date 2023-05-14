@@ -3,6 +3,7 @@ package com.kidsplace.kidsplace.service;
 import java.util.List;
 
 import com.kidsplace.kidsplace.commons.AuthVO;
+import com.kidsplace.kidsplace.commons.Pagination;
 import com.kidsplace.kidsplace.commons.UserVO;
 
 public interface UserService {
@@ -38,7 +39,10 @@ public interface UserService {
     //회원탈퇴
     void withdraw(UserVO vo) throws Exception;
 
-    // 회원리스트
-    // List<UserVO> userList();
+    // 회원 리스트 페이징
+    List<UserVO> userList(Pagination pagination);
+
+    // 회원 리스트 카운팅
+    int userCount();
 
 }

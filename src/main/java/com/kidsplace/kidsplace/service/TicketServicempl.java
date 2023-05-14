@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kidsplace.kidsplace.commons.Criteria;
 import com.kidsplace.kidsplace.commons.Pagination;
 import com.kidsplace.kidsplace.commons.TicketDetailVO;
 import com.kidsplace.kidsplace.commons.TicketVO;
@@ -72,7 +71,6 @@ public class TicketServicempl implements TicketService {
 
     @Override
     public int ticketAllCount() {
-        // System.out.println("noticeCount : " + communityDAO.noticeCount());
         return ticketDAO.ticketAllCount();
     }
 

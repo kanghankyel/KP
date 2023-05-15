@@ -77,7 +77,12 @@ public class UserController {
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            return new ResponseEntity<>(true,  HttpStatus.OK);
+            boolean result = us.updateVisit(userVO);
+            if(result){
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+            }
         } catch (Exception e){
             return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
         }

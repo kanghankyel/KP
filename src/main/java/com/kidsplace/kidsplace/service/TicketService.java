@@ -27,10 +27,10 @@ public interface TicketService {
     int ticketCount(int uNum);
 
     // 티켓구매내역(전체) 리스트 페이징
-    List<TicketVO> ticketAllPaging(Pagination pagination);
+    List<TicketVO> ticketAllPaging(Pagination pagination, TicketVO ticketVO);
 
     // 티켓구매내역(전체) 리스트 카운팅
-    int ticketAllCount();
+    int ticketAllCount(TicketVO ticketVO);
 
     // 티켓환불요청
     boolean ticketRefund(TicketVO ticketVO);

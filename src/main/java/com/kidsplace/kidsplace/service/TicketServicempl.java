@@ -64,14 +64,14 @@ public class TicketServicempl implements TicketService {
     }
 
     @Override
-    public List<TicketVO> ticketAllPaging(Pagination pagination) {
+    public List<TicketVO> ticketAllPaging(Pagination pagination, TicketVO ticketVO) {
         logger.info("get List with SearchDTO");
-        return ticketDAO.ticketAllPaging(pagination);
+        return ticketDAO.ticketAllPaging(pagination, ticketVO);
     }
 
     @Override
-    public int ticketAllCount() {
-        return ticketDAO.ticketAllCount();
+    public int ticketAllCount(TicketVO ticketVO) {
+        return ticketDAO.ticketAllCount(ticketVO);
     }
 
     @Override

@@ -46,7 +46,8 @@
     </resultMap>
 
     <sql id="ticketSearch">
-        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tNum)">
+        <!-- 아래 세개는 int값이라서 string값으로 변경해야함 -->
+        <!-- <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tNum)">
             AND tNum LIKE '%' + #{ticketVO.tNum} + '%'
         </if>
         <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.uNum)">
@@ -55,18 +56,21 @@
         <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tType)">
             AND tType LIKE '%' + #{ticketVO.tType} + '%'
         </if>
+        아래는 ticketVO안에 tName이라는 컬럼이 없음
         <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tName)">
-            AND tName LIKE '%' + #{ticketVO.tName} + '%'
-        </if>
+            AND tName LIKE CONCAT('%' + #{ticketVO.tName} + '%')
+        </if> -->
         <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.uName)">
-            AND uName LIKE '%' + #{ticketVO.uName} + '%'
+            AND uName LIKE CONCAT('%' + #{ticketVO.uName} + '%')
         </if>
-        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.market)">
+        <!-- 아래는 임시로 주석처리 -->
+        <!-- <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.market)">
             AND market LIKE '%' + #{ticketVO.market} + '%'
         </if>
         <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tArea)">
             AND tArea LIKE '%' + #{ticketVO.tArea} + '%'
         </if>
+        아래 세개는 date값이라서 혹시 모를 오류를 피하고자 주석처리
         <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.sellDate)">
             AND sellDate LIKE '%' + #{ticketVO.sellDate} + '%'
         </if>
@@ -75,7 +79,7 @@
         </if>
         <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.used)">
             AND used LIKE '%' + #{ticketVO.used} + '%'
-        </if>
+        </if> -->
     </sql>
 
     <sql id="searchParam">
@@ -196,6 +200,9 @@
         WHERE
             1 = 1
             <!-- <include refid="ticketSearch" /> -->
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.uName)">
+                AND c.uName LIKE CONCAT('%' + #{ticketVO.uName} + '%')
+            </if>
         ORDER BY
             a.tNum DESC
         LIMIT
@@ -208,9 +215,12 @@
             count(*)
         FROM
             kidslandTicket
-            <!-- <include refid="ticketSearch" /> -->
         WHERE
             1 = 1
+            <!-- <include refid="ticketSearch" /> -->
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.uName)">
+                AND uName LIKE CONCAT('%' + #{ticketVO.uName} + '%')
+            </if>
     </select>
 
     <!-- 티켓환불요청 -->

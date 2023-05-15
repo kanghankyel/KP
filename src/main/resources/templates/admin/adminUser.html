@@ -28,6 +28,7 @@
                 <h2>유저 테이블</h2>
                 <table class="ticket_board">
                     <tr>
+                        <td>No</td>
                         <td>회원코드</td>
                         <td>아이디</td>
                         <!-- <td>비밀번호</td> -->
@@ -40,10 +41,13 @@
                         <td>생성일</td>
                         <td>수정일</td>
                         <td>방문일</td>
-                        <td>회원여부</td>
                         <td>회원등급</td>
+                        <td>회원등업</td>
+                        <td>회원여부</td>
+                        <td>계정정지</td>
                     </tr>
                     <tr th:each="user : ${user}">
+                        <td><div th:text="${(page.page - 1) * page.recordSize + userStat.index + 1}"></div></td>
                         <td><span th:text="${user.uNum}"></span></td>
                         <td><span th:text="${user.uId}"></span></td>
                         <!-- <td><span th:text="${user.uPassword}"></span></td> -->
@@ -53,15 +57,33 @@
                         <td><span th:text="${user.uPostCode}"></span></td>
                         <td><span th:text="${user.uAddr}"></span></td>
                         <td><span th:text="${user.uDetailAddr}"></span></td>
-                        <td><span th:text="${#dates.format(user.regdate, 'yy-MM-dd')}"></span></td>
-                        <td><span th:text="${user.updatedate}"></span></td>
-                        <td><span th:text="${user.visitdate}"></span></td>
-                        <td><span th:text="${user.member}"></span></td>
+                        <td><span th:text="${#dates.format(user.regdate, 'yyyy-MM-dd')}"></span></td>
                         <td>
+                            <span th:text="${#dates.format(user.updatedate, 'yyyy-MM-dd')}"></span>
+                            <span th:if="${#lists.isEmpty(user.updatedate)}">-</span>
+                        </td>
+                        <td>
+                            <span th:text="${#dates.format(user.visitdate, 'yyyy-MM-dd')}"></span>
+                            <span th:if="${#lists.isEmpty(user.visitdate)}">-</span>
+                        </td>
+                        <td>
+                            <!-- <span th:text="${user.uAuthList}"></span> -->
                             <span th:if="${user.uAuthList[0].uAuth == 'ROLE_USER'}">고객</span>
                             <span th:if="${user.uAuthList[0].uAuth == 'ROLE_ADMIN'}">관리자</span>
                         </td>
-                        <!-- <td><span th:if="${ticket.used == 'N'}"><input type="button" value="사용" th:tNum="${ticket.tNum}" th:onclick="useCheckTicket(this.getAttribute('tNum'))"></span></td> -->
+                        <td>
+                            <span th:if="${user.uAuthList[0].uAuth == 'ROLE_USER'}"><input type="button" value="등급업" th:uNum="${user.uNum}" th:onclick="upUserGrade(this.getAttribute('uNum'), 'ROLE_USER')"></span>
+                            <span th:if="${user.uAuthList[0].uAuth == 'ROLE_ADMIN'}"><input type="button" value="등급다운" th:uNum="${user.uNum}" th:onclick="downUserGrade(this.getAttribute('uNum'), 'ROLE_ADMIN')"></span>
+                        </td>
+                        <td>
+                            <span th:if="${user.member == 'Y'}">활동</span>
+                            <span th:if="${user.member == 'N'}">탈퇴</span>
+                            <span th:if="${user.member == 'B'}">블락</span>
+                        </td>
+                        <td>
+                            <span th:if="${user.member == 'Y'}"><input type="button" value="계정정지" th:uNum="${user.uNum}" th:member="${user.member}" th:onclick="userBlock(this.getAttribute('uNum'), this.getAttribute('member'))"></span>
+                            <span th:if="${user.member == 'B'}"><input type="button" value="정지해제" th:uNum="${user.uNum}" th:member="${user.member}" th:onclick="userNotBlock(this.getAttribute('uNum'), this.getAttribute('member'))"></span>
+                        </td>
                     </tr>
                 </table>
     
@@ -93,5 +115,108 @@
     </div>
     
     <div th:include="/fragment/footer"></div>
+
+
+
+    <!-- script -->
+    <script>
+        function upUserGrade(uNum, uAuth){
+            // alert(uNum);
+            // alert(uAuth);
+            fetch(urlparam + '/admin/upGrade', {
+                method: 'post',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    uNum: uNum
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        console.log(data);
+                        alert("관리자 권한으로 설정되었습니다.");
+                        location.href= urlparam + "/admin/adminUser";
+                    }else{
+                        alert("관리자 권한 설정에 실패하였습니다. 다시 시도해주세요.");
+                    }
+                })
+                .catch((error) => console.log(error));
+        }
+    </script>
+
+    <script>
+        function downUserGrade(uNum, uAuth){
+            // alert(uNum);
+            // alert(uAuth);
+            fetch(urlparam + '/admin/downGrade', {
+                method: 'post',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    uNum: uNum
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        console.log(data);
+                        alert("일반회원 권한으로 설정되었습니다.");
+                        location.href= urlparam + "/admin/adminUser";
+                    }else{
+                        alert("일반회원 권한 설정에 실패하였습니다. 다시 시도해주세요.");
+                    }
+                })
+                .catch((error) => console.log(error));
+        }
+    </script>
+
+    <script>
+        function userBlock(uNum, member){
+            // alert(uNum);
+            // alert(member);
+            fetch(urlparam + '/admin/userBlock', {
+                method: 'post',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    uNum: uNum
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        console.log(data);
+                        alert("해당 회원을 정지하였습니다.");
+                        location.href= urlparam + "/admin/adminUser";
+                    }else{
+                        alert("해당 회원 정지에 실패하였습니다. 다시 시도해주세요.");
+                    }
+                })
+                .catch((error) => console.log(error));
+        }
+    </script>
+
+<script>
+    function userNotBlock(uNum, member){
+        // alert(uNum);
+        // alert(member);
+        fetch(urlparam + '/admin/userNotBlock', {
+            method: 'post',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                uNum: uNum
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    console.log(data);
+                    alert("해당 회원을 정지해제하였습니다.");
+                    location.href= urlparam + "/admin/adminUser";
+                }else{
+                    alert("해당 회원 정지해제에 실패하였습니다. 다시 시도해주세요.");
+                }
+            })
+            .catch((error) => console.log(error));
+    }
+</script>
 </body>
 </html>

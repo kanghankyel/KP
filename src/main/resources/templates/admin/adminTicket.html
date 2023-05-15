@@ -44,14 +44,17 @@
                 <h2>티켓구매내역(전체)</h2>
                 <hr>
     
-                <!-- <div class="searchBox">
-                    <form id="searchForm" method="get">
-                        <div>
-                            <input type="text" id="tNumSearch" placeholder="티켓번호">
-                            <button type="submit">검색</button>
-                        </div>
+                <div class="searchBox">
+                    <form th:action="@{/admin/adminTicket}" method="get">
+                        <input type="text" name="uName" th:value="${search.uName}" placeholder="이름를 입력하세요">
+                        <div th:text="${search}"></div>
+                        <!-- <input type="text" name="ticketVO.uName" th:value="${ticketVO.uName}" placeholder="이름을 입력하세요">
+                        <input type="text" name="ticketVO.market" th:value="${ticketVO.market}" placeholder="구매처를 입력하세요">
+                        <input type="text" name="ticketVO.tArea" th:value="${ticketVO.tArea}" placeholder="사용장소를 입력하세요">
+                        <input type="text" name="ticketVO.tName" th:value="${ticketVO.tName}" placeholder="티켓종류를 입력하세요"> -->
+                        <button type="submit">검색</button>
                     </form>
-                </div> -->
+                </div>
     
                 <table class="ticket_board">
                     <tr>

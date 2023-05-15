@@ -121,10 +121,14 @@
 
 
     <!--회원 방문시간 업데이트-->
-    <!--void updateVisitDate(Uservo vo) throws Exception;-->
-    <!-- <update id="updateVisit" parameterType="com.kidsplace.kidsplace.commons.UserVO">
-        UPDATE kidslandUser SET visitdate = NOW() WHERE uId = #{uId}
-    </update> -->
+    <update id="updateVisit" parameterType="com.kidsplace.kidsplace.commons.UserVO">
+        UPDATE
+            kidslandUser
+        SET
+            visitdate = NOW()
+        WHERE
+            uId = #{uId}
+    </update>
 
 
     <!-- 회원 리스트 페이징 -->
@@ -166,5 +170,51 @@
         WHERE
             1 = 1
     </select>
+
+    <!-- 회원등급업 -->
+    <update id="userAuthUp">
+        UPDATE
+            kidslandUserAuth AS a
+        INNER JOIN
+            kidslandUser AS b
+                ON a.uId = b.uId
+        SET
+            a.uAuth = 'ROLE_ADMIN'
+        WHERE
+            uNum = #{uNum}
+    </update>
+
+    <!-- 회원등급다운 -->
+    <update id="userAuthDown">
+        UPDATE
+            kidslandUserAuth AS a
+        INNER JOIN
+            kidslandUser AS b
+                ON a.uId = b.uId
+        SET
+            a.uAuth = 'ROLE_USER'
+        WHERE
+            uNum = #{uNum}
+    </update>
+
+    <!-- 회원블락 -->
+    <update id="userBlock">
+        UPDATE
+            kidslandUser
+        SET
+            member = 'B'
+        WHERE
+            uNum = #{uNum}
+    </update>
+
+    <!-- 회원블락해제 -->
+    <update id="userNotBlock">
+        UPDATE
+            kidslandUser
+        SET
+            member = 'Y'
+        WHERE
+            uNum = #{uNum}
+    </update>
 
 </mapper>

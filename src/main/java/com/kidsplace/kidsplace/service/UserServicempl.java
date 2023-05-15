@@ -51,35 +51,47 @@ public class UserServicempl implements UserService {
         userDAO.insertAuth(authVO);
     }
 
+    // @Override
+    // public String findId(UserVO vo) throws Exception {
+    //     return null;
+    // }
+
+    // @Override
+    // public UserVO findPass(UserVO vo) throws Exception {
+    //     return null;
+    // }
+
+    // @Override
+    // public void changePass(UserVO vo) throws Exception {
+
+    // }
+
+    
     @Override
-    public String findId(UserVO vo) throws Exception {
-        return null;
+    public boolean updateVisit(UserVO vo) {
+        try{
+            int result = userDAO.updateVisit(vo);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            logger.error("방문일 업데이트 오류");
+            e.printStackTrace();
+            return false;
+        }
     }
 
-    @Override
-    public UserVO findPass(UserVO vo) throws Exception {
-        return null;
-    }
+    // @Override
+    // public void update(UserVO vo) throws Exception {
 
-    @Override
-    public void changePass(UserVO vo) throws Exception {
+    // }
 
-    }
+    // @Override
+    // public void withdraw(UserVO vo) throws Exception {
 
-    @Override
-    public void updateVisit(UserVO vo) throws Exception {
-
-    }
-
-    @Override
-    public void update(UserVO vo) throws Exception {
-
-    }
-
-    @Override
-    public void withdraw(UserVO vo) throws Exception {
-
-    }
+    // }
 
     // @Override
     // public List<UserVO> userList() {
@@ -95,6 +107,78 @@ public class UserServicempl implements UserService {
     @Override
     public int userCount() {
         return userDAO.userCount();
+    }
+
+    @Override
+    public boolean userAuthUp(UserVO userVO) {
+        // logger.warn("회원등급업 처리 데이터");
+        // logger.warn(String.valueOf(userVO));
+        try{
+            int result = userDAO.userAuthUp(userVO);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            logger.error("회원등급업 데이터 오류");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean userAuthDown(UserVO userVO) {
+        // logger.warn("회원등급다운 처리 데이터");
+        // logger.warn(String.valueOf(userVO));
+        try{
+            int result = userDAO.userAuthDown(userVO);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            logger.error("회원등급다운 데이터 오류");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean userBlock(UserVO userVO) {
+        // logger.warn("회원블락 처리 데이터");
+        // logger.warn(String.valueOf(userVO));
+        try{
+            int result = userDAO.userBlock(userVO);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            logger.error("회원블락처리 데이터 오류");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean userNotBlock(UserVO userVO) {
+        // logger.warn("회원블락해제 처리 데이터");
+        // logger.warn(String.valueOf(userVO));
+        try{
+            int result = userDAO.userNotBlock(userVO);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            logger.error("회원블락해제처리 데이터 오류");
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

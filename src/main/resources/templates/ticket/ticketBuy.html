@@ -79,39 +79,38 @@
                 </tr>
             </table>
             
-            <div id="ticketbox">
-                <div><input type="hidden" th:value="${#authentication.principal.member.uNum}" class="inputuNum" name="uNum" readonly></div>
-                <div>
-                    <select name="tType" class="inputtType">
-                        <option value="none1">( 티켓종류를 선택하세요 )</option>
-                        <option th:each="ticketDetail : ${ticketDetail}" th:value="${ticketDetail.tType}"><div th:text="${ticketDetail.tName}"></div></option>
-                    </select>
-                </div>
-                <div><input type="hidden" th:value="${#authentication.principal.member.uName}" class="inputuName" name="uName" readonly></div>
-                <div><input type="hidden" class="inputmarket" name="market" value="KIDSPLACE" readonly></div>
-                <div>
-                    <select name="tArea" class="inputtArea">
-                        <option value="none2">( 사용지역을 선택하세요 )</option>
-                        <option value="경기 킨텍스">경기 킨텍스</option>
-                        <option value="부산 벡스코">부산 벡스코</option>
-                        <option value="대구 엑스코">대구 엑스코</option>
-                        <option value="광주 김대중컨벤션">광주 김대중컨벤션</option>
-                    </select>
-                </div>
-                <div>
-                    <select class="ticketCount">
-                        <option>( 티켓수량 )</option>
-                        <option th:each="num : ${#numbers.sequence(1,30)}" th:value="${num}" th:text="${num}"></option>
-                    </select>
+            <div class="ticketContainer">
+                <div class="ticketbox">
+                    <div><input type="hidden" th:value="${#authentication.principal.member.uNum}" class="inputuNum" name="uNum" readonly></div>
+                    <div>
+                        <select name="tType" class="inputtType">
+                            <option value="none1">( 티켓종류를 선택하세요 )</option>
+                            <option th:each="ticketDetail : ${ticketDetail}" th:value="${ticketDetail.tType}"><div th:text="${ticketDetail.tName}"></div></option>
+                        </select>
+                    </div>
+                    <div><input type="hidden" th:value="${#authentication.principal.member.uName}" class="inputuName" name="uName" readonly></div>
+                    <div><input type="hidden" class="inputmarket" name="market" value="KIDSPLACE" readonly></div>
+                    <div>
+                        <select name="tArea" class="inputtArea">
+                            <option value="none2">( 사용지역을 선택하세요 )</option>
+                            <option value="경기 킨텍스">경기 킨텍스</option>
+                            <option value="부산 벡스코">부산 벡스코</option>
+                            <option value="대구 엑스코">대구 엑스코</option>
+                            <option value="광주 김대중컨벤션">광주 김대중컨벤션</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select class="ticketCount">
+                            <option value="none3">( 티켓수량 )</option>
+                            <option th:each="num : ${#numbers.sequence(1,30)}" th:value="${num}" th:text="${num}"></option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div id="ticketbtnbox">
                 <div><input type="button" value="추가" onclick="plusTicket()"></div>
                 <div><input type="button" value="티켓구매" onclick="insertTicket()"></div>
             </div>
-            <!-- 지금 요소를 추가해도 적용이 안됨 -->
-            <!-- 지금 요소를 추가해도 적용이 안됨 -->
-            <!-- 지금 요소를 추가해도 적용이 안됨 -->
         </div>
     </div>
     
@@ -122,66 +121,87 @@
     <!-- script -->
     <!-- cloneNode() 함수를 통해 div 내부요소까지 복제-->
     <script>
-        function plusTicket(){
-        // 'test' node 선택
-        const ticketbox1 = document.getElementById('ticketbox');
-        // 노드 복사하기
+        let ticketCount = 1; // 초기 티켓 개수
+
+        function plusTicket() {
+        // 'ticketbox' 복사하기
+        const ticketbox1 = document.querySelector('.ticketbox');
         const ticketbox2 = ticketbox1.cloneNode(true);
-        // 복사된 Node id 변경하기
-        ticketbox2.id = 'ticketbox';
-        // 복사한 노드 붙여넣기
-        ticketbox1.after(ticketbox2);
+        
+        // 새로운 'ticketbox'에 순차적인 클래스 설정
+        const newTicketboxClass = 'ticketbox' + (++ticketCount);
+        ticketbox2.classList.add(newTicketboxClass);
+
+        // 복사된 'ticketbox' 내부 요소들 초기화하기
+        const tTypeSelect = ticketbox2.querySelector('.inputtType');
+        const tAreaSelect = ticketbox2.querySelector('.inputtArea');
+        const ticketCountSelect = ticketbox2.querySelector('.ticketCount');
+        
+        tTypeSelect.selectedIndex = 0;
+        tAreaSelect.selectedIndex = 0;
+        ticketCountSelect.selectedIndex = 0;
+
+        // 새로운 'ticketbox'를 마지막에 추가
+        const ticketContainer = document.querySelector('.ticketContainer');
+        ticketContainer.appendChild(ticketbox2);
         }
     </script>
 
     <!--  티켓구매 정보 제출(fetch로 기능)  -->
     <script>
-        function insertTicket(){
-            // 유효성 검사
-            if(document.getElementsByClassName("inputtType")[0].value == 'none1'){
-                alert("티켓종류를 선택해주세요.");
-                return false;
-            }else if(document.getElementsByClassName("inputtArea")[0].value == 'none2'){
-                alert("사용지역을 선택해주세요.");
-                return false;
+        function insertTicket() {
+        // 유효성 검사
+        const ticketTypeInputs = document.getElementsByClassName("inputtType");
+        const ticketAreaInputs = document.getElementsByClassName("inputtArea");
+        const ticketAmountInputs = document.getElementsByClassName("ticketCount")
+
+        for (let i = 0; i < ticketTypeInputs.length; i++) {
+            if (ticketTypeInputs[i].value === 'none1') {
+            alert("티켓종류를 선택해주세요.");
+            return false;
+            } else if (ticketAreaInputs[i].value === 'none2') {
+            alert("사용지역을 선택해주세요.");
+            return false;
+            } else if (ticketAmountInputs[i].value === 'none3') {
+            alert("티켓수량을 선택해주세요.");
+            return false;
             }
+        }
 
-            console.log(document.getElementsByClassName("ticketCount")[0].value);
-            console.log(document.getElementsByClassName("ticketCount")[1].value);
+        // 티켓 정보 배열 생성
+        const ticketData = [];
+        const ticketCountInputs = document.getElementsByClassName("ticketCount");
 
-            // fetch
-            // List[]형태로 전송
-            fetch(urlparam + '/ticket/ticketBuy', {
-                method: 'post',
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify([{
-                    uNum: document.getElementsByClassName("inputuNum")[0].value,
-                    tType: document.getElementsByClassName("inputtType")[0].value,
-                    uName: document.getElementsByClassName("inputuName")[0].value,
-                    market: document.getElementsByClassName("inputmarket")[0].value,
-                    tArea: document.getElementsByClassName("inputtArea")[0].value,
-                    tCount: document.getElementsByClassName("ticketCount")[0].value,
-                    // test: document.getElementsByClassName("test")[0].value
-                }, {
-                    uNum: document.getElementsByClassName("inputuNum")[1].value,
-                    tType: document.getElementsByClassName("inputtType")[1].value,
-                    uName: document.getElementsByClassName("inputuName")[1].value,
-                    market: document.getElementsByClassName("inputmarket")[1].value,
-                    tArea: document.getElementsByClassName("inputtArea")[1].value,
-                    tCount: document.getElementsByClassName("ticketCount")[1].value,
-                }])
+        for (let i = 0; i < ticketTypeInputs.length; i++) {
+            const ticketInfo = {
+            uNum: document.getElementsByClassName("inputuNum")[i].value,
+            tType: ticketTypeInputs[i].value,
+            uName: document.getElementsByClassName("inputuName")[i].value,
+            market: document.getElementsByClassName("inputmarket")[i].value,
+            tArea: ticketAreaInputs[i].value,
+            tCount: ticketCountInputs[i].value
+            };
+
+            ticketData.push(ticketInfo);
+        }
+
+        // fetch로 티켓 구매 정보 전송
+        fetch(urlparam + '/ticket/ticketBuy', {
+            method: 'post',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(ticketData)
+        })
+            .then(response => response.json())
+            .then(data => {
+            if (data) {
+                console.log(data);
+                alert("티켓예매가 완료되었습니다.");
+                location.href = urlparam + "/ticket/ticketHistory";
+            } else {
+                alert("티켓예매가 실패하였습니다. 다시 시도해주세요.");
+            }
             })
-                .then(response => response.json())
-                .then(data => {
-                    if (data) {
-                        console.log(data);
-                        alert("티켓예매가 완료되었습니다.");
-                        location.href= urlparam + "/ticket/ticketHistory";
-                    }else{
-                        alert("티켓예매가 실패하였습니다. 다시 시도해주세요.");
-                    }
-                })
-                .catch((error) => console.log(error));
+            .catch((error) => console.log(error));
         }
     </script>
 </body>

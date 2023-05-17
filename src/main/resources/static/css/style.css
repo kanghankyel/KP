@@ -630,7 +630,7 @@ footer .inner>div:nth-child(4){
 .ticket_board tr td{
     border: 1px solid #000;
 }
-#ticketbox{
+.ticketbox{
     display: flex;
 }
 #ticketbtnbox{

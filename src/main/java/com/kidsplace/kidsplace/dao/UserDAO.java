@@ -65,4 +65,13 @@ public interface UserDAO {
     // 회원블락해제
     int userNotBlock(UserVO userVO);
 
+    // 마이페이지 회원정보
+    List<UserVO> userInfo(int uNum);
+
+    // 회원정보 수정 데이터베이스 반영
+    int userEdit(UserVO userVO);
+
+    // 회원탈퇴
+    int userDelete(UserVO userVO);
+
 }

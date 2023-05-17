@@ -181,4 +181,46 @@ public class UserServicempl implements UserService {
         }
     }
 
+    @Override
+    public List<UserVO> userInfo(int uNum) {
+        return userDAO.userInfo(uNum);
+    }
+
+    @Override
+    public boolean userEdit(UserVO userVO) {
+        logger.warn("회원정보 수정 데이터");
+        logger.warn(String.valueOf(userVO));
+        try{
+            int result = userDAO.userEdit(userVO);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            logger.error("회원정보 수정 데이터 오류");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean userDelete(UserVO userVO) {
+        logger.warn("회원정보 탈퇴 데이터");
+        logger.warn(String.valueOf(userVO));
+        try{
+            int result = userDAO.userDelete(userVO);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            logger.error("회원탈퇴 데이터 오류");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 }

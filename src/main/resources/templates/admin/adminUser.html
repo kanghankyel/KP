@@ -31,7 +31,6 @@
                         <td>No</td>
                         <td>회원코드</td>
                         <td>아이디</td>
-                        <!-- <td>비밀번호</td> -->
                         <td>이름</td>
                         <td>전화번호</td>
                         <td>생년월일</td>
@@ -50,7 +49,6 @@
                         <td><div th:text="${(page.page - 1) * page.recordSize + userStat.index + 1}"></div></td>
                         <td><span th:text="${user.uNum}"></span></td>
                         <td><span th:text="${user.uId}"></span></td>
-                        <!-- <td><span th:text="${user.uPassword}"></span></td> -->
                         <td><span th:text="${user.uName}"></span></td>
                         <td><span th:text="${user.uPhoneNum}"></span></td>
                         <td><span th:text="${user.uBirth}"></span></td>

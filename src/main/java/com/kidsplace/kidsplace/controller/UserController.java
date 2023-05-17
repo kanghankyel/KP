@@ -1,6 +1,7 @@
 package com.kidsplace.kidsplace.controller;
 
 import com.kidsplace.kidsplace.commons.UserVO;
+import com.kidsplace.kidsplace.security.CustomMember;
 import com.kidsplace.kidsplace.security.CustomUserDetailsService;
 import com.kidsplace.kidsplace.service.UserService;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -103,10 +105,60 @@ public class UserController {
         }
     }
 
-    // 마이페이지 페이지 이동
+    // 마이페이지 개인정보 구현
     @GetMapping("/mypage")
-    public String mypage(){
+    public String Mypage (Model model
+                            , @AuthenticationPrincipal CustomMember customMember){
+        int uNum = customMember.getMember().getuNum();
+        // System.out.println(customMember.getMember().getuNum());
+        List<UserVO> userinfo = us.userInfo(uNum);
+        model.addAttribute("user", userinfo);
         return "/user/mypage";
+    }
+
+    // 마이페이지 수정 페이지 이동
+    @GetMapping("/userEdit")
+    public String UserInfo (Model model
+                            , @AuthenticationPrincipal CustomMember customMember){
+        int uNum = customMember.getMember().getuNum();
+        // System.out.println(customMember.getMember().getuNum());
+        List<UserVO> userinfo = us.userInfo(uNum);
+        model.addAttribute("user", userinfo);
+        return "/user/userEdit";
+    }
+
+    // 회원정보 수정 데이터베이스 반영
+    @PostMapping("/userEdit")
+    public ResponseEntity<Boolean> userEdit(@RequestBody UserVO userVO){
+        try{
+            boolean result = us.userEdit(userVO);
+            if(result){
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e){
+            logger.error("회원정보 수정에 실패하였습니다.");
+            e.printStackTrace();
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // 회원탈퇴
+    @PostMapping("/userDelete")
+    public ResponseEntity<Boolean> userDelete(@RequestBody UserVO userVO){
+        try{
+            boolean result = us.userDelete(userVO);
+            if(result){
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e){
+            logger.error("회원탈퇴에 실패하였습니다.");
+            e.printStackTrace();
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
     }
 
 }

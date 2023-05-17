@@ -17,62 +17,83 @@
         <div class="inner">
             <h2>마이페이지</h2>
             <hr>
-            <table class="userinfo">
-                <!-- <tr>
-                    <th>유저번호</th>
-                    <td><input type="text" th:value="${#authentication.principal.member.uNum}" id="inputuNum" name="uNum" readonly></td>
-                <tr> -->
-                    <th>아이디</th>
-                    <td><input type="text" th:value="${#authentication.principal.member.uId}" id="inputuId" name="uId" readonly></td>
+            <table class="userinfo" th:each="user : ${user}">
+                <tr>
+                    <td><input type="hidden" th:value="${user.uNum}" id="inputuNum" name="uNum" readonly></td>
                 </tr>
-                <!-- <tr>
-                    <th>비밀번호</th>
-                    <td><input type="text" th:value="${#authentication.principal.member.uPassword}" id="inputuPassword" name="uPassword" readonly></td>
-                </tr> -->
                 <tr>
                     <th>이름</th>
-                    <td><input type="text" th:value="${#authentication.principal.member.uName}" id="inputuName" name="uName" readonly></td>
+                    <td><input type="text" th:value="${user.uName}" id="inputuName" name="uName" readonly></td>
                 </tr>
                 <tr>
                     <th>전화번호</th>
-                    <td><input type="text" th:value="${#authentication.principal.member.uPhoneNum}" id="inputuPhoneNum" name="uPhoneNum" readonly></td>
+                    <td><input type="text" th:value="${user.uPhoneNum}" id="inputuPhoneNum" name="uPhoneNum" readonly></td>
                 </tr>
                 <tr>
                     <th>생일</th>
-                    <td><input type="text" th:value="${#authentication.principal.member.uBirth}" id="inputuBirth" name="uBirth" readonly></td>
+                    <td><input type="text" th:value="${user.uBirth}" id="inputuBirth" name="uBirth" readonly></td>
                 </tr>
                 <tr>
                     <th>우편번호</th>
-                    <td><input type="text" th:value="${#authentication.principal.member.uPostCode}" id="inputuPostCode" name="uPostCode" readonly></td>
+                    <td><input type="text" th:value="${user.uPostCode}" id="inputuPostCode" name="uPostCode" readonly></td>
                 </tr>
                 <tr>
                     <th>주소</th>
-                    <td><input type="text" th:value="${#authentication.principal.member.uAddr}" id="inputuAddr" name="uAddr" readonly></td>
+                    <td><input type="text" th:value="${user.uAddr}" id="inputuAddr" name="uAddr" readonly></td>
                 </tr>
                 <tr>
                     <th>상세주소</th>
-                    <td><input type="text" th:value="${#authentication.principal.member.uDetailAddr}" id="inputuDetailAddr" name="uDetailAddr" readonly></td>
+                    <td><input type="text" th:value="${user.uDetailAddr}" id="inputuDetailAddr" name="uDetailAddr" readonly></td>
                 </tr>
                 <tr>
                     <th>가입일</th>
-                    <td><input type="text" th:value="${#authentication.principal.member.regdate}" id="inputregdate" name="regdate" readonly></td>
+                    <td><input type="text" th:value="${#dates.format(user.regdate, 'yyyy-MM-dd')}" id="inputregdate" name="regdate" readonly></td>
                 </tr>
-                <!-- <tr>
-                    <th>수정일</th>
-                    <td><input type="text" th:value="${#authentication.principal.member.updatedate}" id="inputupdatedate" name="updatedate" readonly></td>
-                </tr> -->
-                <!-- <tr>
-                    <th>방문일</th>
-                    <td><input type="text" th:value="${#authentication.principal.member.visitdate}" id="inputvisitdate" name="visitdate" readonly></td>
-                </tr> -->
-                <!-- <tr>
-                    <th>회원여부</th>
-                    <td><input type="text" th:value="${#authentication.principal.member.member}" id="inputmember" name="member" readonly></td>
-                </tr> -->
             </table>
+            <div>
+                <input type="button" value="회원수정" th:onclick="|location.href='@{/user/userEdit}'|">
+                <input type="button" value="회원탈퇴" onclick="userDeleteYN()">
+            </div>
         </div>
     </div>
     
     <div th:include="/fragment/footer"></div>
+
+
+    <!--  script  -->
+    <script>
+        function userDeleteYN(){
+            let DeleteYN = confirm("회원탈퇴 하시겠습니까?")
+            if(DeleteYN){
+                userDeleteComplete();
+            }else{
+                alert("취소되었습니다.");
+            }
+        }
+
+        function userDeleteComplete(){
+            const urlParams = new URLSearchParams(location.search);
+            let uNum = document.getElementById("inputuNum").value;
+            console.log(uNum);
+            fetch(urlparam + '/user/userDelete', {
+                method: 'post',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    uNum: uNum
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        console.log(data);
+                        alert("회원탈퇴가 완료되었습니다.");
+                        location.href = "/logout";
+                    }else{
+                        alert("회원탈퇴에 실패하였습니다. 다시 시도해주세요.");
+                    }
+                })
+                .catch((error) => console.log(error));
+        }
+    </script>
 </body>
 </html>

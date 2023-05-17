@@ -2,6 +2,8 @@ package com.kidsplace.kidsplace.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.kidsplace.kidsplace.commons.AuthVO;
 import com.kidsplace.kidsplace.commons.Pagination;
 import com.kidsplace.kidsplace.commons.UserVO;
@@ -56,5 +58,14 @@ public interface UserService {
 
     // 회원블락해제
     boolean userNotBlock(UserVO userVO);
+
+    // 마이페이지 회원정보
+    List<UserVO> userInfo(@Param("uNum") int uNum);
+
+    // 회원정보 수정 데이터베이스 반영
+    boolean userEdit(UserVO userVO);
+
+    // 회원탈퇴
+    boolean userDelete(UserVO userVO);
 
 }

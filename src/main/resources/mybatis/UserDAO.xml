@@ -217,4 +217,40 @@
             uNum = #{uNum}
     </update>
 
+    <!-- 마이페이지 회원정보 -->
+    <select id="userInfo" resultMap="memberMap">
+        SELECT
+            *
+        FROM
+            kidslandUser
+        WHERE
+            uNum = #{uNum}
+    </select>
+
+    <!-- 회원정보 수정 -->
+    <update id="userEdit">
+        UPDATE
+            kidslandUser
+        SET
+            uName = #{uName}
+          , uPhoneNum = #{uPhoneNum}
+          , uBirth = #{uBirth}
+          , uPostCode = #{uPostCode}
+          , uAddr = #{uAddr}
+          , uDetailAddr = #{uDetailAddr}
+          , updatedate = CURRENT_TIMESTAMP
+        WHERE
+            uNum = #{uNum}
+    </update>
+
+    <!-- 회원탈퇴 -->
+    <update id="userDelete">
+        UPDATE
+            kidslandUser
+        SET
+            member = 'N'
+        WHERE
+            uNum = #{uNum}
+    </update>
+
 </mapper>

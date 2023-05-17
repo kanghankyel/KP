@@ -15,7 +15,7 @@
                 <h6 sec:authorize="isAnonymous()"><a th:href="@{/user/signup}">회원가입</a></h6>
                 <h6 sec:authorize="isAnonymous()"><a th:href="@{/user/login}">로그인</a></h6>
                 <h6 sec:authorize="isAuthenticated()"><a th:href="@{/logout}">로그아웃</a></h6>
-                <h6 sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/user/mypage}">마이페이지</a></h6>
+                <h6 sec:authorize="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"><a th:href="@{/user/mypage}">마이페이지</a></h6>
                 <h6 sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin/admin}">관리자페이지</a></h6>
                 <h6 sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/ticket/ticketHistory}">구매내역</a></h6>
                 <h6><a th:href="@{/community/notice}">공지사항</a></h6>

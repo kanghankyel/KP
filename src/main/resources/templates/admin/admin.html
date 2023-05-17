@@ -42,52 +42,11 @@
                         <!-- <div><input type="text" th:value="${#authentication.principal.member.visitdate}" id="inputvisitdate" name="visitdate" readonly></div> -->
                         <!-- <div><input type="text" th:value="${#authentication.principal.member.member}" id="inputmember" name="member" readonly></div> -->
                     </div>
-                    <div>
-                        <div sec:authorize="hasRole('ROLE_ADMIN')"><input type="button" value="회원수정" th:onclick="|location.href='@{/admin/adminEdit(uNum = ${#authentication.principal.member.uNum})}'|"></div>
-                        <div sec:authorize="hasRole('ROLE_ADMIN')"><input type="button" value="회원탈퇴" onclick="adminDeleteYN()"></div>
-                    </div>
                 </article>
             </section>
         </div>
     </div>
     
     <div th:include="/fragment/footer"></div>
-
-
-    <!--  script  -->
-    <script>
-        function adminDeleteYN(){
-            let DeleteYN = confirm("회원탈퇴 하시겠습니까?")
-            if(DeleteYN){
-                adminDeleteComplete();
-            }else{
-                alert("취소되었습니다.");
-            }
-        }
-
-        function adminDeleteComplete(){
-            const urlParams = new URLSearchParams(location.search);
-            let uNum = urlParams.get("uNum");
-            console.log(uNum);
-            fetch(urlparam + '/admin/admin', {
-                method: 'post',
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({
-                    uNum: uNum
-                })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data) {
-                        console.log(data);
-                        alert("회원탈퇴가 완료되었습니다.");
-                        location.href= urlparam + "/admin/admin";
-                    }else{
-                        alert("회원탈퇴에 실패하였습니다. 다시 시도해주세요.");
-                    }
-                })
-                .catch((error) => console.log(error));
-        }
-    </script>
 </body>
 </html>

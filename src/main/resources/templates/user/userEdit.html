@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+    <div th:include="/fragment/head"></div>
+    <div th:include="/fragment/header"></div>
+    <div th:include="/fragment/nav"></div>
+
+    <div class="content">
+        <div class="image_banner">
+            <div class="notice_banner">
+                <h1>개 &nbsp; 인 &nbsp; 정 &nbsp; 보 &nbsp; 수 &nbsp; 정</h1>
+            </div>
+        </div>
+        <div class="inner">
+            <h2>개인정보 수정</h2>
+            <hr>
+            <table class="userinfo" th:each="user : ${user}">
+                <tr>
+                    <td><input type="hidden" th:value="${user.uNum}" id="inputuNum" name="uNum" readonly></td>
+                </tr>
+                <tr>
+                    <th>이름</th>
+                    <td><input type="text" th:value="${user.uName}" id="inputuName" name="uName"></td>
+                </tr>
+                <tr>
+                    <th>전화번호</th>
+                    <td><input type="text" th:value="${user.uPhoneNum}" id="inputuPhoneNum" name="uPhoneNum"></td>
+                </tr>
+                <tr>
+                    <th>생일</th>
+                    <td><input type="text" th:value="${user.uBirth}" id="inputuBirth" name="uBirth"></td>
+                </tr>
+                <tr>
+                    <th>우편번호</th>
+                    <td><input type="text" th:value="${user.uPostCode}" id="inputuPostCode" name="uPostCode"></td>
+                </tr>
+                <tr>
+                    <th>주소</th>
+                    <td><input type="text" th:value="${user.uAddr}" id="inputuAddr" name="uAddr" readonly></td>
+                </tr>
+                <tr>
+                    <th>상세주소</th>
+                    <td><input type="text" th:value="${user.uDetailAddr}" id="inputuDetailAddr" name="uDetailAddr"></td>
+                </tr>
+            </table>
+            <div>
+                <input type="button" value="수정완료" onclick="userEditComplete()">
+                <input type="button" value="수정취소" onclick="userEditCancel()">
+            </div>
+        </div>
+    </div>
+    
+    <div th:include="/fragment/footer"></div>
+
+
+    <!--  script  -->
+    <script>
+        function userEditComplete(){
+            let uNum = document.getElementById("inputuNum").value;
+            let uName = document.getElementById("inputuName").value;
+            let uPhoneNum = document.getElementById("inputuPhoneNum").value;
+            let uBirth = document.getElementById("inputuBirth").value;
+            let uPostCode = document.getElementById("inputuPostCode").value;
+            let uAddr = document.getElementById("inputuAddr").value;
+            let uDetailAddr = document.getElementById("inputuDetailAddr").value;
+            console.log(uNum);
+            fetch(urlparam + '/user/userEdit', {
+                method: 'post',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    uNum: uNum,
+                    uName: uName,
+                    uPhoneNum: uPhoneNum,
+                    uBirth: uBirth,
+                    uPostCode: uPostCode,
+                    uAddr: uAddr,
+                    uDetailAddr: uDetailAddr
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        console.log(data);
+                        alert("회원정보 수정이 완료되었습니다.");
+                        location.href= urlparam + "/user/mypage";
+                    }else{
+                        alert("회원정보 수정에 실패하였습니다. 다시 시도해주세요.");
+                    }
+                })
+                .catch((error) => console.log(error));
+        }
+    </script>
+
+    <script>
+        function userEditCancel(){
+            alert("회원정보 수정을 취소하였습니다.");
+            history.back();
+        }
+    </script>
+</body>
+</html>

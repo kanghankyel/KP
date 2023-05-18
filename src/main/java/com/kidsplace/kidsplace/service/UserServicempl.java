@@ -222,5 +222,27 @@ public class UserServicempl implements UserService {
         }
     }
 
+    @Override
+    public boolean PasswordEdit(UserVO userVO) {
+        logger.warn("비밀번호 변경 데이터");
+        logger.warn(String.valueOf(userVO));
+        try{
+            String pw = userVO.getuPassword();
+            String encodePw = passwordEncoder.encode(pw);
+            userVO.setuPassword(encodePw);
+
+            int result = userDAO.passwordEdit(userVO);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            logger.error("비밀번호 변경 데이터 오류");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
 }

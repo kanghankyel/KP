@@ -253,4 +253,14 @@
             uNum = #{uNum}
     </update>
 
+    <!-- 비밀번호변경 -->
+    <update id="passwordEdit">
+        UPDATE
+            kidslandUser
+        SET
+            uPassword = #{uPassword}
+        WHERE
+            uNum = #{uNum}
+    </update>
+
 </mapper>

@@ -74,4 +74,7 @@ public interface UserDAO {
     // 회원탈퇴
     int userDelete(UserVO userVO);
 
+    // 비밀번호 변경
+    int passwordEdit(UserVO userVO);
+
 }

@@ -68,4 +68,7 @@ public interface UserService {
     // 회원탈퇴
     boolean userDelete(UserVO userVO);
 
+    // 비밀번호 변경
+    boolean PasswordEdit(UserVO userVO);
+
 }

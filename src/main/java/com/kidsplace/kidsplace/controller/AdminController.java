@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,12 +38,14 @@ public class AdminController {
 
     // 관리자페이지 메인 이동
     @GetMapping("/admin")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String AdminPage(){
         return "/admin/admin";
     }
 
     // 관리자페이지 티켓페이지 이동
     @GetMapping("/adminTicket")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String TicketInfo(Model model
                             , @RequestParam(name = "page", required = false, defaultValue = "1") int page
                             , @ModelAttribute("search") TicketVO search){
@@ -96,6 +99,7 @@ public class AdminController {
 
     // 관리자페이지 회원리스트 페이지 이동 및 회원리스트 구현
     @GetMapping("/adminUser")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String UserList(Model model
                         , @RequestParam(name = "page", required = false, defaultValue = "1") int page){
         int userCount = userService.userCount();

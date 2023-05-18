@@ -107,6 +107,7 @@ public class UserController {
 
     // 마이페이지 개인정보 구현
     @GetMapping("/mypage")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     public String Mypage (Model model
                             , @AuthenticationPrincipal CustomMember customMember){
         int uNum = customMember.getMember().getuNum();
@@ -118,6 +119,7 @@ public class UserController {
 
     // 마이페이지 수정 페이지 이동
     @GetMapping("/userEdit")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     public String UserInfo (Model model
                             , @AuthenticationPrincipal CustomMember customMember){
         int uNum = customMember.getMember().getuNum();
@@ -156,6 +158,35 @@ public class UserController {
             }
         } catch (Exception e){
             logger.error("회원탈퇴에 실패하였습니다.");
+            e.printStackTrace();
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // 비밀번호변경 페이지 이동
+    @GetMapping("/passwordEdit")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    public String PasswordEditPage (Model model
+                            , @AuthenticationPrincipal CustomMember customMember){
+        int uNum = customMember.getMember().getuNum();
+        // System.out.println(customMember.getMember().getuNum());
+        List<UserVO> userinfo = us.userInfo(uNum);
+        model.addAttribute("user", userinfo);
+        return "/user/passwordEdit";
+    }
+
+    // 비밀번호 변경
+    @PostMapping("/passwordEdit")
+    public ResponseEntity<Boolean> PasswordEdit(@RequestBody UserVO userVO){
+        try{
+            boolean result = us.PasswordEdit(userVO);
+            if(result){
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e){
+            logger.error("비밀번호 변경에 실패하였습니다.");
             e.printStackTrace();
             return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
         }

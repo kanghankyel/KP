@@ -192,4 +192,28 @@ public class UserController {
         }
     }
 
+    // 아이디 찾기 페이지 이동
+    @GetMapping("/findId")
+    public String findIdPage(Model model) {
+        model.addAttribute("uId", ""); // 초기에는 빈 아이디로 설정
+        return "user/findId";
+    }
+
+    // 아이디 찾기
+    @PostMapping("/findId")
+    public ResponseEntity<String> findId(@RequestBody UserVO userVO) {
+        try {
+            String result = us.findId(userVO);
+            if (result != null) {
+                return ResponseEntity.ok(result);
+            } else {
+                return ResponseEntity.badRequest().build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+
 }

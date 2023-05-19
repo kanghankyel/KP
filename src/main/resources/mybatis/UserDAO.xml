@@ -263,4 +263,16 @@
             uNum = #{uNum}
     </update>
 
+    <!-- 아이디 찾기 -->
+    <select id="findId" resultType="java.lang.String">
+        SELECT
+            uId
+        FROM
+            kidslandUser
+        WHERE
+            uName = #{uName}
+        AND
+            uPhoneNum = #{uPhoneNum}
+    </select>
+
 </mapper>

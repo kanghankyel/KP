@@ -71,4 +71,8 @@ public interface UserService {
     // 비밀번호 변경
     boolean PasswordEdit(UserVO userVO);
 
+    // 아이디 찾기
+    String findId(UserVO userVO);
+
+
 }

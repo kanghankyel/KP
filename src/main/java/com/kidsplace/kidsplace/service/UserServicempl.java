@@ -227,10 +227,12 @@ public class UserServicempl implements UserService {
         logger.warn("비밀번호 변경 데이터");
         logger.warn(String.valueOf(userVO));
         try{
+            // 비밀번호 인코딩
             String pw = userVO.getuPassword();
             String encodePw = passwordEncoder.encode(pw);
             userVO.setuPassword(encodePw);
 
+            // 비밀번호 변경
             int result = userDAO.passwordEdit(userVO);
             if (result > 0) {
                 return true;
@@ -241,6 +243,16 @@ public class UserServicempl implements UserService {
             logger.error("비밀번호 변경 데이터 오류");
             e.printStackTrace();
             return false;
+        }
+    }
+
+    @Override
+    public String findId(UserVO userVO) {
+        try {
+            return userDAO.findId(userVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

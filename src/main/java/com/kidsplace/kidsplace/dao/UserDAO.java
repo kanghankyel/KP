@@ -77,4 +77,8 @@ public interface UserDAO {
     // 비밀번호 변경
     int passwordEdit(UserVO userVO);
 
+    // 아이디 찾기
+    String findId(UserVO userVO);
+
+
 }

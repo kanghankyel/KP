@@ -52,13 +52,13 @@ public class TicketServicempl implements TicketService {
     }
 
     @Override
-    public List<TicketVO> ticketPaging(Pagination pagination, int uNum) {
+    public List<TicketVO> ticketPaging(Pagination pagination, String uNum) {
         logger.info("get List with SearchDTO");
         return ticketDAO.ticketPaging(pagination, uNum);
     }
 
     @Override
-    public int ticketCount(int uNum) {
+    public int ticketCount(String uNum) {
         int result = ticketDAO.ticketCount(uNum);
         System.out.println("ticketCount : " + result);
         return result;

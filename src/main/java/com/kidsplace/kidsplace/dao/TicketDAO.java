@@ -23,10 +23,10 @@ public interface TicketDAO {
     List<TicketVO> ticketList(int uNum);
 
     // 티켓구매내역(개인) 리스트 페이징
-    List<TicketVO> ticketPaging(@Param("pagination") Pagination pagination, @Param("uNum") int uNum);
+    List<TicketVO> ticketPaging(@Param("pagination") Pagination pagination, @Param("uNum") String uNum);
 
     // 티켓구매내역(개인) 리스트 카운팅
-    int ticketCount(@Param("uNum") int uNum);
+    int ticketCount(@Param("uNum") String uNum);
 
     // 티켓구매내역(전체) 리스트 페이징
     List<TicketVO> ticketAllPaging(@Param("pagination") Pagination pagination, @Param("ticketVO") TicketVO ticketVO, @Param("userVO") UserVO userVO);

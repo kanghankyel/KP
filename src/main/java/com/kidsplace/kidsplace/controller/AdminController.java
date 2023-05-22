@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kidsplace.kidsplace.commons.AuthVO;
 import com.kidsplace.kidsplace.commons.Pagination;
 import com.kidsplace.kidsplace.commons.TicketDetailVO;
 import com.kidsplace.kidsplace.commons.TicketVO;
@@ -62,7 +63,7 @@ public class AdminController {
         // 검색조건 유지를 위한 값
         model.addAttribute("search", ticketVO);
         model.addAttribute("searchElse", userVO);
-        System.out.println(pagination.toString());
+        // System.out.println(pagination.toString());
         return "admin/adminTicket";
     }
 
@@ -104,13 +105,18 @@ public class AdminController {
     @GetMapping("/adminUser")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String UserList(Model model
-                        , @RequestParam(name = "page", required = false, defaultValue = "1") int page){
-        int userCount = userService.userCount();
+                        , @RequestParam(name = "page", required = false, defaultValue = "1") int page
+                        , @ModelAttribute("search") UserVO userVO
+                        , @ModelAttribute("searchElse") AuthVO authVO){
+        int userCount = userService.userCount(userVO, authVO);
         Pagination pagination = new Pagination(userCount, page);
-        List<UserVO> userlist = userService.userList(pagination);
+        List<UserVO> userlist = userService.userList(pagination, userVO, authVO);
         // System.out.println(userlist); 
         model.addAttribute("user", userlist);
         model.addAttribute("page", pagination);
+        // 검색조건 유지를 위한 값
+        model.addAttribute("search", userVO);
+        model.addAttribute("searchElse", authVO);
         return "/admin/adminUser";
     }
 

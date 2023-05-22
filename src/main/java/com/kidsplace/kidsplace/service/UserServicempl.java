@@ -99,14 +99,14 @@ public class UserServicempl implements UserService {
     // }
 
     @Override
-    public List<UserVO> userList(Pagination pagination) {
+    public List<UserVO> userList(Pagination pagination, UserVO userVO, AuthVO authVO) {
         logger.info("get List with SearchDTO");
-        return userDAO.userList(pagination);
+        return userDAO.userList(pagination, userVO, authVO);
     }
 
     @Override
-    public int userCount() {
-        return userDAO.userCount();
+    public int userCount(UserVO userVO, AuthVO authVO) {
+        return userDAO.userCount(userVO, authVO);
     }
 
     @Override
@@ -182,7 +182,7 @@ public class UserServicempl implements UserService {
     }
 
     @Override
-    public List<UserVO> userInfo(int uNum) {
+    public List<UserVO> userInfo(String uNum) {
         return userDAO.userInfo(uNum);
     }
 

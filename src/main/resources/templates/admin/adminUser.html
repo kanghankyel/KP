@@ -26,6 +26,31 @@
                 <h2>관리자 페이지</h2>
                 <hr>
                 <h2>유저 테이블</h2>
+
+                <div class="searchBox">
+                    <form th:action="@{/admin/adminUser(page=${page.page}, search=${search}, searchElse=${searchElse})}" method="get">
+                        <input type="text" name="uNum" th:value="${search.uNum}" placeholder="회원코드 입력">
+                        <input type="text" name="uId" th:value="${search.uId}" placeholder="아이디 입력">
+                        <input type="text" name="uName" th:value="${search.uName}" placeholder="이름 입력">
+                        <input type="text" name="uPhoneNum" th:value="${search.uPhoneNum}" placeholder="전화번호 입력">
+                        <input type="text" name="uBirth" th:value="${search.uBirth}" placeholder="생년월일 입력">
+                        <select name="uAuth">
+                            <option value="">회원전체</option>
+                            <option value="ROLE_USER" th:selected="${searchElse.uAuth == 'ROLE_USER'}">고객</option>
+                            <option value="ROLE_ADMIN" th:selected="${searchElse.uAuth == 'ROLE_ADMIN'}">관리자</option>
+                        </select>
+                        <select name="member">
+                            <option value="">활동전체</option>
+                            <option value="Y" th:selected="${search.member == 'Y'}">활동</option>
+                            <option value="N" th:selected="${search.member == 'N'}">탈퇴</option>
+                            <option value="B" th:selected="${search.member == 'B'}">블락</option>
+                        </select>
+                        <div th:text="${search}"></div>
+                        <button type="submit">검색</button>
+                    </form>
+                </div>
+
+                <h3><span th:text="${page.totalRecordCount}"></span>건이 검색되었습니다.</h3>
                 <table class="ticket_board">
                     <tr>
                         <td>No</td>
@@ -45,7 +70,7 @@
                         <td>회원여부</td>
                         <td>계정정지</td>
                     </tr>
-                    <tr th:each="user : ${user}">
+                    <tr th:each="user : ${user}" th:if="${not #lists.isEmpty(user)}">
                         <td><div th:text="${(page.page - 1) * page.recordSize + userStat.index + 1}"></div></td>
                         <td><span th:text="${user.uNum}"></span></td>
                         <td><span th:text="${user.uId}"></span></td>
@@ -83,6 +108,9 @@
                             <span th:if="${user.member == 'B'}"><input type="button" value="정지해제" th:uNum="${user.uNum}" th:member="${user.member}" th:onclick="userNotBlock(this.getAttribute('uNum'), this.getAttribute('member'))"></span>
                         </td>
                     </tr>
+                    <tr th:unless="${not #lists.isEmpty(user)}">
+                        <td colspan="16">일치하는 회원이 없습니다.</td>
+                    </tr>
                 </table>
     
                 <div class="paginationBox">
@@ -90,17 +118,17 @@
                         <ul class="pagination">
                             <th:block th:if="${page.existPrevPage}">
                                 <li>
-                                    <a th:href="@{/admin/adminUser?page={prev} (prev = ${page.startPage - 1})}">이전</a>
+                                    <a th:href="@{/admin/adminUser(page=${(page.page - 1) - ((page.page - 1) % 5)}, uNum=${search.uNum}, uId=${search.uId}, uName=${search.uName}, uPhoneNum=${search.uPhoneNum}, uBirth=${search.uBirth}, uAuth=${searchElse.uAuth}, member=${search.member})}">이전</a>
                                 </li>
                             </th:block>
                             <th:block th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}">
                                 <li th:class="${num == page.page} ? 'active'">
-                                    <a th:href="@{/admin/adminUser?page={page} (page = ${num})}" th:text="${num}"></a>
+                                    <a th:href="@{/admin/adminUser(page=${num}, uNum=${search.uNum}, uId=${search.uId}, uName=${search.uName}, uPhoneNum=${search.uPhoneNum}, uBirth=${search.uBirth}, uAuth=${searchElse.uAuth}, member=${search.member})}" th:text="${num}"></a>
                                 </li>
                             </th:block>
                             <th:block th:if="${page.existNextPage}">
                                 <li>
-                                    <a th:href="@{/admin/adminUser?page={next} (next = ${page.endPage + 1})}">다음</a>
+                                    <a th:href="@{/admin/adminUser(page=${(page.page + 1) + (4 - ((page.page - 1) % 5))}, uNum=${search.uNum}, uId=${search.uId}, uName=${search.uName}, uPhoneNum=${search.uPhoneNum}, uBirth=${search.uBirth}, uAuth=${searchElse.uAuth}, member=${search.member})}">다음</a>
                                 </li>
                             </th:block>
                         </ul>

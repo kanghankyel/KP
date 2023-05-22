@@ -48,10 +48,10 @@ public interface UserDAO {
     // void withdraw(UserVO vo) throws Exception;
 
     // 회원 리스트 페이징
-    List<UserVO> userList(@Param("pagination") Pagination pagination);
+    List<UserVO> userList(@Param("pagination") Pagination pagination, @Param("userVO") UserVO userVO, @Param("authVO") AuthVO authVO);
 
     // 회원 리스트 카운팅
-    int userCount();
+    int userCount(@Param("userVO") UserVO userVO, @Param("authVO") AuthVO authVO);
 
     // 회원등급업
     int userAuthUp(UserVO userVO);
@@ -66,7 +66,7 @@ public interface UserDAO {
     int userNotBlock(UserVO userVO);
 
     // 마이페이지 회원정보
-    List<UserVO> userInfo(int uNum);
+    List<UserVO> userInfo(String uNum);
 
     // 회원정보 수정 데이터베이스 반영
     int userEdit(UserVO userVO);

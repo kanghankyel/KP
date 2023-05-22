@@ -155,6 +155,27 @@
                 ON a.uId = b.uId
         WHERE
             1 = 1
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(userVO.uNum)">
+                AND a.uNum LIKE CONCAT('%', #{userVO.uNum}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(userVO.uId)">
+                AND a.uId LIKE CONCAT('%', #{userVO.uId}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(userVO.uName)">
+                AND a.uName LIKE CONCAT('%', #{userVO.uName}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(userVO.uPhoneNum)">
+                AND a.uPhoneNum LIKE CONCAT('%', #{userVO.uPhoneNum}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(userVO.uBirth)">
+                AND a.uBirth LIKE CONCAT('%', #{userVO.uBirth}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(authVO.uAuth)">
+                AND b.uAuth LIKE CONCAT('%', #{authVO.uAuth}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(userVO.member)">
+                AND a.member LIKE CONCAT('%', #{userVO.member}, '%')
+            </if>
         ORDER BY
             a.uNum DESC
         LIMIT
@@ -166,9 +187,33 @@
         SELECT
             count(*)
         FROM
-            kidslandUser
+            kidslandUser AS a
+        INNER JOIN
+            kidslandUserAuth AS b
+                ON a.uId = b.uId
         WHERE
             1 = 1
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(userVO.uNum)">
+                AND uNum LIKE CONCAT('%', #{userVO.uNum}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(userVO.uId)">
+                AND a.uId LIKE CONCAT('%', #{userVO.uId}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(userVO.uName)">
+                AND a.uName LIKE CONCAT('%', #{userVO.uName}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(userVO.uPhoneNum)">
+                AND a.uPhoneNum LIKE CONCAT('%', #{userVO.uPhoneNum}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(userVO.uBirth)">
+                AND a.uBirth LIKE CONCAT('%', #{userVO.uBirth}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(authVO.uAuth)">
+                AND b.uAuth LIKE CONCAT('%', #{authVO.uAuth}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(userVO.member)">
+                AND a.member LIKE CONCAT('%', #{userVO.member}, '%')
+            </if>
     </select>
 
     <!-- 회원등급업 -->

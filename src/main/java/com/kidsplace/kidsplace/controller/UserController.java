@@ -110,7 +110,7 @@ public class UserController {
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     public String Mypage (Model model
                             , @AuthenticationPrincipal CustomMember customMember){
-        int uNum = customMember.getMember().getuNum();
+        String uNum = customMember.getMember().getuNum();
         // System.out.println(customMember.getMember().getuNum());
         List<UserVO> userinfo = us.userInfo(uNum);
         model.addAttribute("user", userinfo);
@@ -122,7 +122,7 @@ public class UserController {
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     public String UserInfo (Model model
                             , @AuthenticationPrincipal CustomMember customMember){
-        int uNum = customMember.getMember().getuNum();
+        String uNum = customMember.getMember().getuNum();
         // System.out.println(customMember.getMember().getuNum());
         List<UserVO> userinfo = us.userInfo(uNum);
         model.addAttribute("user", userinfo);
@@ -168,7 +168,7 @@ public class UserController {
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     public String PasswordEditPage (Model model
                             , @AuthenticationPrincipal CustomMember customMember){
-        int uNum = customMember.getMember().getuNum();
+        String uNum = customMember.getMember().getuNum();
         // System.out.println(customMember.getMember().getuNum());
         List<UserVO> userinfo = us.userInfo(uNum);
         model.addAttribute("user", userinfo);

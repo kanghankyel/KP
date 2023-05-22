@@ -5,7 +5,7 @@ import java.util.List;
 
 public class UserVO {
 
-    private int uNum;
+    private String uNum;
     private String uId;
     private String uPassword;
     private String uName;
@@ -23,7 +23,7 @@ public class UserVO {
     public UserVO() {
     }
 
-    public UserVO(int uNum, String uId, String uPassword, String uName, String uPhoneNum, String uBirth, String uPostCode, String uAddr, String uDetailAddr, Date regdate, Date updatedate, Date visitdate, String member, List<AuthVO> uAuthList) {
+    public UserVO(String uNum, String uId, String uPassword, String uName, String uPhoneNum, String uBirth, String uPostCode, String uAddr, String uDetailAddr, Date regdate, Date updatedate, Date visitdate, String member, List<AuthVO> uAuthList) {
         this.uNum = uNum;
         this.uId = uId;
         this.uPassword = uPassword;
@@ -40,10 +40,10 @@ public class UserVO {
         this.uAuthList = uAuthList;
     }
 
-    public int getuNum() {
+    public String getuNum() {
         return uNum;
     }
-    public void setuNum(int uNum) {
+    public void setuNum(String uNum) {
         this.uNum = uNum;
     }
     public String getuId() {
@@ -127,21 +127,11 @@ public class UserVO {
 
     @Override
     public String toString() {
-        return "UserVO{" +
-                "uNum=" + uNum +
-                ", uId='" + uId + '\'' +
-                ", uPassword='" + uPassword + '\'' +
-                ", uName='" + uName + '\'' +
-                ", uPhoneNum='" + uPhoneNum + '\'' +
-                ", uBirth='" + uBirth + '\'' +
-                ", uPostCode='" + uPostCode + '\'' +
-                ", uAddr='" + uAddr + '\'' +
-                ", uDetailAddr='" + uDetailAddr + '\'' +
-                ", regdate=" + regdate +
-                ", updatedate=" + updatedate +
-                ", visitdate=" + visitdate +
-                ", member='" + member + '\'' +
-                ", uAuthList=" + uAuthList +
-                '}';
+        return "UserVO [uNum=" + uNum + ", uId=" + uId + ", uPassword=" + uPassword + ", uName=" + uName
+                + ", uPhoneNum=" + uPhoneNum + ", uBirth=" + uBirth + ", uPostCode=" + uPostCode + ", uAddr=" + uAddr
+                + ", uDetailAddr=" + uDetailAddr + ", regdate=" + regdate + ", updatedate=" + updatedate
+                + ", visitdate=" + visitdate + ", member=" + member + ", uAuthList=" + uAuthList + "]";
     }
+
+    
 }

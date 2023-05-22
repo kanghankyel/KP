@@ -21,10 +21,10 @@ public interface TicketService {
     List<TicketVO> ticketList(@Param("uNum") int uNum);
 
     // 티켓구매내역(개인) 리스트 페이징
-    List<TicketVO> ticketPaging(@Param("pagination") Pagination pagination, @Param("uNum") int uNum);
+    List<TicketVO> ticketPaging(@Param("pagination") Pagination pagination, @Param("uNum") String uNum);
 
     // 티켓구매내역(개인) 리스트 카운팅
-    int ticketCount(int uNum);
+    int ticketCount(String uNum);
 
     // 티켓구매내역(전체) 리스트 페이징
     List<TicketVO> ticketAllPaging(Pagination pagination, TicketVO ticketVO, UserVO userVO);

@@ -42,10 +42,10 @@ public interface UserService {
     // void withdraw(UserVO vo) throws Exception;
 
     // 회원 리스트 페이징
-    List<UserVO> userList(Pagination pagination);
+    List<UserVO> userList(Pagination pagination, UserVO userVO, AuthVO authVO);
 
     // 회원 리스트 카운팅
-    int userCount();
+    int userCount(UserVO userVO, AuthVO authVO);
 
     // 회원등급업
     boolean userAuthUp(UserVO userVO);
@@ -60,7 +60,7 @@ public interface UserService {
     boolean userNotBlock(UserVO userVO);
 
     // 마이페이지 회원정보
-    List<UserVO> userInfo(@Param("uNum") int uNum);
+    List<UserVO> userInfo(@Param("uNum") String uNum);
 
     // 회원정보 수정 데이터베이스 반영
     boolean userEdit(UserVO userVO);

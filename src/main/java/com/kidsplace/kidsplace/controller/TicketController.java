@@ -76,7 +76,7 @@ public class TicketController {
         // model.addAttribute("ticket", ticketlist);
         // return "/ticket/ticketHistory";
 
-        int uNum = customMember.getMember().getuNum();
+        String uNum = customMember.getMember().getuNum();
         // ###################### ticketDAO단에서 ticketCount값을 0으로 받아옴
         int ticketCount = ticketService.ticketCount(uNum);
         // System.out.println("ticketCount : " + ticketCount);

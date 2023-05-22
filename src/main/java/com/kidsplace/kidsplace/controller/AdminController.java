@@ -48,17 +48,20 @@ public class AdminController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String TicketInfo(Model model
                             , @RequestParam(name = "page", required = false, defaultValue = "1") int page
-                            , @ModelAttribute("search") TicketVO search){
+                            , @ModelAttribute("search") TicketVO ticketVO
+                            , @ModelAttribute("searchElse") UserVO userVO){
         // 티켓정보
         List<TicketDetailVO> ticketDetailList = ticketService.ticketDetailList();
         model.addAttribute("ticketDetail", ticketDetailList);
         // 티켓구매리스트 페이징
-        int ticketAllCount = ticketService.ticketAllCount(search);
+        int ticketAllCount = ticketService.ticketAllCount(ticketVO, userVO);
         Pagination pagination = new Pagination(ticketAllCount, page);
-        List<TicketVO> ticketalllist = ticketService.ticketAllPaging(pagination, search);
+        List<TicketVO> ticketalllist = ticketService.ticketAllPaging(pagination, ticketVO, userVO);
         model.addAttribute("ticket", ticketalllist);
         model.addAttribute("page", pagination);
-        // model.addAttribute("search", ticketVO);
+        // 검색조건 유지를 위한 값
+        model.addAttribute("search", ticketVO);
+        model.addAttribute("searchElse", userVO);
         System.out.println(pagination.toString());
         return "admin/adminTicket";
     }

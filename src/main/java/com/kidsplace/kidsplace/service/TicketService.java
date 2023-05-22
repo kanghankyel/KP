@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.kidsplace.kidsplace.commons.Pagination;
 import com.kidsplace.kidsplace.commons.TicketDetailVO;
 import com.kidsplace.kidsplace.commons.TicketVO;
+import com.kidsplace.kidsplace.commons.UserVO;
 
 public interface TicketService {
     
@@ -26,10 +27,10 @@ public interface TicketService {
     int ticketCount(int uNum);
 
     // 티켓구매내역(전체) 리스트 페이징
-    List<TicketVO> ticketAllPaging(Pagination pagination, TicketVO ticketVO);
+    List<TicketVO> ticketAllPaging(Pagination pagination, TicketVO ticketVO, UserVO userVO);
 
     // 티켓구매내역(전체) 리스트 카운팅
-    int ticketAllCount(TicketVO ticketVO);
+    int ticketAllCount(TicketVO ticketVO, UserVO userVO);
 
     // 티켓환불요청
     boolean ticketRefund(TicketVO ticketVO);

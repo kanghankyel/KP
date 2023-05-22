@@ -2,9 +2,9 @@ package com.kidsplace.kidsplace.commons;
 
 public class TicketVO {
 
-    private int tNum;
-    private int uNum;
-    private int tType;
+    private String tNum;
+    private String uNum;
+    private String tType;
     private String tName;
     private String uPhoneNum;
     private String uName;
@@ -19,7 +19,7 @@ public class TicketVO {
     public TicketVO(){
 
     }
-    public TicketVO(int tNum, int uNum, int tType, String tName, String uPhoneNum, String uName, String market, String tArea, String sellDate,
+    public TicketVO(String tNum, String uNum, String tType, String tName, String uPhoneNum, String uName, String market, String tArea, String sellDate,
             String useDate, String used, int tCount) {
         this.tNum = tNum;
         this.uNum = uNum;
@@ -35,22 +35,22 @@ public class TicketVO {
         this.tCount = tCount;
     }
     
-    public int gettNum() {
+    public String gettNum() {
         return tNum;
     }
-    public void settNum(int tNum) {
+    public void settNum(String tNum) {
         this.tNum = tNum;
     }
-    public int getuNum() {
+    public String getuNum() {
         return uNum;
     }
-    public void setuNum(int uNum) {
+    public void setuNum(String uNum) {
         this.uNum = uNum;
     }
-    public int gettType() {
+    public String gettType() {
         return tType;
     }
-    public void settType(int tType) {
+    public void settType(String tType) {
         this.tType = tType;
     }
     public String gettName() {

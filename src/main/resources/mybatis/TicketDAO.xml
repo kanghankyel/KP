@@ -47,7 +47,7 @@
 
     <sql id="ticketSearch">
         <!-- 아래 세개는 int값이라서 string값으로 변경해야함 -->
-        <!-- <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tNum)">
+        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tNum)">
             AND tNum LIKE '%' + #{ticketVO.tNum} + '%'
         </if>
         <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.uNum)">
@@ -56,7 +56,7 @@
         <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tType)">
             AND tType LIKE '%' + #{ticketVO.tType} + '%'
         </if>
-        아래는 ticketVO안에 tName이라는 컬럼이 없음
+        <!-- 아래는 ticketVO안에 tName이라는 컬럼이 없음
         <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tName)">
             AND tName LIKE CONCAT('%' + #{ticketVO.tName} + '%')
         </if> -->
@@ -181,6 +181,7 @@
         SELECT
             a.tNum
            ,a.uNum
+           ,a.tType
            ,b.tName
            ,c.uPhoneNum
            ,c.uName
@@ -200,8 +201,32 @@
         WHERE
             1 = 1
             <!-- <include refid="ticketSearch" /> -->
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tNum)">
+                AND a.tNum LIKE CONCAT('%', #{ticketVO.tNum}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tType)">
+                AND a.tType LIKE CONCAT('%', #{ticketVO.tType}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(userVO.uPhoneNum)">
+                AND c.uPhoneNum LIKE CONCAT('%', #{userVO.uPhoneNum}, '%')
+            </if>
             <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.uName)">
-                AND c.uName LIKE CONCAT('%' + #{ticketVO.uName} + '%')
+                AND c.uName LIKE CONCAT('%', #{ticketVO.uName}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.market)">
+                AND a.market LIKE CONCAT('%', #{ticketVO.market}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tArea)">
+                AND a.tArea LIKE CONCAT('%', #{ticketVO.tArea}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.sellDate)">
+                AND a.sellDate LIKE CONCAT('%', #{ticketVO.sellDate}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.useDate)">
+                AND a.useDate LIKE CONCAT('%', #{ticketVO.useDate}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.used)">
+                AND a.used LIKE CONCAT('%', #{ticketVO.used}, '%')
             </if>
         ORDER BY
             a.tNum DESC
@@ -214,12 +239,39 @@
         SELECT
             count(*)
         FROM
-            kidslandTicket
+            kidslandTicket AS a
+        INNER JOIN
+            kidslandUser AS b
+                ON a.uNum = b.uNum
         WHERE
             1 = 1
             <!-- <include refid="ticketSearch" /> -->
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tNum)">
+                AND a.tNum LIKE CONCAT('%', #{ticketVO.tNum}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tType)">
+                AND a.tType LIKE CONCAT('%', #{ticketVO.tType}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(userVO.uPhoneNum)">
+                AND b.uPhoneNum LIKE CONCAT('%', #{userVO.uPhoneNum}, '%')
+            </if>
             <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.uName)">
-                AND uName LIKE CONCAT('%' + #{ticketVO.uName} + '%')
+                AND a.uName LIKE CONCAT('%', #{ticketVO.uName}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.market)">
+                AND a.market LIKE CONCAT('%', #{ticketVO.market}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tArea)">
+                AND a.tArea LIKE CONCAT('%', #{ticketVO.tArea}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.sellDate)">
+                AND a.sellDate LIKE CONCAT('%', #{ticketVO.sellDate}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.useDate)">
+                AND a.useDate LIKE CONCAT('%', #{ticketVO.useDate}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.used)">
+                AND a.used LIKE CONCAT('%', #{ticketVO.used}, '%')
             </if>
     </select>
 

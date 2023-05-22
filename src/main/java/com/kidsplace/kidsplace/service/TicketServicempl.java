@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kidsplace.kidsplace.commons.Pagination;
 import com.kidsplace.kidsplace.commons.TicketDetailVO;
 import com.kidsplace.kidsplace.commons.TicketVO;
+import com.kidsplace.kidsplace.commons.UserVO;
 import com.kidsplace.kidsplace.dao.TicketDAO;
 
 @Service
@@ -64,14 +65,14 @@ public class TicketServicempl implements TicketService {
     }
 
     @Override
-    public List<TicketVO> ticketAllPaging(Pagination pagination, TicketVO ticketVO) {
+    public List<TicketVO> ticketAllPaging(Pagination pagination, TicketVO ticketVO, UserVO userVO) {
         logger.info("get List with SearchDTO");
-        return ticketDAO.ticketAllPaging(pagination, ticketVO);
+        return ticketDAO.ticketAllPaging(pagination, ticketVO, userVO);
     }
 
     @Override
-    public int ticketAllCount(TicketVO ticketVO) {
-        return ticketDAO.ticketAllCount(ticketVO);
+    public int ticketAllCount(TicketVO ticketVO, UserVO userVO) {
+        return ticketDAO.ticketAllCount(ticketVO, userVO);
     }
 
     @Override

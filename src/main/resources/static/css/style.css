@@ -411,6 +411,102 @@ footer .inner>div:nth-child(4){
     border: 1px solid #fff;
     background-color: #fff;
 }
+/* templates/user/signup */
+.floating_labels{
+    margin: 0 auto;
+    width: 500px;
+    height: 900px;
+    padding: 50px;
+    border: 1px solid #ccc;
+    margin-bottom: 100px;
+}
+.form_group{
+    position: relative;
+    margin-bottom: 20px;
+}
+.form_control{
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+    transition: border-bottom-color 0.3s;
+}
+.form_control:focus{
+    border-bottom-color: dodgerblue;
+    outline: none;
+}
+.form_control_postBtn{
+    position: absolute;
+    right: 20px;
+    bottom: 13px;
+    width: 100px;
+    height: 35px;
+    background-color: royalblue;
+    color: #eee;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.form_control_postBtn:hover{
+    background-color: tomato;
+}
+.form_groupBox label{
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 16px;
+    color: #999;
+    transition: all 0.3s;
+    pointer-events: none;
+}
+.form_control:focus ~ label,
+.form_control:valid ~ label{
+    top: -15px;
+    left: 0;
+    font-size: 14px;
+    color: dodgerblue;
+}
+.policyBox>div>h5{
+    padding-top: 20px;
+    margin-bottom: 10px;
+    color: #888;
+}
+.policyBox textarea{
+    width: 100%;
+    height: 200px;
+    resize: none;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+.policyBox p {
+    font-size: 14px;
+    margin-bottom: 50px;
+}
+.submitBox{
+    text-align: center;
+}
+.submitBox input{
+    width: 250px;
+    height: 50px;
+    background-color: tomato;
+    color: #eee;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.submitBox input:hover{
+    background-color: royalblue;
+}
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
 /* templates/community/notice */
 .notice_banner{
     position: relative;

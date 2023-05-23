@@ -8,59 +8,100 @@
     <div th:include="/fragment/nav"></div>
 
     <div class="content">
+        <section class="image_banner">
+            <div class="notice_banner">
+                <h1>회 &nbsp; 원 &nbsp; 가 &nbsp; 입</h1>
+            </div>
+        </section>
         <div class="inner">
-            <h2>회원가입 페이지 테스트</h2>
-            <hr>
-            <table>
-                <tr>
-                    <th><label for="inputId">아이디</label></th>
-                    <td colspan="2"><input type="text" id="inputId" name="uId" required></td>
-                </tr>
-                <tr>
-                    <th><label for="inputPw">비밀번호</label></th>
-                    <td colspan="2"><input type="password" id="inputPw" name="uPassword"></td>
-                </tr>
-                <tr>
-                    <th><label for="inputPwcheck">비밀번호 재확인</label></th>
-                    <td colspan="2"><input type="password" id="inputPwcheck"></td>
-                </tr>
-                <tr>
-                    <th><label for="inputName">성명</label></th>
-                    <td colspan="2"><input type="text" id="inputName" name="uName"></td>
-                </tr>
-                <tr>
-                    <th><label for="inputPhone">전화번호</label></th>
-                    <td colspan="2"><input type="text" id="inputPhone" name="uPhoneNum"></td>
-                </tr>
-                <tr>
-                    <th><label for="inputBirth">생일</label></th>
-                    <td colspan="2"><input type="text" id="inputBirth" name="uBirth"></td>
-                </tr>
-                <tr>
-                    <th><label for="sample6_postcode">우편번호</label></th>
-                    <td><input type="text" id="sample6_postcode" name="uPostCode" placeholder="우편번호"></td>
-                    <td><input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></td>
-                </tr>
-                <tr>
-                    <th><label for="sample6_address">주소</label></th>
-                    <td colspan="2"><input type="text" id="sample6_address" name="uAddr" placeholder="주소"></td>
-                </tr>
-                <tr>
-                    <th><label for="sample6_detailAddress">상세주소</label></th>
-                    <td colspan="2"><input type="text" id="sample6_detailAddress" name="uDetailAddr" placeholder="상세주소"></td>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        <input type="button" value="회원가입" onclick="insertUser()">
-                    </td>
-                </tr>
-            </table>
+            <h2>회원가입</h2>
+            <div class="floating_labels">
+                <div class="form_groupBox">
+                    <div class="form_group">
+                        <input type="text" id="inputId" class="form_control" name="uId" required>
+                        <label for="inputId">아이디</label>
+                        <div id="idError" class="error-message"></div>
+                    </div>
+                    <div class="form_group">
+                        <input type="password" id="inputPw" class="form_control" name="uPassword" required>
+                        <label for="inputPw">비밀번호 &nbsp;&nbsp; (영문/숫자/특수문자 조합)</label>
+                        <div id="pwError" class="error-message"></div>
+                    </div>
+                    <div class="form_group">
+                        <input type="password" id="inputPwcheck" class="form_control" name="uPasswordCheck" required>
+                        <label for="inputPwcheck">비밀번호 재확인</label>
+                        <div id="pwCheckError" class="error-message"></div>
+                    </div>
+                    <div class="form_group">
+                        <input type="text" id="inputName" class="form_control" name="uName" required>
+                        <label for="inputName">성명</label>
+                        <div id="nameError" class="error-message"></div>
+                    </div>
+                    <div class="form_group">
+                        <input type="text" id="inputPhone" class="form_control" name="uPhoneNum" required>
+                        <label for="inputPhone">전화번호 &nbsp;&nbsp; (' - '없이 입력)</label>
+                        <div id="phoneError" class="error-message"></div>
+                    </div>
+                    <div class="form_group">
+                        <input type="text" id="inputBirth" class="form_control" name="uBirth" required>
+                        <label for="inputBirth">생년월일 &nbsp;&nbsp; (ex. 920701)</label>
+                        <div id="birthError" class="error-message"></div>
+                    </div>
+                    <div class="form_group">
+                        <input type="text" id="sample6_postcode" class="form_control" name="uPostCode" required>
+                        <input type="button" class="form_control_postBtn" onclick="sample6_execDaumPostcode()" value="우편번호검색">
+                        <label for="sample6_postcode">우편번호</label>
+                        <div id="addOneError" class="error-message"></div>
+                    </div>
+                    <div class="form_group">
+                        <input type="text" id="sample6_address" class="form_control" name="uAddr" required>
+                        <label for="sample6_address">주소</label>
+                        <div id="addTwoError" class="error-message"></div>
+                    </div>
+                    <div class="form_group">
+                        <input type="text" id="sample6_detailAddress" class="form_control" name="uDetailAddr" required>
+                        <label for="sample6_detailAddress">상세주소</label>
+                        <div id="addThreeError" class="error-message"></div>
+                    </div>
+                </div>
+                
+                <div class="policyBox">
+                    <div>
+                        <h5>개인정보 취급방침 (필수)</h5>
+                        <textarea th:include="/fragment/policyExample"></textarea>
+                    </div>
+                    <p>
+                        <input type="checkbox" name="" id="check" required> &nbsp;
+                        <label for="check">개인정보 취급방침을 읽었으며 이에 동의합니다.</label>
+                    </p>
+                </div>
+
+                <div class="submitBox">
+                    <input type="button" value="회원가입" onclick="signupSubmit()">
+                </div>
+            </div>
         </div>
     </div>
 
     <div th:include="/fragment/footer"></div>
 
 
+    <!-- floating labels script -->
+    <script>
+        const formControl = document.querySelectorAll('.form-control');
+
+        formControl.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.previousElementSibling.classList.add('active');
+            });
+
+            input.addEventListener('blur', () => {
+                if (input.value === '') {
+                input.previousElementSibling.classList.remove('active');
+                }
+            });
+        });
+    </script>
 
     <!--  주소찾기 script  -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -91,8 +132,126 @@
         }
     </script>
 
-    <!--  회원가입 제출(fetch로 기능)  -->
+    <!-- 유효성 검사 & 회원가입 제출(fetch로 기능)  -->
     <script>
+        function signupSubmit(){
+            const id = document.getElementById("inputId").value;
+            const password = document.getElementById("inputPw").value;
+            const passwordCheck = document.getElementById("inputPwcheck").value;
+            const name = document.getElementById("inputName").value;
+            const phone = document.getElementById("inputPhone").value;
+            const birth = document.getElementById("inputBirth").value;
+            const postcode = document.getElementById("sample6_postcode").value;
+            const address = document.getElementById("sample6_address").value;
+            const detailAddress = document.getElementById("sample6_detailAddress").value;
+            const checkbox = document.getElementById("check");
+
+            const idError = document.getElementById('idError');
+            const pwError = document.getElementById('pwError');
+            const pwCheckError = document.getElementById('pwCheckError');
+            const nameError = document.getElementById('nameError');
+            const phoneError = document.getElementById('phoneError');
+            const birthError = document.getElementById('birthError');
+            const addOneError = document.getElementById('addOneError');
+            const addTwoError = document.getElementById('addTwoError');
+            const addThreeError = document.getElementById('addThreeError');
+
+            const passwordRegex = /^(?=.*[A-Z])(?=.*[\W_])(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d\W_]{8,}$/;
+            const phoneRegex = /^\d+$/;
+            const birthRegex = /^\d{6}$/;
+            
+            // 아이디 중복검사 유효성 검사도 추가 예정
+            if (id.trim() === "") {
+                idError.textContent = "아이디를 입력해주세요.";
+                document.getElementById("inputId").focus();
+                return false;
+            } else if (id.length < 5 || id.length > 12) {
+                idError.textContent = "아이디는 최소 5자 이상 12자 이하이어야 합니다.";
+                document.getElementById("inputId").focus();
+                return false;
+            } else {
+                idError.textContent = "";
+            }
+            if (password.trim() === "") {
+                pwError.textContent = "비밀번호를 입력해주세요.";
+                document.getElementById("inputPw").focus();
+                return false;
+            } else if (!passwordRegex.test(password)) {
+                pwError.textContent = "비밀번호는 최소 8자 이상이어야 하며, 대문자, 특수기호, 영어와 숫자를 포함해야 합니다.";
+                document.getElementById("inputPw").focus();
+                return false;
+            } else {
+                pwError.textContent = "";
+            }
+            if (passwordCheck.trim() === "") {
+                pwCheckError.textContent = "비밀번호를 재확인해주세요.";
+                document.getElementById("inputPwcheck").focus();
+                return false;
+            } else if (password !== passwordCheck) {
+                pwCheckError.textContent = "비밀번호가 일치하지 않습니다.";
+                document.getElementById("inputPwcheck").focus();
+                return false;
+            } else {
+                pwCheckError.textContent = "";
+            }
+            if (name.trim() === "") {
+                nameError.textContent = "이름을 입력해주세요.";
+                document.getElementById("inputName").focus();
+                return false;
+            } else {
+                nameError.textContent = "";
+            }
+            if (phone.trim() === "") {
+                phoneError.textContent = "전화번호를 입력해주세요.";
+                document.getElementById("inputPhone").focus();
+                return false;
+            } else if (!phoneRegex.test(phone)) {
+                phoneError.textContent = "전화번호는 '-'를 빼고 숫자만 입력해주세요.";
+                document.getElementById("inputPhone").focus();
+                return false;
+            } else {
+                phoneError.textContent = "";
+            }
+            if (birth.trim() === "") {
+                birthError.textContent = "생년월일을 입력해주세요.";
+                document.getElementById("inputBirth").focus();
+                return false;
+            } else if (!birthRegex.test(birth)) {
+                birthError.textContent = "생년월일은 YYMMDD 형식의 6자리 숫자로 입력해주세요.";
+                document.getElementById("inputBirth").focus();
+                return false;
+            } else {
+                birthError.textContent = "";
+            }
+            if (postcode.trim() === "") {
+                addOneError.textContent = "우편번호를 입력해주세요.";
+                document.getElementById("sample6_postcode").focus();
+                return false;
+            } else {
+                addOneError.textContent = "";
+            }
+            if (address.trim() === "") {
+                addTwoError.textContent = "주소를 입력해주세요.";
+                document.getElementById("sample6_address").focus();
+                return false;
+            } else {
+                addTwoError.textContent = "";
+            }
+            if (detailAddress.trim() === "") {
+                addThreeError.textContent = "상세주소를 입력해주세요.";
+                document.getElementById("sample6_detailAddress").focus();
+                return false;
+            } else {
+                addThreeError.textContent = "";
+            }
+            if (!checkbox.checked) {
+                alert("개인정보 취급방침에 동의해야 합니다.");
+                return false;
+            }
+
+            insertUser();
+        }
+
         function insertUser(){
             fetch('http://localhost:9000/user/signup', {
                 method: 'post',

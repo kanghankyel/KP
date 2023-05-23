@@ -13,7 +13,8 @@
             </div> -->
             <div>
                 <h6 sec:authorize="isAnonymous()"><a th:href="@{/user/signup}">회원가입</a></h6>
-                <h6 sec:authorize="isAnonymous()"><a th:href="@{/user/login}">로그인</a></h6>
+                <!-- <h6 sec:authorize="isAnonymous()"><a th:href="@{/user/login}">로그인</a></h6> -->
+                <h6 sec:authorize="isAnonymous()"><a class="login_modal" onclick="openModal()">로그인</a></h6>
                 <h6 sec:authorize="isAuthenticated()"><a th:href="@{/logout}">로그아웃</a></h6>
                 <h6 sec:authorize="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"><a th:href="@{/user/mypage}">마이페이지</a></h6>
                 <h6 sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin/admin}">관리자페이지</a></h6>
@@ -24,5 +25,110 @@
             </div>
         </div>
     </header>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="left_modal">
+                <div>
+                    <h3>로그인</h3>
+                </div>
+                <div>
+                    <a href="#"><i class="icon_naver">아</i></a>
+                    <a href="#"><i class="icon_google">이</i></a>
+                    <a href="#"><i class="icon_kakao">콘</i></a>
+                </div>
+                <div>
+                    <p>또는 아래의 회원로그인</p>
+                    <div>
+                        <input type="text" id="loginId" name="uId" placeholder="아이디">
+                    </div>
+                    <div>
+                        <input type="password" id="loginPw" name="uPassword" placeholder="비밀번호">
+                    </div>
+                </div>
+                <div>
+                    <a th:href="@{../user/findId}">아이디 / 비밀번호를 잊으셨나요?</a>
+                </div>
+                <div>
+                    <input type="button" value="로그인" onclick="loginUser()">
+                </div>
+            </div>
+
+            <div class="right_modal">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h3>Welcome, 환영합니다!</h3>
+                <p>만남의 행복을 꿈꾸는 KidsPlace는 처음이신가요?<br>아래를 통해 함께하세요!</p>
+                <div>
+                    <a th:href="@{../user/signup}">회원가입</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 모달창 script -->
+    <script>
+        // 모달 열기
+        function openModal() {
+            var modal = document.getElementById("modal");
+            modal.style.display = "block";
+            setTimeout(function() {
+                modal.classList.add("show");
+            }, 10); // 약간의 딜레이를 주어 슬라이드 애니메이션이 적용되도록 함
+        }
+
+        // 모달 닫기
+        function closeModal() {
+            var modal = document.getElementById("modal");
+            modal.classList.remove("show");
+            setTimeout(function() {
+                modal.style.display = "none";
+            }, 300); // 애니메이션이 완료된 후에 모달을 숨김
+        }
+
+        // 모달 외부 클릭 시 닫기
+        window.onclick = function(event) {
+            var modal = document.getElementById("modal");
+            if (event.target == modal) {
+                closeModal();
+            }
+        };
+    </script>
+
+
+    <!--  로그인 여부 비동기 script  -->
+    <script>
+        window.addEventListener('load', function () {
+            document.getElementById('loginPw').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    loginUser();
+                }
+            })
+        });
+
+        function loginUser(){
+            console.log(document.getElementById("loginId").value);
+            console.log(document.getElementById("loginPw").value);
+            fetch('/user/login', {
+                method: 'post',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    uId: document.getElementById("loginId").value,
+                    uPassword: document.getElementById("loginPw").value
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        console.log(data);
+                        alert("로그인이 완료되었습니다.");
+                        location.href = "http://localhost:9000";
+                    }else{
+                        alert("로그인에 실패하였습니다. 다시 시도해주세요.");
+                    }
+                })
+                .catch((error) => console.log(error));
+        }
+    </script>
 </th:block>
 </html>

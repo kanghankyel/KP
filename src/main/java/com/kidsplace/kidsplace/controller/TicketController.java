@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,15 +31,10 @@ public class TicketController {
 
     @Autowired
     TicketService ticketService;
-
-    // 티켓예매 페이지 이동
-    // @GetMapping("/ticketBuy")
-    // public String TicketPage(){
-    //     return "/ticket/ticketBuy";
-    // }
     
     // 티켓예매 페이지 이동 + 티켓정보
     @GetMapping("/ticketBuy")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     public String TicketInfo(Model model){
         List<TicketDetailVO> ticketDetailList = ticketService.ticketDetailList();
         model.addAttribute("ticketDetail", ticketDetailList);

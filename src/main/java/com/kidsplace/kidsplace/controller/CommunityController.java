@@ -31,16 +31,19 @@ public class CommunityController {
     // 공지사항 페이지 이동 및 리스트 구현
     @GetMapping("/notice")
     public String NoticeList (Model model
-                            , @RequestParam(name = "page", required = false, defaultValue = "1") int page){
+                            , @RequestParam(name = "page", required = false, defaultValue = "1") int page
+                            , @ModelAttribute("search") NoticeVO noticeVO){
         // 임시 리스트
         // List<NoticeVO> noticelist = communityService.noticeList();
         // model.addAttribute("notice", noticelist);
         // 아래는 페이징 처리
-        int noticeCount = communityService.noticeCount();
+        int noticeCount = communityService.noticeCount(noticeVO);
         Pagination pagination = new Pagination(noticeCount, page);
-        List<NoticeVO> noticelist = communityService.noticePaging(pagination);
+        List<NoticeVO> noticelist = communityService.noticePaging(pagination, noticeVO);
         model.addAttribute("notice", noticelist);
         model.addAttribute("page", pagination);
+        // 검색조건 유지를 위한 값
+        model.addAttribute("search", noticeVO);
         System.out.println(pagination.toString());
         return "/community/notice";
     }

@@ -13,10 +13,10 @@ public interface CommunityService {
     // List<NoticeVO> noticeList();
 
     // 공지사항 리스트 페이징
-    List<NoticeVO> noticePaging(Pagination pagination);
+    List<NoticeVO> noticePaging(Pagination pagination, NoticeVO noticeVO);
 
     // 공지사항 게시글 카운팅
-    int noticeCount();
+    int noticeCount(NoticeVO noticeVO);
 
     // 공지사항 항목 하나 불러오기(공지사항 보기)
     NoticeVO noticeRead(@Param("nNum") int nNum);

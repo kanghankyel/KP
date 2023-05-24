@@ -17,43 +17,23 @@
         <div class="inner">
             <h2>공지사항</h2>
             <hr>
-            <!-- <div class="searchBox">
-                <form action="@{/community/notice}" id="searchForm" method="get" th:onsubmit="return false;" autocomplete="off">
-                    <div>
-                        <input type="hidden" name="page" value="1">
-                        <input type="hidden" name="recordSize" th:value="${page.recordSize}">
-                        <input type="hidden" name="pageSize" th:value="${page.pageSize}">
-                        <select name="searchType" id="searchType">
-                            <option value="">전체 검색</option>
-                            <option value="title">제목</option>
-                            <option value="content">내용</option>
-                            <option value="writer">작성자</option>
-                        </select>
-                        <input type="text" id="keyword" name="keyword" placeholder="키워드를 입력해 주세요.">
-                        <input type="button" value="검색" onclick="searchBoard()">
-                        <button type="submit">검색</button>
-                    </div>
+            <div class="searchBox">
+                <form th:action="@{/community/notice(page=${page.page}, search=${search})}" method="get">
+                    <select name="nCategory">
+                        <option value="">카테고리 전체</option>
+                        <option value="이벤트" th:selected="${search.nCategory == '이벤트'}">이벤트</option>
+                        <option value="공지사항" th:selected="${search.nCategory == '공지사항'}">공지사항</option>
+                        <option value="주의사항" th:selected="${search.nCategory == '주의사항'}">주의사항</option>
+                        <option value="기타" th:selected="${search.nCategory == '기타'}">기 타</option>
+                    </select>
+                    <input type="text" name="nTitle" th:value="${search.nTitle}" placeholder="제목 입력">
+                    <input type="text" name="nContent" th:value="${search.nContent}" placeholder="내용 입력">
+                    <!-- <div th:text="${search}"></div> -->
+                    <button type="submit">검색</button>
                 </form>
-            </div> -->
+            </div>
 
-            <!-- <div>
-                <form th:action="@{/community/notice}" id="searchForm" method="get" th:onsubmit="return searchBoard(this)">
-                    <input type="hidden" name="page" value="1">
-                    <input type="hidden" name="recordSize" th:value="${page.recordSize}">
-                    <input type="hidden" name="pageSize" th:value="${page.pageSize}">
-                    <div>
-                        <select name="searchType" class="">
-                            <option value="" th:selected="${#strings.isEmpty(page.searchType)}">전체</option>
-                            <option value="title" th:selected="${#strings.equals(page.searchType, 'title')}">제목</option>
-                            <option value="content" th:selected="${#strings.equals(page.searchType, 'content')}">내용</option>
-                            <option value="writer" th:selected="${#strings.equals(page.searchType, 'writer')}">작성자</option>
-                        </select>
-                        <input type="text" id="searchKeyword" name="searchKeyword" th:value="${page.searchKeyword}" placeholder="검색어를 입력하세요.">
-                        <button type="submit" value="검색버튼"></button>
-                        <input type="button" value="검색" onclick="searchBoard(null)">
-                    </div>
-                </form>
-            </div> -->
+            <!-- <h3><span th:text="${page.totalRecordCount}"></span>건이 검색되었습니다.</h3> -->
             <table class="board_table">
                 <tr>
                     <th>No</th>
@@ -79,17 +59,17 @@
                 <ul class="pagination">
                     <th:block th:if="${page.existPrevPage}">
                         <li>
-                            <a th:href="@{/community/notice?page={prev} (prev = ${page.startPage - 1})}">이전</a>
+                            <a th:href="@{/community/notice?(page=${(page.page - 1) - ((page.page - 1) % 5)}, nCategory=${search.nCategory}, nTitle=${search.nTitle}, nContent=${search.nContent})}">이전</a>
                         </li>
                     </th:block>
                     <th:block th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}">
                         <li th:class="${num == page.page} ? 'active'">
-                            <a th:href="@{/community/notice?page={page} (page = ${num})}" th:text="${num}"></a>
+                            <a th:href="@{/community/notice(page=${num}, nCategory=${search.nCategory}, nTitle=${search.nTitle}, nContent=${search.nContent})}" th:text="${num}"></a>
                         </li>
                     </th:block>
                     <th:block th:if="${page.existNextPage}">
                         <li>
-                            <a th:href="@{/community/notice?page={next} (next = ${page.endPage + 1})}">다음</a>
+                            <a th:href="@{/community/notice(page=${(page.page + 1) + (4 - ((page.page - 1) % 5))}, nCategory=${search.nCategory}, nTitle=${search.nTitle}, nContent=${search.nContent})}">다음</a>
                         </li>
                     </th:block>
                 </ul>

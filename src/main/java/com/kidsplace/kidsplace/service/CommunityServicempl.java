@@ -26,15 +26,15 @@ public class CommunityServicempl implements CommunityService {
     // }
 
     @Override
-    public List<NoticeVO> noticePaging(Pagination pagination) {
+    public List<NoticeVO> noticePaging(Pagination pagination, NoticeVO noticeVO) {
         logger.info("get List with SearchDTO");
-        return communityDAO.noticePaging(pagination);
+        return communityDAO.noticePaging(pagination, noticeVO);
     }
 
     @Override
-    public int noticeCount() {
+    public int noticeCount(NoticeVO noticeVO) {
         // System.out.println("noticeCount : " + communityDAO.noticeCount());
-        return communityDAO.noticeCount();
+        return communityDAO.noticeCount(noticeVO);
     }
 
     @Override

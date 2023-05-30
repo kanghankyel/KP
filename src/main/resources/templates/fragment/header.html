@@ -33,9 +33,18 @@
                     <h3>로그인</h3>
                 </div>
                 <div>
-                    <a href="#"><i class="icon_naver">N</i></a>
-                    <a href="#"><i class="icon_google">G</i></a>
-                    <a href="#"><i class="icon_kakao">K</i></a>
+                    <a href="#">
+                        <img th:src="@{/image/google_icon.png}" class="google" alt="">
+                        <!-- <a href="https://www.flaticon.com/kr/free-icons/" title="구글 아이콘">구글 아이콘  제작자: Freepik - Flaticon</a> -->
+                    </a>
+                    <a href="#">
+                        <img th:src="@{/image/naver_icon.png}" class="naver" alt="">
+                        <!-- <a href="https://www.flaticon.com/kr/free-icons/-n" title="편지 n 아이콘">편지 n 아이콘  제작자: shohanur.rahman13 - Flaticon</a> -->
+                    </a>
+                    <a href="#">
+                        <img th:src="@{/image/kakao_icon.png}" class="kakao" alt="">
+                        <!-- <a href="https://www.flaticon.com/kr/free-icons/-" title="카카오 톡 아이콘">카카오 톡 아이콘  제작자: Fathema Khanom - Flaticon</a> -->
+                    </a>
                 </div>
                 <div>
                     <p>또는 아래의 회원로그인</p>
@@ -70,7 +79,7 @@
     <script>
         // 모달 열기
         function openModal() {
-            var modal = document.getElementById("modal");
+            let modal = document.getElementById("modal");
             modal.style.display = "block";
             setTimeout(function() {
                 modal.classList.add("show");
@@ -79,7 +88,7 @@
 
         // 모달 닫기
         function closeModal() {
-            var modal = document.getElementById("modal");
+            let modal = document.getElementById("modal");
             modal.classList.remove("show");
             setTimeout(function() {
                 modal.style.display = "none";
@@ -88,7 +97,7 @@
 
         // 모달 외부 클릭 시 닫기
         window.onclick = function(event) {
-            var modal = document.getElementById("modal");
+            let modal = document.getElementById("modal");
             if (event.target == modal) {
                 closeModal();
             }
@@ -121,8 +130,8 @@
                 .then(data => {
                     if (data) {
                         console.log(data);
-                        alert("로그인이 완료되었습니다.");
-                        location.href = "http://localhost:9000";
+                        // alert("로그인이 완료되었습니다.");
+                        location.href = urlparam;
                     }else{
                         alert("로그인에 실패하였습니다. 다시 시도해주세요.");
                     }

@@ -17,36 +17,43 @@
             <h2>회원가입</h2>
             <div class="floating_labels">
                 <div class="form_groupBox">
+                    <i class="fa-solid fa-user"></i>
                     <div class="form_group">
                         <input type="text" id="inputId" class="form_control" name="uId" required>
                         <label for="inputId">아이디</label>
                         <div id="idError" class="error-message"></div>
                     </div>
+                    <i class="fa-solid fa-unlock"></i>
                     <div class="form_group">
                         <input type="password" id="inputPw" class="form_control" name="uPassword" required>
                         <label for="inputPw">비밀번호 &nbsp;&nbsp; (영문/숫자/특수문자 조합)</label>
                         <div id="pwError" class="error-message"></div>
                     </div>
+                    <i class="fa-solid fa-lock"></i>
                     <div class="form_group">
                         <input type="password" id="inputPwcheck" class="form_control" name="uPasswordCheck" required>
                         <label for="inputPwcheck">비밀번호 재확인</label>
                         <div id="pwCheckError" class="error-message"></div>
                     </div>
+                    <i class="fa-solid fa-tags"></i>
                     <div class="form_group">
                         <input type="text" id="inputName" class="form_control" name="uName" required>
                         <label for="inputName">성명</label>
                         <div id="nameError" class="error-message"></div>
                     </div>
+                    <i class="fa-solid fa-phone"></i>
                     <div class="form_group">
                         <input type="text" id="inputPhone" class="form_control" name="uPhoneNum" required>
                         <label for="inputPhone">전화번호 &nbsp;&nbsp; (' - '없이 입력)</label>
                         <div id="phoneError" class="error-message"></div>
                     </div>
+                    <i class="fa-solid fa-calendar"></i>
                     <div class="form_group">
                         <input type="text" id="inputBirth" class="form_control" name="uBirth" required>
                         <label for="inputBirth">생년월일 &nbsp;&nbsp; (ex. 920701)</label>
                         <div id="birthError" class="error-message"></div>
                     </div>
+                    <i class="fa-solid fa-location-dot"></i>
                     <div class="form_group">
                         <input type="text" id="sample6_postcode" class="form_control" name="uPostCode" required>
                         <input type="button" class="form_control_postBtn" onclick="sample6_execDaumPostcode()" value="우편번호검색">
@@ -253,7 +260,7 @@
         }
 
         function insertUser(){
-            fetch('http://localhost:9000/user/signup', {
+            fetch(urlparam + '/user/signup', {
                 method: 'post',
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
@@ -271,7 +278,7 @@
                 .then(data => {
                     if (data) {
                         alert("회원가입이 완료되었습니다.");
-                        location.href="http://localhost:9000/user/login";
+                        location.href = urlparam;
                     }else{
                         alert("회원가입에 실패하였습니다. 다시 시도해주세요.");
                     }

@@ -127,7 +127,7 @@
           , nWriter = #{nWriter}
           , nTitle = #{nTitle}
           , nContent = #{nContent}
-          , nUpdate = CURRENT_TIMESTAMP
+          , nDate = CURRENT_TIMESTAMP
         WHERE
             nNum = #{nNum}
     </update>

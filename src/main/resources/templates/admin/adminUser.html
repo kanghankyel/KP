@@ -9,11 +9,18 @@
     <div th:include="/fragment/nav"></div>
 
     <div class="content">
-        <section class="image_banner">
-            <div class="notice_banner">
+        <div class="image_banner">
+            <div class="image_banner_bg">
+                <img th:src="@{/image/admin_banner.jpg}" alt="">
                 <h1>관 &nbsp; 리 &nbsp; 자 &nbsp; 페 &nbsp; 이 &nbsp; 지</h1>
             </div>
-        </section>
+            <div class="page_nav">
+                <span><a th:href="@{/}"><i class="fa-solid fa-house"></i></a></span>
+                <span><a th:href="@{/admin/admin}">ADMIN &nbsp; <i class="fa-solid fa-caret-down"></i></a></span>
+                <span><a th:href="@{/admin/adminUser}">회원리스트 &nbsp; <i class="fa-solid fa-caret-down"></i></a></span>
+            </div>
+        </div>
+
         <div class="admin_content">
             <section class="admin_left">
                 <article class="admin_href">

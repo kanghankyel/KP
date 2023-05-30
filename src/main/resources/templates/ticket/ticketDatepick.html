@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<th:block>
+    <div class="inner">
+        <div id="calendar">
+            <div id="calendarHeader">
+                <button id="prevMonthBtn">&lt;</button>
+                <h2 id="currentMonthYear"></h2>
+                <button id="nextMonthBtn">&gt;</button>
+            </div>
+            <table id="calendarBody">
+                <thead>
+                    <tr>
+                    <th>일</th>
+                    <th>월</th>
+                    <th>화</th>
+                    <th>수</th>
+                    <th>목</th>
+                    <th>금</th>
+                    <th>토</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <input type="text" id="selectedDate" placeholder="날짜 선택">
+    </div>
+    
+
+
+    <script>
+        const selectedDateInput = document.getElementById('selectedDate');
+        let selectedDate = null;
+
+        const today = new Date();
+        let currentYear = today.getFullYear();
+        let currentMonth = today.getMonth();
+
+        const prevMonthBtn = document.getElementById('prevMonthBtn');
+        const nextMonthBtn = document.getElementById('nextMonthBtn');
+        const currentMonthYear = document.getElementById('currentMonthYear');
+        const calendarBody = document.querySelector('#calendarBody tbody');
+
+        function initializeCalendar() {
+            updateCalendar();
+            prevMonthBtn.addEventListener('click', showPrevMonth);
+            nextMonthBtn.addEventListener('click', showNextMonth);
+        }
+
+        function updateCalendar() {
+            currentMonthYear.textContent = `${currentYear}년 ${currentMonth + 1}월`;
+            createCalendar();
+        }
+
+        function showPrevMonth() {
+            if (currentMonth === 0) {
+                currentYear--;
+                currentMonth = 11;
+            } else {
+                currentMonth--;
+            }
+            updateCalendar();
+        }
+
+        function showNextMonth() {
+            if (currentMonth === 11) {
+                currentYear++;
+                currentMonth = 0;
+            } else {
+                currentMonth++;
+            }
+            updateCalendar();
+        }
+
+        function createCalendar() {
+            while (calendarBody.firstChild) {
+                calendarBody.removeChild(calendarBody.firstChild);
+            }
+
+            const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+            const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+            let dates = [];
+            for (let i = 1; i <= lastDayOfMonth; i++) {
+                dates.push(i);
+            }
+
+            let row = document.createElement('tr');
+            let dayCounter = 0;
+            for (let i = 0; i < dates.length + firstDayOfMonth; i++) {
+                if (i >= firstDayOfMonth) {
+                    dayCounter++;
+                    const date = dates[dayCounter - 1];
+                    const cell = document.createElement('td');
+                    cell.textContent = date;
+
+                    if (currentYear === today.getFullYear() && currentMonth === today.getMonth()) {
+                        if (date < today.getDate()) {
+                            cell.classList.add('disabled');
+                        } else {
+                            cell.addEventListener('click', selectDate);
+                        }
+                    } else if (currentYear < today.getFullYear() || (currentYear === today.getFullYear() && currentMonth < today.getMonth())) {
+                        cell.classList.add('disabled');
+                    } else {
+                        cell.addEventListener('click', selectDate);
+                    }
+
+                    row.appendChild(cell);
+                } else {
+                    row.appendChild(document.createElement('td'));
+                }
+
+                if (i % 7 === 6) {
+                    calendarBody.appendChild(row);
+                    row = document.createElement('tr');
+                }
+            }
+            calendarBody.appendChild(row);
+        }
+
+        function selectDate(event) {
+            const clickedDate = event.target.textContent;
+            selectedDate = new Date(currentYear, currentMonth, clickedDate);
+            selectedDateInput.value = formatDate(selectedDate);
+        }
+
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        initializeCalendar();
+    </script>
+</th:block>
+</html>

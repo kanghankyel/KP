@@ -19,26 +19,27 @@
                 <span><a th:href="@{/ticket/ticketBuy}">티켓예매 &nbsp; <i class="fa-solid fa-caret-down"></i></a></span>
             </div>
         </div>
-
-        <div th:include="/ticket/ticketDatepick"></div>
         
         <div class="inner">
-            <h2>티켓예매</h2>
-            <hr>
+            <div class="pointBox">
+                <div class="point_bigtext">티켓정보</div>
+                <div class="point_smalltext">KidsPlace는 편리한 온라인 예약 시스템을 통해 예약 접수를 받고 있습니다.</div>
+                <span class="point_hr"></span>
+            </div>
             <table class="ticket_board">
                 <tr>
-                    <th>구분</th>
+                    <th class="left_td">구분</th>
                     <th>종류</th>
                     <th>대상내용</th>
                     <th>가격</th>
-                    <th>비고</th>
+                    <th class="right_td">비고</th>
                 </tr>
                 <tr>
-                    <td rowspan="2">종일권</td>
+                    <td rowspan="2" class="left_td">종일권</td>
                     <td>유/초등학생권</td>
                     <td>유아/초등학생 대상</td>
                     <td>20,000원</td>
-                    <td rowspan="2"></td>
+                    <td rowspan="2" class="right_td"></td>
                 </tr>
                 <tr>
                     <td>일반권</td>
@@ -46,11 +47,11 @@
                     <td>18,000원</td>
                 </tr>
                 <tr>
-                    <td rowspan="2">오후권</td>
+                    <td rowspan="2" class="left_td">오후권</td>
                     <td>유/초등학생권</td>
                     <td>유아/초등학생 대상</td>
                     <td>15,000원</td>
-                    <td rowspan="2"></td>
+                    <td rowspan="2" class="right_td"></td>
                 </tr>
                 <tr>
                     <td>일반권</td>
@@ -58,41 +59,74 @@
                     <td>13,000원</td>
                 </tr>
                 <tr>
-                    <td>단체</td>
+                    <td class="left_td">단체</td>
                     <td>단체할인권</td>
                     <td>20인 이상의 단체</td>
                     <td></td>
-                    <td>별도문의</td>
+                    <td class="right_td">별도문의</td>
                 </tr>
                 <tr>
-                    <td>특별할인</td>
+                    <td class="left_td">특별할인</td>
                     <td>공통</td>
                     <td>장애인 [복지카드 지참 시, 동반 1인까지]<br>
                         65세 이상 경로 우대[주민등록증], 국가유공자[복지카드] 및<br>
                         교원증 소지한 교사(본인에 한함)</td>
                     <td>9,000원</td>
-                    <td>신분증 및<br>
-                        증빙 서류<br>
-                        필히 지참</td>
+                    <td class="right_td">신분증 및<br>
+                                        증빙 서류<br>
+                                        필히 지참</td>
                 </tr>
                 <tr>
-                    <td colspan="2" rowspan="2">기타</td>
+                    <td colspan="2" rowspan="2" class="left_td">기타</td>
                     <td>24개월 미만 유아[부모 동반 시]</td>
                     <td>무료</td>
-                    <td rowspan="2"></td>
+                    <td rowspan="2" class="right_td"></td>
                 </tr>
                 <tr>
                     <td>기타 이벤트 할인권</td>
                     <td>행사 할인율 적용</td>
                 </tr>
             </table>
+
+            <div class="pointBox">
+                <div class="point_bigtext">예약일 선택</div>
+                <div class="point_smalltext">365일 연중무휴! 원하시는 일정을 골라주세요.</div>
+                <span class="point_hr"></span>
+            </div>
+            <div id="calendar">
+                <div id="calendarHeader">
+                    <button id="prevMonthBtn">&lt;</button>
+                    <h2 id="currentMonthYear"></h2>
+                    <button id="nextMonthBtn">&gt;</button>
+                </div>
+                <table id="calendarBody">
+                    <thead>
+                        <tr>
+                        <th class="holiday">일</th>
+                        <th>월</th>
+                        <th>화</th>
+                        <th>수</th>
+                        <th>목</th>
+                        <th>금</th>
+                        <th class="holiday">토</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <input type="hidden" id="selectedDate" placeholder="선택일자">
             
+            <div class="pointBox">
+                <div class="point_bigtext">티켓 선택</div>
+                <div class="point_smalltext">아이들의 재미! 티켓을 선택해주세요.</div>
+                <span class="point_hr"></span>
+            </div>
             <div class="ticketContainer">
                 <div class="ticketbox">
                     <div><input type="hidden" th:value="${#authentication.principal.member.uNum}" class="inputuNum" name="uNum" readonly></div>
                     <div>
                         <select name="tType" class="inputtType">
-                            <option value="none1">( 티켓종류를 선택하세요 )</option>
+                            <option value="none1">( &nbsp;&nbsp; 티켓종류를 선택하세요 &nbsp;&nbsp; )</option>
                             <option th:each="ticketDetail : ${ticketDetail}" th:value="${ticketDetail.tType}"><div th:text="${ticketDetail.tName}"></div></option>
                         </select>
                     </div>
@@ -100,7 +134,7 @@
                     <div><input type="hidden" class="inputmarket" name="market" value="KIDSPLACE" readonly></div>
                     <div>
                         <select name="tArea" class="inputtArea">
-                            <option value="none2">( 사용지역을 선택하세요 )</option>
+                            <option value="none2">( &nbsp;&nbsp; 사용지역을 선택하세요 &nbsp;&nbsp; )</option>
                             <option value="경기 킨텍스">경기 킨텍스</option>
                             <option value="부산 벡스코">부산 벡스코</option>
                             <option value="대구 엑스코">대구 엑스코</option>
@@ -109,15 +143,18 @@
                     </div>
                     <div>
                         <select class="ticketCount">
-                            <option value="none3">( 티켓수량 )</option>
+                            <option value="none3">(&nbsp; 티켓수량 &nbsp;)</option>
                             <option th:each="num : ${#numbers.sequence(1,30)}" th:value="${num}" th:text="${num}"></option>
                         </select>
                     </div>
                 </div>
             </div>
-            <div id="ticketbtnbox">
-                <div><input type="button" value="추가" onclick="plusTicket()"></div>
-                <div><input type="button" value="티켓구매" onclick="insertTicket()"></div>
+            <div id="ticketbtnPlus">
+                <input type="button" value="추가 +" onclick="plusTicket()">
+            </div>
+            <div id="ticketbtnBuy">
+                <!-- <div><input type="button" value="추가 +" onclick="plusTicket()"></div> -->
+                <input type="button" value="티켓구매" onclick="insertTicket()">
             </div>
         </div>
     </div>
@@ -125,6 +162,121 @@
     <div th:include="/fragment/footer"></div>
 
 
+    <!-- script -->
+    <!-- ticketDatepick 일자 선택 -->
+    <script>
+        const selectedDateInput = document.getElementById('selectedDate');
+        let selectedDate = null;
+
+        const today = new Date();
+        let currentYear = today.getFullYear();
+        let currentMonth = today.getMonth();
+
+        const prevMonthBtn = document.getElementById('prevMonthBtn');
+        const nextMonthBtn = document.getElementById('nextMonthBtn');
+        const currentMonthYear = document.getElementById('currentMonthYear');
+        const calendarBody = document.querySelector('#calendarBody tbody');
+
+        function initializeCalendar() {
+            updateCalendar();
+            prevMonthBtn.addEventListener('click', showPrevMonth);
+            nextMonthBtn.addEventListener('click', showNextMonth);
+        }
+
+        function updateCalendar() {
+            currentMonthYear.textContent = `${currentYear}년 ${currentMonth + 1}월`;
+            createCalendar();
+        }
+
+        function showPrevMonth() {
+            if (currentMonth === 0) {
+                currentYear--;
+                currentMonth = 11;
+            } else {
+                currentMonth--;
+            }
+            updateCalendar();
+        }
+
+        function showNextMonth() {
+            if (currentMonth === 11) {
+                currentYear++;
+                currentMonth = 0;
+            } else {
+                currentMonth++;
+            }
+            updateCalendar();
+        }
+
+        function createCalendar() {
+            while (calendarBody.firstChild) {
+                calendarBody.removeChild(calendarBody.firstChild);
+            }
+
+            const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+            const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+            let dates = [];
+            for (let i = 1; i <= lastDayOfMonth; i++) {
+                dates.push(i);
+            }
+
+            let row = document.createElement('tr');
+            let dayCounter = 0;
+            for (let i = 0; i < dates.length + firstDayOfMonth; i++) {
+                if (i >= firstDayOfMonth) {
+                    dayCounter++;
+                    const date = dates[dayCounter - 1];
+                    const cell = document.createElement('td');
+                    cell.textContent = date;
+
+                    if (currentYear === today.getFullYear() && currentMonth === today.getMonth()) {
+                        if (date < today.getDate()) {
+                            cell.classList.add('disabled');
+                        } else {
+                            cell.addEventListener('click', selectDate);
+                        }
+                    } else if (currentYear < today.getFullYear() || (currentYear === today.getFullYear() && currentMonth < today.getMonth())) {
+                        cell.classList.add('disabled');
+                    } else {
+                        cell.addEventListener('click', selectDate);
+                    }
+
+                    row.appendChild(cell);
+                } else {
+                    row.appendChild(document.createElement('td'));
+                }
+
+                if (i % 7 === 6) {
+                    calendarBody.appendChild(row);
+                    row = document.createElement('tr');
+                }
+            }
+            calendarBody.appendChild(row);
+        }
+
+        function selectDate(event) {
+            const clickedDate = event.target.textContent;
+            selectedDate = new Date(currentYear, currentMonth, clickedDate);
+            selectedDateInput.value = formatDate(selectedDate);
+
+            const selectedCell = calendarBody.querySelector('.selected');
+            if (selectedCell) {
+                selectedCell.classList.remove('selected');
+            }
+
+            event.target.classList.add('selected');
+        }
+
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        initializeCalendar();
+    </script>
 
     <!-- cloneNode() 함수를 통해 div 내부요소까지 복제-->
     <script>
@@ -160,7 +312,13 @@
         // 유효성 검사
         const ticketTypeInputs = document.getElementsByClassName("inputtType");
         const ticketAreaInputs = document.getElementsByClassName("inputtArea");
-        const ticketAmountInputs = document.getElementsByClassName("ticketCount")
+        const ticketAmountInputs = document.getElementsByClassName("ticketCount");
+        const selectedDate = document.getElementById("selectedDate").value;
+
+        if (selectedDate === "") {
+            alert("예약날짜를 선택해주세요.");
+            return false;
+        }
 
         for (let i = 0; i < ticketTypeInputs.length; i++) {
             if (ticketTypeInputs[i].value === 'none1') {
@@ -186,6 +344,7 @@
             uName: document.getElementsByClassName("inputuName")[i].value,
             market: document.getElementsByClassName("inputmarket")[i].value,
             tArea: ticketAreaInputs[i].value,
+            pickDate: document.getElementById("selectedDate").value,
             tCount: ticketCountInputs[i].value
             };
 

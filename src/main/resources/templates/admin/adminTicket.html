@@ -66,6 +66,7 @@
                         <input type="text" name="market" th:value="${search.market}" placeholder="구매처 입력">
                         <input type="text" name="tArea" th:value="${search.tArea}" placeholder="사용처 입력">
                         <input type="text" name="sellDate" th:value="${search.sellDate}" placeholder="구매일자 입력">
+                        <input type="text" name="pickDate" th:value="${search.pickDate}" placeholder="예약일자 입력">
                         <input type="text" name="useDate" th:value="${search.useDate}" placeholder="사용일자 입력">
                         <!-- <input type="text" name="used" th:value="${search.used}" placeholder="티켓상태 입력"> -->
                         <select name="used">
@@ -92,6 +93,7 @@
                         <th>구매처</th>
                         <th>사용장소</th>
                         <th>구매일자</th>
+                        <th>예약일자</th>
                         <th>사용일자</th>
                         <th>티켓상태</th>
                         <th>비고</th>
@@ -106,6 +108,7 @@
                         <td><div th:text="${ticket.market}"></div></td>
                         <td><div th:text="${ticket.tArea}"></div></td>
                         <td><div th:text="${ticket.sellDate}"></div></td>
+                        <td><div th:text="${ticket.pickDate}"></div></td>
                         <td>
                             <div th:text="${ticket.useDate}"></div>
                             <div th:if="${#lists.isEmpty(ticket.useDate)}">-</div>
@@ -133,17 +136,17 @@
                         <ul class="pagination">
                             <th:block th:if="${page.existPrevPage}">
                                 <li>
-                                    <a th:href="@{/admin/adminTicket(page=${(page.page - 1) - ((page.page - 1) % 5)}, tNum=${search.tNum}, tType=${search.tType}, uPhoneNum=${searchElse.uPhoneNum}, uName=${search.uName}, market=${search.market}, tArea=${search.tArea}, sellDate=${search.sellDate}, useDate=${search.useDate}, used=${search.used})}">이전</a>
+                                    <a th:href="@{/admin/adminTicket(page=${(page.page - 1) - ((page.page - 1) % 5)}, tNum=${search.tNum}, tType=${search.tType}, uPhoneNum=${searchElse.uPhoneNum}, uName=${search.uName}, market=${search.market}, tArea=${search.tArea}, sellDate=${search.sellDate}, pickDate=${search.pickDate}, useDate=${search.useDate}, used=${search.used})}">이전</a>
                                 </li>
                             </th:block>
                             <th:block th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}">
                                 <li th:class="${num == page.page} ? 'active'">
-                                    <a th:href="@{/admin/adminTicket(page=${num}, tNum=${search.tNum}, tType=${search.tType}, uPhoneNum=${searchElse.uPhoneNum}, uName=${search.uName}, market=${search.market}, tArea=${search.tArea}, sellDate=${search.sellDate}, useDate=${search.useDate}, used=${search.used})}" th:text="${num}"></a>
+                                    <a th:href="@{/admin/adminTicket(page=${num}, tNum=${search.tNum}, tType=${search.tType}, uPhoneNum=${searchElse.uPhoneNum}, uName=${search.uName}, market=${search.market}, tArea=${search.tArea}, sellDate=${search.sellDate}, pickDate=${search.pickDate}, useDate=${search.useDate}, used=${search.used})}" th:text="${num}"></a>
                                 </li>
                             </th:block>
                             <th:block th:if="${page.existNextPage}">
                                 <li>
-                                    <a th:href="@{/admin/adminTicket(page=${(page.page + 1) + (4 - ((page.page - 1) % 5))}, tNum=${search.tNum}, tType=${search.tType}, uPhoneNum=${searchElse.uPhoneNum}, uName=${search.uName}, market=${search.market}, tArea=${search.tArea}, sellDate=${search.sellDate}, useDate=${search.useDate}, used=${search.used})}">다음</a>
+                                    <a th:href="@{/admin/adminTicket(page=${(page.page + 1) + (4 - ((page.page - 1) % 5))}, tNum=${search.tNum}, tType=${search.tType}, uPhoneNum=${searchElse.uPhoneNum}, uName=${search.uName}, market=${search.market}, tArea=${search.tArea}, sellDate=${search.sellDate}, pickDate=${search.pickDate}, useDate=${search.useDate}, used=${search.used})}">다음</a>
                                 </li>
                             </th:block>
                         </ul>

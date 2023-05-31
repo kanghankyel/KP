@@ -39,52 +39,12 @@
         <result property="market" column="market"/>
         <result property="tArea" column="tArea"/>
         <result property="sellDate" column="sellDate"/>
+        <result property="pickDate" column="pickDate"/>
         <result property="useDate" column="useDate"/>
         <result property="used" column="used"/>
 
         <!-- <collection property="TDList" resultMap="TDMap" /> -->
     </resultMap>
-
-    <sql id="ticketSearch">
-        <!-- 아래 세개는 int값이라서 string값으로 변경해야함 -->
-        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tNum)">
-            AND tNum LIKE '%' + #{ticketVO.tNum} + '%'
-        </if>
-        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.uNum)">
-            AND uNum LIKE '%' + #{ticketVO.uNum} + '%'
-        </if>
-        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tType)">
-            AND tType LIKE '%' + #{ticketVO.tType} + '%'
-        </if>
-        <!-- 아래는 ticketVO안에 tName이라는 컬럼이 없음
-        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tName)">
-            AND tName LIKE CONCAT('%' + #{ticketVO.tName} + '%')
-        </if> -->
-        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.uName)">
-            AND uName LIKE CONCAT('%' + #{ticketVO.uName} + '%')
-        </if>
-        <!-- 아래는 임시로 주석처리 -->
-        <!-- <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.market)">
-            AND market LIKE '%' + #{ticketVO.market} + '%'
-        </if>
-        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tArea)">
-            AND tArea LIKE '%' + #{ticketVO.tArea} + '%'
-        </if>
-        아래 세개는 date값이라서 혹시 모를 오류를 피하고자 주석처리
-        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.sellDate)">
-            AND sellDate LIKE '%' + #{ticketVO.sellDate} + '%'
-        </if>
-        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.useDate)">
-            AND useDate LIKE '%' + #{ticketVO.useDate} + '%'
-        </if>
-        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.used)">
-            AND used LIKE '%' + #{ticketVO.used} + '%'
-        </if> -->
-    </sql>
-
-    <sql id="searchParam">
-        LIKE '%' + #{searchParam} + '%'
-    </sql>
 
     <!--  티켓정보 리스트 불러오기  -->
     <select id="ticketDetailList" resultMap="TDMap">
@@ -108,14 +68,15 @@
     <!-- 티켓구매 -->
     <insert id="ticketInsert">
         INSERT INTO
-            kidslandTicket(tNum, uNum, tType, uName, market, tArea)
+            kidslandTicket(tNum, uNum, tType, uName, market, tArea, pickDate)
         VALUES
             ((SELECT resultTable.resultNum FROM (SELECT IFNULL(MAX(tNum), 0) + 1 AS resultNum FROM kidslandTicket) resultTable)
             , #{uNum}
             , #{tType}
             , #{uName}
             , #{market}
-            , #{tArea})
+            , #{tArea}
+            , #{pickDate})
     </insert>
 
     <!-- 티켓구매내역(개인) 리스트 -->
@@ -128,6 +89,7 @@
            ,market
            ,tArea
            ,date_format(sellDate, '%Y-%m-%d') AS sellDate
+           ,date_format(pickDate, '%Y-%m-%d') AS pickDate
            ,date_format(useDate, '%Y-%m-%d') AS useDate
            ,used
         FROM
@@ -148,6 +110,7 @@
            ,a.market
            ,a.tArea
            ,date_format(a.sellDate, '%Y-%m-%d') AS sellDate
+           ,date_format(a.pickDate, '%Y-%m-%d') AS pickDate
            ,date_format(a.useDate, '%Y-%m-%d') AS useDate
            ,used
         FROM
@@ -188,6 +151,7 @@
            ,a.market
            ,a.tArea
            ,date_format(a.sellDate, '%Y-%m-%d') AS sellDate
+           ,date_format(a.pickDate, '%Y-%m-%d') AS pickDate
            ,date_format(a.useDate, '%Y-%m-%d') AS useDate
            ,a.used
         FROM
@@ -221,6 +185,9 @@
             </if>
             <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.sellDate)">
                 AND a.sellDate LIKE CONCAT('%', #{ticketVO.sellDate}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.pickDate)">
+                AND a.pickDate LIKE CONCAT('%', #{ticketVO.pickDate}, '%')
             </if>
             <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.useDate)">
                 AND a.useDate LIKE CONCAT('%', #{ticketVO.useDate}, '%')
@@ -266,6 +233,9 @@
             </if>
             <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.sellDate)">
                 AND a.sellDate LIKE CONCAT('%', #{ticketVO.sellDate}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.pickDate)">
+                AND a.pickDate LIKE CONCAT('%', #{ticketVO.pickDate}, '%')
             </if>
             <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.useDate)">
                 AND a.useDate LIKE CONCAT('%', #{ticketVO.useDate}, '%')

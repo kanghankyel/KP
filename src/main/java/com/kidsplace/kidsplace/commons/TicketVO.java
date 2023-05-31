@@ -11,6 +11,7 @@ public class TicketVO {
     private String market;
     private String tArea;
     private String sellDate;
+    private String pickDate;
     private String useDate;
     private String used;
     // 티켓수량 vo객체 추가
@@ -19,8 +20,9 @@ public class TicketVO {
     public TicketVO(){
 
     }
+    
     public TicketVO(String tNum, String uNum, String tType, String tName, String uPhoneNum, String uName, String market, String tArea, String sellDate,
-            String useDate, String used, int tCount) {
+            String pickDate, String useDate, String used, int tCount) {
         this.tNum = tNum;
         this.uNum = uNum;
         this.tType = tType;
@@ -30,6 +32,7 @@ public class TicketVO {
         this.market = market;
         this.tArea = tArea;
         this.sellDate = sellDate;
+        this.pickDate = pickDate;
         this.useDate = useDate;
         this.used = used;
         this.tCount = tCount;
@@ -89,6 +92,12 @@ public class TicketVO {
     public void setSellDate(String sellDate) {
         this.sellDate = sellDate;
     }
+    public String getPickDate() {
+        return pickDate;
+    }
+    public void setPickDate(String pickDate) {
+        this.pickDate = pickDate;
+    }
     public String getUseDate() {
         return useDate;
     }
@@ -112,7 +121,8 @@ public class TicketVO {
     public String toString() {
         return "TicketVO [tNum=" + tNum + ", uNum=" + uNum + ", tType=" + tType + ", tName=" + tName + ", uPhoneNum="
                 + uPhoneNum + ", uName=" + uName + ", market=" + market + ", tArea=" + tArea + ", sellDate=" + sellDate
-                + ", useDate=" + useDate + ", used=" + used + ", tCount=" + tCount + "]";
+                + ", pickDate=" + pickDate + ", useDate=" + useDate + ", used=" + used + ", tCount=" + tCount + "]";
     }
+
    
 }

@@ -569,6 +569,20 @@ footer .inner>div:nth-child(4){
     color: #64a5ff;
   }
 /* templates/page/home */
+.pointBox{
+    margin-bottom: 30px;
+}
+.point_bigtext{
+    font-size: 40px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    color: #f4435d;
+}
+.point_smalltext{
+    font-size: 16px;
+    color: #999;
+    letter-spacing: 1px;
+}
 .point_hr{
     display: block;
     width: 30px;
@@ -932,21 +946,196 @@ footer .inner>div:nth-child(4){
 }
 /* templates/ticket/ticketBuy */
 .ticket_board{
+    width: 1200px;
     margin: 0 auto;
-    border: 1px solid #000;
-    margin-bottom: 80px;
+    box-sizing: border-box;
+    margin-bottom: 160px;
 }
 .ticket_board tr th{
-    border: 1px solid #000;
+    height: 50px;
+    border: 1px solid #aaa;
+    border-top: 2px solid #ff416b;
+    border-bottom: 1px solid #ff416b;
+    letter-spacing: 5px;
+    box-sizing: border-box;
 }
 .ticket_board tr td{
-    border: 1px solid #000;
+    padding: 15px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid #aaa;
+    box-sizing: border-box;
+}
+.ticket_board .left_td{
+    border-left: none;
+}
+.ticket_board .right_td{
+    border-right: none;
 }
 .ticketbox{
     display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
 }
-#ticketbtnbox{
+.ticketbox select{
+    width: 300px;
+    height: 60px;
+    border: 1px solid #000;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-left: -1px;
+    box-sizing: border-box;
+    background-color: #F6F1F1;
+    cursor: pointer;
+}
+.ticketbox .ticketCount{
+    width: 130px;
+    height: 60px;
+}
+#ticketbtnPlus{
+    text-align: center;
+    margin-bottom: 120px;
+}
+#ticketbtnPlus input{
+    padding: 5px 20px;
+    border: none;
+    background-color: royalblue;
+    box-sizing: border-box;
+    cursor: pointer;
+    color: #eee;
+    transition: 0.3s;
+}
+#ticketbtnPlus input:hover{
+    background-color: rgb(101, 132, 225);
+}
+#ticketbtnBuy{
+    text-align: center;
+    margin-bottom: 150px;
+}
+#ticketbtnBuy input{
+    font-size: 18px;
+    font-weight: bold;
+    padding: 17px 60px;
+    border: none;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background-color: #f4435d;
+    cursor: pointer;
+    color: #fff;
+    transition: 0.3s;
+}
+#ticketbtnBuy input:hover{
+    background-color: #FF4C2A;
+}
+/* templates/ticket/ticketDatepick */
+#calendar {
+    max-width: 1200px;
+    margin-bottom: 160px;
+}
+#calendarHeader {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+#calendarHeader button {
+    padding: 5px 10px;
+    border: 1px solid #000;
+    border-radius: 50%;
+    box-sizing: border-box;
+    font-size: 20px;
+    background: none;
+    cursor: pointer;
+    background-color: #fff;
+    transition: 0.3s;
+}
+#calendarHeader button:hover {
+    color: #fff;
+    background-color: royalblue;
+}
+#calendarHeader h2 {
+    padding: 5px 40px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    box-sizing: border-box;
+    margin: 0 50px;
+    letter-spacing: 2px;
+}
+#calendarBody {
+    width: 1200px;
+    border-collapse: collapse;
+    border: 1px solid #aaa;
+}
+#calendarBody th {
+    height: 30px;
+    background-color: #f9f9f9;
+    padding: 5px;
+    text-align: center;
+    border-top: 2px solid #f4435d;
+    border-bottom: 1px solid #aaa;
+}
+#calendarBody .holiday{
+    color: #f4435d;
+}
+#calendarBody td {
+    height: 90px;
+    color: #222;
+    font-size: 21px;
+    padding: 10px 10px 50px 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    border: 1px solid #aaa;
+    transition: 0.3s;
+}
+#calendarBody td:hover{
+    background-color: #f7f7f7;
+}
+#calendarBody td.selected {
+    color: #fff;
+    font-weight: bold;
+    background-color: #FC4F55;
+    border: 2px solid #555;
+    box-sizing: border-box;
+}
+#calendarBody td.disabled {
+    color: #bbb;
+    cursor: not-allowed;
+}
+/* templates/ticket/ticketHistory */
+.myticket_board{
+    width: 1200px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+.myticket_board th{
+    font-size: 17px;
+    padding: 15px 5px;
+    letter-spacing: 2px;
+    background-color: #F8E8EE;
+    border-top: 2px solid #f4435d;
+    box-sizing: border-box;
+}
+.myticket_board td{
+    height: 50px;
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    box-sizing: border-box;
+}
+.myticket_board tr:hover{
+    background-color: #f8f8f8;
+}
+.myticket_board td input{
+    width: 70px;
+    height: 30px;
+    font-size: 13px;
+    cursor: pointer;
+}
+.myticket_board .left_td{
+    border-left: none;
+}
+.myticket_board .right_td{
+    border-right: none;
 }
 /* templates/admin/admin */
 .admin_content{
@@ -1015,48 +1204,4 @@ footer .inner>div:nth-child(4){
 .pagination li a:hover{
     background-color: rgb(100, 131, 226);
     color: #eee;
-}
-
-
-
-/* templates/ticket/ticketDatepick */
-#calendar {
-    max-width: 400px;
-    margin: 0 auto;
-}
-#calendarHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-#calendarHeader button {
-    font-size: 20px;
-    border: none;
-    background: none;
-    cursor: pointer;
-}
-#calendarHeader h2 {
-    margin: 0;
-}
-#calendarBody {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid #000;
-}
-#calendarBody th {
-    background-color: #f2f2f2;
-    padding: 5px;
-    text-align: center;
-    border: 1px solid #000;
-}
-#calendarBody td {
-    padding: 5px;
-    text-align: center;
-    cursor: pointer;
-    border: 1px solid #000;
-}
-#calendarBody td.disabled {
-    color: #999;
-    cursor: not-allowed;
 }

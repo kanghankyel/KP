@@ -26,6 +26,7 @@
                 <div class="point_smalltext">KidsPlace는 편리한 온라인 예약 시스템을 통해 예약 접수를 받고 있습니다.</div>
                 <span class="point_hr"></span>
             </div>
+            
             <table class="ticket_board">
                 <tr>
                     <th class="left_td">구분</th>
@@ -118,16 +119,17 @@
             
             <div class="pointBox">
                 <div class="point_bigtext">티켓 선택</div>
-                <div class="point_smalltext">아이들의 재미! 티켓을 선택해주세요.</div>
+                <div class="point_smalltext">다양한 종류의 티켓을 선택해주세요.</div>
                 <span class="point_hr"></span>
             </div>
+
             <div class="ticketContainer">
                 <div class="ticketbox">
                     <div><input type="hidden" th:value="${#authentication.principal.member.uNum}" class="inputuNum" name="uNum" readonly></div>
                     <div>
-                        <select name="tType" class="inputtType">
+                        <select name="tType" class="inputtType" onchange="calculateTotal()">
                             <option value="none1">( &nbsp;&nbsp; 티켓종류를 선택하세요 &nbsp;&nbsp; )</option>
-                            <option th:each="ticketDetail : ${ticketDetail}" th:value="${ticketDetail.tType}"><div th:text="${ticketDetail.tName}"></div></option>
+                            <option th:each="ticketDetail : ${ticketDetail}" th:value="${ticketDetail.tType}" th:text="${ticketDetail.tName}" th:data-price="${ticketDetail.tPrice}"></option>
                         </select>
                     </div>
                     <div><input type="hidden" th:value="${#authentication.principal.member.uName}" class="inputuName" name="uName" readonly></div>
@@ -142,18 +144,25 @@
                         </select>
                     </div>
                     <div>
-                        <select class="ticketCount">
+                        <select class="ticketCount" onchange="calculateTotal()">
                             <option value="none3">(&nbsp; 티켓수량 &nbsp;)</option>
                             <option th:each="num : ${#numbers.sequence(1,30)}" th:value="${num}" th:text="${num}"></option>
                         </select>
                     </div>
                 </div>
             </div>
-            <div id="ticketbtnPlus">
-                <input type="button" value="추가 +" onclick="plusTicket()">
+
+            <div class="ticketBottomBox">
+                <div id="ticketbtnPlus">
+                    <input type="button" value="추가 +" onclick="plusTicket()">
+                </div>
+                <div id="ticketTotal">
+                    <span>총 합계 : </span>
+                    <input type="text" id="tAmount" disabled>
+                    <i class="fa-solid fa-won-sign"></i>
+                </div>
             </div>
             <div id="ticketbtnBuy">
-                <!-- <div><input type="button" value="추가 +" onclick="plusTicket()"></div> -->
                 <input type="button" value="티켓구매" onclick="insertTicket()">
             </div>
         </div>
@@ -278,31 +287,62 @@
         initializeCalendar();
     </script>
 
-    <!-- cloneNode() 함수를 통해 div 내부요소까지 복제-->
+    <!-- cloneNode() 함수를 통해 div 내부요소까지 복제 & 실시간 티켓 총합계 계산-->
     <script>
-        let ticketCount = 1; // 초기 티켓 개수
+        let ticketCount = 1;
 
         function plusTicket() {
-        // 'ticketbox' 복사하기
+
+        const ticketcontainer = document.querySelector('.ticketContainer');
         const ticketbox1 = document.querySelector('.ticketbox');
         const ticketbox2 = ticketbox1.cloneNode(true);
-        
-        // 새로운 'ticketbox'에 순차적인 클래스 설정
+
         const newTicketboxClass = 'ticketbox' + (++ticketCount);
         ticketbox2.classList.add(newTicketboxClass);
 
-        // 복사된 'ticketbox' 내부 요소들 초기화하기
         const tTypeSelect = ticketbox2.querySelector('.inputtType');
         const tAreaSelect = ticketbox2.querySelector('.inputtArea');
         const ticketCountSelect = ticketbox2.querySelector('.ticketCount');
-        
+
         tTypeSelect.selectedIndex = 0;
         tAreaSelect.selectedIndex = 0;
         ticketCountSelect.selectedIndex = 0;
 
-        // 새로운 'ticketbox'를 마지막에 추가
+        const cancelBtn = document.createElement('button');
+        cancelBtn.addEventListener('click', function() {
+            cancelTicket(this);
+            calculateTotal();
+        });
+        ticketbox2.appendChild(cancelBtn);
+
         const ticketContainer = document.querySelector('.ticketContainer');
         ticketContainer.appendChild(ticketbox2);
+        }
+
+        function cancelTicket(btn) {
+        const ticketbox = btn.parentNode;
+        ticketbox.parentNode.removeChild(ticketbox);
+        }
+
+        function calculateTotal() {
+        const ticketboxes = document.querySelectorAll('.ticketbox');
+        let total = 0;
+        Array.from(ticketboxes).forEach(function(ticketbox) {
+            const tTypeSelect = ticketbox.querySelector('.inputtType');
+            const selectedOption = tTypeSelect.options[tTypeSelect.selectedIndex];
+            const tPrice = parseFloat(selectedOption.getAttribute('data-price')); // parseFloat()로 숫자로 변환
+            const tCount = parseInt(ticketbox.querySelector('.ticketCount').value); // parseInt()로 숫자로 변환
+
+            if (!isNaN(tPrice) && !isNaN(tCount)) { // NaN이 아닌지 확인
+            total += tPrice * tCount;
+            }
+        });
+
+        const amountInput = document.getElementById('tAmount');
+        amountInput.value = isNaN(total) ? '' : total; // NaN인 경우 빈 문자열로 처리
+
+        // 디버깅을 위해 총합계를 출력
+        console.log('Total:', total);
         }
     </script>
 

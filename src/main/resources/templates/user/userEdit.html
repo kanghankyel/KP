@@ -10,46 +10,60 @@
 
     <div class="content">
         <div class="image_banner">
-            <div class="notice_banner">
+            <div class="image_banner_bg">
+                <img th:src="@{/image/mypage_banner.jpg}" alt="">
                 <h1>개 &nbsp; 인 &nbsp; 정 &nbsp; 보 &nbsp; 수 &nbsp; 정</h1>
             </div>
+            <div class="page_nav">
+                <span><a th:href="@{/}"><i class="fa-solid fa-house"></i></a></span>
+                <span><a th:href="@{/user/mypage}">마이페이지 &nbsp; <i class="fa-solid fa-caret-down"></i></a></span>
+                <span><a th:href="@{/user/userEdit}">개인정보 수정 &nbsp; <i class="fa-solid fa-caret-down"></i></a></span>
+            </div>
         </div>
+
         <div class="inner">
-            <h2>개인정보 수정</h2>
-            <hr>
-            <table class="userinfo" th:each="user : ${user}">
-                <tr>
-                    <td><input type="hidden" th:value="${user.uNum}" id="inputuNum" name="uNum" readonly></td>
-                </tr>
+            <div class="pointBox pointBox_mypage">
+                <div class="point_middletext">개인정보 수정</div>
+                <div class="point_smalltext">수정을 원하시는 항목을 선택 후 정보수정을 해주세요.</div>
+                <span class="point_hr"></span>
+            </div>
+
+            <table class="userinfo useredit" th:each="user : ${user}">
                 <tr>
                     <th>이름</th>
-                    <td colspan="2"><input type="text" th:value="${user.uName}" id="inputuName" name="uName"></td>
+                    <td>
+                        <input type="hidden" th:value="${user.uNum}" id="inputuNum" name="uNum" readonly>
+                        <input type="text" th:value="${user.uName}" id="inputuName" name="uName">
+                    </td>
                 </tr>
                 <tr>
                     <th>전화번호</th>
-                    <td colspan="2"><input type="text" th:value="${user.uPhoneNum}" id="inputuPhoneNum" name="uPhoneNum"></td>
+                    <td><input type="text" th:value="${user.uPhoneNum}" id="inputuPhoneNum" name="uPhoneNum"></td>
                 </tr>
                 <tr>
                     <th>생일</th>
-                    <td colspan="2"><input type="text" th:value="${user.uBirth}" id="inputuBirth" name="uBirth"></td>
+                    <td><input type="text" th:value="${user.uBirth}" id="inputuBirth" name="uBirth"></td>
                 </tr>
                 <tr>
                     <th><label for="sample6_postcode">우편번호</label></th>
-                    <td><input type="text" th:value="${user.uPostCode}" id="sample6_postcode" name="uPostCode" placeholder="우편번호"></td>
-                    <td><input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></td>
+                    <td>
+                        <input type="text" th:value="${user.uPostCode}" id="sample6_postcode" name="uPostCode" placeholder="우편번호">
+                        <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" id="postBtn">
+                    </td>
                 </tr>
                 <tr>
                     <th><label for="sample6_address">주소</label></th>
-                    <td colspan="2"><input type="text" th:value="${user.uAddr}" id="sample6_address" name="uAddr" placeholder="주소"></td>
+                    <td><input type="text" th:value="${user.uAddr}" id="sample6_address" name="uAddr" placeholder="주소"></td>
                 </tr>
                 <tr>
                     <th><label for="sample6_detailAddress">상세주소</label></th>
-                    <td colspan="2"><input type="text" th:value="${user.uDetailAddr}" id="sample6_detailAddress" name="uDetailAddr" placeholder="상세주소"></td>
+                    <td><input type="text" th:value="${user.uDetailAddr}" id="sample6_detailAddress" name="uDetailAddr" placeholder="상세주소"></td>
                 </tr>
             </table>
-            <div>
-                <input type="button" value="수정완료" onclick="userEditComplete()">
+            <div class="btn_wrap">
+                <input type="button" value="수정완료" onclick="userEditSubmit()">
                 <input type="button" value="수정취소" onclick="userEditCancel()">
+                <input type="hidden">
             </div>
         </div>
     </div>
@@ -88,6 +102,59 @@
 
     <!--  script  -->
     <script>
+        function userEditSubmit(){
+            const name = document.getElementById("inputuName").value;
+            const phone = document.getElementById("inputuPhoneNum").value;
+            const birth = document.getElementById("inputuBirth").value;
+            const postcode = document.getElementById("sample6_postcode").value;
+            const address = document.getElementById("sample6_address").value;
+            const detailAddress = document.getElementById("sample6_detailAddress").value;
+
+            const phoneRegex = /^\d+$/;
+            const birthRegex = /^\d{6}$/;
+            
+            if (name.trim() === "") {
+                alert("이름을 입력해주세요.");
+                document.getElementById("inputuName").focus();
+                return false;
+            }
+            if (phone.trim() === "") {
+                alert("전화번호를 입력해주세요.")
+                document.getElementById("inputuPhoneNum").focus();
+                return false;
+            } else if (!phoneRegex.test(phone)) {
+                alert("전화번호는 '-'를 빼고 숫자만 입력해주세요.");
+                document.getElementById("inputuPhoneNum").focus();
+                return false;
+            }
+            if (birth.trim() === "") {
+                alert("생년월일을 입력해주세요.");
+                document.getElementById("inputuBirth").focus();
+                return false;
+            } else if (!birthRegex.test(birth)) {
+                alert("생년월일은 YYMMDD 형식의 6자리 숫자로 입력해주세요.");
+                document.getElementById("inputuBirth").focus();
+                return false;
+            }
+            if (postcode.trim() === "") {
+                alert("우편번호를 입력해주세요.");
+                document.getElementById("sample6_postcode").focus();
+                return false;
+            }
+            if (address.trim() === "") {
+                alert("주소를 입력해주세요.");
+                document.getElementById("sample6_address").focus();
+                return false;
+            }
+            if (detailAddress.trim() === "") {
+                alert("상세주소를 입력해주세요.");
+                document.getElementById("sample6_detailAddress").focus();
+                return false;
+            }
+
+            userEditComplete();
+        }
+
         function userEditComplete(){
             let uNum = document.getElementById("inputuNum").value;
             let uName = document.getElementById("inputuName").value;

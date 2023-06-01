@@ -7,9 +7,24 @@
     <div th:include="/fragment/nav"></div>
 
     <div class="content">
+        <div class="image_banner">
+            <div class="image_banner_bg">
+                <img th:src="@{/image/mypage_banner.jpg}" alt="">
+                <h1>비 &nbsp; 밀 &nbsp; 번 &nbsp; 호 &nbsp; 찾 &nbsp; 기</h1>
+            </div>
+            <div class="page_nav">
+                <span><a th:href="@{/}"><i class="fa-solid fa-house"></i></a></span>
+                <span><a th:href="@{/user/findPw}">비밀번호 찾기 &nbsp; <i class="fa-solid fa-caret-down"></i></a></span>
+            </div>
+        </div>
+
         <div class="inner">
-            <h2>비밀번호 찾기</h2>
-            <hr>
+            <div class="pointBox pointBox_mypage">
+                <div class="point_middletext">비밀번호 찾기</div>
+                <div class="point_smalltext">비밀번호를 잃어버리셨나요?</div>
+                <span class="point_hr"></span>
+            </div>
+
             <table>
                 <tr>
                     <th><label for="uId">아이디</label></th>

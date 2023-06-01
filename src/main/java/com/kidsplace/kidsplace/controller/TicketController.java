@@ -63,6 +63,7 @@ public class TicketController {
 
     // 티켓구매내역(개인) 리스트 구현
     @GetMapping("/ticketHistory")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     public String TicketList (Model model
                             , @AuthenticationPrincipal CustomMember customMember
                             , @RequestParam(name = "page", required = false, defaultValue = "1") int page){

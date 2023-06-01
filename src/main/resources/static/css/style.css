@@ -163,8 +163,7 @@ header .inner div:last-child h6:last-child a{
     background-color: rgba(0, 0, 0, 0.4);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
-  }
-  
+}
 .modal.show {
 opacity: 1;
 }
@@ -182,10 +181,10 @@ opacity: 1;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
       0 10px 10px rgba(0,0,0,0.22);
     transition: top 0.3s ease-in-out;
-  }
-  .modal.show .modal-content {
+}
+.modal.show .modal-content {
     top: 30%;
-  }
+}
 .close{
     position: absolute;
     right: 10px;
@@ -578,6 +577,12 @@ footer .inner>div:nth-child(4){
     letter-spacing: 5px;
     color: #f4435d;
 }
+.point_middletext{
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    color: #ff416b;
+}
 .point_smalltext{
     font-size: 16px;
     color: #999;
@@ -948,6 +953,10 @@ footer .inner>div:nth-child(4){
     background-color: royalblue;
 }
 /* templates/community/noticeWrite */
+.pointBox_noticedetail{
+    position: relative;
+    padding-left: 12.5%;
+}
 .board_detail_table tr td{
     color: #222;
     padding: 0px 20px;

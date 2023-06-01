@@ -30,7 +30,7 @@
             <table class="myticket_board">
                 <tr>
                     <th class="left_td">No</th>
-                    <th>티켓번호</th>
+                    <th>티켓코드</th>
                     <th>티켓종류</th>
                     <th>구매처</th>
                     <th>사용장소</th>
@@ -65,7 +65,7 @@
                     </td>
                 </tr>
                 <tr th:unless="${not #lists.isEmpty(ticket)}">
-                    <td colspan="9">구매된 티켓이 없습니다.</td>
+                    <td colspan="10">구매한 티켓이 없습니다.</td>
                 </tr>
             </table>
 

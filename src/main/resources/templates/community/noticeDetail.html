@@ -22,21 +22,24 @@
         </div>
         
         <div class="inner">
-            <h2>공지사항 상세보기</h2>
-            <hr>
+            <div class="pointBox pointBox_noticedetail">
+                <div class="point_middletext">공지사항 상세</div>
+                <span class="point_hr"></span>
+            </div>
+
             <table class="board_write_table board_detail_table">
                 <tr th:each="noticeDetail : ${noticeDetail}">
-                    <th>제목</th>
+                    <th class="left_td">제목</th>
                     <td colspan="3" id="deleteTitle" th:text="${noticeDetail.nTitle}"></td>                    
                 </tr>
                 <tr>
-                    <th>카테고리</th>
+                    <th class="left_td">카테고리</th>
                     <td id="deleteCategory" th:text="${noticeDetail.nCategory}"></td>
                     <th>작성자</th>
                     <td id="deleteWriter" th:text="${noticeDetail.nWriter}"></td>
                 </tr>
                 <tr>
-                    <td colspan="4" id="deleteContent" th:text="${noticeDetail.nContent}"></td>
+                    <td colspan="4" id="deleteContent" class="left_td" th:text="${noticeDetail.nContent}"></td>
                 </tr>
             </table>
             <div class="board_write_table_btn_box">

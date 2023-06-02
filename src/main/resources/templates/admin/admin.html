@@ -21,34 +21,49 @@
             </div>
         </div>
 
-        <div class="admin_content">
-            <section class="admin_left">
-                <article class="admin_href">
-                    <div><a th:href="@{../admin/admin}">관리자 페이지 이동</a></div>
-                    <div><a th:href="@{../admin/adminUser}">유저리스트 페이지 이동</a></div>
-                    <div><a th:href="@{../admin/adminTicket}">티켓리스트 페이지 이동</a></div>
-                </article>
-            </section>
-            <section class="inner admin_right">
-                <h2>관리자 페이지</h2>
-                <hr>
-                <h2>관리자 정보</h2>
+        <div class="admin_wrap">
+            <div th:include="/fragment/adminNav"></div>
+            
+            <section class="admin_content">
+                <div class="pointBox">
+                    <div class="point_admintext">관리자 메인</div>
+                    <span class="point_hr"></span>
+                </div>
+
                 <article>
-                    <div>
-                        <div><input type="text" th:value="${#authentication.principal.member.uNum}" id="inputuNum" name="uNum" readonly></div>
-                        <div><input type="text" th:value="${#authentication.principal.member.uId}" id="inputuId" name="uId" readonly></div>
-                        <!-- <div><input type="text" th:value="${#authentication.principal.member.uPassword}" id="inputuPassword" name="uPassword" readonly></div> -->
-                        <div><input type="text" th:value="${#authentication.principal.member.uName}" id="inputuName" name="uName" readonly></div>
-                        <div><input type="text" th:value="${#authentication.principal.member.uPhoneNum}" id="inputuPhoneNum" name="uPhoneNum" readonly></div>
-                        <div><input type="text" th:value="${#authentication.principal.member.uBirth}" id="inputuBirth" name="uBirth" readonly></div>
-                        <div><input type="text" th:value="${#authentication.principal.member.uPostCode}" id="inputuPostCode" name="uPostCode" readonly></div>
-                        <div><input type="text" th:value="${#authentication.principal.member.uAddr}" id="inputuAddr" name="uAddr" readonly></div>
-                        <div><input type="text" th:value="${#authentication.principal.member.uDetailAddr}" id="inputuDetailAddr" name="uDetailAddr" readonly></div>
-                        <!-- <div><input type="text" th:value="${#authentication.principal.member.regdate}" id="inputregdate" name="regdate" readonly></div> -->
-                        <!-- <div><input type="text" th:value="${#authentication.principal.member.updatedate}" id="inputupdatedate" name="updatedate" readonly></div> -->
-                        <!-- <div><input type="text" th:value="${#authentication.principal.member.visitdate}" id="inputvisitdate" name="visitdate" readonly></div> -->
-                        <!-- <div><input type="text" th:value="${#authentication.principal.member.member}" id="inputmember" name="member" readonly></div> -->
-                    </div>
+                    <table class="admin_info_table">
+                        <tr>
+                            <th>I &nbsp; D</th>
+                            <td><div th:text="${#authentication.principal.member.uId}"></div></td>
+                        </tr>
+                        <tr>
+                            <th>이 &nbsp; 름</th>
+                            <td><div th:text="${#authentication.principal.member.uName}"></div></td>
+                        </tr>
+                        <tr>
+                            <th>부 &nbsp; 서</th>
+                            <td><div>-</div></td>
+                        </tr>
+                        <tr>
+                            <th>직 &nbsp; 책</th>
+                            <td><div>-</div></td>
+                        </tr>
+                        <tr>
+                            <th>권 &nbsp; 한</th>
+                            <td>
+                                <div th:if="${#authentication.principal.member.uAuthList[0].uAuth == 'ROLE_USER'}">회원</div>
+                                <div th:if="${#authentication.principal.member.uAuthList[0].uAuth == 'ROLE_ADMIN'}">관리자</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>상 &nbsp; 태</th>
+                            <td>
+                                <div th:if="${#authentication.principal.member.member == 'Y'}">재직</div>
+                                <div th:if="${#authentication.principal.member.member == 'N'}">퇴사</div>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- <h1 th:text="${#authentication.principal.member}"></h1> -->
                 </article>
             </section>
         </div>

@@ -21,18 +21,14 @@
             </div>
         </div>
 
-        <div class="admin_content">
-            <section class="admin_left">
-                <article class="admin_href">
-                    <div><a th:href="@{../admin/admin}">관리자 페이지 이동</a></div>
-                    <div><a th:href="@{../admin/adminUser}">유저리스트 페이지 이동</a></div>
-                    <div><a th:href="@{../admin/adminTicket}">티켓리스트 페이지 이동</a></div>
-                </article>
-            </section>
-            <section class="inner admin_right">
-                <h2>관리자 페이지</h2>
-                <hr>
-                <h2>유저 테이블</h2>
+        <div class="admin_wrap">
+            <div th:include="/fragment/adminNav"></div>
+
+            <section class="admin_content">
+                <div class="pointBox">
+                    <div class="point_admintext">회원 리스트</div>
+                    <span class="point_hr"></span>
+                </div>
 
                 <div class="searchBox">
                     <form th:action="@{/admin/adminUser(page=${page.page}, search=${search}, searchElse=${searchElse})}" method="get">
@@ -52,96 +48,130 @@
                             <option value="N" th:selected="${search.member == 'N'}">탈퇴</option>
                             <option value="B" th:selected="${search.member == 'B'}">블락</option>
                         </select>
-                        <div th:text="${search}"></div>
+                        <!-- <div th:text="${search}"></div> -->
                         <button type="submit">검색</button>
                     </form>
                 </div>
 
                 <h3><span th:text="${page.totalRecordCount}"></span>건이 검색되었습니다.</h3>
-                <table class="ticket_board">
-                    <tr>
-                        <td>No</td>
-                        <td>회원코드</td>
-                        <td>아이디</td>
-                        <td>이름</td>
-                        <td>전화번호</td>
-                        <td>생년월일</td>
-                        <td>우편번호</td>
-                        <td>주소</td>
-                        <td>상세주소</td>
-                        <td>생성일</td>
-                        <td>수정일</td>
-                        <td>방문일</td>
-                        <td>회원등급</td>
-                        <td>회원등업</td>
-                        <td>회원여부</td>
-                        <td>계정정지</td>
-                    </tr>
-                    <tr th:each="user : ${user}" th:if="${not #lists.isEmpty(user)}">
-                        <td><div th:text="${(page.page - 1) * page.recordSize + userStat.index + 1}"></div></td>
-                        <td><span th:text="${user.uNum}"></span></td>
-                        <td><span th:text="${user.uId}"></span></td>
-                        <td><span th:text="${user.uName}"></span></td>
-                        <td><span th:text="${user.uPhoneNum}"></span></td>
-                        <td><span th:text="${user.uBirth}"></span></td>
-                        <td><span th:text="${user.uPostCode}"></span></td>
-                        <td><span th:text="${user.uAddr}"></span></td>
-                        <td><span th:text="${user.uDetailAddr}"></span></td>
-                        <td><span th:text="${#dates.format(user.regdate, 'yyyy-MM-dd')}"></span></td>
-                        <td>
-                            <span th:text="${#dates.format(user.updatedate, 'yyyy-MM-dd')}"></span>
-                            <span th:if="${#lists.isEmpty(user.updatedate)}">-</span>
-                        </td>
-                        <td>
-                            <span th:text="${#dates.format(user.visitdate, 'yyyy-MM-dd')}"></span>
-                            <span th:if="${#lists.isEmpty(user.visitdate)}">-</span>
-                        </td>
-                        <td>
-                            <!-- <span th:text="${user.uAuthList}"></span> -->
-                            <span th:if="${user.uAuthList[0].uAuth == 'ROLE_USER'}">고객</span>
-                            <span th:if="${user.uAuthList[0].uAuth == 'ROLE_ADMIN'}">관리자</span>
-                        </td>
-                        <td>
-                            <span th:if="${user.uAuthList[0].uAuth == 'ROLE_USER'}"><input type="button" value="등급업" th:uNum="${user.uNum}" th:onclick="upUserGrade(this.getAttribute('uNum'), 'ROLE_USER')"></span>
-                            <span th:if="${user.uAuthList[0].uAuth == 'ROLE_ADMIN'}"><input type="button" value="등급다운" th:uNum="${user.uNum}" th:onclick="downUserGrade(this.getAttribute('uNum'), 'ROLE_ADMIN')"></span>
-                        </td>
-                        <td>
-                            <span th:if="${user.member == 'Y'}">활동</span>
-                            <span th:if="${user.member == 'N'}">탈퇴</span>
-                            <span th:if="${user.member == 'B'}">블락</span>
-                        </td>
-                        <td>
-                            <span th:if="${user.member == 'Y'}"><input type="button" value="계정정지" th:uNum="${user.uNum}" th:member="${user.member}" th:onclick="userBlock(this.getAttribute('uNum'), this.getAttribute('member'))"></span>
-                            <span th:if="${user.member == 'B'}"><input type="button" value="정지해제" th:uNum="${user.uNum}" th:member="${user.member}" th:onclick="userNotBlock(this.getAttribute('uNum'), this.getAttribute('member'))"></span>
-                        </td>
-                    </tr>
-                    <tr th:unless="${not #lists.isEmpty(user)}">
-                        <td colspan="16">일치하는 회원이 없습니다.</td>
-                    </tr>
-                </table>
-    
-                <div class="paginationBox">
-                    <th:block th:if="${page.startPage != 0}">
-                        <ul class="pagination">
-                            <th:block th:if="${page.existPrevPage}">
-                                <li>
-                                    <a th:href="@{/admin/adminUser(page=${(page.page - 1) - ((page.page - 1) % 5)}, uNum=${search.uNum}, uId=${search.uId}, uName=${search.uName}, uPhoneNum=${search.uPhoneNum}, uBirth=${search.uBirth}, uAuth=${searchElse.uAuth}, member=${search.member})}">이전</a>
-                                </li>
-                            </th:block>
-                            <th:block th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}">
-                                <li th:class="${num == page.page} ? 'active'">
-                                    <a th:href="@{/admin/adminUser(page=${num}, uNum=${search.uNum}, uId=${search.uId}, uName=${search.uName}, uPhoneNum=${search.uPhoneNum}, uBirth=${search.uBirth}, uAuth=${searchElse.uAuth}, member=${search.member})}" th:text="${num}"></a>
-                                </li>
-                            </th:block>
-                            <th:block th:if="${page.existNextPage}">
-                                <li>
-                                    <a th:href="@{/admin/adminUser(page=${(page.page + 1) + (4 - ((page.page - 1) % 5))}, uNum=${search.uNum}, uId=${search.uId}, uName=${search.uName}, uPhoneNum=${search.uPhoneNum}, uBirth=${search.uBirth}, uAuth=${searchElse.uAuth}, member=${search.member})}">다음</a>
-                                </li>
-                            </th:block>
-                        </ul>
-                        <!-- <input type="hidden" th:value="${page}"> -->
-                        <p th:text="${page}"></p>
-                    </th:block>
+
+                <div class="tablewrap">
+                    <div class="tablebox">
+                        <table class="lefttable">
+                            <tr>
+                                <th>No</th>
+                                <th>회원코드</th>
+                                <th>아이디</th>
+                                <th>이름</th>
+                                <th>전화번호</th>
+                                <td class="hide_td">생년월일</td>
+                                <td class="hide_td">우편번호</td>
+                                <td class="hide_td">주소</td>
+                                <td class="hide_td">상세주소</td>
+                                <td class="hide_td">생성일</td>
+                                <td class="hide_td">방문일</td>
+                                <td class="hide_td">회원등급</td>
+                                <td class="hide_td">회원여부</td>
+                            </tr>
+                            <tr class="userDetail" th:each="user : ${user}" th:if="${not #lists.isEmpty(user)}">
+                                <td><div th:text="${(page.page - 1) * page.recordSize + userStat.index + 1}"></div></td>
+                                <td><div id="info_uNum" th:text="${user.uNum}"></div></td>
+                                <td><div id="info_uId" th:text="${user.uId}"></div></td>
+                                <td><div id="info_uName" th:text="${user.uName}"></div></td>
+                                <td><div id="info_uPhoneNum" th:text="${#strings.replace(#strings.substring(user.uPhoneNum, 0, 3) + '-' + #strings.substring(user.uPhoneNum, 3, 7) + '-' + #strings.substring(user.uPhoneNum, 7), '--', '-')}"></div></td>
+                                <td class="hide_td"><div id="info_uBirth" th:text="${user.uBirth}"></div></td>
+                                <td class="hide_td"><div id="info_uPostCode" th:text="${user.uPostCode}"></div></td>
+                                <td class="hide_td"><div id="info_uAddr" th:text="${user.uAddr}"></div></td>
+                                <td class="hide_td"><div id="info_uDetailAddr" th:text="${user.uDetailAddr}"></div></td>
+                                <td class="hide_td"><div id="info_regdate" th:text="${#dates.format(user.regdate, 'yyyy-MM-dd')}"></div></td>
+                                <td class="hide_td"><div id="info_visitdate" th:text="${#dates.format(user.visitdate, 'yyyy-MM-dd')}"></div></td>
+                                <td class="hide_td"><div id="info_uAuth" th:text="${user.uAuthList[0].uAuth}"></div></td>      <!-- <div th:text="${user.uAuthList}"></div> -->
+                                <td class="hide_td"><div id="info_member" th:text="${user.member}"></div></td>
+                            </tr>
+                            <tr th:unless="${not #lists.isEmpty(user)}">
+                                <td colspan="5">일치하는 회원이 없습니다.</td>
+                            </tr>
+                        </table>
+                        <div class="pagination_wrap">
+                            <div class="paginationBox_admin">
+                                <th:block th:if="${page.startPage != 0}">
+                                    <ul class="pagination_admin">
+                                        <th:block th:if="${page.existPrevPage}">
+                                            <li>
+                                                <a th:href="@{/admin/adminUser(page=${(page.page - 1) - ((page.page - 1) % 5)}, uNum=${search.uNum}, uId=${search.uId}, uName=${search.uName}, uPhoneNum=${search.uPhoneNum}, uBirth=${search.uBirth}, uAuth=${searchElse.uAuth}, member=${search.member})}">이전</a>
+                                            </li>
+                                        </th:block>
+                                        <th:block th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}">
+                                            <li th:class="${num == page.page} ? 'active'">
+                                                <a th:href="@{/admin/adminUser(page=${num}, uNum=${search.uNum}, uId=${search.uId}, uName=${search.uName}, uPhoneNum=${search.uPhoneNum}, uBirth=${search.uBirth}, uAuth=${searchElse.uAuth}, member=${search.member})}" th:text="${num}"></a>
+                                            </li>
+                                        </th:block>
+                                        <th:block th:if="${page.existNextPage}">
+                                            <li>
+                                                <a th:href="@{/admin/adminUser(page=${(page.page + 1) + (4 - ((page.page - 1) % 5))}, uNum=${search.uNum}, uId=${search.uId}, uName=${search.uName}, uPhoneNum=${search.uPhoneNum}, uBirth=${search.uBirth}, uAuth=${searchElse.uAuth}, member=${search.member})}">다음</a>
+                                            </li>
+                                        </th:block>
+                                    </ul>
+                                    <!-- <p th:text="${page}"></p> -->
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <div class="tablebox">
+                        <table class="righttable">
+                            <tr>
+                                <th colspan="4">회원 상세정보</th>
+                            </tr>
+                            <tr>
+                                <th>회원코드</th>
+                                <td colspan="3"><div id="detail_uNum"></div></td>
+                            </tr>
+                            <tr>
+                                <th>아이디</th>
+                                <td class="righttable_td"><div id="detail_uId"></div></td>
+                                <th>이름</th>
+                                <td><div id="detail_uName"></div></td>
+                            </tr>
+                            <tr>
+                                <th>전화번호</th>
+                                <td><div id="detail_uPhoneNum"></div></td>
+                                <th>생년월일</th>
+                                <td><div id="detail_uBirth"></div></td>
+                            </tr>
+                            <tr>
+                                <th>우편번호</th>
+                                <td colspan="3"><div id="detail_uPostCode"></div></td>
+                            </tr>
+                            <tr>
+                                <th>주소</th>
+                                <td colspan="3"><div id="detail_uAddr"></div></td>
+                            </tr>
+                            <tr>
+                                <th>상세주소</th>
+                                <td colspan="3"><div id="detail_uDetailAddr"></div></td>
+                            </tr>
+                            <tr>
+                                <th>생성일</th>
+                                <td><div id="detail_regdate"></div></td>
+                                <th>방문일</th>
+                                <td>
+                                    <div id="detail_visitdate"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>회원권한</th>
+                                <td colspan="2"><div id="detail_uAuth"></div></td>
+                                <td class="btn_td"><div id="uAuthBtn"></div></td>
+                            </tr>
+                            <tr>
+                                <th>회원여부</th>
+                                <td colspan="2"><div id="detail_member"></div></td>
+                                <td class="btn_td"><div id="memberBtn"></div></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </section>
         </div>
@@ -150,8 +180,91 @@
     <div th:include="/fragment/footer"></div>
 
 
+    
 
     <!-- script -->
+    <!-- 고객 상세정보 보기 script -->
+    <script>
+        const userDetailRows = document.querySelectorAll('.lefttable .userDetail');
+        const detail_uNumInput = document.getElementById('detail_uNum');
+        const detail_uIdInput = document.getElementById('detail_uId');
+        const detail_uNameInput = document.getElementById('detail_uName');
+        const detail_uPhoneNumInput = document.getElementById('detail_uPhoneNum');
+        const detail_uBirthInput = document.getElementById('detail_uBirth');
+        const detail_uPostCodeInput = document.getElementById('detail_uPostCode');
+        const detail_uAddrInput = document.getElementById('detail_uAddr');
+        const detail_uDetailAddrInput = document.getElementById('detail_uDetailAddr');
+        const detail_regdateInput = document.getElementById('detail_regdate');
+        const detail_visitdateInput = document.getElementById('detail_visitdate');
+        const detail_uAuthInput = document.getElementById('detail_uAuth');
+        const detail_memberInput = document.getElementById('detail_member');
+
+        userDetailRows.forEach(function(row) {
+            row.addEventListener('click', function() {
+                const userDetails = row.querySelectorAll('div');
+
+                detail_uNumInput.textContent = userDetails[1].textContent;
+                detail_uIdInput.textContent = userDetails[2].textContent;
+                detail_uNameInput.textContent = userDetails[3].textContent;
+                detail_uPhoneNumInput.textContent = userDetails[4].textContent;
+                detail_uBirthInput.textContent = userDetails[5].textContent;
+                detail_uPostCodeInput.textContent = userDetails[6].textContent;
+                detail_uAddrInput.textContent = userDetails[7].textContent;
+                detail_uDetailAddrInput.textContent = userDetails[8].textContent;
+                detail_regdateInput.textContent = userDetails[9].textContent;
+
+                const visitdate = userDetails[10].textContent.trim();
+                if (visitdate === "") {
+                    detail_visitdateInput.textContent = "--";
+                } else {
+                    detail_visitdateInput.textContent = visitdate;
+                }
+
+                const uAuth = userDetails[11].textContent.trim();
+                if (uAuth === "ROLE_USER") {
+                    detail_uAuthInput.textContent = "일반회원";
+                    uAuthBtn.innerHTML = '<input type="button" value="관리자전환" id="upUserGradeBtn">';
+                    document.getElementById('upUserGradeBtn').addEventListener('click', function() {
+                        const uNum = userDetails[1].textContent;
+                        upUserGrade(uNum, 'ROLE_USER');
+                    });
+                } else if (uAuth === "ROLE_ADMIN") {
+                    detail_uAuthInput.textContent = "관리자";
+                    uAuthBtn.innerHTML = '<input type="button" value="일반회원전환" id="downUserGradeBtn">';
+                    document.getElementById('downUserGradeBtn').addEventListener('click', function() {
+                        const uNum = userDetails[1].textContent;
+                        downUserGrade(uNum, 'ROLE_ADMIN');
+                    });
+                } else {
+                    detail_uAuthInput.textContent = uAuth;
+                    uAuthBtn.innerHTML = ''; // 버튼을 지움.
+                }
+
+                const member = userDetails[12].textContent.trim();
+                if (member === "Y") {
+                    detail_memberInput.textContent = "활동";
+                    memberBtn.innerHTML = '<input type="button" value="계정정지" id="userBlockBtn">';
+                    document.getElementById('userBlockBtn').addEventListener('click', function() {
+                        const uNum = detail_uNumInput.textContent;
+                        const member = detail_memberInput.textContent;
+                        userBlock(uNum, member);
+                    });
+                } else if (member === "B") {
+                    detail_memberInput.textContent = "블락";
+                    memberBtn.innerHTML = '<input type="button" value="정지해제" id="userNotBlockBtn">';
+                    document.getElementById('userNotBlockBtn').addEventListener('click', function() {
+                        const uNum = detail_uNumInput.textContent;
+                        const member = detail_memberInput.textContent;
+                        userNotBlock(uNum, member);
+                    });
+                } else {
+                    detail_memberInput.textContent = member;
+                    memberBtn.innerHTML = ''; // 버튼을 지움.
+                }
+            });
+        });
+    </script>
+
     <script>
         function upUserGrade(uNum, uAuth){
             // alert(uNum);

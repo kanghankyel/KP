@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<th:block>
+    <div th:fragment="adminNavFragment">
+        <section class="admin_nav">
+            <article>
+                <div><a th:href="@{/admin/admin}">관리자 메인</a></div>
+                <div><a th:href="@{/admin/adminUser}">회원 리스트</a></div>
+                <div><a th:href="@{/admin/adminTicket}">티켓 리스트</a></div>
+            </article>
+        </section>
+    </div>
+</th:block>
+</html>

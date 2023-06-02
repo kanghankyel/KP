@@ -21,18 +21,15 @@
             </div>
         </div>
 
-        <div class="admin_content">
-            <section class="admin_left">
-                <article class="admin_href">
-                    <div><a th:href="@{../admin/admin}">관리자 페이지 이동</a></div>
-                    <div><a th:href="@{../admin/adminUser}">유저리스트 페이지 이동</a></div>
-                    <div><a th:href="@{../admin/adminTicket}">티켓리스트 페이지 이동</a></div>
-                </article>
-            </section>
-            <section class="inner admin_right">
-                <h2>관리자 페이지</h2>
-                <hr>
-                <h2>티켓 종류 테이블</h2>
+        <div class="admin_wrap">
+            <div th:include="/fragment/adminNav"></div>
+
+            <section class="admin_content">
+                <div class="pointBox">
+                    <div class="point_admintext">티켓 리스트</div>
+                    <span class="point_hr"></span>
+                </div>
+
                 <table class="ticket_board">
                     <tr>
                         <td>티켓번호</td>

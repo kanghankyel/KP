@@ -121,6 +121,42 @@ input, textarea{color: inherit;
     border-right: 1px solid #bbb;
     padding: 0px 20px;
 }
+/* 페이지네이션 */
+.paginationBox{
+    margin-bottom: 100px;
+    text-align: center;
+}
+.pagination{
+    display: flex;
+    justify-content: center;
+}
+.pagination li{
+    display: block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    box-sizing: border-box;
+    margin-right: -1px;
+    color: royalblue;
+    border: 1px solid #ccc;
+    z-index: 999;
+}
+.pagination li.active{
+    width: 30px;
+    height: 30px;
+    color: #eee;
+    background-color: royalblue;
+}
+.pagination li a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: 0.2s;
+}
+.pagination li a:hover{
+    background-color: rgb(100, 131, 226);
+    color: #eee;
+}
 /* templates/fragment/header */
 header{
     width: 100%;
@@ -587,6 +623,12 @@ footer .inner>div:nth-child(4){
     font-size: 16px;
     color: #999;
     letter-spacing: 1px;
+}
+.point_admintext{
+    font-size: 25px;
+    color: #5C469C;
+    font-weight: bold;
+    letter-spacing: 3px;
 }
 .point_hr{
     display: block;
@@ -1307,71 +1349,220 @@ footer .inner>div:nth-child(4){
 .myticket_board .right_td{
     border-right: none;
 }
-/* templates/admin/admin */
-.admin_content{
-    display: flex;
-    margin-top: -80px;
+/* templates/fragment/adminNav */
+.admin_nav{
+    position: relative;
 }
-.admin_left{
-    width: 200px;
+.admin_nav article div{
+    width: 259px;
+    height: 60px;
+    border-bottom: 1px solid #aaa;
     box-sizing: border-box;
-    border-right: 1px solid #000;
 }
-.admin_right{
-    width: calc(100% - 200px);
-}
-.admin_href div{
-    width: 200px;
-    height: 50px;
-    border-bottom: 1.5px solid #bbb;
-}
-.admin_href div:hover{
-    background-color: #000;
-    color: #eee;
-}
-.admin_href div a{
+.admin_nav article div a{
     display: block;
     width: 100%;
     height: 100%;
-    line-height: 50px;
+    text-align: center;
+    line-height: 60px;
+    font-size: 17px;
+    letter-spacing: 0px;
+    background-color: #f5f5f5;
+    transition: 0.3s;
+}
+.admin_nav article div a:hover{
+    background-color: #ddd;
+    font-weight: bold;
+    color: #000;
+}
+/* templates/admin/admin */
+.admin_wrap{
+    display: flex;
+    margin-top: -90px;
+}
+.admin_content{
+    border-left: 1px solid #aaa;
+    width: calc(100% - 259px);
+    padding: 40px 60px 150px 60px;
+}
+.admin_content article{
     text-align: center;
 }
-.admin_right article{
+.admin_info_table{
+    margin: 0 auto;
+}
+.admin_info_table th{
+    width: 120px;
+    height: 40px;
+    font-size: 16px;
+    letter-spacing: 4px;
+    border: 1px solid #aaa;
+    border-left: none;
+    border-right: 3px double #000;
+    background-color: #f5f5f5;
+}
+.admin_info_table td{
+    width: 300px;
+    letter-spacing: 0px;
+    border: 1px solid #aaa;
+    border-right: none;
+}
+/* templates/admin/adminUser */
+.tablewrap{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    box-sizing: border-box;
+}
+.tablebox{
+    position: relative;
+    width: 502px;
+    height: 420px;
+    border: 1px solid #222;
+    box-sizing: border-box;
+}
+.tablebox table{
+    width: 500px;
+}
+.tablebox table th, .tablebox table td{
+    border: 1px solid #000;
+    box-sizing: border-box;
+}
+.lefttable tr{
+    cursor: pointer;
+}
+.lefttable tr:hover{
+    background-color: #f5f5f5;
+}
+.lefttable tr th{
+    height: 35px;
+    border-top: none;
+    background-color: #A6D0E4;
+    color: #444;
+    cursor: default;
+}
+.lefttable tr th:nth-child(1){
+    border-left: none;
+    width: 6%;
+}
+.lefttable tr th:nth-child(2){
+    width: 13%;
+}
+.lefttable tr th:nth-child(3){
+
+}
+.lefttable tr th:nth-child(4){
+    width: 15%;
+}
+.lefttable tr th:nth-child(5){
+    border-right: none;
+    width: 30%;
+}
+.lefttable tr td{
+    height: 35px;
     text-align: center;
 }
-/* 페이지네이션 */
-.paginationBox{
-    margin-bottom: 100px;
+.lefttable tr td:first-child{
+    border-left: none;
+}
+.lefttable tr td:last-child{
+    border-right: none;
+}
+.lefttable tr .hide_td{
+    display: none;
+}
+.righttable{
+    height: 420px;
+}
+.righttable th{
+    background-color: #cae6f2;
+    color: #444;
+    width: 100px;
+    box-sizing: border-box;
+}
+.righttable tr:first-child th{
+    width: 500px;
+    border-bottom: 2px dashed #000;
+    box-sizing: border-box;
+    background-color: #A6D0E4;
+}
+.righttable tr:last-child th{
+    border-bottom: 2px solid #000;
+}
+.righttable td{
+    padding: 0px 10px;
+    box-sizing: border-box;
+}
+.righttable .btn_td{
+    height: 41.7px;
     text-align: center;
 }
-.pagination{
+.righttable input{
+    width: 100px;
+    height: 30px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 13px;
+    color: #fff;
+    background-color: #f4435d;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.righttable input:hover{
+    background-color: royalblue;
+}
+.righttable .righttable_td{
+    width: 147px;
+}
+.pagination_wrap{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 35px;
+    border-top: 1px solid #222;
+    box-sizing: border-box;
+    background-color: #A6D0E4;
+}
+.paginationBox_admin{
+    position: relative;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.pagination_admin{
     display: flex;
     justify-content: center;
 }
-.pagination li{
+.pagination_admin li{
     display: block;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    font-size: 13px;
     box-sizing: border-box;
     margin-right: -1px;
     color: royalblue;
-    border: 1px solid #ccc;
+    font-weight: bold;
+    background-color: #fff;
+    border: 1px solid #222;
     z-index: 999;
 }
-.pagination li.active{
-    width: 30px;
-    height: 30px;
-    color: #eee;
-    background-color: royalblue;
+.pagination_admin li.active{
+    width: 22px;
+    height: 22px;
+    color: royalblue;
+    background-color: #ddd;
 }
-.pagination li a{
+.pagination_admin li a{
     display: block;
     width: 100%;
     height: 100%;
     transition: 0.2s;
 }
-.pagination li a:hover{
-    background-color: rgb(100, 131, 226);
+.pagination_admin li a:hover{
+    background-color: #777;
     color: #eee;
 }

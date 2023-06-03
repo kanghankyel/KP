@@ -30,30 +30,58 @@
                     <span class="point_hr"></span>
                 </div>
 
-                <div class="searchBox">
+                <div class="admin_searchWrap">
                     <form th:action="@{/admin/adminUser(page=${page.page}, search=${search}, searchElse=${searchElse})}" method="get">
-                        <input type="text" name="uNum" th:value="${search.uNum}" placeholder="회원코드 입력">
-                        <input type="text" name="uId" th:value="${search.uId}" placeholder="아이디 입력">
-                        <input type="text" name="uName" th:value="${search.uName}" placeholder="이름 입력">
-                        <input type="text" name="uPhoneNum" th:value="${search.uPhoneNum}" placeholder="전화번호 입력">
-                        <input type="text" name="uBirth" th:value="${search.uBirth}" placeholder="생년월일 입력">
-                        <select name="uAuth">
-                            <option value="">회원전체</option>
-                            <option value="ROLE_USER" th:selected="${searchElse.uAuth == 'ROLE_USER'}">고객</option>
-                            <option value="ROLE_ADMIN" th:selected="${searchElse.uAuth == 'ROLE_ADMIN'}">관리자</option>
-                        </select>
-                        <select name="member">
-                            <option value="">활동전체</option>
-                            <option value="Y" th:selected="${search.member == 'Y'}">활동</option>
-                            <option value="N" th:selected="${search.member == 'N'}">탈퇴</option>
-                            <option value="B" th:selected="${search.member == 'B'}">블락</option>
-                        </select>
-                        <!-- <div th:text="${search}"></div> -->
-                        <button type="submit">검색</button>
+                        <div class="admin_searchBox">
+                            <h3>회원 &nbsp; 검색창</h3>
+                            <div>
+                                <div>
+                                    <h4><i class="fa-solid fa-user"></i>&nbsp;&nbsp;회원이름</h4>
+                                    <input type="text" name="uName" th:value="${search.uName}" placeholder="회원이름 입력..">
+                                </div>
+                                <div>
+                                    <h4><i class="fa-solid fa-id-badge"></i>&nbsp;&nbsp;아이디</h4>
+                                    <input type="text" name="uId" th:value="${search.uId}" placeholder="아이디 입력..">
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <h4><i class="fa-solid fa-phone"></i>&nbsp;&nbsp;전화번호</h4>
+                                    <input type="text" name="uPhoneNum" th:value="${search.uPhoneNum}" placeholder="전화번호 입력..">
+                                </div>
+                                <div>
+                                    <h4><i class="fa-solid fa-thumbtack"></i>&nbsp;&nbsp;회원코드</h4>
+                                    <input type="text" name="uNum" th:value="${search.uNum}" placeholder="회원코드 입력..">
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <h4><i class="fa-solid fa-feather"></i>&nbsp;&nbsp;회원권한</h4>
+                                    <select name="uAuth">
+                                        <option value="">회원권한 선택</option>
+                                        <option value="ROLE_USER" th:selected="${searchElse.uAuth == 'ROLE_USER'}">일반회원</option>
+                                        <option value="ROLE_ADMIN" th:selected="${searchElse.uAuth == 'ROLE_ADMIN'}">관리자</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h4><i class="fa-solid fa-shield"></i>&nbsp;&nbsp;회원상태</h4>
+                                    <select name="member">
+                                        <option value="">회원상태 선택</option>
+                                        <option value="Y" th:selected="${search.member == 'Y'}">활동</option>
+                                        <option value="N" th:selected="${search.member == 'N'}">탈퇴</option>
+                                        <option value="B" th:selected="${search.member == 'B'}">블락</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="admin_searchBtn">
+                            <button type="submit">검색</button>
+                            <button onclick="searchReset()">초기화</button>
+                        </div>
                     </form>
                 </div>
 
-                <h3><span th:text="${page.totalRecordCount}"></span>건이 검색되었습니다.</h3>
+                <h3 class="countAlarm"><span th:text="${page.totalRecordCount}"></span> 건이 검색되었습니다.</h3>
 
                 <div class="tablewrap">
                     <div class="tablebox">
@@ -183,6 +211,18 @@
     
 
     <!-- script -->
+    <!-- 검색창 초기화 -->
+    <script>
+        function searchReset(){
+            document.getElementsByName("uName")[0].value = "";
+            document.getElementsByName("uId")[0].value = "";
+            document.getElementsByName("uPhoneNum")[0].value = "";
+            document.getElementsByName("uNum")[0].value = "";
+            document.getElementsByName("uAuth")[0].selectedIndex = 0;
+            document.getElementsByName("member")[0].selectedIndex = 0;
+        }
+    </script>
+
     <!-- 고객 상세정보 보기 script -->
     <script>
         const userDetailRows = document.querySelectorAll('.lefttable .userDetail');

@@ -1,5 +1,6 @@
 package com.kidsplace.kidsplace.dao;
 
+import com.kidsplace.kidsplace.commons.FaqVO;
 import com.kidsplace.kidsplace.commons.NoticeVO;
 import com.kidsplace.kidsplace.commons.Pagination;
 
@@ -33,5 +34,17 @@ public interface CommunityDAO {
 
     // 공지사항 삭제
     int noticeDelete(NoticeVO noticeVO);
+
+    // FAQ 리스트 페이징
+    List<FaqVO> faqPaging(@Param("pagination")Pagination pagination);
+
+    // FAQ 게시글 카운팅
+    int faqCount();
+
+    // FAQ 쓰기
+    int faqWrite(FaqVO faqVO);
+
+    // FAQ 삭제
+    int faqDelete(FaqVO faqVO);
 
 }

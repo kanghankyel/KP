@@ -1,5 +1,6 @@
 package com.kidsplace.kidsplace.controller;
 
+import com.kidsplace.kidsplace.commons.FaqVO;
 import com.kidsplace.kidsplace.commons.NoticeVO;
 import com.kidsplace.kidsplace.commons.Pagination;
 import com.kidsplace.kidsplace.service.CommunityService;
@@ -114,6 +115,58 @@ public class CommunityController {
             }
         } catch (Exception e){
             logger.error("공지사항 정보 삭제에 실패하였습니다.");
+            e.printStackTrace();
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // FAQ 페이지 이동 및 리스트 구현
+    @GetMapping("/faq")
+    public String FaqList (Model model
+                            , @RequestParam(name = "page", required = false, defaultValue = "1") int page){
+        int faqCount = communityService.faqCount();
+        Pagination pagination = new Pagination(faqCount, page);
+        List<FaqVO> faqlist = communityService.faqPaging(pagination);
+        model.addAttribute("faq", faqlist);
+        model.addAttribute("page", pagination);
+        return "/community/faq";
+    }
+
+    // FAQ 쓰기 페이지 이동
+    @GetMapping("/faqWrite")
+    public String faqWrite(){
+        return "/community/faqWrite";
+    }
+
+    // FAQ 쓰기
+    @PostMapping("/faqWrite")
+    public ResponseEntity<Boolean> faqWrite(@RequestBody FaqVO faqVO){
+        try{
+            boolean result = communityService.faqWrite(faqVO);
+            if(result){
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e){
+            logger.error("FAQ 추가에 실패하였습니다.");
+            e.printStackTrace();
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // FAQ 삭제처리
+    @PostMapping("/faqDelete")
+    public ResponseEntity<Boolean> FaqDelete(@RequestBody FaqVO faqVO){
+        try{
+            boolean result = communityService.faqDelete(faqVO);
+            if(result){
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e){
+            logger.error("FAQ 삭제에 실패하였습니다.");
             e.printStackTrace();
             return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
         }

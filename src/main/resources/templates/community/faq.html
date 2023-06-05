@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+    <div th:include="/fragment/head"></div>
+    <div th:include="/fragment/header"></div>
+    <div th:include="/fragment/nav"></div>
+
+    <div class="content">
+        <div class="image_banner">
+            <div class="image_banner_bg">
+                <img th:src="@{/image/notice_banner.jpg}" alt="">
+                <h1>F &nbsp; A &nbsp; Q</h1>
+            </div>
+            <div class="page_nav">
+                <span><a th:href="@{/}"><i class="fa-solid fa-house"></i></a></span>
+                <span><a th:href="@{/community/notice}">공지사항 &nbsp; <i class="fa-solid fa-caret-down"></i></a></span>
+                <span><a th:href="@{/community/faq}">자주 묻는 질문 &nbsp; <i class="fa-solid fa-caret-down"></i></a></span>
+            </div>
+        </div>
+
+        <div class="inner">
+            <div class="pointBox pointBox_notice">
+                <div class="point_bigtext">FAQ</div>
+                <div class="point_smalltext">자주 묻는 질문에 대한 답변을 모았습니다.</div>
+                <span class="point_hr"></span>
+            </div>
+
+            <div class="faq_tableWrap">
+                <table class="faq_table" th:each="faq : ${faq}">
+                    <tr th:if="${not #lists.isEmpty(faq)}" class="faq_question" onclick="toggleAnswer(this)">
+                        <th><div th:text="${(page.page - 1) * page.recordSize + faqStat.index + 1}"></div></th>
+                        <th>
+                            <i>Q. &nbsp;</i>
+                            <span th:text="${faq.fTitle}"></span>
+                            <input type="button" value="삭제" sec:authorize="hasRole('ROLE_ADMIN')" th:fNum="${faq.fNum}" th:onclick="faqDelete(this.getAttribute('fNum'))">
+                        </th>
+                    </tr>
+                    <tr class="faq_answer">
+                        <td colspan="2">
+                            <i>A. &nbsp;</i>
+                            <span th:text="${faq.fContent}"></span>
+                        </td>
+                    </tr>
+                    <tr th:unless="${not #lists.isEmpty(faq)}">
+                        <td colspan="2">자주 묻는 질문이 없습니다.</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="paginationBox faq_paginationBox">
+                <ul class="pagination">
+                    <th:block th:if="${page.existPrevPage}">
+                        <li>
+                            <a th:href="@{/community/faq?(page=${(page.page - 1) - ((page.page - 1) % 5)})}">&lt;</a>
+                        </li>
+                    </th:block>
+                    <th:block th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}">
+                        <li th:class="${num == page.page} ? 'active'">
+                            <a th:href="@{/community/faq(page=${num})}" th:text="${num}"></a>
+                        </li>
+                    </th:block>
+                    <th:block th:if="${page.existNextPage}">
+                        <li>
+                            <a th:href="@{/community/faq(page=${(page.page + 1) + (4 - ((page.page - 1) % 5))})}">&gt;</a>
+                        </li>
+                    </th:block>
+                </ul>
+            </div>
+
+            <div class="faqWriteBtn" sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/community/faqWrite}">글쓰기</a></div>
+        </div>
+    </div>
+    
+    <div th:include="/fragment/footer"></div>
+
+
+    <!-- script -->
+    <!-- FAQ 토글 script -->
+    <script>
+        function toggleAnswer(element) {
+            var answerRow = element.nextElementSibling;
+            answerRow.classList.toggle('active');
+        }
+    </script>
+
+    <!-- FAQ 삭제 -->
+    <script>
+        function faqDelete(fNum){
+            // alert(fNum);
+            fetch(urlparam + '/community/faqDelete', {
+                method: 'post',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    fNum: fNum
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        console.log(data);
+                        alert("FAQ를 삭제하였습니다.");
+                        location.href= window.location.href;
+                    }else{
+                        alert("FAQ 삭제에 실패하였습니다. 다시 시도해주세요.");
+                    }
+                })
+                .catch((error) => console.log(error));
+        }
+    </script>
+</body>
+</html>

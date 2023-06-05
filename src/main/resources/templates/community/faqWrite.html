@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+    <div th:include="/fragment/head"></div>
+    <div th:include="/fragment/header"></div>
+    <div th:include="/fragment/nav"></div>
+
+    <div class="content">
+        <div class="image_banner">
+            <div class="image_banner_bg">
+                <img th:src="@{/image/notice_banner.jpg}" alt="">
+                <h1>F &nbsp; A &nbsp; Q &nbsp; 작 &nbsp; 성</h1>
+            </div>
+            <div class="page_nav">
+                <span><a th:href="@{/}"><i class="fa-solid fa-house"></i></a></span>
+                <span><a th:href="@{/community/notice}">공지사항 &nbsp; <i class="fa-solid fa-caret-down"></i></a></span>
+                <span><a th:href="@{/community/faq}">자주 묻는 질문 &nbsp; <i class="fa-solid fa-caret-down"></i></a></span>
+            </div>
+        </div>
+
+        <div class="inner">
+            <div class="pointBox pointBox_notice">
+                <div class="point_middletext">FAQ 작성</div>
+                <span class="point_hr"></span>
+            </div>
+
+            <table class="faqWrite_table">
+                <tr>
+                    <th>제목</th>
+                    <td>
+                        <input type="hidden" th:value="${#authentication.principal.member.uNum}" id="inputuNum">
+                        <input type="text" id="inputTitle">
+                    </td>                    
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td>
+                        <textarea name="faq_textarea" id="inputContent"></textarea>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="board_write_table_btn_box">
+                <div class="board_table_btn" sec:authorize="hasRole('ROLE_ADMIN')"><input type="button" value="작 성" onclick="faqWriteComplete()"></div>
+                <div class="board_table_btn" sec:authorize="hasRole('ROLE_ADMIN')"><input type="button" value="취 소" onclick="faqWriteCancel()"></div>
+            </div>
+        </div>
+    </div>
+
+    <div th:include="/fragment/footer"></div>
+
+
+
+    <!--  script  -->
+    <script>
+        function faqWriteComplete(){
+            fetch(urlparam + '/community/faqWrite', {
+                method: 'post',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    uNum: document.getElementById("inputuNum").value,
+                    fTitle: document.getElementById("inputTitle").value,
+                    fContent: document.getElementById("inputContent").value
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        console.log(data);
+                        alert("FAQ 작성이 완료되었습니다.");
+                        location.href = urlparam + "/community/faq";
+                    }else{
+                        alert("FAQ 작성에 실패하였습니다. 다시 시도해주세요.");
+                    }
+                })
+                .catch((error) => console.log(error));
+        }
+    </script>
+
+    <script>
+        function faqWriteCancel(){
+            alert("FAQ 작성을 취소하였습니다.");
+            history.back();
+        }
+    </script>
+</body>
+</html>

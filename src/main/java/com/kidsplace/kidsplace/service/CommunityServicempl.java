@@ -1,5 +1,6 @@
 package com.kidsplace.kidsplace.service;
 
+import com.kidsplace.kidsplace.commons.FaqVO;
 import com.kidsplace.kidsplace.commons.NoticeVO;
 import com.kidsplace.kidsplace.commons.Pagination;
 import com.kidsplace.kidsplace.dao.CommunityDAO;
@@ -82,6 +83,55 @@ public class CommunityServicempl implements CommunityService {
             }
         } catch (Exception e){
             logger.error("공지사항 삭제 데이터 오류");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public List<FaqVO> faqPaging(Pagination pagination) {
+        logger.info("get List with FaqDTO");
+        return communityDAO.faqPaging(pagination);
+    }
+
+    @Override
+    public int faqCount() {
+        int result = communityDAO.faqCount();
+        System.out.println("faqCount : " + result);
+        return result;
+    }
+
+    @Override
+    public boolean faqWrite(FaqVO faqVO) {
+        // logger.warn("FAQ 추가처리 데이터");
+        // logger.warn(String.valueOf(faqVO));
+        try{
+            int result = communityDAO.faqWrite(faqVO);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            logger.error("FAQ 추가처리 데이터 오류");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean faqDelete(FaqVO faqVO) {
+        // logger.warn("FAQ 삭제처리 데이터");
+        // logger.warn(String.valueOf(faqVO));
+        try{
+            int result = communityDAO.faqDelete(faqVO);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            logger.error("FAQ 삭제 데이터 오류");
             e.printStackTrace();
             return false;
         }

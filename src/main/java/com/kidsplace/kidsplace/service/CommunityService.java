@@ -1,5 +1,6 @@
 package com.kidsplace.kidsplace.service;
 
+import com.kidsplace.kidsplace.commons.FaqVO;
 import com.kidsplace.kidsplace.commons.NoticeVO;
 import com.kidsplace.kidsplace.commons.Pagination;
 
@@ -29,5 +30,17 @@ public interface CommunityService {
 
     // 공지사항 삭제
     Boolean noticeDelete(NoticeVO noticeVO);
+
+    // FAQ 리스트 페이징
+    List<FaqVO> faqPaging(Pagination pagination);
+
+    // FAQ 게시글 카운팅
+    int faqCount();
+
+    // FAQ 쓰기
+    boolean faqWrite(FaqVO faqVO);
+
+    // FAQ 삭제
+    boolean faqDelete(FaqVO faqVO);
 
 }

@@ -1022,7 +1022,8 @@ footer .inner>div:nth-child(4){
 /* templates/community/notice */
 .pointBox_notice{
     position: relative;
-    left: 149px;
+    padding-left: 149px;
+    box-sizing: border-box;
 }
 .notice_searchBox{
     padding-left: 68.5%;
@@ -1200,6 +1201,130 @@ footer .inner>div:nth-child(4){
 }
 .board_detail_table tr:nth-child(3) td{
     padding: 20px 20px;
+}
+/* templates/community/faq */
+.faq_tableWrap{
+    width: 76%;
+    margin: 0 auto;
+    margin-bottom: 60px;
+}
+.faq_table{
+    width: 100%;
+    margin: 0 auto;
+}
+.faq_table tr th{
+    height: 50px;
+    border-top: 0.5px solid #000;
+    border-bottom: 0.5px solid #000;
+    box-sizing: border-box;
+    background-color: #e7e7e7;
+    color: #222;
+    font-size: 17px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.faq_table tr th i{
+    font-size: 25px;
+}
+.faq_table tr:first-child th:nth-child(1){
+    width: 80px;
+}
+.faq_table tr:first-child th:nth-child(2){
+    position: relative;
+}
+.faq_table tr:first-child th:nth-child(2) input{
+    position: absolute;
+    right: 50px;
+    font-size: 13px;
+    width: 50px;
+    height: 25px;
+    background-color: royalblue;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+.faq_table tr:first-child th:nth-child(2) input:hover{
+    background-color: #64a5ff;
+}
+.faq_table tr td{
+    height: 40px;
+    padding: 30px 50px;
+    box-sizing: border-box;
+    background-color: #F9F5F6;
+    transition: max-height 0.3s ease;
+    max-height: 0;
+    overflow: hidden;
+}
+.faq_table tr td i{
+    font-size: 20px;
+    font-weight: bold;
+}
+.faq_question{
+    cursor: pointer;
+}
+.faq_answer{
+    display: none;
+}
+.faq_answer.active{
+    display: table-row;
+}
+.faqWriteBtn{
+    position: relative;
+    width: 100%;
+    text-align: right;
+    margin-bottom: 50px;
+    box-sizing: border-box;
+}
+.faqWriteBtn a{
+    position: relative;
+    right: 140px;
+    bottom: 50px;
+    padding: 5px 30px;
+    border-radius: 5px;
+    background-color: tomato;
+    color: #fff;
+    transition: 0.3s;
+}
+.faqWriteBtn a:hover{
+    background-color: royalblue;
+}
+/* templates/community/faqWrite */
+.faqWrite_table{
+    margin: 0 auto;
+    width: 75%;
+    margin-bottom: 100px;
+    border: 1px solid #000;
+}
+.faqWrite_table th{
+    background-color: #e7e7e7;
+    border: 1px solid #000;
+}
+.faqWrite_table tr:nth-child(1) th{
+    height: 40px;
+}
+.faqWrite_table tr:nth-child(2) th{
+    height: 200px;
+}
+.faqWrite_table td{
+    border: 1px solid #000;
+}
+.faqWrite_table td input{
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding: 0px 20px;
+    box-sizing: border-box;
+}
+.faqWrite_table td textarea{
+    width: 100%;
+    height: 200px;
+    border: none;
+    outline: none;
+    padding: 20px;
+    box-sizing: border-box;
 }
 /* templates/ticket/ticketBuy */
 .ticket_board{
@@ -1929,4 +2054,19 @@ footer .inner>div:nth-child(4){
 }
 .newTicketBtn input:hover{
     background-color: royalblue;
+}
+
+
+
+
+
+.imsi_table{
+    width: 100%;
+    border: 2px solid #222;
+}
+.imsi_table th{
+    border: 1px solid #000;
+}
+.imsi_table td{
+    border: 1px solid #000;
 }

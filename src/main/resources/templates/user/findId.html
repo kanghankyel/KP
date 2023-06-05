@@ -7,25 +7,44 @@
     <div th:include="/fragment/nav"></div>
 
     <div class="content">
+        <div class="image_banner">
+            <div class="image_banner_bg">
+                <img th:src="@{/image/mypage_banner.jpg}" alt="">
+                <h1>아 &nbsp; 이 &nbsp; 디 &nbsp; 찾 &nbsp; 기</h1>
+            </div>
+            <div class="page_nav">
+                <span><a th:href="@{/}"><i class="fa-solid fa-house"></i></a></span>
+                <span><a th:href="@{/user/findPw}">아이디 찾기 &nbsp; <i class="fa-solid fa-caret-down"></i></a></span>
+            </div>
+        </div>
+
         <div class="inner">
-            <h2>아이디 찾기</h2>
-            <hr>
-            <table>
-                <tr>
-                    <th><label for="uName">성명</label></th>
-                    <td><input type="text" id="uName" name="uName"></td>
-                </tr>
-                <tr>
-                    <th><label for="uPhoneNum">전화번호</label></th>
-                    <td><input type="text" id="uPhoneNum" name="uPhoneNum"></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input type="button" value="아이디 찾기" onclick="findId()"></td>
-                </tr>
-            </table>
-            <input type="text" id="foundId" placeholder="찾은 아이디가 표시됩니다" readonly>
-            <div>
-                <a th:href="@{/}"><i class="fa-solid fa-house"></i>메인화면</a>
+            <div class="pointBox pointBox_mypage">
+                <div class="point_middletext">아이디 찾기</div>
+                <div class="point_smalltext">아이디를 잃어버리셨나요?</div>
+                <span class="point_hr"></span>
+            </div>
+
+            <div class="idFindWrap">
+                <table>
+                    <tr>
+                        <th><label for="uName">성명</label></th>
+                        <td><input type="text" id="uName" name="uName" placeholder="성명을 입력하세요.."></td>
+                    </tr>
+                    <tr>
+                        <th><label for="uPhoneNum">전화번호</label></th>
+                        <td><input type="text" id="uPhoneNum" name="uPhoneNum" placeholder="(-) 없이 숫자만 입력하세요.."></td>
+                    </tr>
+                </table>
+                <div>
+                    <input type="button" value="아이디 찾기" onclick="findId()">
+                </div>
+                <div>
+                    <input type="text" id="foundId" placeholder="찾은 아이디가 표시됩니다" readonly>
+                </div>
+                <div>
+                    <a th:href="@{/}"><i class="fa-solid fa-house"></i> 메인화면</a>
+                </div>
             </div>
         </div>
     </div>

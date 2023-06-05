@@ -26,7 +26,7 @@
 
             <section class="admin_content">
                 <div class="pointBox">
-                    <div class="point_admintext">회원 리스트</div>
+                    <div class="point_admintext">회원 관리</div>
                     <span class="point_hr"></span>
                 </div>
 
@@ -47,7 +47,7 @@
                             <div>
                                 <div>
                                     <h4><i class="fa-solid fa-phone"></i>&nbsp;&nbsp;전화번호</h4>
-                                    <input type="text" name="uPhoneNum" th:value="${search.uPhoneNum}" placeholder="전화번호 입력..">
+                                    <input type="text" name="uPhoneNum" th:value="${search.uPhoneNum}" placeholder="( - )제외. 전화번호 입력..">
                                 </div>
                                 <div>
                                     <h4><i class="fa-solid fa-thumbtack"></i>&nbsp;&nbsp;회원코드</h4>
@@ -126,7 +126,7 @@
                                     <ul class="pagination_admin">
                                         <th:block th:if="${page.existPrevPage}">
                                             <li>
-                                                <a th:href="@{/admin/adminUser(page=${(page.page - 1) - ((page.page - 1) % 5)}, uNum=${search.uNum}, uId=${search.uId}, uName=${search.uName}, uPhoneNum=${search.uPhoneNum}, uBirth=${search.uBirth}, uAuth=${searchElse.uAuth}, member=${search.member})}">이전</a>
+                                                <a th:href="@{/admin/adminUser(page=${(page.page - 1) - ((page.page - 1) % 5)}, uNum=${search.uNum}, uId=${search.uId}, uName=${search.uName}, uPhoneNum=${search.uPhoneNum}, uBirth=${search.uBirth}, uAuth=${searchElse.uAuth}, member=${search.member})}">&lt;</a>
                                             </li>
                                         </th:block>
                                         <th:block th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}">
@@ -136,7 +136,7 @@
                                         </th:block>
                                         <th:block th:if="${page.existNextPage}">
                                             <li>
-                                                <a th:href="@{/admin/adminUser(page=${(page.page + 1) + (4 - ((page.page - 1) % 5))}, uNum=${search.uNum}, uId=${search.uId}, uName=${search.uName}, uPhoneNum=${search.uPhoneNum}, uBirth=${search.uBirth}, uAuth=${searchElse.uAuth}, member=${search.member})}">다음</a>
+                                                <a th:href="@{/admin/adminUser(page=${(page.page + 1) + (4 - ((page.page - 1) % 5))}, uNum=${search.uNum}, uId=${search.uId}, uName=${search.uName}, uPhoneNum=${search.uPhoneNum}, uBirth=${search.uBirth}, uAuth=${searchElse.uAuth}, member=${search.member})}">&gt;</a>
                                             </li>
                                         </th:block>
                                     </ul>
@@ -305,6 +305,7 @@
         });
     </script>
 
+    <!-- 관리자권한으로 변경 -->
     <script>
         function upUserGrade(uNum, uAuth){
             // alert(uNum);
@@ -321,7 +322,7 @@
                     if (data) {
                         console.log(data);
                         alert("관리자 권한으로 설정되었습니다.");
-                        location.href= urlparam + "/admin/adminUser";
+                        location.href= window.location.href;
                     }else{
                         alert("관리자 권한 설정에 실패하였습니다. 다시 시도해주세요.");
                     }
@@ -330,6 +331,7 @@
         }
     </script>
 
+    <!-- 일반회원권한으로 변경 -->
     <script>
         function downUserGrade(uNum, uAuth){
             // alert(uNum);
@@ -346,7 +348,7 @@
                     if (data) {
                         console.log(data);
                         alert("일반회원 권한으로 설정되었습니다.");
-                        location.href= urlparam + "/admin/adminUser";
+                        location.href= window.location.href;
                     }else{
                         alert("일반회원 권한 설정에 실패하였습니다. 다시 시도해주세요.");
                     }
@@ -355,6 +357,7 @@
         }
     </script>
 
+    <!-- 회원블락 -->
     <script>
         function userBlock(uNum, member){
             // alert(uNum);
@@ -371,7 +374,7 @@
                     if (data) {
                         console.log(data);
                         alert("해당 회원을 정지하였습니다.");
-                        location.href= urlparam + "/admin/adminUser";
+                        location.href= window.location.href;
                     }else{
                         alert("해당 회원 정지에 실패하였습니다. 다시 시도해주세요.");
                     }
@@ -380,29 +383,30 @@
         }
     </script>
 
-<script>
-    function userNotBlock(uNum, member){
-        // alert(uNum);
-        // alert(member);
-        fetch(urlparam + '/admin/userNotBlock', {
-            method: 'post',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({
-                uNum: uNum
+    <!-- 회원블락해제 -->
+    <script>
+        function userNotBlock(uNum, member){
+            // alert(uNum);
+            // alert(member);
+            fetch(urlparam + '/admin/userNotBlock', {
+                method: 'post',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    uNum: uNum
+                })
             })
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data) {
-                    console.log(data);
-                    alert("해당 회원을 정지해제하였습니다.");
-                    location.href= urlparam + "/admin/adminUser";
-                }else{
-                    alert("해당 회원 정지해제에 실패하였습니다. 다시 시도해주세요.");
-                }
-            })
-            .catch((error) => console.log(error));
-    }
-</script>
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        console.log(data);
+                        alert("해당 회원을 정지해제하였습니다.");
+                        location.href= window.location.href;
+                    }else{
+                        alert("해당 회원 정지해제에 실패하였습니다. 다시 시도해주세요.");
+                    }
+                })
+                .catch((error) => console.log(error));
+        }
+    </script>
 </body>
 </html>

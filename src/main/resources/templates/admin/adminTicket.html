@@ -24,66 +24,82 @@
         <div class="admin_wrap">
             <div th:include="/fragment/adminNav"></div>
 
-            <section class="admin_content">
+            <section class="admin_content">        
                 <div class="pointBox">
-                    <div class="point_admintext">티켓 리스트</div>
+                    <div class="point_admintext">티켓 구매내역</div>
                     <span class="point_hr"></span>
                 </div>
 
-                <table class="ticket_board">
-                    <tr>
-                        <td>티켓번호</td>
-                        <td>티켓이름</td>
-                        <td>티켓가격</td>
-                        <td>티켓여부</td>
-                    </tr>
-                    <tr th:each="ticketDetail : ${ticketDetail}">
-                        <td><span th:text="${ticketDetail.tType}"></span></td>
-                        <td><span th:text="${ticketDetail.tName}"></span></td>
-                        <td><span th:text="${ticketDetail.tPrice}"></span></td>
-                        <td><span th:text="${ticketDetail.tDelete}"></span></td>
-                    </tr>
-                </table>
-    
-                <h2>티켓구매내역(전체)</h2>
-                <hr>
-    
-                <div class="searchBox">
+                <div class="admin_searchWrap admin_searchWrap_ticket">
                     <form th:action="@{/admin/adminTicket(page=${page.page}, search=${search}, searchElse=${searchElse})}" method="get">
-                        <input type="text" name="tNum" th:value="${search.tNum}" placeholder="티켓번호 입력">
-                        <!-- <input type="text" name="tType" th:value="${search.tType}" placeholder="티켓종류 입력"> -->
-                        <select name="tType">
-                            <option value="">전체</option>
-                            <th:block th:each="ticketDetail : ${ticketDetail}">
-                                <option th:value="${ticketDetail.tType}" th:text="${ticketDetail.tName}" th:selected="${ticketDetail.tType == search.tType}"></option>
-                            </th:block>
-                        </select>
-                        <input type="text" name="uPhoneNum" th:value="${searchElse.uPhoneNum}" placeholder="전화번호 입력">
-                        <input type="text" name="uName" th:value="${search.uName}" placeholder="이름 입력">
-                        <input type="text" name="market" th:value="${search.market}" placeholder="구매처 입력">
-                        <input type="text" name="tArea" th:value="${search.tArea}" placeholder="사용처 입력">
-                        <input type="text" name="sellDate" th:value="${search.sellDate}" placeholder="구매일자 입력">
-                        <input type="text" name="pickDate" th:value="${search.pickDate}" placeholder="예약일자 입력">
-                        <input type="text" name="useDate" th:value="${search.useDate}" placeholder="사용일자 입력">
-                        <!-- <input type="text" name="used" th:value="${search.used}" placeholder="티켓상태 입력"> -->
-                        <select name="used">
-                            <option value="">전체</option>
-                            <option value="N" th:selected="${search.used == 'N'}">예매완료</option>
-                            <option value="Y" th:selected="${search.used == 'Y'}">사용완료</option>
-                            <option value="R" th:selected="${search.used == 'R'}">환불요청</option>
-                            <option value="C" th:selected="${search.used == 'C'}">환불완료</option>
-                        </select>
-                        <div th:text="${search}"></div>
-                        <button type="submit">검색</button>
+                        <div class="admin_searchBox">
+                            <h3>티켓 &nbsp; 검색창</h3>
+                            <div>
+                                <div>
+                                    <h4><i class="fa-solid fa-user"></i>&nbsp;&nbsp;회원이름</h4>
+                                    <input type="text" name="uName" th:value="${search.uName}" placeholder="회원이름 입력..">
+                                </div>
+                                <div>
+                                    <h4><i class="fa-solid fa-ticket-simple"></i>&nbsp;&nbsp;티켓종류</h4>
+                                    <select name="tType">
+                                        <option value="">티켓종류 선택</option>
+                                        <th:block th:each="ticketDetail : ${ticketDetail}">
+                                            <option th:value="${ticketDetail.tType}" th:text="${ticketDetail.tName}" th:selected="${ticketDetail.tType == search.tType}"></option>
+                                        </th:block>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <h4><i class="fa-solid fa-phone"></i>&nbsp;&nbsp;전화번호</h4>
+                                    <input type="text" name="uPhoneNum" th:value="${searchElse.uPhoneNum}" placeholder="( - )제외. 전화번호 입력..">
+                                </div>
+                                <div>
+                                    <h4><i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;구매처</h4>
+                                    <input type="text" name="market" th:value="${search.market}" placeholder="구매처 입력..">
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <h4><i class="fa-solid fa-map-location-dot"></i>&nbsp;&nbsp;사용장소</h4>
+                                    <input type="text" name="tArea" th:value="${search.tArea}" placeholder="사용장소 입력..">
+                                </div>
+                                <div>
+                                    <h4><i class="fa-solid fa-thumbtack"></i>&nbsp;&nbsp;티켓상태</h4>
+                                    <select name="used">
+                                        <option value="">티켓상태 선택</option>
+                                        <option value="N" th:selected="${search.used == 'N'}">예매완료</option>
+                                        <option value="Y" th:selected="${search.used == 'Y'}">사용완료</option>
+                                        <option value="R" th:selected="${search.used == 'R'}">환불요청</option>
+                                        <option value="C" th:selected="${search.used == 'C'}">환불완료</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <h4><i class="fa-solid fa-calendar"></i>&nbsp;&nbsp;구매일자</h4>
+                                    <input type="date" name="sellDate" th:value="${search.sellDate}">
+                                </div>
+                                <div>
+                                    <h4><i class="fa-solid fa-calendar-check"></i>&nbsp;&nbsp;예약일자</h4>
+                                    <input type="date" name="pickDate" th:value="${search.pickDate}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="admin_searchBtn">
+                            <button type="submit">검색</button>
+                            <button onclick="searchReset()">초기화</button>
+                        </div>
                     </form>
                 </div>
                 
                 <h3><span th:text="${page.totalRecordCount}"></span>건이 검색되었습니다.</h3>
-                <table class="ticket_board">
+
+                <table class="adminTicket_table">
                     <tr>
                         <th>No</th>
-                        <th>티켓번호</th>
-                        <!-- <th>유저번호</th> -->
+                        <th>티켓코드</th>
+                        <!-- <th>회원코드</th> -->
                         <th>티켓종류</th>
                         <th>전화번호</th>
                         <th>이름</th>
@@ -100,7 +116,7 @@
                         <td><div th:text="${ticket.tNum}"></div></td>
                         <!-- <td><div th:text="${ticket.uNum}"></div></td> -->
                         <td><div th:text="${ticket.tName}"></div></td>
-                        <td><div th:text="${ticket.uPhoneNum}"></div></td>
+                        <td><div th:text="${#strings.replace(#strings.substring(ticket.uPhoneNum, 0, 3) + '-' + #strings.substring(ticket.uPhoneNum, 3, 7) + '-' + #strings.substring(ticket.uPhoneNum, 7), '--', '-')}"></div></td>
                         <td><div th:text="${ticket.uName}"></div></td>
                         <td><div th:text="${ticket.market}"></div></td>
                         <td><div th:text="${ticket.tArea}"></div></td>
@@ -118,37 +134,35 @@
                             <div th:if="${ticket.used == 'C'}">환불완료</div>
                         </td>
                         <td>
-                            <div th:if="${ticket.used == 'N'}"><input type="button" value="사용" th:tNum="${ticket.tNum}" th:onclick="useCheckTicket(this.getAttribute('tNum'))"></div>
-                            <div th:if="${ticket.used == 'R'}"><input type="button" value="환불" th:tNum="${ticket.tNum}" th:onclick="refundCheckTicket(this.getAttribute('tNum'))"></div>
-                            
+                            <div th:if="${ticket.used == 'N'}"><input type="button" class="redBtn" value="사용" th:tNum="${ticket.tNum}" th:onclick="useCheckTicket(this.getAttribute('tNum'))"></div>
+                            <div th:if="${ticket.used == 'R'}"><input type="button" class="blueBtn" value="환불" th:tNum="${ticket.tNum}" th:onclick="refundCheckTicket(this.getAttribute('tNum'))"></div>
                         </td>
                     </tr>
                     <tr th:unless="${not #lists.isEmpty(ticket)}">
-                        <td colspan="12">구매된 티켓이 없습니다.</td>
+                        <td colspan="13">구매된 티켓이 없습니다.</td>
                     </tr>
                 </table>
     
-                <div class="paginationBox">
+                <div class="paginationBox admin_paginationBox">
                     <th:block th:if="${page.startPage != 0}">
                         <ul class="pagination">
                             <th:block th:if="${page.existPrevPage}">
                                 <li>
-                                    <a th:href="@{/admin/adminTicket(page=${(page.page - 1) - ((page.page - 1) % 5)}, tNum=${search.tNum}, tType=${search.tType}, uPhoneNum=${searchElse.uPhoneNum}, uName=${search.uName}, market=${search.market}, tArea=${search.tArea}, sellDate=${search.sellDate}, pickDate=${search.pickDate}, useDate=${search.useDate}, used=${search.used})}">이전</a>
+                                    <a th:href="@{/admin/adminTicket(page=${(page.page - 1) - ((page.page - 1) % 5)}, tNum=${search.tNum}, uNum=${search.uNum}, tType=${search.tType}, uPhoneNum=${searchElse.uPhoneNum}, uName=${search.uName}, market=${search.market}, tArea=${search.tArea}, sellDate=${search.sellDate}, pickDate=${search.pickDate}, useDate=${search.useDate}, used=${search.used})}">&lt;</a>
                                 </li>
                             </th:block>
                             <th:block th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}">
                                 <li th:class="${num == page.page} ? 'active'">
-                                    <a th:href="@{/admin/adminTicket(page=${num}, tNum=${search.tNum}, tType=${search.tType}, uPhoneNum=${searchElse.uPhoneNum}, uName=${search.uName}, market=${search.market}, tArea=${search.tArea}, sellDate=${search.sellDate}, pickDate=${search.pickDate}, useDate=${search.useDate}, used=${search.used})}" th:text="${num}"></a>
+                                    <a th:href="@{/admin/adminTicket(page=${num}, tNum=${search.tNum}, uNum=${search.uNum}, tType=${search.tType}, uPhoneNum=${searchElse.uPhoneNum}, uName=${search.uName}, market=${search.market}, tArea=${search.tArea}, sellDate=${search.sellDate}, pickDate=${search.pickDate}, useDate=${search.useDate}, used=${search.used})}" th:text="${num}"></a>
                                 </li>
                             </th:block>
                             <th:block th:if="${page.existNextPage}">
                                 <li>
-                                    <a th:href="@{/admin/adminTicket(page=${(page.page + 1) + (4 - ((page.page - 1) % 5))}, tNum=${search.tNum}, tType=${search.tType}, uPhoneNum=${searchElse.uPhoneNum}, uName=${search.uName}, market=${search.market}, tArea=${search.tArea}, sellDate=${search.sellDate}, pickDate=${search.pickDate}, useDate=${search.useDate}, used=${search.used})}">다음</a>
+                                    <a th:href="@{/admin/adminTicket(page=${(page.page + 1) + (4 - ((page.page - 1) % 5))}, tNum=${search.tNum}, uNum=${search.uNum}, tType=${search.tType}, uPhoneNum=${searchElse.uPhoneNum}, uName=${search.uName}, market=${search.market}, tArea=${search.tArea}, sellDate=${search.sellDate}, pickDate=${search.pickDate}, useDate=${search.useDate}, used=${search.used})}">&gt;</a>
                                 </li>
                             </th:block>
                         </ul>
-                        <!-- <input type="hidden" th:value="${page}"> -->
-                        <p th:text="${page}"></p>
+                        <!-- <p th:text="${page}"></p> -->
                     </th:block>
                 </div>
             </section>
@@ -159,6 +173,22 @@
 
 
     <!-- script -->
+    <!-- 검색창 초기화 -->
+    <script>
+        function searchReset(){
+            // uName, tType, uPhoneNum, market, tArea, used, sellDate, pickDate
+            document.getElementsByName("uName")[0].value = "";
+            document.getElementsByName("tType")[0].selectedIndex = 0;
+            document.getElementsByName("uPhoneNum")[0].value = "";
+            document.getElementsByName("market")[0].value = "";
+            document.getElementsByName("tArea")[0].value = "";
+            document.getElementsByName("used")[0].selectedIndex = 0;
+            document.getElementsByName("sellDate")[0].value = "";
+            document.getElementsByName("pickDate")[0].value = "";
+        }
+    </script>
+
+    <!-- 티켓 사용처리 -->
     <script>
         function useCheckTicket(tNum, used){
             // alert(tNum);
@@ -175,7 +205,7 @@
                     if (data) {
                         console.log(data);
                         alert("티켓이 사용되었습니다.");
-                        location.href= urlparam + "/admin/adminTicket";
+                        location.href= window.location.href;
                     }else{
                         alert("티켓사용에 실패하였습니다. 다시 시도해주세요.");
                     }
@@ -184,6 +214,7 @@
         }
     </script>
 
+    <!-- 티켓 환불처리 -->
     <script>
         function refundCheckTicket(tNum, used){
             fetch(urlparam + '/admin/refundComplete', {
@@ -198,7 +229,7 @@
                     if (data) {
                         console.log(data);
                         alert("티켓이 환불되었습니다.");
-                        location.href= urlparam + "/admin/adminTicket";
+                        location.href= window.location.href;
                     }else{
                         alert("티켓환불에 실패하였습니다. 다시 시도해주세요.");
                     }

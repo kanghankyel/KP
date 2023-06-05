@@ -41,4 +41,13 @@ public interface TicketService {
     // 티켓환불처리
     boolean ticketRefundCheck(TicketVO ticketVO);
 
+    // 티켓정보 삭제처리
+    boolean ticketInfoDelete(TicketDetailVO ticketDetailVO);
+
+    // 티켓정보 추가
+    boolean ticketInfoCreate(TicketDetailVO ticketDetailVO);
+
+    // 티켓정보 수정
+    boolean ticketInfoEdit(TicketDetailVO ticketDetailVO);
+
 }

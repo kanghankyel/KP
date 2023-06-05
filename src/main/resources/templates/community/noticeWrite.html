@@ -55,7 +55,7 @@
     <!--  script  -->
     <script>
         function noticeWriteComplete(){
-            fetch('http://localhost:9000/community/noticeWrite', {
+            fetch(urlparam + '/community/noticeWrite', {
                 method: 'post',
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
@@ -70,7 +70,7 @@
                     if (data) {
                         console.log(data);
                         alert("공지사항 작성이 완료되었습니다.");
-                        location.href="http://localhost:9000/community/notice";
+                        location.href = urlparam + "/community/notice";
                     }else{
                         alert("공지사항 작성에 실패하였습니다. 다시 시도해주세요.");
                     }

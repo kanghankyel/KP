@@ -1464,6 +1464,11 @@ footer .inner>div:nth-child(4){
     letter-spacing: 0px;
     color: #aaa;
 }
+.admin_searchBox input[type='date']{
+    color: #555;
+    font-size: 15px;
+    letter-spacing: 0px;
+}
 .admin_searchBox select{
     width: 300px;
     height: 35px;
@@ -1659,4 +1664,70 @@ footer .inner>div:nth-child(4){
 .pagination_admin li a:hover{
     background-color: #777;
     color: #eee;
+}
+/* templates/admin/adminTicket */
+.admin_searchWrap_ticket{
+    height: 265px;
+}
+.adminTicket_table{
+    width: 100%;
+    margin-top: 15px;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+}
+.adminTicket_table tr{
+    cursor: pointer;
+    transition: 0.2s;
+}
+.adminTicket_table tr:hover{
+    background-color: #e5e5e5;
+}
+.adminTicket_table th{
+    height: 40px;
+    font-size: 16px;
+    border-top: 2px solid #000;
+    border-bottom: 3px double #000;
+    background-color: #777;
+    color: #eee;
+}
+.adminTicket_table td{
+    height: 35px;
+    font-size: 14px;
+    text-align: center;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+.adminTicket_table td input{
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 12px;
+    color: #fff;
+    padding: 4px 8px;
+    border: none;
+    border-radius: 3px;
+}
+.adminTicket_table td .redBtn{
+    background-color: #ff416b;
+}
+.adminTicket_table td .redBtn:hover{
+    background-color: royalblue;
+}
+.adminTicket_table td .blueBtn{
+    background-color: #64a5ff;
+}
+.adminTicket_table td .blueBtn:hover{
+    background-color: tomato;
+}
+.admin_paginationBox{
+    margin-bottom: 0px;
+}
+/* templates/admin/adminTicketInfo */
+.imsi_table{
+    border: 1px solid #000;
+}
+.imsi_table th{
+    border: 1px solid #000;
+}
+.imsi_table td{
+    border: 1px solid #000;
 }

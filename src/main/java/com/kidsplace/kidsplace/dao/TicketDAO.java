@@ -43,4 +43,13 @@ public interface TicketDAO {
     // 티켓환불처리
     int ticketRefundCheck(TicketVO ticketVO);
 
+    // 티켓정보 삭제처리
+    int ticketInfoDelete(TicketDetailVO ticketDetailVO);
+
+    // 티켓정보 추가
+    int ticketInfoCreate(TicketDetailVO ticketDetailVO);
+
+    // 티켓정보 수정
+    int ticketInfoEdit(TicketDetailVO ticketDetailVO);
+
 }

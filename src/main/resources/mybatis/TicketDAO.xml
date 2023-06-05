@@ -24,7 +24,7 @@
         <result property="tType" column="tType" />
         <result property="tName" column="tName" />
         <result property="tPrice" column="tPrice" />
-        <result property="tDate" column="uNamtDatee" />
+        <result property="tDate" column="tDate" />
         <result property="tUpdate" column="tUpdate" />
         <result property="tDeletedate" column="tDeletedate" />
         <result property="tDelete" column="tDelete" />
@@ -53,7 +53,6 @@
            ,tName
            ,tPrice
            ,tDate
-           ,date_format(tDate, '%Y-%m-%d') AS tDate
            ,tUpdate
            ,tDeletedate
            ,tDelete
@@ -168,6 +167,9 @@
             <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tNum)">
                 AND a.tNum LIKE CONCAT('%', #{ticketVO.tNum}, '%')
             </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.uNum)">
+                AND a.uNum LIKE CONCAT('%', #{ticketVO.uNum}, '%')
+            </if>
             <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tType)">
                 AND a.tType LIKE CONCAT('%', #{ticketVO.tType}, '%')
             </if>
@@ -215,6 +217,9 @@
             <!-- <include refid="ticketSearch" /> -->
             <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tNum)">
                 AND a.tNum LIKE CONCAT('%', #{ticketVO.tNum}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.uNum)">
+                AND a.uNum LIKE CONCAT('%', #{ticketVO.uNum}, '%')
             </if>
             <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.tType)">
                 AND a.tType LIKE CONCAT('%', #{ticketVO.tType}, '%')
@@ -275,4 +280,38 @@
         WHERE
             tNum = #{tNum}
     </update>
+
+    <!-- 티켓정보 삭제처리 -->
+    <update id="ticketInfoDelete">
+        UPDATE
+            kidslandTicketDetail
+        SET
+            tDelete = 'Y'
+        WHERE
+            tType = #{tType}
+    </update>
+
+    <!-- 티켓정보 추가 -->
+    <insert id="ticketInfoCreate">
+        INSERT INTO
+            kidslandTicketDetail(tType, tName, tPrice)
+        VALUES
+            ((SELECT resultTable.resultNum FROM (SELECT IFNULL(MAX(tType), 0) + 1 AS resultNum FROM kidslandTicketDetail) resultTable)
+            , #{tName}
+            , #{tPrice})
+    </insert>
+
+    <!-- 티켓정보 수정 -->
+    <update id="ticketInfoEdit">
+        UPDATE
+            kidslandTicketDetail
+        SET
+            tName = #{tName}
+          , tPrice = #{tPrice}
+          , tUpDate = CURRENT_TIMESTAMP
+        WHERE
+            tType = #{tType}
+    </update>
+
 </mapper>
+

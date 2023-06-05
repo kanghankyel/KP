@@ -129,4 +129,58 @@ public class TicketServicempl implements TicketService {
         }
     }
 
+    @Override
+    public boolean ticketInfoDelete(TicketDetailVO ticketDetailVO) {
+        // logger.warn("티켓정보 삭제처리 데이터");
+        // logger.warn(String.valueOf(ticketDetailVO));
+        try{
+            int result = ticketDAO.ticketInfoDelete(ticketDetailVO);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            logger.error("티켓사용처리 데이터 오류");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean ticketInfoCreate(TicketDetailVO ticketDetailVO) {
+        // logger.warn("티켓정보 추가처리 데이터");
+        // logger.warn(String.valueOf(ticketDetailVO));
+        try{
+            int result = ticketDAO.ticketInfoCreate(ticketDetailVO);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            logger.error("티켓정보 추가처리 데이터 오류");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean ticketInfoEdit(TicketDetailVO ticketDetailVO) {
+        // logger.warn("티켓정보 수정처리 데이터");
+        // logger.warn(String.valueOf(ticketDetailVO));
+        try{
+            int result = ticketDAO.ticketInfoEdit(ticketDetailVO);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            logger.error("티켓정보 수정처리 데이터 오류");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

@@ -37,17 +37,17 @@ public class AdminController {
     @Autowired
     UserService userService;
 
-    // 관리자페이지 메인 이동
+    // 관리자페이지 메인페이지 이동
     @GetMapping("/admin")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String AdminPage(){
         return "/admin/admin";
     }
 
-    // 관리자페이지 티켓페이지 이동
+    // 관리자페이지 티켓 리스트 페이지 이동 및 티켓리스트 구현
     @GetMapping("/adminTicket")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String TicketInfo(Model model
+    public String TicketList(Model model
                             , @RequestParam(name = "page", required = false, defaultValue = "1") int page
                             , @ModelAttribute("search") TicketVO ticketVO
                             , @ModelAttribute("searchElse") UserVO userVO){
@@ -188,5 +188,75 @@ public class AdminController {
         }
     }
 
+    // 관리자페이지 티켓 리스트 페이지 이동 및 티켓정보리스트 구현
+    @GetMapping("/adminTicketInfo")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String TicketInfo(Model model){
+        // 티켓정보
+        List<TicketDetailVO> ticketDetailList = ticketService.ticketDetailList();
+        model.addAttribute("ticketDetail", ticketDetailList);
+        return "admin/adminTicketInfo";
+    }
+
+    // 티켓정보 삭제처리
+    @PostMapping("/ticketInfoDelete")
+    public ResponseEntity<Boolean> TicketInfoDelete(@RequestBody TicketDetailVO ticketDetailVO){
+        try{
+            boolean result = ticketService.ticketInfoDelete(ticketDetailVO);
+            if(result){
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e){
+            logger.error("티켓정보삭제 요청에 실패하였습니다.");
+            e.printStackTrace();
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // 관리자페이지 티켓정보 추가 페이지 이동 및 티켓정보리스트 구현
+    @GetMapping("/adminTicketInfoCreate")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String TicketInfoCreate(Model model){
+        // 티켓정보
+        List<TicketDetailVO> ticketDetailList = ticketService.ticketDetailList();
+        model.addAttribute("ticketDetail", ticketDetailList);
+        return "admin/adminTicketInfoCreate";
+    }
+
+    // 티켓정보 추가
+    @PostMapping("/ticketInfoCreate")
+    public ResponseEntity<Boolean> TicketInfoCreate(@RequestBody TicketDetailVO ticketDetailVO){
+        try{
+            boolean result = ticketService.ticketInfoCreate(ticketDetailVO);
+            if(result){
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e){
+            logger.error("티켓정보 추가에 실패하였습니다.");
+            e.printStackTrace();
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // 티켓정보 수정
+    @PostMapping("/ticketInfoEdit")
+    public ResponseEntity<Boolean> TicketInfoEdit(@RequestBody TicketDetailVO ticketDetailVO){
+        try{
+            boolean result = ticketService.ticketInfoEdit(ticketDetailVO);
+            if(result){
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e){
+            logger.error("티켓정보 수정에 실패하였습니다.");
+            e.printStackTrace();
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
+    }
     
 }

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+    <div th:include="/fragment/head"></div>
+    <div th:include="/fragment/header"></div>
+    <div th:include="/fragment/nav"></div>
+
+    <div class="content">
+        <div class="image_banner">
+            <div class="image_banner_bg">
+                <img th:src="@{/image/admin_banner.jpg}" alt="">
+                <h1>관 &nbsp; 리 &nbsp; 자 &nbsp; 페 &nbsp; 이 &nbsp; 지</h1>
+            </div>
+            <div class="page_nav">
+                <span><a th:href="@{/}"><i class="fa-solid fa-house"></i></a></span>
+                <span><a th:href="@{/admin/admin}">ADMIN &nbsp; <i class="fa-solid fa-caret-down"></i></a></span>
+                <span><a th:href="@{/admin/adminTicket}">티켓정보 &nbsp; <i class="fa-solid fa-caret-down"></i></a></span>
+            </div>
+        </div>
+
+        <div class="admin_wrap">
+            <div th:include="/fragment/adminNav"></div>
+
+            <section class="admin_content">
+                <div class="pointBox">
+                    <div class="point_admintext">티켓 정보</div>
+                    <span class="point_hr"></span>
+                </div>
+
+                <table class="imsi_table">
+                    <tr>
+                        <td>티켓코드</td>
+                        <td>티켓이름</td>
+                        <td>티켓가격</td>
+                        <td>티켓생성일</td>
+                        <td>티켓수정일</td>
+                        <td>티켓수정</td>
+                        <td>티켓삭제</td>
+                    </tr>
+                    <tr th:each="ticketDetail : ${ticketDetail}">
+                        <td><input type="text" th:value="${ticketDetail.tType}" readonly></td>
+                        <td><input type="text" class="tName" th:value="${ticketDetail.tName}" readonly></td>
+                        <td><input type="text" class="tPrice" th:value="${ticketDetail.tPrice}" readonly></td>
+                        <td><input type="text" th:value="${#dates.format(ticketDetail.tDate, 'yyyy-MM-dd')}" readonly></td>
+                        <td><input type="text" th:value="${#dates.format(ticketDetail.tUpdate, 'yyyy-MM-dd')}" readonly></td>
+                        <td>
+                            <input type="button" value="수정" onclick="editTicketInfo(this)">
+                            <input type="button" value="수정완료" th:tType="${ticketDetail.tType}" style="display: none;" onclick="TicketInfoEdit(this.getAttribute('tType'))">
+                        </td>
+                        <td><input type="button" value="삭제" th:tType="${ticketDetail.tType}" th:onclick="ticketInfoDelete(this.getAttribute('tType'))"></td>
+                    </tr>
+                </table>
+
+                <div>
+                    <input type="button" value="티켓추가 +" th:onclick="|location.href='@{/admin/adminTicketInfoCreate}'|">
+                    <input type="button" value="티켓수정" th:onclick="|location.href='@{/admin/adminTicketInfoEdit}'|">
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <div th:include="/fragment/footer"></div>
+
+
+    <!-- script -->
+    <!-- 티켓종류 삭제처리 -->
+    <script>
+        function ticketInfoDelete(tType){
+            let DeleteYN = confirm("삭제하시겠습니까?")
+            if(DeleteYN){
+                console.log(tType);
+                fetch(urlparam + '/admin/ticketInfoDelete', {
+                    method: 'post',
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({
+                        tType: tType
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        console.log(data);
+                        alert("티켓이 삭제되었습니다.");
+                        location.href= window.location.href;
+                    }else{
+                        alert("티켓삭제에 실패하였습니다. 다시 시도해주세요.");
+                    }
+                })
+                .catch((error) => console.log(error));
+            }else{
+                alert("취소되었습니다.");
+            }
+        }
+    </script>
+
+    <!-- 티켓 수정 버튼구현 및 fetch 전송 -->
+    <script>
+        function editTicketInfo(button) {
+            var row = button.parentNode.parentNode;
+            var tNameInput = row.querySelector(".tName");
+            var tPriceInput = row.querySelector(".tPrice");
+            tNameInput.value = "";
+            tPriceInput.value = "";
+            tNameInput.readOnly = false;
+            tPriceInput.readOnly = false;
+            button.style.display = "none";
+            var completeButton = button.nextElementSibling;
+            completeButton.style.display = "inline-block";
+        }
+
+        function TicketInfoEdit(tType) {
+            var tNameInput = document.querySelector(".tName:not([readonly])");
+            var tPriceInput = document.querySelector(".tPrice:not([readonly])");
+            
+            var tName = tNameInput.value;
+            var tPrice = tPriceInput.value;
+            
+            fetch(urlparam + '/admin/ticketInfoEdit', {
+                method: 'post',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    tType: tType,
+                    tName: tName,
+                    tPrice: tPrice,
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        console.log(data);
+                        alert("티켓이 수정되었습니다.");
+                        location.href = window.location.href;
+                    } else {
+                        alert("티켓수정에 실패하였습니다. 다시 시도해주세요.");
+                    }
+                })
+                .catch((error) => console.log(error));
+        }
+    </script>
+</body>
+</html>

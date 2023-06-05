@@ -1722,12 +1722,131 @@ footer .inner>div:nth-child(4){
     margin-bottom: 0px;
 }
 /* templates/admin/adminTicketInfo */
-.imsi_table{
-    border: 1px solid #000;
+.ticketInfoWrap{
+    width: 100%;
+    /* margin-bottom: 40px; */
 }
-.imsi_table th{
-    border: 1px solid #000;
+.ticketInfoWrap table{
+    width: 100%;
+    border-bottom: 2px solid #aaa;
+    margin-bottom: 40px;
 }
-.imsi_table td{
-    border: 1px solid #000;
+.ticketInfoWrap table th{
+    border-top: 2px solid #aaa;
+    border-bottom: 3px double #aaa;
+    padding: 0px 10px;
+    height: 40px;
+    background-color: #FCE9F1;
+}
+.ticketInfoWrap table tr{
+    transition: 0.3s;
+    z-index: 1;
+}
+.ticketInfoWrap table tr:hover{
+    background-color: #e5e5e5;
+}
+.ticketInfoWrap table td{
+    height: 35px;
+    text-align: center;
+    border-top: 1px solid #000;
+}
+.ticketInfoWrap table td input{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+.ticketInfoWrap table td .redBtn{
+    z-index: 2;
+    width: 60px;
+    height: 25px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 13px;
+    background-color: tomato;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.ticketInfoWrap table td .redBtn:hover{
+    background-color: #f4435d;
+}
+.ticketInfoWrap table td .blueBtn{
+    z-index: 2;
+    width: 60px;
+    height: 25px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 13px;
+    background-color: #64a5ff;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.ticketInfoWrap table td .blueBtn:hover{
+    background-color: royalblue;
+}
+.ticketInfoBtn{
+    text-align: center;
+}
+.ticketInfoBtn input{
+    width: 200px;
+    height: 40px;
+    background-color: #f4435d;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.ticketInfoBtn input:hover{
+    background-color: royalblue;
+}
+/* templates/admin/adminTicketInfoCreate */
+.newTicketBox{
+    text-align: center;
+    padding: 15px 0px;
+    border-top: 2px solid crimson;
+    border-bottom: 2px solid crimson;
+    background-color: #f7f7f7;
+    margin-bottom: 60px;
+}
+.newTicketBox i{
+    margin-right: 5px;
+}
+.newTicketBox span{
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+.newTicketBox input{
+    width: 250px;
+    height: 35px;
+    padding: 0px 15px;
+    margin-right: 100px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+.newTicketBox input:last-child{
+    width: 150px;
+    margin-right: 0px;
+}
+.newTicketBtn{
+    display: flex;
+    justify-content: space-evenly;
+}
+.newTicketBtn input{
+    width: 130px;
+    height: 35px;
+    border: none;
+    border-radius: 10px;
+    background-color: #f4435d;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.newTicketBtn input:hover{
+    background-color: royalblue;
 }

@@ -43,4 +43,5 @@ public interface CommunityService {
     // FAQ 삭제
     boolean faqDelete(FaqVO faqVO);
 
+
 }

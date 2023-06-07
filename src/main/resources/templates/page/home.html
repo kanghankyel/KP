@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
     <div th:include="/fragment/head"></div>
     <div th:include="/fragment/header"></div>
@@ -54,6 +55,44 @@
             </article>
         </div>
     </section>
+
+    <section class="content2">
+        <div class="inner">
+            <span class="point_hr"></span>
+            <article>
+                <div class="content2_banner">
+                    <div>
+                        <h4>공지사항</h4>
+                        <h5>( NEWS )</h5>
+                    </div>
+                    <div>
+                        <a th:href="@{/community/notice}"><i class="fa-solid fa-square-plus"></i> 더보기</a>
+                    </div>
+                </div>
+                <div class="content2_content">
+                    <table>
+                        <tr th:each="notice : ${notice}" th:if="${not #lists.isEmpty(notice)}">
+                            <td><a th:href="@{/community/noticeDetail(nNum = ${notice.nNum})}"><i class="fa-solid fa-caret-right"></i></a></td>
+                            <td><a th:href="@{/community/noticeDetail(nNum = ${notice.nNum})}"><div th:text="${notice.nTitle}"></div></a></td>
+                            <td><a th:href="@{/community/noticeDetail(nNum = ${notice.nNum})}"><div th:text="${#strings.replace(#strings.substring(notice.nDate, 5), '-', '-')}"></div></a></td>
+                        </tr>
+                        <tr th:unless="${not #lists.isEmpty(notice)}">
+                            <td colspan="2">공지사항이 없습니다.</td>
+                        </tr>
+                    </table>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- <section class="content3">
+        <div class="inner">
+            <span class="point_hr"></span>
+            <article>
+
+            </article>
+        </div>
+    </section> -->
 
     <div th:include="/fragment/footer"></div>
 </body>

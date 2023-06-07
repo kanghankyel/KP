@@ -638,6 +638,7 @@ footer .inner>div:nth-child(4){
     width: 30px;
     height: 3px;
     background-color: #222;
+    margin-bottom: 10px;
 }
 .content1{
     padding-top: 60px;
@@ -710,6 +711,45 @@ footer .inner>div:nth-child(4){
 .content1 article>a:first-child:hover{
     border: 1px solid #fff;
     background-color: #fff;
+}
+.content2{
+    margin-bottom: 50px;
+}
+.content2 article{
+    width: 25%;
+}
+.content2_banner{
+    border: 1px solid #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.content2_content table{
+    width: 100%;
+    border: 1px solid #000;
+    background-color: #f5f5f5;
+}
+.content2_content table td{
+    /* border: 1px solid #000; */
+}
+.content2_content table td:nth-child(1){
+    width: 15px;
+    text-align: center;
+}
+.content2_content table td:nth-child(2){
+    padding: 2px 5px;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+.content2_content table td:nth-child(3){
+    width: 50px;
+    text-align: center;
+}
+.content2_content table td i{
+    position: relative;
+    bottom: 1.5px;
+    font-size: 2px;
+    color: #777;
 }
 /* templates/user/signup */
 .image_banner_bg .signupBanner{
@@ -1354,33 +1394,59 @@ footer .inner>div:nth-child(4){
 .ticket_board .right_td{
     border-right: none;
 }
+.ticketboxblock{
+    width: 580px;
+    height: 71px;
+    padding: 5px 10px;
+    border: 2px solid #aaa;
+    box-sizing: border-box;
+}
+.ticketboxblock h3{
+    font-size: 22px;
+    margin-bottom: 5px;
+    color: #222;
+}
+.ticketboxblock p{
+    font-size: 15px;
+}
+.ticketContainer{
+    width: 580px;
+    height: 300px;
+    padding: 20px 10px 0px 10px;
+    border: 2px solid #aaa;
+    box-sizing: border-box;
+    overflow: scroll;
+    background-color: #f5f5f5;
+}
 .ticketbox{
+    margin: 0 auto;
     position: relative;
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 .ticketbox select{
-    width: 300px;
-    height: 60px;
+    width: 200px;
+    height: 35px;
     border: 1px solid #000;
-    font-size: 16px;
-    letter-spacing: 2px;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
     text-align: center;
     margin-left: -1px;
     box-sizing: border-box;
-    background-color: #D2DAFF;
+    background-color: #f7f7f7;
     cursor: pointer;
 }
 .ticketbox .ticketCount{
-    width: 130px;
-    height: 60px;
+    width: 95px;
+    height: 35px;
 }
 .ticketbox button{
     position: absolute;
-    width: 20px;
-    height: 20px;
-    left: 82%;
+    width: 15px;
+    height: 15px;
+    right: 10px;
     top: 50%;
     transform: translate(0, -50%);
     border: 1px solid #000;
@@ -1388,24 +1454,41 @@ footer .inner>div:nth-child(4){
 }
 .ticketbox button::after{
     content: 'X';
-    font-weight: bold;
+    font-size: 11px;
 }
 .ticketBottomBox{
-    margin: 0 auto;
-    width: 730px;
-    /* border: 1px solid red; */
+    height: 42px;
+    line-height: 37px;
+    position: relative;
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 120px;
+    justify-content: center;
+    border: 2px solid #aaa;
     box-sizing: border-box;
+    margin-bottom: 15px;
 }
 #ticketbtnPlus{
     text-align: center;
 }
+#ticketbtnPlus input{
+    padding: 5px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: royalblue;
+    box-sizing: border-box;
+    cursor: pointer;
+    color: #eee;
+    transition: 0.3s;
+}
+#ticketbtnPlus input:hover{
+    background-color: rgb(101, 132, 225);
+}
 #ticketTotal{
+    display: flex;
+    justify-content: center;
     font-size: 22px;
     font-weight: bold;
     color: #222;
+    margin-bottom: 100px;
 }
 #ticketTotal input{
     width: 120px;
@@ -1416,18 +1499,6 @@ footer .inner>div:nth-child(4){
 }
 #ticketTotal i{
     font-size: 17px;
-}
-#ticketbtnPlus input{
-    padding: 5px 20px;
-    border: none;
-    background-color: royalblue;
-    box-sizing: border-box;
-    cursor: pointer;
-    color: #eee;
-    transition: 0.3s;
-}
-#ticketbtnPlus input:hover{
-    background-color: rgb(101, 132, 225);
 }
 #ticketbtnBuy{
     text-align: center;
@@ -1448,10 +1519,14 @@ footer .inner>div:nth-child(4){
 #ticketbtnBuy input:hover{
     background-color: #FF4C2A;
 }
+.ticketbuy_wrap{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
 /* templates/ticket/ticketDatepick */
 #calendar {
-    max-width: 1200px;
-    margin-bottom: 160px;
+    max-width: 600px;
 }
 #calendarHeader {
     display: flex;
@@ -1483,7 +1558,7 @@ footer .inner>div:nth-child(4){
     letter-spacing: 2px;
 }
 #calendarBody {
-    width: 1200px;
+    width: 600px;
     border-collapse: collapse;
     border: 1px solid #aaa;
 }
@@ -1499,10 +1574,10 @@ footer .inner>div:nth-child(4){
     color: #f4435d;
 }
 #calendarBody td {
-    height: 90px;
+    height: 60px;
     color: #222;
-    font-size: 21px;
-    padding: 10px 10px 50px 10px;
+    font-size: 18px;
+    padding: 5px 10px 30px 10px;
     box-sizing: border-box;
     cursor: pointer;
     border: 1px solid #aaa;
@@ -1515,7 +1590,7 @@ footer .inner>div:nth-child(4){
     color: #fff;
     font-weight: bold;
     background-color: #FC4F55;
-    border: 2px solid #555;
+    border: 1px solid #555;
     box-sizing: border-box;
 }
 #calendarBody td.disabled {
@@ -2061,7 +2136,6 @@ footer .inner>div:nth-child(4){
 
 
 .imsi_table{
-    width: 100%;
     border: 2px solid #222;
 }
 .imsi_table th{

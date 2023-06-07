@@ -90,77 +90,84 @@
             </table>
 
             <div class="pointBox">
-                <div class="point_bigtext">예약일 선택</div>
+                <div class="point_bigtext">예약일 & 티켓 선택</div>
                 <div class="point_smalltext">365일 연중무휴! 원하시는 일정을 골라주세요.</div>
                 <span class="point_hr"></span>
             </div>
-            <div id="calendar">
-                <div id="calendarHeader">
-                    <button id="prevMonthBtn">&lt;</button>
-                    <h2 id="currentMonthYear"></h2>
-                    <button id="nextMonthBtn">&gt;</button>
+
+            <div class="ticketbuy_wrap">
+                <div>
+                    <div id="calendar">
+                        <div id="calendarHeader">
+                            <button id="prevMonthBtn">&lt;</button>
+                            <h2 id="currentMonthYear"></h2>
+                            <button id="nextMonthBtn">&gt;</button>
+                        </div>
+                        <table id="calendarBody">
+                            <thead>
+                                <tr>
+                                <th class="holiday">일</th>
+                                <th>월</th>
+                                <th>화</th>
+                                <th>수</th>
+                                <th>목</th>
+                                <th>금</th>
+                                <th class="holiday">토</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <input type="hidden" id="selectedDate" placeholder="선택일자">
                 </div>
-                <table id="calendarBody">
-                    <thead>
-                        <tr>
-                        <th class="holiday">일</th>
-                        <th>월</th>
-                        <th>화</th>
-                        <th>수</th>
-                        <th>목</th>
-                        <th>금</th>
-                        <th class="holiday">토</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+                
+                <div>
+                    <div class="ticketboxblock">
+                        <h3>티켓 종류를 선택하세요</h3>
+                        <p>(추가 +) 버튼을 통해 추가구매 할 수 있습니다.</p>
+                    </div>
+                    <div class="ticketContainer">
+                        <div>
+                            <div class="ticketbox">
+                                <div><input type="hidden" th:value="${#authentication.principal.member.uNum}" class="inputuNum" name="uNum" readonly></div>
+                                <div>
+                                    <select name="tType" class="inputtType" onchange="calculateTotal()">
+                                        <option value="none1">( 티켓종류를 선택하세요 )</option>
+                                        <option th:each="ticketDetail : ${ticketDetail}" th:value="${ticketDetail.tType}" th:text="${ticketDetail.tName}" th:data-price="${ticketDetail.tPrice}"></option>
+                                    </select>
+                                </div>
+                                <div><input type="hidden" th:value="${#authentication.principal.member.uName}" class="inputuName" name="uName" readonly></div>
+                                <div><input type="hidden" class="inputmarket" name="market" value="KIDSPLACE" readonly></div>
+                                <div>
+                                    <select name="tArea" class="inputtArea">
+                                        <option value="none2">( 사용지역을 선택하세요 )</option>
+                                        <option value="경기 킨텍스">경기 킨텍스</option>
+                                        <option value="부산 벡스코">부산 벡스코</option>
+                                        <option value="대구 엑스코">대구 엑스코</option>
+                                        <option value="광주 김대중컨벤션">광주 김대중컨벤션</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <select class="ticketCount" onchange="calculateTotal()">
+                                        <option value="none3">( 티켓수량 )</option>
+                                        <option th:each="num : ${#numbers.sequence(1,30)}" th:value="${num}" th:text="${num}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ticketBottomBox">
+                        <div id="ticketbtnPlus">
+                            <input type="button" value="추가 +" onclick="plusTicket()">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <input type="hidden" id="selectedDate" placeholder="선택일자">
             
-            <div class="pointBox">
-                <div class="point_bigtext">티켓 선택</div>
-                <div class="point_smalltext">다양한 종류의 티켓을 선택해주세요.</div>
-                <span class="point_hr"></span>
-            </div>
-
-            <div class="ticketContainer">
-                <div class="ticketbox">
-                    <div><input type="hidden" th:value="${#authentication.principal.member.uNum}" class="inputuNum" name="uNum" readonly></div>
-                    <div>
-                        <select name="tType" class="inputtType" onchange="calculateTotal()">
-                            <option value="none1">( &nbsp;&nbsp; 티켓종류를 선택하세요 &nbsp;&nbsp; )</option>
-                            <option th:each="ticketDetail : ${ticketDetail}" th:value="${ticketDetail.tType}" th:text="${ticketDetail.tName}" th:data-price="${ticketDetail.tPrice}"></option>
-                        </select>
-                    </div>
-                    <div><input type="hidden" th:value="${#authentication.principal.member.uName}" class="inputuName" name="uName" readonly></div>
-                    <div><input type="hidden" class="inputmarket" name="market" value="KIDSPLACE" readonly></div>
-                    <div>
-                        <select name="tArea" class="inputtArea">
-                            <option value="none2">( &nbsp;&nbsp; 사용지역을 선택하세요 &nbsp;&nbsp; )</option>
-                            <option value="경기 킨텍스">경기 킨텍스</option>
-                            <option value="부산 벡스코">부산 벡스코</option>
-                            <option value="대구 엑스코">대구 엑스코</option>
-                            <option value="광주 김대중컨벤션">광주 김대중컨벤션</option>
-                        </select>
-                    </div>
-                    <div>
-                        <select class="ticketCount" onchange="calculateTotal()">
-                            <option value="none3">(&nbsp; 티켓수량 &nbsp;)</option>
-                            <option th:each="num : ${#numbers.sequence(1,30)}" th:value="${num}" th:text="${num}"></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="ticketBottomBox">
-                <div id="ticketbtnPlus">
-                    <input type="button" value="추가 +" onclick="plusTicket()">
-                </div>
-                <div id="ticketTotal">
-                    <span>총 합계 : </span>
-                    <input type="text" id="tAmount" disabled>
-                    <i class="fa-solid fa-won-sign"></i>
-                </div>
+            <div id="ticketTotal">
+                <span>총 합계 : </span>
+                <input type="text" id="tAmount" disabled>
+                <i class="fa-solid fa-won-sign"></i>
             </div>
             <div id="ticketbtnBuy">
                 <input type="button" value="티켓구매" onclick="insertTicket()">

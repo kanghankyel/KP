@@ -50,4 +50,37 @@ public interface TicketService {
     // 티켓정보 수정
     boolean ticketInfoEdit(TicketDetailVO ticketDetailVO);
 
+    // 티켓정보 리스트
+    List<TicketVO> ticketDateList(TicketVO ticketVO);
+
+    // 일별 구매 정산
+    List<TicketVO> ticketDayBuySum(TicketVO ticketVO);
+
+    // 일별 환불 정산
+    List<TicketVO> ticketDayRefundSum(TicketVO ticketVO);
+
+    // 일별 수익 총계
+    List<TicketVO> ticketDayTotal(TicketVO ticketVO);
+
+    // 월별 구매 정산
+    List<TicketVO> ticketMonthList(TicketVO ticketVO);
+
+    // 월별 환불 정산
+    List<TicketVO> ticketMonthRefund(TicketVO ticketVO);
+
+    // 월별 수익 총계
+    List<TicketVO> ticketMonthTotal(TicketVO ticketVO);
+
+    // 기간 티켓정보 리스트
+    List<TicketVO> ticketSinceList(TicketVO ticketVO);
+
+    // 기간별 구매 정산
+    List<TicketVO> ticketSinceBuySum(TicketVO ticketVO);
+
+    // 기간별 환불 정산
+    List<TicketVO> ticketSinceRefundSum(TicketVO ticketVO);
+
+    // 기간별 수익 총계
+    List<TicketVO> ticketSinceTotal(TicketVO ticketVO);
+
 }

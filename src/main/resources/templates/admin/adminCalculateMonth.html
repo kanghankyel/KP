@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+    <div th:include="/fragment/head"></div>
+    <div th:include="/fragment/header"></div>
+    <div th:include="/fragment/nav"></div>
+
+    <div class="content">
+        <div class="image_banner">
+            <div class="image_banner_bg">
+                <img th:src="@{/image/admin_banner.jpg}" alt="">
+                <h1>관 &nbsp; 리 &nbsp; 자 &nbsp; 페 &nbsp; 이 &nbsp; 지</h1>
+            </div>
+            <div class="page_nav">
+                <span><a th:href="@{/}"><i class="fa-solid fa-house"></i></a></span>
+                <span><a th:href="@{/admin/admin}">ADMIN &nbsp; <i class="fa-solid fa-caret-down"></i></a></span>
+                <span><a th:href="@{/admin/adminCalculate}">관리자정산 &nbsp; <i class="fa-solid fa-caret-down"></i></a></span>
+            </div>
+        </div>
+
+        <div class="admin_wrap">
+            <div th:include="/fragment/adminNav"></div>
+            
+            <section class="admin_content">
+                <div class="pointBox">
+                    <div class="point_admintext">관리자 정산</div>
+                    <span class="point_hr"></span>
+                </div>
+
+                <div class="adminTop">
+                    <article>
+                        <div>
+                            <button id="date_searchBtn">일별 검색</button>
+                            <button id="month_searchBtn">월별 검색</button>
+                            <button id="since_searchBtn">구간 검색</button>
+                        </div>
+                        <div id="date_searchBox" style="display: none;">
+                            <form th:action="@{/admin/adminCalculate(search=${search})}" method="get">
+                                <div>
+                                    <input type="date" name="sellDate" th:value="${search.sellDate}">
+                                </div>
+                                <button type="submit">검색</button>
+                                <a th:href="@{/admin/adminCalculate?search=}">전체 검색</a>
+                            </form>
+                        </div>
+                        <div id="month_searchBox" style="display: block;">
+                            <form th:action="@{/admin/adminCalculateMonth(search=${search})}" method="get">
+                                <div>
+                                    <input type="month" name="sellDate" th:value="${search.sellDate}">
+                                </div>
+                                <button type="submit">검색</button>
+                                <a th:href="@{/admin/adminCalculateMonth?search=}">전체 검색</a>
+                            </form>
+                        </div>
+                        <div id="since_searchBox" style="display: none;">
+                            <form th:action="@{/admin/adminCalculateSince(search=${search})}" method="get">
+                                <div>
+                                    <input type="date" name="startDate" th:value="${search.startDate}">
+                                    <span> ~ </span>
+                                    <input type="date" name="endDate" th:value="${search.endDate}">
+                                </div>
+                                <button type="submit">검색</button>
+                            </form>
+                        </div>
+                    </article>
+    
+                    <article>
+                        <div>캘린더를 넣을 예정</div>
+                    </article>
+                </div>
+                
+                <div class="adminBottom">
+                    <article>
+                        <div id="monthDisplay">
+                            <table class="imsi_table">
+                                <tr>
+                                    <th>검색일자</th>
+                                    <th>티켓번호</th>
+                                    <th>유저이름</th>
+                                    <th>티켓가격</th>
+                                    <th>티켓상태</th>
+                                </tr>
+                                <tr th:each="ticketdatelist : ${ticketdatelist}" th:if="${not #lists.isEmpty(ticketdatelist)}">
+                                    <td><div th:text="${ticketdatelist.sellDate}"></div></td>
+                                    <td><div th:text="${ticketdatelist.tNum}"></div></td>
+                                    <td><div th:text="${ticketdatelist.uName}"></div></td>
+                                    <td><div th:text="${ticketdatelist.tPrice}"></div></td>
+                                    <td>
+                                        <div th:if="${ticketdatelist.used == 'N'}">예매완료</div>
+                                        <div th:if="${ticketdatelist.used == 'Y'}">사용완료</div>
+                                        <div th:if="${ticketdatelist.used == 'R'}">환불요청</div>
+                                        <div th:if="${ticketdatelist.used == 'C'}">환불완료</div>
+                                    </td>
+                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(ticketdatelist)}">
+                                    <td colspan="5">해당하는 정보가 없습니다.</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </article>
+    
+                    <article>
+                        <div id="monthResult">
+                            <div>해당하는 검색 월 총계</div>
+                            <table class="imsi_table">
+                                <tr>
+                                    <th>검색월</th>
+                                    <th>구매건수</th>
+                                    <th>티켓총액</th>
+                                </tr>
+                                <tr th:each="ticketmonthlist : ${ticketmonthlist}" th:if="${not #lists.isEmpty(ticketmonthlist)}">
+                                    <td><div th:text="${ticketmonthlist.sellDate}"></div></td>
+                                    <td><div th:text="${ticketmonthlist.tCount}"></div></td>
+                                    <td><div th:text="${ticketmonthlist.tPrice}"></div></td>
+                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(ticketmonthlist)}">
+                                    <td>-</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                            </table>
+
+                            <div>해당하는 환불건수를 보여줄 예정</div>
+                            <table class="imsi_table">
+                                <tr>
+                                    <th>검색월</th>
+                                    <th>환불건수</th>
+                                    <th>환불금액</th>
+                                </tr>
+                                <tr th:each="ticketmonthrefund : ${ticketmonthrefund}" th:if="${not #lists.isEmpty(ticketmonthrefund)}">
+                                    <td th:text="${ticketmonthrefund.sellDate}"></td>
+                                    <td th:text="${ticketmonthrefund.tCount}"></td>
+                                    <td th:text="${ticketmonthrefund.tPrice}"></td>
+                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(ticketmonthrefund)}">
+                                    <td>-</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                            </table>
+
+                            <div>판매금액에서 환불금액을 뺀 수익총계</div>
+                            <table class="imsi_table">
+                                <tr>
+                                    <th>수익월</th>
+                                    <th>수익건수</th>
+                                    <th>수익총계</th>
+                                </tr>
+                                <tr th:each="ticketmonthtotal : ${ticketmonthtotal}" th:if="${not #lists.isEmpty(ticketmonthtotal)}">
+                                    <td th:text="${ticketmonthtotal.sellDate}"></td>
+                                    <td th:text="${ticketmonthtotal.tCount}"></td>
+                                    <td th:text="${ticketmonthtotal.tPrice}"></td>
+                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(ticketmonthtotal)}">
+                                    <td>-</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <div th:include="/fragment/footer"></div>
+    
+
+    <!-- button을 통해 날짜검색 div 변경 -->
+    <script>
+        document.getElementById('date_searchBtn').addEventListener('click', function() {
+            document.getElementById('date_searchBox').style.display = 'block';
+            document.getElementById('month_searchBox').style.display = 'none';
+            document.getElementById('since_searchBox').style.display = 'none';
+        });
+
+        document.getElementById('month_searchBtn').addEventListener('click', function() {
+            document.getElementById('date_searchBox').style.display = 'none';
+            document.getElementById('month_searchBox').style.display = 'block';
+            document.getElementById('since_searchBox').style.display = 'none';
+        });
+
+        document.getElementById('since_searchBtn').addEventListener('click', function() {
+            document.getElementById('date_searchBox').style.display = 'none';
+            document.getElementById('month_searchBox').style.display = 'none';
+            document.getElementById('since_searchBox').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

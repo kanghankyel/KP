@@ -6,6 +6,7 @@ public class TicketVO {
     private String uNum;
     private String tType;
     private String tName;
+    private String tPrice;
     private String uPhoneNum;
     private String uName;
     private String market;
@@ -16,17 +17,21 @@ public class TicketVO {
     private String used;
     // 티켓수량 vo객체 추가
     private int tCount;
+    // 검색일 vo객체 추가
+    private String startDate;
+    private String endDate;
 
     public TicketVO(){
 
     }
     
-    public TicketVO(String tNum, String uNum, String tType, String tName, String uPhoneNum, String uName, String market, String tArea, String sellDate,
-            String pickDate, String useDate, String used, int tCount) {
+    public TicketVO(String tNum, String uNum, String tType, String tName, String tPrice, String uPhoneNum, String uName, String market, String tArea, String sellDate,
+            String pickDate, String useDate, String used, int tCount, String startDate, String endDate) {
         this.tNum = tNum;
         this.uNum = uNum;
         this.tType = tType;
         this.tName = tName;
+        this.tPrice = tPrice;
         this.uPhoneNum = uPhoneNum;
         this.uName = uName;
         this.market = market;
@@ -36,6 +41,8 @@ public class TicketVO {
         this.useDate = useDate;
         this.used = used;
         this.tCount = tCount;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
     
     public String gettNum() {
@@ -61,6 +68,12 @@ public class TicketVO {
     }
     public void settName(String tName) {
         this.tName = tName;
+    }
+    public String gettPrice() {
+        return tPrice;
+    }
+    public void settPrice(String tPrice) {
+        this.tPrice = tPrice;
     }
     public String getuPhoneNum() {
         return uPhoneNum;
@@ -116,13 +129,26 @@ public class TicketVO {
     public void settCount(int tCount) {
         this.tCount = tCount;
     }
+    public String getStartDate() {
+        return startDate;
+    }
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+    public String getEndDate() {
+        return endDate;
+    }
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
 
     @Override
     public String toString() {
-        return "TicketVO [tNum=" + tNum + ", uNum=" + uNum + ", tType=" + tType + ", tName=" + tName + ", uPhoneNum="
-                + uPhoneNum + ", uName=" + uName + ", market=" + market + ", tArea=" + tArea + ", sellDate=" + sellDate
-                + ", pickDate=" + pickDate + ", useDate=" + useDate + ", used=" + used + ", tCount=" + tCount + "]";
+        return "TicketVO [tNum=" + tNum + ", uNum=" + uNum + ", tType=" + tType + ", tName=" + tName + ", tPrice="
+                + tPrice + ", uPhoneNum=" + uPhoneNum + ", uName=" + uName + ", market=" + market + ", tArea=" + tArea
+                + ", sellDate=" + sellDate + ", pickDate=" + pickDate + ", useDate=" + useDate + ", used=" + used
+                + ", tCount=" + tCount + ", startDate=" + startDate + ", endDate=" + endDate + "]";
     }
-
    
+    
 }

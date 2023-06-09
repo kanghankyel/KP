@@ -313,5 +313,272 @@
             tType = #{tType}
     </update>
 
+    <!-- 티켓정보 리스트 -->
+    <select id="ticketDateList" resultMap="ticketMap">
+        SELECT
+            a.tNum
+           ,a.uNum
+           ,a.tType
+           ,a.uName
+           ,a.market
+           ,a.tArea
+           ,DATE_FORMAT(a.sellDate, '%Y-%m-%d') AS sellDate
+           ,DATE_FORMAT(a.pickDate, '%Y-%m-%d') AS pickDate
+           ,DATE_FORMAT(a.useDate, '%Y-%m-%d') AS useDate
+           ,a.used
+           ,b.tPrice
+        FROM
+            kidslandTicket AS a
+        LEFT JOIN
+            kidslandTicketDetail AS b
+        ON
+            a.tType = b.tType
+        WHERE
+            1 = 1
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.sellDate)">
+                AND a.sellDate LIKE CONCAT('%', #{ticketVO.sellDate}, '%')
+            </if>
+        ORDER BY
+            a.tNum DESC
+    </select>
+
+    <!-- 일별 구매 정산 -->
+    <select id="ticketDayBuySum" resultMap="ticketMap">
+        SELECT
+            DATE_FORMAT(a.sellDate, '%Y-%m-%d') AS sellDate
+           ,COUNT(*) AS tCount
+           ,CAST(SUM(b.tPrice) AS CHAR) AS tPrice
+        FROM
+            kidslandTicket AS a
+        LEFT JOIN
+            kidslandTicketDetail AS b
+        ON
+            a.tType = b.tType
+        WHERE
+            1 = 1
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.sellDate)">
+                AND a.sellDate LIKE CONCAT('%', #{ticketVO.sellDate}, '%')
+            </if>
+        GROUP BY
+            DATE_FORMAT(a.sellDate, '%Y-%m-%d')
+    </select>
+
+    <!-- 일별 환불 정산 -->
+    <select id="ticketDayRefundSum" resultMap="ticketMap">
+        SELECT
+            DATE_FORMAT(a.sellDate, '%Y-%m-%d') AS sellDate
+           ,COUNT(*) AS tCount
+           ,CAST(SUM(b.tPrice) AS CHAR) AS tPrice
+        FROM
+            kidslandTicket AS a
+        INNER JOIN
+            kidslandTicketDetail AS b
+        ON
+            a.tType = b.tType
+        WHERE
+            1 = 1
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.sellDate)">
+                AND a.sellDate LIKE CONCAT('%', #{ticketVO.sellDate}, '%')
+            </if>
+            AND
+                a.used = 'C'
+        GROUP BY
+            DATE_FORMAT(a.sellDate, '%Y-%m-%d')
+    </select>
+
+    <!-- 일별 수익 총계 -->
+    <select id="ticketDayTotal" resultMap="ticketMap">
+        SELECT
+            DATE_FORMAT(a.sellDate, '%Y-%m-%d') AS sellDate,
+            COUNT(*) AS tCount,
+            CAST(SUM(b.tPrice) AS CHAR) AS tPrice
+        FROM
+            kidslandTicket AS a
+        INNER JOIN
+            kidslandTicketDetail AS b
+        ON
+            a.tType = b.tType
+        WHERE
+            1 = 1
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.sellDate)">
+                AND a.sellDate LIKE CONCAT('%', #{ticketVO.sellDate}, '%')
+            </if>
+            AND NOT
+                a.used = 'C'
+        GROUP BY
+            DATE_FORMAT(a.sellDate, '%Y-%m-%d')
+    </select>
+
+    <!-- 월별 구매 정산 -->
+    <select id="ticketMonthList" resultMap="ticketMap">
+        SELECT
+            MONTH(a.sellDate) AS sellDate,
+            COUNT(*) AS tCount,
+            SUM(b.tPrice) AS tPrice
+        FROM
+            kidslandTicket AS a
+        INNER JOIN
+            kidslandTicketDetail AS b
+        ON
+            a.tType = b.tType
+        WHERE
+            1 = 1
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.sellDate)">
+                AND a.sellDate LIKE CONCAT('%', #{ticketVO.sellDate}, '%')
+            </if>
+        GROUP BY
+            MONTH(a.sellDate);
+    </select>
+
+    
+    <!-- 월별 환불 정산 -->
+    <select id="ticketMonthRefund" resultMap="ticketMap">
+        SELECT
+            MONTH(a.sellDate) AS sellDate,
+            COUNT(*) AS tCount,
+            SUM(b.tPrice) AS tPrice
+        FROM
+            kidslandTicket AS a
+        INNER JOIN
+            kidslandTicketDetail AS b
+        ON
+            a.tType = b.tType
+        WHERE
+            1 = 1
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.sellDate)">
+                AND a.sellDate LIKE CONCAT('%', #{ticketVO.sellDate}, '%')
+            </if>
+            AND
+                a.used = 'C'
+        GROUP BY
+            MONTH(a.sellDate);
+    </select>
+
+
+    <!-- 월별 수익 총계 -->
+    <select id="ticketMonthTotal" resultMap="ticketMap">
+        SELECT
+            MONTH(a.sellDate) AS sellDate,
+            COUNT(*) AS tCount,
+            SUM(b.tPrice) AS tPrice
+        FROM
+            kidslandTicket AS a
+        INNER JOIN
+            kidslandTicketDetail AS b
+        ON
+            a.tType = b.tType
+        WHERE
+            1 = 1
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(ticketVO.sellDate)">
+                AND a.sellDate LIKE CONCAT('%', #{ticketVO.sellDate}, '%')
+            </if>
+            AND NOT
+                a.used = 'C'
+        GROUP BY
+            MONTH(a.sellDate);
+    </select>
+
+    
+    <!-- 기간 티켓정보 리스트 -->
+    <select id="ticketSinceList" resultMap="ticketMap">
+        SELECT
+            a.tNum
+           ,a.uNum
+           ,a.tType
+           ,a.uName
+           ,a.market
+           ,a.tArea
+           ,DATE_FORMAT(a.sellDate, '%Y-%m-%d') AS sellDate
+           ,DATE_FORMAT(a.pickDate, '%Y-%m-%d') AS pickDate
+           ,DATE_FORMAT(a.useDate, '%Y-%m-%d') AS useDate
+           ,a.used
+           ,b.tPrice
+        FROM
+            kidslandTicket AS a
+        LEFT JOIN
+            kidslandTicketDetail AS b
+        ON
+            a.tType = b.tType
+        WHERE
+            DATE(a.sellDate)
+                BETWEEN #{ticketVO.startDate}
+                AND #{ticketVO.endDate}
+                OR DATE(a.sellDate) = #{ticketVO.endDate}
+        ORDER BY
+            a.tNum DESC
+    </select>
+
+
+    <!-- 기간별 구매 정산 -->
+    <select id="ticketSinceBuySum" resultMap="ticketMap">
+        SELECT
+            DATE_FORMAT(a.sellDate, '%Y-%m-%d') AS sellDate
+           ,COUNT(*) AS tCount
+           ,CAST(SUM(b.tPrice) AS CHAR) AS tPrice
+        FROM
+            kidslandTicket AS a
+        LEFT JOIN
+            kidslandTicketDetail AS b
+        ON
+            a.tType = b.tType
+        WHERE
+            DATE(a.sellDate)
+                BETWEEN #{ticketVO.startDate}
+                AND #{ticketVO.endDate}
+                OR DATE(a.sellDate) = #{ticketVO.endDate}
+        GROUP BY
+            DATE_FORMAT(a.sellDate, '%Y-%m-%d')
+    </select>
+
+
+    <!-- 기간별 환불 정산 -->
+    <select id="ticketSinceRefundSum" resultMap="ticketMap">
+        SELECT
+            DATE_FORMAT(a.sellDate, '%Y-%m-%d') AS sellDate
+           ,COUNT(*) AS tCount
+           ,CAST(SUM(b.tPrice) AS CHAR) AS tPrice
+        FROM
+            kidslandTicket AS a
+        INNER JOIN
+            kidslandTicketDetail AS b
+        ON
+            a.tType = b.tType
+        WHERE
+            a.used = 'C'
+            AND
+            (DATE(a.sellDate)
+                BETWEEN #{ticketVO.startDate}
+                AND #{ticketVO.endDate}
+                OR DATE(a.sellDate) = #{ticketVO.endDate})
+            AND
+                a.used = 'C'
+        GROUP BY
+            DATE_FORMAT(a.sellDate, '%Y-%m-%d')
+    </select>
+
+
+    <!-- 기간별 수익 총계 -->
+    <select id="ticketSinceTotal" resultMap="ticketMap">
+        SELECT
+            DATE_FORMAT(a.sellDate, '%Y-%m-%d') AS sellDate,
+            COUNT(*) AS tCount,
+            CAST(SUM(b.tPrice) AS CHAR) AS tPrice
+        FROM
+            kidslandTicket AS a
+        INNER JOIN
+            kidslandTicketDetail AS b
+        ON
+            a.tType = b.tType
+        WHERE
+            (DATE(a.sellDate)
+                BETWEEN #{ticketVO.startDate}
+                AND #{ticketVO.endDate}
+                OR DATE(a.sellDate) = #{ticketVO.endDate})
+            AND NOT
+                a.used = 'C'
+        GROUP BY
+            DATE_FORMAT(a.sellDate, '%Y-%m-%d')
+    </select>
+
 </mapper>
 

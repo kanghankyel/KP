@@ -10,6 +10,7 @@
                 <div><a th:href="@{/admin/adminUser}">회원 리스트 관리</a></div>
                 <div><a th:href="@{/admin/adminTicket}">티켓 리스트 관리</a></div>
                 <div><a th:href="@{/admin/adminTicketInfo}">티켓 정보 관리</a></div>
+                <div><a th:href="@{/admin/adminCalculate(sellDate=${T(java.time.LocalDate).now()})}">관리자 정산</a></div>
             </article>
         </section>
     </div>

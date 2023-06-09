@@ -1,5 +1,6 @@
 package com.kidsplace.kidsplace.controller;
 
+import java.io.Console;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -258,5 +259,72 @@ public class AdminController {
             return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
         }
     }
+
+    // 관리자페이지 정산페이지(일별) 이동
+    @GetMapping("/adminCalculate")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String AdminCalculateDay(Model model
+                                    , @ModelAttribute("search") TicketVO ticketVO){
+        // 검색조건 유지를 위한 값
+        model.addAttribute("search", ticketVO);
+        // 티켓 리스트
+        List<TicketVO> ticketdatelist = ticketService.ticketDateList(ticketVO);
+        model.addAttribute("ticketdatelist", ticketdatelist);
+        // 일별 구매 정산
+        List<TicketVO> ticketdaybuysum = ticketService.ticketDayBuySum(ticketVO);
+        model.addAttribute("ticketdaybuysum", ticketdaybuysum);
+        // 일별 환불 정산
+        List<TicketVO> ticketdayrefundsum = ticketService.ticketDayRefundSum(ticketVO);
+        model.addAttribute("ticketdayrefundsum", ticketdayrefundsum);
+        // 일별 수익 총계
+        List<TicketVO> ticketdaytotal = ticketService.ticketDayTotal(ticketVO);
+        model.addAttribute("ticketdaytotal", ticketdaytotal);
+        return "/admin/adminCalculate";
+    }
+
+    // 관리자페이지 정산페이지(월별) 이동
+    @GetMapping("/adminCalculateMonth")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String AdminCalculateMonth(Model model
+                                    , @ModelAttribute("search") TicketVO ticketVO){
+        // 검색조건 유지를 위한 값
+        model.addAttribute("search", ticketVO);
+        // 티켓 리스트
+        List<TicketVO> ticketdatelist = ticketService.ticketDateList(ticketVO);
+        model.addAttribute("ticketdatelist", ticketdatelist);
+        // 월별 구매 정산
+        List<TicketVO> ticketmonthlist = ticketService.ticketMonthList(ticketVO);
+        model.addAttribute("ticketmonthlist", ticketmonthlist);
+        // 월별 환불 정산
+        List<TicketVO> ticketmonthrefund = ticketService.ticketMonthRefund(ticketVO);
+        model.addAttribute("ticketmonthrefund", ticketmonthrefund);
+        // 월별 수익 총계
+        List<TicketVO> ticketmonthtotal = ticketService.ticketMonthTotal(ticketVO);
+        model.addAttribute("ticketmonthtotal", ticketmonthtotal);
+        return "/admin/adminCalculateMonth";
+    }
+
+    // 관리자페이지 정산페이지(기간) 이동
+    @GetMapping("/adminCalculateSince")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String AdminCalculateSince(Model model
+                                    , @ModelAttribute("search") TicketVO ticketVO){
+        // 검색조건 유지를 위한 값
+        model.addAttribute("search", ticketVO);
+        // 티켓 리스트
+        List<TicketVO> ticketdatelist = ticketService.ticketSinceList(ticketVO);
+        model.addAttribute("ticketdatelist", ticketdatelist);
+        // 기간별 구매 정산
+        List<TicketVO> ticketsincebuysum = ticketService.ticketSinceBuySum(ticketVO);
+        model.addAttribute("ticketsincebuysum", ticketsincebuysum);
+        // 기간별 환불 정산
+        List<TicketVO> ticketsincerefundsum = ticketService.ticketSinceRefundSum(ticketVO);
+        model.addAttribute("ticketsincerefundsum", ticketsincerefundsum);
+        // 기간별 수익 총계
+        List<TicketVO> ticketsincetotal = ticketService.ticketSinceTotal(ticketVO);
+        model.addAttribute("ticketsincetotal", ticketsincetotal);
+        return "/admin/adminCalculateSince";
+    }
+
     
 }

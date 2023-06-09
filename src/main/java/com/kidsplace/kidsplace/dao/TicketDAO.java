@@ -52,4 +52,37 @@ public interface TicketDAO {
     // 티켓정보 수정
     int ticketInfoEdit(TicketDetailVO ticketDetailVO);
 
+    // 티켓정보 리스트
+    List<TicketVO> ticketDateList(@Param("ticketVO") TicketVO ticketVO);
+
+    // 일별 구매 정산
+    List<TicketVO> ticketDayBuySum(@Param("ticketVO") TicketVO ticketVO);
+
+    // 일별 환불 정산
+    List<TicketVO> ticketDayRefundSum(@Param("ticketVO") TicketVO ticketVO);
+
+    // 일별 수익 총계
+    List<TicketVO> ticketDayTotal(@Param("ticketVO") TicketVO ticketVO);
+
+    // 월별 구매 정산
+    List<TicketVO> ticketMonthList(@Param("ticketVO") TicketVO ticketVO);
+
+    // 월별 환불 정산
+    List<TicketVO> ticketMonthRefund(@Param("ticketVO") TicketVO ticketVO);
+
+    // 월별 수익 총계
+    List<TicketVO> ticketMonthTotal(@Param("ticketVO") TicketVO ticketVO);
+
+    // 기간 티켓정보 리스트
+    List<TicketVO> ticketSinceList(@Param("ticketVO") TicketVO ticketVO);
+
+    // 기간별 구매 정산
+    List<TicketVO> ticketSinceBuySum(@Param("ticketVO") TicketVO ticketVO);
+
+    // 기간별 환불 정산
+    List<TicketVO> ticketSinceRefundSum(@Param("ticketVO") TicketVO ticketVO);
+
+    // 기간별 수익 총계
+    List<TicketVO> ticketSinceTotal(@Param("ticketVO") TicketVO ticketVO);
+    
 }

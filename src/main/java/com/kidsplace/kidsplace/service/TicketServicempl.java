@@ -183,4 +183,59 @@ public class TicketServicempl implements TicketService {
         }
     }
 
+    @Override
+    public List<TicketVO> ticketDateList(TicketVO ticketVO) {
+        return ticketDAO.ticketDateList(ticketVO);
+    }
+
+    @Override
+    public List<TicketVO> ticketDayBuySum(TicketVO ticketVO) {
+        return ticketDAO.ticketDayBuySum(ticketVO);
+    }
+
+    @Override
+    public List<TicketVO> ticketDayRefundSum(TicketVO ticketVO) {
+        return ticketDAO.ticketDayRefundSum(ticketVO);
+    }
+
+    @Override
+    public List<TicketVO> ticketDayTotal(TicketVO ticketVO) {
+        return ticketDAO.ticketDayTotal(ticketVO);
+    }
+
+    @Override
+    public List<TicketVO> ticketMonthList(TicketVO ticketVO) {
+        return ticketDAO.ticketMonthList(ticketVO);
+    }
+
+    @Override
+    public List<TicketVO> ticketMonthRefund(TicketVO ticketVO) {
+        return ticketDAO.ticketMonthRefund(ticketVO);
+    }
+
+    @Override
+    public List<TicketVO> ticketMonthTotal(TicketVO ticketVO) {
+        return ticketDAO.ticketMonthTotal(ticketVO);
+    }
+
+    @Override
+    public List<TicketVO> ticketSinceList(TicketVO ticketVO) {
+        return ticketDAO.ticketSinceList(ticketVO);
+    }
+
+    @Override
+    public List<TicketVO> ticketSinceBuySum(TicketVO ticketVO) {
+        return ticketDAO.ticketSinceBuySum(ticketVO);
+    }
+
+    @Override
+    public List<TicketVO> ticketSinceRefundSum(TicketVO ticketVO) {
+        return ticketDAO.ticketSinceRefundSum(ticketVO);
+    }
+
+    @Override
+    public List<TicketVO> ticketSinceTotal(TicketVO ticketVO) {
+        return ticketDAO.ticketSinceTotal(ticketVO);
+    }
+
 }

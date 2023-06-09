@@ -412,7 +412,7 @@
     <!-- 월별 구매 정산 -->
     <select id="ticketMonthList" resultMap="ticketMap">
         SELECT
-            MONTH(a.sellDate) AS sellDate,
+            DATE_FORMAT(a.sellDate, '%Y-%m') AS sellDate,
             COUNT(*) AS tCount,
             SUM(b.tPrice) AS tPrice
         FROM
@@ -427,14 +427,14 @@
                 AND a.sellDate LIKE CONCAT('%', #{ticketVO.sellDate}, '%')
             </if>
         GROUP BY
-            MONTH(a.sellDate);
+            DATE_FORMAT(a.sellDate, '%Y-%m')
     </select>
 
     
     <!-- 월별 환불 정산 -->
     <select id="ticketMonthRefund" resultMap="ticketMap">
         SELECT
-            MONTH(a.sellDate) AS sellDate,
+            DATE_FORMAT(a.sellDate, '%Y-%m') AS sellDate,
             COUNT(*) AS tCount,
             SUM(b.tPrice) AS tPrice
         FROM
@@ -451,14 +451,14 @@
             AND
                 a.used = 'C'
         GROUP BY
-            MONTH(a.sellDate);
+            DATE_FORMAT(a.sellDate, '%Y-%m')
     </select>
 
 
     <!-- 월별 수익 총계 -->
     <select id="ticketMonthTotal" resultMap="ticketMap">
         SELECT
-            MONTH(a.sellDate) AS sellDate,
+            DATE_FORMAT(a.sellDate, '%Y-%m') AS sellDate,
             COUNT(*) AS tCount,
             SUM(b.tPrice) AS tPrice
         FROM
@@ -475,7 +475,7 @@
             AND NOT
                 a.used = 'C'
         GROUP BY
-            MONTH(a.sellDate);
+            DATE_FORMAT(a.sellDate, '%Y-%m')
     </select>
 
     

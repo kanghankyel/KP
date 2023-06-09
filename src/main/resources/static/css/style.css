@@ -2131,39 +2131,212 @@ footer .inner>div:nth-child(4){
     background-color: royalblue;
 }
 /* templates/admin/adminCalculate */
+.adminContentWrap{
+    display: flex;
+    border: 1px solid #555;
+    box-sizing: border-box;
+}
 .adminTop{
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-    height: 300px;
+    flex-direction: column;
+    width: 50%;
+    height: 600px;
 }
 .adminTop article:nth-child(1){
-    width: 50%;
-    height: 100%;
-    background-color: rgb(255, 254, 182);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 200px;
+    border: 1px solid #555;
+    box-sizing: border-box;
+}
+.dateSearchBox{
+    position: relative;
+    width: 400px;
+    height: 180px;
+}
+.dateSearchBox>div:nth-child(1){
+    padding: 5px;
+    font-size: 20px;
+    color: #222;
+    letter-spacing: 2px;
+    background-color: #e7e7e7;
+    border-top: 1px dotted #000;
+    border-bottom: 1px dotted #000;
+    margin-bottom: 10px;
+}
+.dateSearchBox>div:nth-child(2){
+    margin-bottom: 15px;
+}
+.dateSearchBox>div:nth-child(2) button{
+    width: 90px;
+    height: 26px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #ff416b;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.dateSearchBox>div:nth-child(2) button:hover{
+    background-color: tomato;
+}
+.dateSearchBox>div:nth-child(2) button:last-child{
+    margin-right: 0px;
+}
+.dateSearchBox>div:nth-child(3) div:nth-child(1){
+    display: flex;
+    justify-content: center;
+}
+.dateSearchBox h4{
+    width: 75px;
+    height: 27px;
+    line-height: 27px;
+    box-sizing: border-box;
+}
+.dateSearchBox input{
+    width: 200px;
+    height: 27px;
+    box-sizing: border-box;
+    text-align: center;
+    margin-bottom: 3px;
+}
+.dateSearchBox>div:nth-child(4) div:nth-child(1){
+    display: flex;
+    justify-content: center;
+}
+.dateSearchBox>div:nth-child(5) div:nth-child(1){
+    display: flex;
+    justify-content: center;
+}
+.dateSearchBox>div:nth-child(5) div:nth-child(2){
+    display: flex;
+    justify-content: center;
+}
+.dateSearchBox .submitBtnBox{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #e7e7e7;
+}
+.dateSearchBox .submitBtnBox button{
+    position: relative;
+    top: 2px;
+    width: 90px;
+    height: 25px;
+    border: none;
+    border-radius: 5px;
+    color: #222;
+    background-color: #64a5ff;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.dateSearchBox .submitBtnBox button p{
+    font-size: 12px;
+}
+.dateSearchBox .submitBtnBox button:hover{
+    color: #fff;
+    background-color: royalblue;
+}
+.dateSearchBox .submitBtnBox a{
+    position: relative;
+    top: 2px;
+    font-size: 12px;
+    color: #222;
+    display: block;
+    width: 90px;
+    height: 25px;
+    line-height: 25px;
+    border: none;
+    border-radius: 5px;
+    background-color: #64a5ff;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.dateSearchBox .submitBtnBox a:hover{
+    color: #fff;
+    background-color: royalblue;
 }
 .adminTop article:nth-child(2){
-    width: 50%;
-    height: 100%;
-    background-color: rgb(157, 175, 231);
+    width: 100%;
+    height: 400px;
+    overflow: scroll;
+    padding: 30px 0px;
+    box-sizing: border-box;
+    border: 1px solid #555;
+    box-sizing: border-box;
 }
 .adminBottom{
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-    /* height: 300px; */
+    flex-direction: column;
+    width: 50%;
+    height: 600px;
 }
 .adminBottom article:nth-child(1){
-    width: 50%;
-    /* height: 100%; */
-    background-color: yellowgreen;
-}
-.adminBottom article:nth-child(2){
-    width: 50%;
-    /* height: 100%; */
-    background-color: pink;
+    width: 100%;
+    height: 600px;
+    overflow: scroll;
+    padding: 20px;
+    border: 1px solid #555;
+    box-sizing: border-box;
 }
 
+.searchResult{
+    display: flex;
+    justify-content: space-evenly;
+}
+.searchResult table{
+    width: 220px;
+    border: 1px solid #000;
+    box-sizing: border-box;
+}
+.searchResult table thead th{
+    font-size: 17px;
+    padding: 5px;
+    color: #222;
+    background-color: #e7e7e7;
+}
+.searchResult table th{
+    font-size: 15px;
+    padding: 5px 10px;
+    border: 1px solid #000;
+    background-color: #f5f5f5;
+}
+.searchResult table td{
+    font-size: 14px;
+    padding: 4px 6px;
+    border: 1px solid #000;
+}
+.searchResult table:nth-child(1){
+    margin-bottom: 30px;
+}
+.dateDisplay table{
+    width: 100%;
+}
+.dateDisplay table thead th{
+    padding: 10px;
+    font-size: 20px;
+    color: #222;
+    letter-spacing: 1px;
+    background-color: #e7e7e7;
+}
+.dateDisplay table th{
+    border: 1px solid #000;
+    font-size: 16px;
+    padding: 5px;
+    background-color: #f5f5f5;
+}
+.dateDisplay table td{
+    padding: 4px;
+    font-size: 14px;
+    border: 1px solid #000;
+}
 
 
 
@@ -2172,8 +2345,7 @@ footer .inner>div:nth-child(4){
 
 
 
-
-.imsi_table{
+/* .imsi_table{
     border: 2px solid #222;
 }
 .imsi_table th{
@@ -2181,4 +2353,4 @@ footer .inner>div:nth-child(4){
 }
 .imsi_table td{
     border: 1px solid #000;
-}
+} */

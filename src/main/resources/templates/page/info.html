@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+    <div th:include="/fragment/head"></div>
+    <div th:include="/fragment/header"></div>
+    <div th:include="/fragment/nav"></div>
+
+    <section class="info_section">
+        <!-- article:nth-child(1) -->
+        <article>
+            <figure>
+                <video th:src="@{/image/visual_01.mp4}" autoplay muted loop></video>
+                <div class="inner">
+                    <h1>KIDSWORLD</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.<br>
+                        Quisquam magni quia laboriosam debitis in adipisci aperiam 
+                        consequatur quas eligendi, vel corporis, iure dolor.
+                    </p>
+                    <a th:href="@{../ticket/ticketBuy}" onclick="return checkAuthentication()">티켓 예매하러 가기</a>
+                </div>
+            </figure>
+        </article>
+
+        <!-- article:nth-child(2) -->
+        <article>
+            <div>
+                <h2>핵심가치</h2>
+            </div>
+            <div>
+                <div>
+                    <h3>고객중심 <i>User-driven</i></h3>
+                    <p>항상 아이들과 고객입장에서<br>우선 생각하고, 그에 따른<br>저희 서비스의 진화 방향은<br>고객 입장에서 결정합니다.</p>
+                </div>
+                <div>
+                    <h3>프로정신 <i>Pro-mentality</i></h3>
+                    <p>반복되는 구조의 주변,<br>형식적이게 된 일상에서<br>모두가 같은 길은 거부하며<br>독보적으로 차별화하거나.</p>
+                </div>
+                <div>
+                    <h3>투명성 <i>Decision</i></h3>
+                    <p>투명하고 깨끗하게<br>항상 같은 마음으로<br>자신의 이름을 걸고 일할 수<br>있으냐가 우리의 기준입니다.</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- article:nth-child(3) -->
+        <article>
+            <div>
+                <h2>기본연혁</h2>
+            </div>
+            <div>
+                <div>
+                    <ul>
+                        <li><h3>2008. 12</h3><p>- “해피 윈터 페스티벌(판타스틱 월드)” in 일산</p></li>
+                    </ul>
+                    <ul>
+                        <li><h3>2010. 07</h3><p>- “뽀로로 바운스 빌리지” in 창원</p></li>
+                        <li><h3>2010. 12</h3><p>- “해피 윈터 페스티벌2” in 창원</p></li>
+                    </ul>
+                    <ul>
+                        <li><h3>2011. 11</h3><p>- “스폰지밥의 해피월드 시즌2” in 일산</p></li>
+                        <li><h3>2011. 12</h3><p>- “해피 윈터 페스티벌3” in 창원, 대구</p></li>
+                    </ul>
+                    <ul>
+                        <li><h3>2012. 06</h3><p>- “2012 썸머 키즈파크” in 부산, 송도, 창원</p></li>
+                        <li><h3>2012. 12</h3><p>- “해피 윈터 페스티벌4” in 송도, 대구, 창원, 대전, 광주, 구미</p></li>
+                    </ul>
+                    <ul>
+                        <li><h3>2013. 12</h3><p>- “해피 윈터 페스티벌 5-키즈파크“ in 송도, 양재</p></li>
+                        <li><h3>2013. 12</h3><p>- “해피 윈터 페스티벌 5-레이싱 키즈파크“ in 일산</p></li>
+                        <li><h3>2013. 12</h3><p>- “해피 윈터 페스티벌 5-슈퍼키즈파크” in 경기</p></li>
+                    </ul>
+                    <ul>
+                        <li><h3>2014. 07</h3><p>- “해피몽 키즈파크“ in 대전</p></li>
+                        <li><h3>2014. 11</h3><p>- “상상체험 키즈월드“ in 일산</p></li>
+                        <li><h3>2014. 12</h3><p>- “플레이 키즈 실내 썰매“ in 일산, 창원</p></li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <li><h3>2015. 01</h3><p>- “키즈체험나라“ in 창원</p></li>
+                        <li><h3>2015. 01</h3><p>- “키즈 실내 썰매“ in 대구</p></li>
+                        <li><h3>2015. 07</h3><p>- “상상체험 키즈월드“ in 일산, 부산, 창원</p></li>
+                    </ul>
+                    <ul>
+                        <li><h3>2016. 12</h3><p>- “상상체험 실내 썰매“ in 일산, 부산</p></li>
+                    </ul>
+                    <ul>
+                        <li><h3>2017. 01</h3><p>- “상상체험 실내 썰매“ in 창원</p></li>
+                        <li><h3>2017. 05</h3><p>- “씽씽키즈월드＂ 상설매장 오픈 in 일산</p></li>
+                        <li><h3>2017. 07</h3><p>- “상상체험 키즈월드”&“레이싱 키즈월드” in 일산, 부산</p></li>
+                        <li><h3>2017. 07</h3><p>- “상상체험 키즈월드” in 대전, 창원</p></li>
+                        <li><h3>2017. 12</h3><p>- “상상체험 키즈월드 실내썰매“&”룰루랄라 레이싱＂ in 일산, 부산</p></li>
+                    </ul>
+                    <ul>
+                        <li><h3>2018. 07</h3><p>- “상상체험 키즈월드“&”레이싱 키즈월드＂ in 일산, 부산</p></li>
+                    </ul>
+                </div>
+            </div>
+        </article>
+
+        <!-- article:nth-child(4) -->
+        <article>
+            <div>
+                <h2>티켓정보</h2>
+            </div>
+            <table class="ticket_board">
+                <tr>
+                    <th class="left_td">구분</th>
+                    <th>종류</th>
+                    <th>대상내용</th>
+                    <th>가격</th>
+                    <th class="right_td">비고</th>
+                </tr>
+                <tr>
+                    <td rowspan="2" class="left_td">종일권</td>
+                    <td>유/초등학생권</td>
+                    <td>유아/초등학생 대상</td>
+                    <td>20,000원</td>
+                    <td rowspan="2" class="right_td"></td>
+                </tr>
+                <tr>
+                    <td>일반권</td>
+                    <td>중학생 이상</td>
+                    <td>18,000원</td>
+                </tr>
+                <tr>
+                    <td rowspan="2" class="left_td">오후권</td>
+                    <td>유/초등학생권</td>
+                    <td>유아/초등학생 대상</td>
+                    <td>15,000원</td>
+                    <td rowspan="2" class="right_td"></td>
+                </tr>
+                <tr>
+                    <td>일반권</td>
+                    <td>중학생 이상</td>
+                    <td>13,000원</td>
+                </tr>
+                <tr>
+                    <td class="left_td">단체</td>
+                    <td>단체할인권</td>
+                    <td>20인 이상의 단체</td>
+                    <td></td>
+                    <td class="right_td">별도문의</td>
+                </tr>
+                <tr>
+                    <td class="left_td">특별할인</td>
+                    <td>공통</td>
+                    <td>장애인 [복지카드 지참 시, 동반 1인까지]<br>
+                        65세 이상 경로 우대[주민등록증], 국가유공자[복지카드] 및<br>
+                        교원증 소지한 교사(본인에 한함)</td>
+                    <td>9,000원</td>
+                    <td class="right_td">신분증 및<br>
+                                        증빙 서류<br>
+                                        필히 지참</td>
+                </tr>
+                <tr>
+                    <td colspan="2" rowspan="2" class="left_td">기타</td>
+                    <td>24개월 미만 유아[부모 동반 시]</td>
+                    <td>무료</td>
+                    <td rowspan="2" class="right_td"></td>
+                </tr>
+                <tr>
+                    <td>기타 이벤트 할인권</td>
+                    <td>행사 할인율 적용</td>
+                </tr>
+            </table>
+        </article>
+
+        <!-- article:nth-child(5) -->
+        <article>
+            <div>
+                <h2>운영시간 및 장소</h2>
+            </div>
+            <div>
+                <table>
+                    <tr>
+                        <thead>
+                            <th>장소</th>
+                            <td>일산 킨텍스 제2전시장 9홀</td>
+                        </thead>
+                    </tr>
+                    <tr>
+                        <th>기간</th>
+                        <td>2018. 11. 24 ~ 2019. 02. 24</td>
+                    </tr>
+                    <tr>
+                        <th>시간</th>
+                        <td>10:30 ~ 18:00</td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <thead>
+                            <th>장소</th>
+                            <td>부산 벡스코 제2전시관</td>
+                        </thead>
+                    </tr>
+                    <tr>
+                        <th>기간</th>
+                        <td>2018. 11. 24 ~</td>
+                    </tr>
+                    <tr>
+                        <th>시간</th>
+                        <td>오픈 10:00AM ~ 마감 06:00PM</td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <thead>
+                            <th>장소</th>
+                            <td>김대중컨벤션센터</td>
+                        </thead>
+                    </tr>
+                    <tr>
+                        <th>기간</th>
+                        <td>2018. 12. 22 ~</td>
+                    </tr>
+                    <tr>
+                        <th>시간</th>
+                        <td>오픈 10:00AM ~ 마감 06:00PM</td>
+                    </tr>
+                </table>
+            </div>
+        </article>
+
+        <!-- article:nth-child(6) -->
+        <article>
+            <div>
+                <h2>이용규칙</h2>
+            </div>
+            <div>
+                <div>
+                    <ul>
+                        <li>* 전시장에서 뛰어다니지 않도록 지도해 주세요.</li>
+                        <li>* 음식물 반입은 금지 되어있습니다.(특수식, 이유식 제외)</li>
+                        <li>* 애완동물은 출입이 불가합니다.</li>
+                        <li>* 유모차, 돗자리 반입 가능합니다.</li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <li>* 활동하기 편한 복장으로 준비해 주세요.</li>
+                        <li>* 벨트 등 혹시 다칠 수 있는 액세사리는 확인 부탁드립니다.</li>
+                        <li>* 에어바운스 탑승 시 양말을 꼭 착용해주세요.<br> &nbsp; (탑승시 마찰로 다칠 수 있습니다.)</li>
+                    </ul>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <div th:include="/fragment/footer"></div>
+</body>
+</html>

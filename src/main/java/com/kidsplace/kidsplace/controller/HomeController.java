@@ -37,4 +37,10 @@ public class HomeController {
         return "/page/home";
     }
 
+    // 소개 페이지 이동
+    @GetMapping("/info")
+    public String Info(){
+        return "/page/info";
+    }
+
 }

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+    <div th:include="/fragment/head"></div>
+    <div th:include="/fragment/header"></div>
+    <div th:include="/fragment/nav"></div>
+
+    <div class="content">
+        <div class="image_banner">
+            <div class="image_banner_bg">
+                <img th:src="@{/image/location_banner.jpg}" alt="">
+                <h1>찾 &nbsp; 아 &nbsp; 오 &nbsp; 시 &nbsp; 는 &nbsp; 길</h1>
+            </div>
+            <div class="page_nav">
+                <span><a th:href="@{/}"><i class="fa-solid fa-house"></i></a></span>
+                <span><a th:href="@{/location}">찾아오시는 길 &nbsp; <i class="fa-solid fa-caret-down"></i></a></span>
+            </div>
+        </div>
+        
+        <div class="inner">
+            <div class="pointBox">
+                <div class="point_bigtext">경기 킨텍스</div>
+                <div class="point_smalltext">KINTEX.</div>
+                <span class="point_hr"></span>
+            </div>
+            
+            <div class="mapBox">
+                <div>
+                    <img th:src="@{/image/map01.png}" alt="">
+                </div>
+                <div>
+                    <table>
+                        <tr>
+                            <th>주소</th>
+                            <td>경기도 고양시 일산서구 킨텍스로 217-60 킨텍스 제2전시장</td>
+                        </tr>
+                        <tr>
+                            <th>대화역 2번 출구</th>
+                            <td>킨텍스 길로 도보 [제 1전시장 7분, 제 2전시장 15분 소요]<br>
+                                버스 58번 [5분 소요]</td>
+                        </tr>
+                        <tr>
+                            <th>대화역 5번 출구</th>
+                            <td>버스 39번, 82번, 9700번, 8109번 [5분 소요]</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="pointBox">
+                <div class="point_bigtext">벡스코</div>
+                <div class="point_smalltext">BEXCO.</div>
+                <span class="point_hr"></span>
+            </div>
+
+            <div class="mapBox">
+                <div>
+                    <img th:src="@{/image/map02.png}" alt="">
+                </div>
+                <div>
+                    <table>
+                        <tr>
+                            <th>주소</th>
+                            <td>부산광역시 해운대구 APEC로 55 벡스코 제2전시장</td>
+                        </tr>
+                        <tr>
+                            <th>1전시장</th>
+                            <td>지하철 2호선 센텀시티역 1번출구 도보 50m<br>
+                                벡스코역 7번출구 도보 100m<br>
+                                동해선 벡스코역 1번출구 도보 280m</td>
+                        </tr>
+                        <tr>
+                            <th>2전시장</th>
+                            <td>지하철 2호선 센텀시티역 1번출구 도보 380m<br>
+                                벡스코역 5번출구 도보453m</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="pointBox">
+                <div class="point_bigtext">김대중컨벤션</div>
+                <div class="point_smalltext">KIMDAEJUNG CONVENTION CENTER.</div>
+                <span class="point_hr"></span>
+            </div>
+
+            <div class="mapBox">
+                <div>
+                    <img th:src="@{/image/map03.png}" alt="">
+                </div>
+                <div>
+                    <table>
+                        <tr>
+                            <th>주소</th>
+                            <td>광주광역시 서구 상무누리로 30 (치평동 1159-2)</td>
+                        </tr>
+                        <tr>
+                            <th>버스</th>
+                            <td>일곡 38번, 상무 64번, 518번, 순환01번, 공항버스 1000번</td>
+                        </tr>
+                        <tr>
+                            <th>지하철</th>
+                            <td>김대중컨벤션센터(마륵)역 하차 -> 5번출구로 나와서 직진(3분 소요)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div th:include="/fragment/footer"></div>
+</body>
+</html>

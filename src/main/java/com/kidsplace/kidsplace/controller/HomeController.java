@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kidsplace.kidsplace.commons.FaqVO;
 import com.kidsplace.kidsplace.commons.NoticeVO;
 import com.kidsplace.kidsplace.commons.Pagination;
 import com.kidsplace.kidsplace.service.CommunityService;
@@ -33,7 +34,11 @@ public class HomeController {
         Pagination pagination = new Pagination(noticeCount, page);
         List<NoticeVO> noticelist = communityService.noticePaging(pagination, noticeVO);
         model.addAttribute("notice", noticelist);
-        model.addAttribute("page", pagination);
+        // faq 리스트
+        int faqCount = communityService.faqCount();
+        Pagination paginationFaq = new Pagination(faqCount, page);
+        List<FaqVO> faqlist = communityService.faqPagingHome(paginationFaq);
+        model.addAttribute("faq", faqlist);
         return "/page/home";
     }
 
@@ -41,6 +46,12 @@ public class HomeController {
     @GetMapping("/info")
     public String Info(){
         return "/page/info";
+    }
+
+    // 지점 위치 페이지 이동
+    @GetMapping("/location")
+    public String Location(){
+        return "/page/location";
     }
 
 }

@@ -43,5 +43,8 @@ public interface CommunityService {
     // FAQ 삭제
     boolean faqDelete(FaqVO faqVO);
 
+    // HOME faq
+    List<FaqVO> faqPagingHome(Pagination pagination);
+
 
 }

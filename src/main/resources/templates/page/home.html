@@ -58,30 +58,121 @@
 
     <section class="content2">
         <div class="inner">
+            <div class="point_middletext">Kidsworld</div>
             <span class="point_hr"></span>
             <article>
-                <div class="content2_banner">
-                    <div>
-                        <h4>공지사항</h4>
-                        <h5>( NEWS )</h5>
-                    </div>
-                    <div>
-                        <a th:href="@{/community/notice}"><i class="fa-solid fa-square-plus"></i> 더보기</a>
-                    </div>
-                </div>
-                <div class="content2_content">
-                    <table>
-                        <tr th:each="notice : ${notice}" th:if="${not #lists.isEmpty(notice)}">
-                            <td><a th:href="@{/community/noticeDetail(nNum = ${notice.nNum})}"><i class="fa-solid fa-caret-right"></i></a></td>
-                            <td><a th:href="@{/community/noticeDetail(nNum = ${notice.nNum})}"><div th:text="${notice.nTitle}"></div></a></td>
-                            <td><a th:href="@{/community/noticeDetail(nNum = ${notice.nNum})}"><div th:text="${#strings.replace(#strings.substring(notice.nDate, 5), '-', '-')}"></div></a></td>
+                <div>
+                    <table class="content2Table">
+                        <tr>
+                            <td rowspan="2"><div><img th:src="@{image/photo01.jpg}" alt=""></div></td>
+                            <td><div><img th:src="@{image/photo02.jpg}" alt=""></div></td>
+                            <td><div><img th:src="@{image/photo03.jpg}" alt=""></div></td>
+                            <td><div><img th:src="@{image/photo04.jpg}" alt=""></div></td>
                         </tr>
-                        <tr th:unless="${not #lists.isEmpty(notice)}">
-                            <td colspan="2">공지사항이 없습니다.</td>
+                        <tr>
+                            <td><div><img th:src="@{image/photo05.jpg}" alt=""></div></td>
+                            <td><div></div></td>
+                            <td rowspan="2"><div></div></td>
+                        </tr>
+                        <tr>
+                            <td><div><img th:src="@{image/photo06.jpg}" alt=""></div></td>
+                            <td colspan="2"><div><img th:src="@{image/photo07.jpg}" alt=""></div></td>
                         </tr>
                     </table>
+                    <div class="videoBox">
+                        <iframe width="578" height="375" src="https://www.youtube.com/embed/00fagb2_nYA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
                 </div>
             </article>
+        </div>
+    </section>
+
+    <section class="content3">
+        <div class="inner">
+            <div class="point_middletext">NEWS & FAQ</div>
+            <span class="point_hr"></span>
+            <div class="homeTable">
+                <article>
+                    <div class="content3_banner">
+                        <div>
+                            <h4>공지사항</h4>
+                            <h5>( NEWS )</h5>
+                        </div>
+                        <div>
+                            <a th:href="@{/community/notice}"><i class="fa-solid fa-square-plus"></i> 더보기</a>
+                        </div>
+                    </div>
+                    <div class="content3_content">
+                        <table>
+                            <tr th:each="notice : ${notice}" th:if="${not #lists.isEmpty(notice)}">
+                                <td><a th:href="@{/community/noticeDetail(nNum = ${notice.nNum})}"><i class="fa-solid fa-caret-right"></i></a></td>
+                                <td><a th:href="@{/community/noticeDetail(nNum = ${notice.nNum})}"><div th:text="${notice.nTitle}"></div></a></td>
+                                <td><a th:href="@{/community/noticeDetail(nNum = ${notice.nNum})}"><div th:text="${#strings.replace(#strings.substring(notice.nDate, 5), '-', '-')}"></div></a></td>
+                            </tr>
+                            <tr th:unless="${not #lists.isEmpty(notice)}">
+                                <td colspan="3">공지사항이 없습니다.</td>
+                            </tr>
+                        </table>
+                    </div>
+                </article>
+    
+                <article>
+                    <div class="content3_banner">
+                        <div>
+                            <h4>자주 묻는 질문</h4>
+                            <h5>( FAQ )</h5>
+                        </div>
+                        <div>
+                            <a th:href="@{/community/faq}"><i class="fa-solid fa-square-plus"></i> 더보기</a>
+                        </div>
+                    </div>
+                    <div class="content3_content">
+                        <table>
+                            <tr th:each="faq : ${faq}" th:if="${not #lists.isEmpty(faq)}">
+                                <td><a th:href="@{/community/faq}"><i class="fa-solid fa-caret-right"></i></a></td>
+                                <td><a th:href="@{/community/faq}"><div th:text="${faq.fTitle}"></div></a></td>
+                                <td><a th:href="@{/community/faq}"><div th:text="${#strings.substring(faq.fDate, 5, 10)}"></div></a></td>
+                            </tr>
+                            <tr th:unless="${not #lists.isEmpty(faq)}">
+                                <td colspan="3">공지사항이 없습니다.</td>
+                            </tr>
+                        </table>
+                    </div>
+                </article>
+    
+                <article>
+                    <table class="hrefBtn">
+                        <tr>
+                            <td>
+                                <a th:href="@{/community/notice}">
+                                    <p><i class="fa-solid fa-envelope"></i></p>
+                                    <p>공지사항</p>
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{../ticket/ticketBuy}" onclick="return checkAuthentication()">
+                                    <p><i class="fa-solid fa-ticket"></i></p>
+                                    <p>티켓예매</p>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a th:href="@{/community/faq}">
+                                    <p><i class="fa-solid fa-book"></i></p>
+                                    <p>FAQ</p>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#">
+                                    <p><i class="fa-solid fa-location-dot"></i></p>
+                                    <p>오시는길</p>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </article>
+            </div>
         </div>
     </section>
 

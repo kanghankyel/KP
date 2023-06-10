@@ -137,4 +137,10 @@ public class CommunityServicempl implements CommunityService {
         }
     }
 
+    @Override
+    public List<FaqVO> faqPagingHome(Pagination pagination) {
+        logger.info("get List with FaqDTO");
+        return communityDAO.faqPaging(pagination);
+    }
+
 }

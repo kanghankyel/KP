@@ -4,9 +4,9 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <body>
-    <div th:include="/fragment/head"></div>
-    <div th:include="/fragment/header"></div>
-    <div th:include="/fragment/nav"></div>
+    <div th:include="./fragment/head"></div>
+    <div th:include="./fragment/header"></div>
+    <div th:include="./fragment/nav"></div>
 
     <div class="content">
         <div class="image_banner">
@@ -111,6 +111,6 @@
         </div>
     </div>
     
-    <div th:include="/fragment/footer"></div>
+    <div th:include="./fragment/footer"></div>
 </body>
 </html>

@@ -38,7 +38,7 @@ public class TicketController {
     public String TicketInfo(Model model){
         List<TicketDetailVO> ticketDetailList = ticketService.ticketDetailList();
         model.addAttribute("ticketDetail", ticketDetailList);
-        return "/ticket/ticketBuy";
+        return "ticket/ticketBuy";
     }
 
     // 티켓구입 정보 저장
@@ -83,7 +83,7 @@ public class TicketController {
         model.addAttribute("ticket", ticketlist);
         model.addAttribute("page", pagination);
         System.out.println(pagination.toString());
-        return "/ticket/ticketHistory";
+        return "ticket/ticketHistory";
     }
 
     // 티켓환불요청

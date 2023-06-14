@@ -46,7 +46,7 @@ public class CommunityController {
         // 검색조건 유지를 위한 값
         model.addAttribute("search", noticeVO);
         System.out.println(pagination.toString());
-        return "/community/notice";
+        return "community/notice";
     }
 
     // 공지사항 항목 개별 선택(공지사항 보기)
@@ -55,13 +55,13 @@ public class CommunityController {
        // logger.warn(String.valueOf(nNum));
         NoticeVO noticeVO = communityService.noticeRead(nNum);
         model.addAttribute("noticeDetail", noticeVO);
-        return "/community/noticeDetail";
+        return "community/noticeDetail";
     }
 
     // 공지사항 쓰기 페이지 이동
     @GetMapping("/noticeWrite")
     public String noticeWrite(){
-        return "/community/noticeWrite";
+        return "community/noticeWrite";
     }
 
     // 공지사항 쓰기
@@ -83,7 +83,7 @@ public class CommunityController {
        // logger.warn(String.valueOf(nNum));
         NoticeVO noticeVO = communityService.noticeRead(nNum);
         model.addAttribute("noticeDetail", noticeVO);
-        return "/community/noticeEdit";
+        return "community/noticeEdit";
     }
 
     // 공지사항 수정 데이터베이스 반영
@@ -129,13 +129,13 @@ public class CommunityController {
         List<FaqVO> faqlist = communityService.faqPaging(pagination);
         model.addAttribute("faq", faqlist);
         model.addAttribute("page", pagination);
-        return "/community/faq";
+        return "community/faq";
     }
 
     // FAQ 쓰기 페이지 이동
     @GetMapping("/faqWrite")
     public String faqWrite(){
-        return "/community/faqWrite";
+        return "community/faqWrite";
     }
 
     // FAQ 쓰기

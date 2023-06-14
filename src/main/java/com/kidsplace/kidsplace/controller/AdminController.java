@@ -42,7 +42,7 @@ public class AdminController {
     @GetMapping("/admin")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String AdminPage(){
-        return "/admin/admin";
+        return "admin/admin";
     }
 
     // 관리자페이지 티켓 리스트 페이지 이동 및 티켓리스트 구현
@@ -118,7 +118,7 @@ public class AdminController {
         // 검색조건 유지를 위한 값
         model.addAttribute("search", userVO);
         model.addAttribute("searchElse", authVO);
-        return "/admin/adminUser";
+        return "admin/adminUser";
     }
 
     // 회원등급업
@@ -279,7 +279,7 @@ public class AdminController {
         // 일별 수익 총계
         List<TicketVO> ticketdaytotal = ticketService.ticketDayTotal(ticketVO);
         model.addAttribute("ticketdaytotal", ticketdaytotal);
-        return "/admin/adminCalculate";
+        return "admin/adminCalculate";
     }
 
     // 관리자페이지 정산페이지(월별) 이동
@@ -301,7 +301,7 @@ public class AdminController {
         // 월별 수익 총계
         List<TicketVO> ticketmonthtotal = ticketService.ticketMonthTotal(ticketVO);
         model.addAttribute("ticketmonthtotal", ticketmonthtotal);
-        return "/admin/adminCalculateMonth";
+        return "admin/adminCalculateMonth";
     }
 
     // 관리자페이지 정산페이지(기간) 이동
@@ -323,7 +323,7 @@ public class AdminController {
         // 기간별 수익 총계
         List<TicketVO> ticketsincetotal = ticketService.ticketSinceTotal(ticketVO);
         model.addAttribute("ticketsincetotal", ticketsincetotal);
-        return "/admin/adminCalculateSince";
+        return "admin/adminCalculateSince";
     }
 
     

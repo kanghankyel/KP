@@ -28,8 +28,14 @@ public class CommunityServicempl implements CommunityService {
 
     @Override
     public List<NoticeVO> noticePaging(Pagination pagination, NoticeVO noticeVO) {
-        logger.info("get List with SearchDTO");
-        return communityDAO.noticePaging(pagination, noticeVO);
+        // logger.info("get List with SearchDTO");
+        // return communityDAO.noticePaging(pagination, noticeVO);
+        try {
+            return communityDAO.noticePaging(pagination, noticeVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     @Override
@@ -90,8 +96,14 @@ public class CommunityServicempl implements CommunityService {
 
     @Override
     public List<FaqVO> faqPaging(Pagination pagination) {
-        logger.info("get List with FaqDTO");
-        return communityDAO.faqPaging(pagination);
+        // logger.info("get List with FaqDTO");
+        // return communityDAO.faqPaging(pagination);
+        try {
+            return communityDAO.faqPaging(pagination);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     @Override
@@ -139,8 +151,14 @@ public class CommunityServicempl implements CommunityService {
 
     @Override
     public List<FaqVO> faqPagingHome(Pagination pagination) {
-        logger.info("get List with FaqDTO");
-        return communityDAO.faqPaging(pagination);
+        // logger.info("get List with FaqDTO");
+        // return communityDAO.faqPaging(pagination);
+        try {
+            return communityDAO.faqPaging(pagination);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
 }

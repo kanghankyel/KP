@@ -3,9 +3,9 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <body>
-    <div th:include="/fragment/head"></div>
-    <div th:include="/fragment/header"></div>
-    <div th:include="/fragment/nav"></div>
+    <div th:include="./fragment/head"></div>
+    <div th:include="./fragment/header"></div>
+    <div th:include="./fragment/nav"></div>
 
     <div class="content">
         <div class="image_banner">
@@ -86,7 +86,7 @@
                 <div class="policyBox">
                     <div>
                         <h5>개인정보 취급방침 (필수)</h5>
-                        <textarea th:include="/fragment/policyExample"></textarea>
+                        <textarea th:include="./fragment/policyExample"></textarea>
                     </div>
                     <p>
                         <input type="checkbox" name="" id="check" required> &nbsp;
@@ -101,7 +101,7 @@
         </div>
     </div>
 
-    <div th:include="/fragment/footer"></div>
+    <div th:include="./fragment/footer"></div>
 
 
     <!-- floating labels script -->
@@ -291,7 +291,7 @@
                         alert("회원가입이 완료되었습니다.");
                         location.href = urlparam;
                     }else{
-                        alert("회원가입에 실패하였습니다. 다시 시도해주세요.");
+                        alert("회원가입에 실패하였습니다.(이미 가입되어 있는 아이디입니다.)");
                     }
                 })
                 .catch((error) => console.log(error));

@@ -1,5 +1,6 @@
 package com.kidsplace.kidsplace.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -24,7 +25,13 @@ public class TicketServicempl implements TicketService {
 
     @Override
     public List<TicketDetailVO> ticketDetailList() {
-        return ticketDAO.ticketDetailList();
+        // return ticketDAO.ticketDetailList();
+        try {
+            return ticketDAO.ticketDetailList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     @Override
@@ -48,26 +55,44 @@ public class TicketServicempl implements TicketService {
 
     @Override
     public List<TicketVO> ticketList(int uNum) {
-        return ticketDAO.ticketList(uNum);
+        // return ticketDAO.ticketList(uNum);
+        try {
+            return ticketDAO.ticketList(uNum);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     @Override
     public List<TicketVO> ticketPaging(Pagination pagination, String uNum) {
-        logger.info("get List with SearchDTO");
-        return ticketDAO.ticketPaging(pagination, uNum);
+        // logger.info("get List with SearchDTO");
+        // return ticketDAO.ticketPaging(pagination, uNum);
+        try {
+            return ticketDAO.ticketPaging(pagination, uNum);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     @Override
     public int ticketCount(String uNum) {
         int result = ticketDAO.ticketCount(uNum);
-        System.out.println("ticketCount : " + result);
+        // System.out.println("ticketCount : " + result);
         return result;
     }
 
     @Override
     public List<TicketVO> ticketAllPaging(Pagination pagination, TicketVO ticketVO, UserVO userVO) {
-        logger.info("get List with SearchDTO");
-        return ticketDAO.ticketAllPaging(pagination, ticketVO, userVO);
+        // logger.info("get List with SearchDTO");
+        // return ticketDAO.ticketAllPaging(pagination, ticketVO, userVO);
+        try {
+            return ticketDAO.ticketAllPaging(pagination, ticketVO, userVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     @Override
@@ -185,57 +210,122 @@ public class TicketServicempl implements TicketService {
 
     @Override
     public List<TicketVO> ticketDateList(TicketVO ticketVO) {
-        return ticketDAO.ticketDateList(ticketVO);
+        try {
+            return ticketDAO.ticketDateList(ticketVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     @Override
     public List<TicketVO> ticketDayBuySum(TicketVO ticketVO) {
-        return ticketDAO.ticketDayBuySum(ticketVO);
+        // return ticketDAO.ticketDayBuySum(ticketVO);
+        try {
+            return ticketDAO.ticketDayBuySum(ticketVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     @Override
     public List<TicketVO> ticketDayRefundSum(TicketVO ticketVO) {
-        return ticketDAO.ticketDayRefundSum(ticketVO);
+        // return ticketDAO.ticketDayRefundSum(ticketVO);
+        try {
+            return ticketDAO.ticketDayRefundSum(ticketVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     @Override
     public List<TicketVO> ticketDayTotal(TicketVO ticketVO) {
-        return ticketDAO.ticketDayTotal(ticketVO);
+        // return ticketDAO.ticketDayTotal(ticketVO);
+        try {
+            return ticketDAO.ticketDayTotal(ticketVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     @Override
     public List<TicketVO> ticketMonthList(TicketVO ticketVO) {
-        return ticketDAO.ticketMonthList(ticketVO);
+        // return ticketDAO.ticketMonthList(ticketVO);
+        try {
+            return ticketDAO.ticketMonthList(ticketVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     @Override
     public List<TicketVO> ticketMonthRefund(TicketVO ticketVO) {
-        return ticketDAO.ticketMonthRefund(ticketVO);
+        // return ticketDAO.ticketMonthRefund(ticketVO);
+        try {
+            return ticketDAO.ticketMonthRefund(ticketVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     @Override
     public List<TicketVO> ticketMonthTotal(TicketVO ticketVO) {
-        return ticketDAO.ticketMonthTotal(ticketVO);
+        // return ticketDAO.ticketMonthTotal(ticketVO);
+        try {
+            return ticketDAO.ticketMonthTotal(ticketVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     @Override
     public List<TicketVO> ticketSinceList(TicketVO ticketVO) {
-        return ticketDAO.ticketSinceList(ticketVO);
+        // return ticketDAO.ticketSinceList(ticketVO);
+        try {
+            return ticketDAO.ticketSinceList(ticketVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     @Override
     public List<TicketVO> ticketSinceBuySum(TicketVO ticketVO) {
-        return ticketDAO.ticketSinceBuySum(ticketVO);
+        // return ticketDAO.ticketSinceBuySum(ticketVO);
+        try {
+            return ticketDAO.ticketSinceBuySum(ticketVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     @Override
     public List<TicketVO> ticketSinceRefundSum(TicketVO ticketVO) {
-        return ticketDAO.ticketSinceRefundSum(ticketVO);
+        // return ticketDAO.ticketSinceRefundSum(ticketVO);
+        try {
+            return ticketDAO.ticketSinceRefundSum(ticketVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     @Override
     public List<TicketVO> ticketSinceTotal(TicketVO ticketVO) {
-        return ticketDAO.ticketSinceTotal(ticketVO);
+        // return ticketDAO.ticketSinceTotal(ticketVO);
+        try {
+            return ticketDAO.ticketSinceTotal(ticketVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
 }

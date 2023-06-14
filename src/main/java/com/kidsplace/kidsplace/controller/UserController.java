@@ -43,7 +43,7 @@ public class UserController {
     // 회원가입 페이지 이동
     @GetMapping("/signup")
     public String signup(){
-        return "/user/signup";
+        return "user/signup";
     }
 
     // 회원가입
@@ -62,7 +62,7 @@ public class UserController {
     // 로그인 페이지 이동
     @GetMapping("/login")
     public String login(){
-        return "/user/login";
+        return "user/login";
     }
 
     // 로그인
@@ -114,7 +114,7 @@ public class UserController {
         // System.out.println(customMember.getMember().getuNum());
         List<UserVO> userinfo = us.userInfo(uNum);
         model.addAttribute("user", userinfo);
-        return "/user/mypage";
+        return "user/mypage";
     }
 
     // 마이페이지 수정 페이지 이동
@@ -126,7 +126,7 @@ public class UserController {
         // System.out.println(customMember.getMember().getuNum());
         List<UserVO> userinfo = us.userInfo(uNum);
         model.addAttribute("user", userinfo);
-        return "/user/userEdit";
+        return "user/userEdit";
     }
 
     // 회원정보 수정 데이터베이스 반영
@@ -172,7 +172,7 @@ public class UserController {
         // System.out.println(customMember.getMember().getuNum());
         List<UserVO> userinfo = us.userInfo(uNum);
         model.addAttribute("user", userinfo);
-        return "/user/passwordEdit";
+        return "user/passwordEdit";
     }
 
     // 비밀번호 변경

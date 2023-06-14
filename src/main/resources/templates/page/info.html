@@ -3,9 +3,9 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
-    <div th:include="/fragment/head"></div>
-    <div th:include="/fragment/header"></div>
-    <div th:include="/fragment/nav"></div>
+    <div th:include="./fragment/head"></div>
+    <div th:include="./fragment/header"></div>
+    <div th:include="./fragment/nav"></div>
 
     <section class="info_section">
         <!-- article:nth-child(1) -->
@@ -251,6 +251,6 @@
         </article>
     </section>
 
-    <div th:include="/fragment/footer"></div>
+    <div th:include="./fragment/footer"></div>
 </body>
 </html>

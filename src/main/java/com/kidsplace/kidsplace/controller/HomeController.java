@@ -39,19 +39,19 @@ public class HomeController {
         Pagination paginationFaq = new Pagination(faqCount, page);
         List<FaqVO> faqlist = communityService.faqPagingHome(paginationFaq);
         model.addAttribute("faq", faqlist);
-        return "/page/home";
+        return "page/home";
     }
 
     // 소개 페이지 이동
     @GetMapping("/info")
     public String Info(){
-        return "/page/info";
+        return "page/info";
     }
 
     // 지점 위치 페이지 이동
     @GetMapping("/location")
     public String Location(){
-        return "/page/location";
+        return "page/location";
     }
 
 }

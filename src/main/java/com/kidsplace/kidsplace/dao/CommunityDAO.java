@@ -18,7 +18,7 @@ public interface CommunityDAO {
     // List<NoticeVO> noticeList();
 
     // 공지사항 게시글 리스트 조회 페이징
-    List<NoticeVO> noticePaging(@Param("pagination") Pagination pagination, @Param("noticeVO") NoticeVO noticeVO);
+    List<NoticeVO> noticePaging(@Param("pagination") Pagination pagination, @Param("noticeVO") NoticeVO noticeVO) throws Exception;
 
     // 공지사항 게시글 카운팅
     int noticeCount(@Param("noticeVO") NoticeVO noticeVO);
@@ -30,21 +30,21 @@ public interface CommunityDAO {
     void noticeWrite(NoticeVO noticeVO);
 
     // 공지사항 수정
-    int noticeEdit(NoticeVO noticeVO);
+    int noticeEdit(NoticeVO noticeVO) throws Exception;
 
     // 공지사항 삭제
-    int noticeDelete(NoticeVO noticeVO);
+    int noticeDelete(NoticeVO noticeVO) throws Exception;
 
     // FAQ 리스트 페이징
-    List<FaqVO> faqPaging(@Param("pagination")Pagination pagination);
+    List<FaqVO> faqPaging(@Param("pagination")Pagination pagination) throws Exception;
 
     // FAQ 게시글 카운팅
     int faqCount();
 
     // FAQ 쓰기
-    int faqWrite(FaqVO faqVO);
+    int faqWrite(FaqVO faqVO) throws Exception;
 
     // FAQ 삭제
-    int faqDelete(FaqVO faqVO);
+    int faqDelete(FaqVO faqVO) throws Exception;
 
 }

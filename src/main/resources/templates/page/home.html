@@ -3,10 +3,10 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
-    <div th:include="/fragment/head"></div>
-    <div th:include="/fragment/header"></div>
-    <div th:include="/fragment/nav"></div>
-    <div th:include="/fragment/slideBanner"></div>
+    <div th:include="./fragment/head"></div>
+    <div th:include="./fragment/header"></div>
+    <div th:include="./fragment/nav"></div>
+    <div th:include="./fragment/slideBanner"></div>
 
     <section class="content1">
         <div class="inner">
@@ -61,7 +61,7 @@
             <div class="point_middletext">Kidsworld</div>
             <span class="point_hr"></span>
             <article>
-                <div>
+                <div class="content2Wrap">
                     <table class="content2Table">
                         <tr>
                             <td rowspan="2"><div><img th:src="@{image/photo01.jpg}" alt=""></div></td>
@@ -80,7 +80,7 @@
                         </tr>
                     </table>
                     <div class="videoBox">
-                        <iframe width="578" height="375" src="https://www.youtube.com/embed/00fagb2_nYA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <iframe src="https://www.youtube.com/embed/00fagb2_nYA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                 </div>
             </article>
@@ -176,15 +176,6 @@
         </div>
     </section>
 
-    <!-- <section class="content3">
-        <div class="inner">
-            <span class="point_hr"></span>
-            <article>
-
-            </article>
-        </div>
-    </section> -->
-
-    <div th:include="/fragment/footer"></div>
+    <div th:include="./fragment/footer"></div>
 </body>
 </html>

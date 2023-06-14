@@ -34,7 +34,7 @@ public class SecurityConfig {
                 .csrf().disable()           // 없으면 post요청을 차단한다.
 
                 .authorizeRequests()
-                //.antMatchers("/").permitAll()
+                // .antMatchers("/admin/**").hasAnyRole("ROLE_ADMIN")
                 // .antMatchers("/ticket/ticketBuy").hasAnyRole("ROLE_USER","ROLE_ADMIN")
                 .anyRequest().permitAll()
 

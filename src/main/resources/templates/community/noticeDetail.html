@@ -39,7 +39,9 @@
                     <td id="deleteWriter" th:text="${noticeDetail.nWriter}"></td>
                 </tr>
                 <tr>
-                    <td colspan="4" id="deleteContent" class="left_td" th:text="${noticeDetail.nContent}"></td>
+                    <td colspan="4">
+                        <textarea id="deleteContent" class="left_td" th:text="${noticeDetail.nContent}"></textarea>
+                    </td>
                 </tr>
             </table>
             <div class="board_write_table_btn_box">

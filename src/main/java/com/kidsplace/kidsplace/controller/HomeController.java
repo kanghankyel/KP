@@ -1,6 +1,10 @@
 package com.kidsplace.kidsplace.controller;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +19,7 @@ import com.kidsplace.kidsplace.commons.FaqVO;
 import com.kidsplace.kidsplace.commons.NoticeVO;
 import com.kidsplace.kidsplace.commons.Pagination;
 import com.kidsplace.kidsplace.service.CommunityService;
+import com.kidsplace.kidsplace.service.IpService;
 
 @Controller
 public class HomeController {
@@ -23,12 +28,20 @@ public class HomeController {
 
     @Autowired
     CommunityService communityService;
+
+    @Autowired
+    IpService ipService;
     
     // main home 화면
     @GetMapping(value = "/")
     public String home(Model model
+                    , HttpServletRequest request
                     , @RequestParam(name = "page", required = false, defaultValue = "1") int page
                     , @ModelAttribute("search") NoticeVO noticeVO){
+        // 방문자 ip주소 주입
+        String clientIp = request.getRemoteAddr();
+        logger.info("방문자의 IP 주소: " + clientIp);
+        ipService.insertIp(clientIp);
         // 공지사항 리스트
         int noticeCount = communityService.noticeCount(noticeVO);
         Pagination pagination = new Pagination(noticeCount, page);
@@ -41,6 +54,7 @@ public class HomeController {
         model.addAttribute("faq", faqlist);
         return "page/home";
     }
+    
 
     // 소개 페이지 이동
     @GetMapping("/info")

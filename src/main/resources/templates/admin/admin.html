@@ -78,7 +78,8 @@
                         <div>
                             <div class="admin_visit_total">
                                 <h4>Today 방문자</h4>
-                                <h5>임시데이터</h5>
+                                <h5 th:each="adminvisitsum : ${adminvisitsum}" th:if="${not #lists.isEmpty(adminvisitsum)}" th:text="${adminvisitsum}"></h5>
+                                <h5 th:unless="${not #lists.isEmpty(adminvisitsum)}">0</h5>
                             </div>
                             <div class="admin_money_total">
                                 <h4>Today 판매액</h4>

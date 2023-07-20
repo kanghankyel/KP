@@ -104,6 +104,28 @@
         };
     </script>
 
+    <!-- 비밀번호창 붙여넣기 방지 -->
+    <script>
+        // 입력값을 감지하는 함수
+        function detectPaste(e) {
+            var clipboardData, pastedData;
+
+            // 다양한 브라우저에서 붙여넣기 값을 가져오기 위한 처리
+            clipboardData = e.clipboardData || window.clipboardData;
+            pastedData = clipboardData.getData('Text');
+
+            // 붙여넣기가 감지되면 경고창을 띄우고 입력값을 비움
+            if (pastedData) {
+                e.preventDefault(); // 붙여넣기 막기
+                alert('붙여넣기 금지. 제대로 입력해 주세요.');
+                document.getElementById('loginPw').value = ''; // 입력값 비우기
+            }
+        }
+
+        // 붙여넣기 이벤트를 감지하여 detectPaste 함수 호출
+        document.getElementById('loginPw').addEventListener('paste', detectPaste);
+    </script>
+
 
     <!--  로그인 여부 비동기 script  -->
     <script>

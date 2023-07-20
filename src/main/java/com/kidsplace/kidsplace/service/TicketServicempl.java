@@ -328,4 +328,26 @@ public class TicketServicempl implements TicketService {
         }
     }
 
+    @Override
+    public List<TicketVO> adminBuySum() {
+        // return ticketDAO.adminBuySum();
+        try {
+            return ticketDAO.adminBuySum();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public List<TicketVO> adminRefundSum() {
+        // return ticketDAO.adminRefundSum();
+        try {
+            return ticketDAO.adminRefundSum();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
+
 }

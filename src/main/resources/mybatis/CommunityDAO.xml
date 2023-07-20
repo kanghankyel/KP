@@ -205,4 +205,21 @@
             fNum = #{fNum}
     </update>
 
+    <!-- 사내공지사항 -->
+
+    <!-- 고객공지사항 -->
+    <select id="adminNotice" resultMap="noticeMap">
+        SELECT
+            nNum
+           ,nTitle
+           ,date_format(nDate, '%Y.%m.%d') AS nDate
+        FROM
+            kidslandNotice
+        WHERE
+            nDelete = 'N'
+        ORDER BY
+            nNum DESC
+        LIMIT
+            6
+    </select>
 </mapper>

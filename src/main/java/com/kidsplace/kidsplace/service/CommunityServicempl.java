@@ -161,4 +161,16 @@ public class CommunityServicempl implements CommunityService {
         }
     }
 
+    @Override
+    public List<NoticeVO> adminNotice() {
+        // logger.info("get List with adminNoticeDTO");
+        // return communityDAO.adminNotice();
+        try {
+            return communityDAO.adminNotice();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
+
 }

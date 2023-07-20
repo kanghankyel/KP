@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kidsplace.kidsplace.commons.AuthVO;
+import com.kidsplace.kidsplace.commons.NoticeVO;
 import com.kidsplace.kidsplace.commons.Pagination;
 import com.kidsplace.kidsplace.commons.TicketDetailVO;
 import com.kidsplace.kidsplace.commons.TicketVO;
 import com.kidsplace.kidsplace.commons.UserVO;
+import com.kidsplace.kidsplace.service.CommunityService;
 import com.kidsplace.kidsplace.service.TicketService;
 import com.kidsplace.kidsplace.service.UserService;
 
@@ -38,10 +40,23 @@ public class AdminController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    CommunityService communityService;
+
     // 관리자페이지 메인페이지 이동
     @GetMapping("/admin")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String AdminPage(){
+    public String AdminPage(Model model){
+        // 관리자 메인페이지 오늘 총계액
+        List<TicketVO> adminbuysum = ticketService.adminBuySum();
+        model.addAttribute("adminbuysum", adminbuysum);
+        // 관리자 메인페이지 환불건수 데이터
+        List<TicketVO> adminrefundsum = ticketService.adminRefundSum();
+        model.addAttribute("adminrefundsum", adminrefundsum);
+        // 사내공지사항
+        // 고객공지사항
+        List<NoticeVO> adminnotice = communityService.adminNotice();
+        model.addAttribute("adminnotice", adminnotice);
         return "admin/admin";
     }
 

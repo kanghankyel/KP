@@ -47,4 +47,9 @@ public interface CommunityDAO {
     // FAQ 삭제
     int faqDelete(FaqVO faqVO) throws Exception;
 
+    // 사내공지사항
+
+    // 고객공지사항
+    List<NoticeVO> adminNotice() throws Exception;
+
 }

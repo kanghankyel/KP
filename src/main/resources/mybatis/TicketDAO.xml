@@ -580,5 +580,39 @@
             DATE_FORMAT(a.sellDate, '%Y-%m-%d')
     </select>
 
+    <!-- 관리자 메인페이지 오늘 총계액 -->
+    <select id="adminBuySum" resultMap="ticketMap">
+        SELECT
+            DATE_FORMAT(a.sellDate, '%Y-%m-%d') AS sellDate,
+            COUNT(*) AS tCount,
+            CAST(SUM(b.tPrice) AS CHAR) AS tPrice
+        FROM
+            kidslandTicket AS a
+        INNER JOIN
+            kidslandTicketDetail AS b
+        ON
+            a.tType = b.tType
+        WHERE
+            DATE(a.sellDate) = CURDATE()
+            AND NOT
+                a.used = 'C'
+        GROUP BY
+            DATE_FORMAT(a.sellDate, '%Y-%m-%d')
+    </select>
+
+    <!-- 관리자 메인페이지 환불건수 데이터 -->
+    <select id="adminRefundSum" resultMap="ticketMap">
+        SELECT
+            COUNT(*) AS tCount
+        FROM
+            kidslandTicket AS a
+        INNER JOIN
+            kidslandTicketDetail AS b
+        ON
+            a.tType = b.tType
+        WHERE
+            a.used = 'C'
+    </select>
+
 </mapper>
 

@@ -84,5 +84,11 @@ public interface TicketDAO {
 
     // 기간별 수익 총계
     List<TicketVO> ticketSinceTotal(@Param("ticketVO") TicketVO ticketVO) throws Exception;
+
+    // 관리자 메인페이지 오늘 총계액
+    List<TicketVO> adminBuySum() throws Exception;
+
+    // 관리자 메인페이지 환불건수 데이터
+    List<TicketVO> adminRefundSum() throws Exception;
     
 }

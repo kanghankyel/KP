@@ -46,5 +46,10 @@ public interface CommunityService {
     // HOME faq
     List<FaqVO> faqPagingHome(Pagination pagination);
 
+    // 사내공지사항
+
+    // 고객공지사항
+    List<NoticeVO> adminNotice();
+
 
 }

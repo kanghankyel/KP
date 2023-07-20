@@ -83,4 +83,10 @@ public interface TicketService {
     // 기간별 수익 총계
     List<TicketVO> ticketSinceTotal(TicketVO ticketVO);
 
+    // 관리자 메인페이지 오늘 총계액
+    List<TicketVO> adminBuySum();
+
+    // 관리자 메인페이지 환불건수 데이터
+    List<TicketVO> adminRefundSum();
+
 }

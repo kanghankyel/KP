@@ -30,45 +30,135 @@
                     <span class="point_hr"></span>
                 </div>
 
-                <article>
-                    <table class="admin_info_table">
-                        <tr>
-                            <th>I &nbsp; D</th>
-                            <td><div th:text="${#authentication.principal.member.uId}"></div></td>
-                        </tr>
-                        <tr>
-                            <th>이 &nbsp; 름</th>
-                            <td><div th:text="${#authentication.principal.member.uName}"></div></td>
-                        </tr>
-                        <tr>
-                            <th>부 &nbsp; 서</th>
-                            <td><div>-</div></td>
-                        </tr>
-                        <tr>
-                            <th>직 &nbsp; 책</th>
-                            <td><div>-</div></td>
-                        </tr>
-                        <tr>
-                            <th>권 &nbsp; 한</th>
-                            <td>
-                                <div th:if="${#authentication.principal.member.uAuthList[0].uAuth == 'ROLE_USER'}">회원</div>
-                                <div th:if="${#authentication.principal.member.uAuthList[0].uAuth == 'ROLE_ADMIN'}">관리자</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>상 &nbsp; 태</th>
-                            <td>
-                                <div th:if="${#authentication.principal.member.member == 'Y'}">재직</div>
-                                <div th:if="${#authentication.principal.member.member == 'N'}">퇴사</div>
-                            </td>
-                        </tr>
-                    </table>
-                    <!-- <h1 th:text="${#authentication.principal.member}"></h1> -->
+                <article class="admin_firstwrap">
+                    <div>
+                        <div>
+                            <div class="admin_info_box">
+                                <table class="admin_info_table">
+                                    <tr>
+                                        <th>I&nbsp;D</th>
+                                        <td><div th:text="${#authentication.principal.member.uId}"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <th>이&nbsp;름</th>
+                                        <td><div th:text="${#authentication.principal.member.uName}"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <th>부&nbsp;서</th>
+                                        <td><div>-</div></td>
+                                    </tr>
+                                    <tr>
+                                        <th>직&nbsp;책</th>
+                                        <td><div>-</div></td>
+                                    </tr>
+                                    <tr>
+                                        <th>권&nbsp;한</th>
+                                        <td>
+                                            <div th:if="${#authentication.principal.member.uAuthList[0].uAuth == 'ROLE_USER'}">회원</div>
+                                            <div th:if="${#authentication.principal.member.uAuthList[0].uAuth == 'ROLE_ADMIN'}">관리자</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>상&nbsp;태</th>
+                                        <td>
+                                            <div th:if="${#authentication.principal.member.member == 'Y'}">재직</div>
+                                            <div th:if="${#authentication.principal.member.member == 'N'}">퇴사</div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- <h1 th:text="${#authentication.principal.member}"></h1> -->
+                            </div>
+                            
+                            <div class="admin_day_box">
+                                <div id="yearMonth"></div>
+                                <div id="day"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="admin_visit_total">
+                                <h4>Today 방문자</h4>
+                                <h5>임시데이터</h5>
+                            </div>
+                            <div class="admin_money_total">
+                                <h4>Today 판매액</h4>
+                                <h5 th:each="adminbuysum : ${adminbuysum}" th:if="${not #lists.isEmpty(adminbuysum)}" th:text="${adminbuysum.tPrice}"></h5>
+                                <h5 th:unless="${not #lists.isEmpty(adminbuysum)}">0</h5>
+                            </div>
+                            <div class="admin_refund_yn">
+                                <h4>환불요청 건수</h4>
+                                <h5 th:each="adminrefundsum : ${adminrefundsum}" th:if="${not #lists.isEmpty(adminrefundsum)}" th:text="${adminrefundsum.tCount}"></h5>
+                                <h5 th:unless="${not #lists.isEmpty(adminrefundsum)}">0</h5>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div>
+                            <div>메 모 &nbsp; ( ToDo-List )</div>
+                            <div>
+                                <button>저장</button>
+                                <button>삭제</button>
+                            </div>
+                        </div>
+                        <div>
+                            <textarea name="" id="" placeholder="내용을 입력하세요..."></textarea>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="admin_secondwrap">
+                    <div>판매그래프</div>
+                </article>
+
+                <article class="admin_thirdwrap">
+                    <div>사내공지</div>
+                    <div>
+                        <div>
+                            <table>
+                                <tr th:each="adminnotice : ${adminnotice}" th:if="${not #lists.isEmpty(adminnotice)}">
+                                    <td><a th:href="@{/community/noticeDetail(nNum = ${adminnotice.nNum})}"><div th:text="${adminnotice.nTitle}"></div></a></td>
+                                    <td><a th:href="@{/community/noticeDetail(nNum = ${adminnotice.nNum})}"><div th:text="${adminnotice.nDate}"></div></a></td>
+                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(adminnotice)}">
+                                    <td colspan="3">공지사항이 없습니다.</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div>
+                            <a th:href="@{../community/notice}">+ 고객공지사항 더보기</a>
+                        </div>
+                    </div>
                 </article>
             </section>
         </div>
     </div>
     
     <div th:include="./fragment/footer"></div>
+
+
+    <!-- script -->
+    <!-- 오늘 일자(년.월 / 일) javascript -->
+    <script>
+        function getToday() {
+            var today = new Date();
+            var year = today.getFullYear();
+            var month = (today.getMonth() + 1).toString().padStart(2, '0'); // padStart 함수를 사용하여 2자리 숫자로 만들고 앞에 0을 채울 수 있다.
+            var day = today.getDate();
+    
+            return { year: year, month: month, day: day };
+        }
+    
+        function displayDate() {
+            var date = getToday();
+            var yearMonthElement = document.getElementById("yearMonth");
+            var dayElement = document.getElementById("day");
+    
+            yearMonthElement.textContent = date.year + "." + date.month;
+            dayElement.textContent = date.day;
+        }
+    
+        displayDate();
+    </script>
 </body>
 </html>

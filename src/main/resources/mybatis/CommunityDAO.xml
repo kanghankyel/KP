@@ -25,6 +25,16 @@
         <result property="fDelete" column="fDelete" />
     </resultMap>
 
+    <resultMap id="adminNoticeMap" type="com.kidsplace.kidsplace.commons.AdminNoticeVO">
+        <result property="aNum" column="aNum" />
+        <result property="aCategory" column="aCategory" />
+        <result property="aWriter" column="aWriter" />
+        <result property="aTitle" column="aTitle" />
+        <result property="aContent" column="aContent" />
+        <result property="aDate" column="aDate" />
+        <result property="aDelete" column="aDelete" />
+    </resultMap>
+
     <sql id="noticeSearch">
         <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(noticeVO.nNum)">
             AND nNum LIKE '%' + #{ticketVO.nNum} + '%'
@@ -205,20 +215,117 @@
             fNum = #{fNum}
     </update>
 
-    <!-- 사내공지사항 -->
-
-    <!-- 고객공지사항 -->
-    <select id="adminNotice" resultMap="noticeMap">
+    <!-- 사내공지사항 페이징 -->
+    <select id="adminNoticePaging" resultMap="adminNoticeMap">
         SELECT
-            nNum
-           ,nTitle
-           ,date_format(nDate, '%Y.%m.%d') AS nDate
+            aNum
+           ,aCategory
+           ,aWriter
+           ,aTitle
+           ,aContent
+           ,date_format(aDate, '%Y-%m-%d') AS aDate
+           ,aDelete
         FROM
-            kidslandNotice
+            kidslandAdminNotice
         WHERE
-            nDelete = 'N'
+            aDelete = 'N'
+            <!-- <include refid="noticeSearch" /> -->
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(adminNoticeVO.aCategory)">
+                AND aCategory LIKE CONCAT('%', #{adminNoticeVO.aCategory}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(adminNoticeVO.aTitle)">
+                AND aTitle LIKE CONCAT('%', #{adminNoticeVO.aTitle}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(adminNoticeVO.aContent)">
+                AND aContent LIKE CONCAT('%', #{adminNoticeVO.aContent}, '%')
+            </if>
         ORDER BY
-            nNum DESC
+            aNum DESC
+        LIMIT
+            #{pagination.limitStart}, #{pagination.recordSize}
+    </select>
+
+    <!-- 사내공지사항 카운팅 -->
+    <select id="adminNoticeCount" resultType="int">
+        SELECT
+            count(*)
+        FROM
+            kidslandAdminNotice
+        WHERE
+            aDelete = 'N'
+            <!-- <include refid="noticeSearch" /> -->
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(adminNoticeVO.aCategory)">
+                AND aCategory LIKE CONCAT('%', #{adminNoticeVO.aCategory}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(adminNoticeVO.aTitle)">
+                AND aTitle LIKE CONCAT('%', #{adminNoticeVO.aTitle}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(adminNoticeVO.aContent)">
+                AND aContent LIKE CONCAT('%', #{adminNoticeVO.aContent}, '%')
+            </if>
+    </select>
+
+    <!-- 사내공지사항 작성 -->
+    <select id="adminNoticeWrite">
+        INSERT INTO
+            kidslandAdminNotice(
+                aNum
+               ,aCategory
+               ,aWriter
+               ,aTitle
+               ,aContent)
+        VALUES
+            ((SELECT resultTable.resultNum FROM (SELECT IFNULL(MAX(aNum), 0) + 1 AS resultNum FROM kidslandAdminNotice) resultTable)
+            , #{aCategory}
+            , #{aWriter}
+            , #{aTitle}
+            , #{aContent})
+    </select>
+
+    <!-- 사내공지사항 상세 -->
+    <select id="adminNoticeRead" resultMap="adminNoticeMap">
+        SELECT
+            aNum
+           ,aCategory
+           ,aWriter
+           ,aTitle
+           ,aContent
+           ,date_format(aDate, '%Y/%m/%d') AS aDate
+           ,aDelete
+        FROM
+            kidslandAdminNotice
+        WHERE
+            aDelete = 'N'
+        AND
+            aNum = #{aNum, jdbcType=VARCHAR}
+    </select>
+
+    <!-- 사내공지사항 수정 -->
+    <update id="adminNoticeEdit">
+        UPDATE
+            kidslandAdminNotice
+        SET
+            aCategory = #{aCategory}
+          , aWriter = #{aWriter}
+          , aTitle = #{aTitle}
+          , aContent = #{aContent}
+          , aDate = CURRENT_TIMESTAMP
+        WHERE
+            aNum = #{aNum}
+    </update>
+
+    <!-- 관리자페이지 사내공지사항 리스트 -->
+    <select id="adminNotice" resultMap="adminNoticeMap">
+        SELECT
+            aNum
+           ,aTitle
+           ,date_format(aDate, '%Y.%m.%d') AS aDate
+        FROM
+            kidslandAdminNotice
+        WHERE
+            aDelete = 'N'
+        ORDER BY
+            aNum DESC
         LIMIT
             6
     </select>

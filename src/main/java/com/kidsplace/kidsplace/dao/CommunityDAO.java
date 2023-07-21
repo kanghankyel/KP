@@ -1,5 +1,6 @@
 package com.kidsplace.kidsplace.dao;
 
+import com.kidsplace.kidsplace.commons.AdminNoticeVO;
 import com.kidsplace.kidsplace.commons.FaqVO;
 import com.kidsplace.kidsplace.commons.NoticeVO;
 import com.kidsplace.kidsplace.commons.Pagination;
@@ -47,9 +48,22 @@ public interface CommunityDAO {
     // FAQ 삭제
     int faqDelete(FaqVO faqVO) throws Exception;
 
-    // 사내공지사항
+    // 사내공지사항 페이징
+    List<AdminNoticeVO> adminNoticePaging(@Param("pagination") Pagination pagination, @Param("adminNoticeVO") AdminNoticeVO adminNoticeVO) throws Exception;
 
-    // 고객공지사항
-    List<NoticeVO> adminNotice() throws Exception;
+    // 사내공지사항 카운팅
+    int adminNoticeCount(@Param("adminNoticeVO") AdminNoticeVO adminNoticeVO);
+
+    // 사내공지사항 작성
+    void adminNoticeWrite(AdminNoticeVO adminNoticeVO);
+
+    // 사내공지사항 상세
+    AdminNoticeVO adminNoticeRead(int aNum);
+
+    // 사내공지사항 수정
+    int adminNoticeEdit(AdminNoticeVO adminNoticeVO) throws Exception;    
+
+    // 관리자페이지 사내공지사항 리스트
+    List<AdminNoticeVO> adminNotice() throws Exception;
 
 }

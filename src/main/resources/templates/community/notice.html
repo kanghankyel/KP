@@ -55,7 +55,7 @@
                     <td><a th:href="@{/community/noticeDetail(nNum = ${notice.nNum})}"><div th:text="${notice.nDate}"></div></a></td>
                 </tr>
                 <tr th:unless="${not #lists.isEmpty(notice)}">
-                    <td colspan="6">공지사항이 없습니다.</td>
+                    <td colspan="5">공지사항이 없습니다.</td>
                 </tr>
             </table>
 

@@ -1,5 +1,6 @@
 package com.kidsplace.kidsplace.service;
 
+import com.kidsplace.kidsplace.commons.AdminNoticeVO;
 import com.kidsplace.kidsplace.commons.FaqVO;
 import com.kidsplace.kidsplace.commons.NoticeVO;
 import com.kidsplace.kidsplace.commons.Pagination;
@@ -46,10 +47,22 @@ public interface CommunityService {
     // HOME faq
     List<FaqVO> faqPagingHome(Pagination pagination);
 
-    // 사내공지사항
+    // 사내공지사항 페이징
+    List<AdminNoticeVO> adminNoticePaging(Pagination pagination, AdminNoticeVO adminNoticeVO);
 
-    // 고객공지사항
-    List<NoticeVO> adminNotice();
+    // 사내공지사항 카운팅
+    int adminNoticeCount(AdminNoticeVO adminNoticeVO);
 
+    // 사내공지사항 작성
+    void adminNoticeWrite(AdminNoticeVO adminNoticeVO);
+
+    // 사내공지사항 상세
+    AdminNoticeVO adminNoticeRead(int aNum);
+
+    // 사내공지사항 수정
+    Boolean adminNoticeEdit(AdminNoticeVO adminNoticeVO);
+
+    // 관리자페이지 사내공지사항 리스트
+    List<AdminNoticeVO> adminNotice();
 
 }

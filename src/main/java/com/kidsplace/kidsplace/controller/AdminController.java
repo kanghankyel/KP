@@ -1,6 +1,5 @@
 package com.kidsplace.kidsplace.controller;
 
-import java.io.Console;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -18,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kidsplace.kidsplace.commons.AdminNoticeVO;
 import com.kidsplace.kidsplace.commons.AuthVO;
-import com.kidsplace.kidsplace.commons.IpVO;
 import com.kidsplace.kidsplace.commons.NoticeVO;
 import com.kidsplace.kidsplace.commons.Pagination;
 import com.kidsplace.kidsplace.commons.TicketDetailVO;
@@ -61,9 +60,8 @@ public class AdminController {
         // 관리자 메인페이지 환불건수 데이터
         List<TicketVO> adminrefundsum = ticketService.adminRefundSum();
         model.addAttribute("adminrefundsum", adminrefundsum);
-        // 사내공지사항
-        // 고객공지사항
-        List<NoticeVO> adminnotice = communityService.adminNotice();
+        // 관리자페이지 사내공지사항 리스트
+        List<AdminNoticeVO> adminnotice = communityService.adminNotice();
         model.addAttribute("adminnotice", adminnotice);
         return "admin/admin";
     }
@@ -347,6 +345,80 @@ public class AdminController {
         List<TicketVO> ticketsincetotal = ticketService.ticketSinceTotal(ticketVO);
         model.addAttribute("ticketsincetotal", ticketsincetotal);
         return "admin/adminCalculateSince";
+    }
+
+    // 관리자페이지 사내공지사항 페이지 이동
+    @GetMapping("/adminNotice")
+    public String NoticeList (Model model
+                            , @RequestParam(name = "page", required = false, defaultValue = "1") int page
+                            , @ModelAttribute("search") AdminNoticeVO adminNoticeVO){
+        // 임시 리스트
+        // List<AdminNoticeVO> adminnoticelist = communityService.adminnoticeList();
+        // model.addAttribute("adminnotice", adminnoticelist);
+        // 페이징 처리
+        int adminNoticeCount = communityService.adminNoticeCount(adminNoticeVO);
+        Pagination pagination = new Pagination(adminNoticeCount, page);
+        List<AdminNoticeVO> adminnoticelist = communityService.adminNoticePaging(pagination, adminNoticeVO);
+        model.addAttribute("adminnotice", adminnoticelist);
+        model.addAttribute("page", pagination);
+        // 검색조건 유지를 위한 값
+        model.addAttribute("search", adminNoticeVO);
+        System.out.println(pagination.toString());
+        return "admin/adminNotice";
+    }
+
+    // 관리자페이지 사내공지사항작성 페이지 이동
+    @GetMapping("/adminNoticeWrite")
+    public String AdminNoticeWirte (Model model){
+        return "admin/adminNoticeWrite";
+    }
+
+    // 관리자페이지 사내공지사항작성
+    @PostMapping("/adminNoticeWrite")
+    public ResponseEntity<Boolean> adminNoticeWrite(@RequestBody AdminNoticeVO adminNoticeVO){
+        try{
+            communityService.adminNoticeWrite(adminNoticeVO);
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } catch (Exception e){
+            logger.error("사내공지사항 정보 저장에 실패하였습니다.");
+            e.printStackTrace();
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // 관리자페이지 사내공지사항상세 페이지 이동
+    @GetMapping("/adminNoticeDetail")
+    public String AdminNoticeDetail (int aNum, Model model){
+       // logger.warn(String.valueOf(aNum));
+        AdminNoticeVO adminNoticeVO = communityService.adminNoticeRead(aNum);
+        model.addAttribute("adminNoticeDetail", adminNoticeVO);
+        return "admin/adminNoticeDetail";
+    }
+
+    // 관리자페이지 사내공지사항수정 페이지 이동
+    @GetMapping("/adminNoticeEdit")
+    public String AdminNoticeEdit (int aNum, Model model){
+       // logger.warn(String.valueOf(aNum));
+        AdminNoticeVO adminNoticeVO = communityService.adminNoticeRead(aNum);
+        model.addAttribute("adminNoticeDetail", adminNoticeVO);
+        return "admin/adminNoticeEdit";
+    }
+
+    // 관리자페이지 사내공지사항수정
+    @PostMapping("/adminNoticeEdit")
+    public ResponseEntity<Boolean> adminNoticeEdit(@RequestBody AdminNoticeVO adminNoticeVO){
+        try{
+            boolean result = communityService.adminNoticeEdit(adminNoticeVO);
+            if(result){
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e){
+            logger.error("사내공지사항 정보 수정에 실패하였습니다.");
+            e.printStackTrace();
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
     }
 
     

@@ -1,5 +1,6 @@
 package com.kidsplace.kidsplace.service;
 
+import com.kidsplace.kidsplace.commons.AdminNoticeVO;
 import com.kidsplace.kidsplace.commons.FaqVO;
 import com.kidsplace.kidsplace.commons.NoticeVO;
 import com.kidsplace.kidsplace.commons.Pagination;
@@ -162,7 +163,56 @@ public class CommunityServicempl implements CommunityService {
     }
 
     @Override
-    public List<NoticeVO> adminNotice() {
+    public List<AdminNoticeVO> adminNoticePaging(Pagination pagination, AdminNoticeVO adminNoticeVO) {
+        // logger.info("get List with SearchDTO");
+        // return communityDAO.adminNoticePaging(pagination, adminNoticeVO);
+        try {
+            return communityDAO.adminNoticePaging(pagination, adminNoticeVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public int adminNoticeCount(AdminNoticeVO adminNoticeVO) {
+        // System.out.println("adminNoticeCount : " + communityDAO.adminNoticeCount());
+        return communityDAO.adminNoticeCount(adminNoticeVO);
+    }
+
+    @Override
+    @Transactional
+    public void adminNoticeWrite(AdminNoticeVO adminNoticeVO) {
+        communityDAO.adminNoticeWrite(adminNoticeVO);
+    }
+
+    @Override
+    public AdminNoticeVO adminNoticeRead(int aNum) {
+        // logger.warn(String.valueOf(aNum));
+        AdminNoticeVO adminNoticeVO = communityDAO.adminNoticeRead(aNum);
+        return adminNoticeVO;
+    }
+
+    @Override
+    public Boolean adminNoticeEdit(AdminNoticeVO adminNoticeVO) {
+        // logger.warn("사내공지사항 수정 데이터");
+        // logger.warn(String.valueOf(adminNoticeVO));
+        try{
+            int result = communityDAO.adminNoticeEdit(adminNoticeVO);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            logger.error("사내공지사항 수정 데이터 오류");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public List<AdminNoticeVO> adminNotice() {
         // logger.info("get List with adminNoticeDTO");
         // return communityDAO.adminNotice();
         try {

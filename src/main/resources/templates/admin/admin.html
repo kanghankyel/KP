@@ -112,13 +112,28 @@
                 </article>
 
                 <article class="admin_thirdwrap">
-                    <div>사내공지</div>
                     <div>
                         <div>
                             <table>
                                 <tr th:each="adminnotice : ${adminnotice}" th:if="${not #lists.isEmpty(adminnotice)}">
-                                    <td><a th:href="@{/community/noticeDetail(nNum = ${adminnotice.nNum})}"><div th:text="${adminnotice.nTitle}"></div></a></td>
-                                    <td><a th:href="@{/community/noticeDetail(nNum = ${adminnotice.nNum})}"><div th:text="${adminnotice.nDate}"></div></a></td>
+                                    <td><a th:href="@{/admin/adminNoticeDetail(aNum = ${adminnotice.aNum})}"><div th:text="${adminnotice.aTitle}"></div></a></td>
+                                    <td><a th:href="@{/admin/adminNoticeDetail(aNum = ${adminnotice.aNum})}"><div th:text="${adminnotice.aDate}"></div></a></td>
+                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(adminnotice)}">
+                                    <td colspan="3">공지사항이 없습니다.</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div>
+                            <a th:href="@{../admin/adminNotice}">+ 사내공지사항 더보기</a>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <table>
+                                <tr th:each="adminnotice : ${adminnotice}" th:if="${not #lists.isEmpty(adminnotice)}">
+                                    <td><a th:href="@{/admin/adminNoticeDetail(aNum = ${adminnotice.aNum})}"><div th:text="${adminnotice.aTitle}"></div></a></td>
+                                    <td><a th:href="@{/admin/adminNoticeDetail(aNum = ${adminnotice.aNum})}"><div th:text="${adminnotice.aDate}"></div></a></td>
                                 </tr>
                                 <tr th:unless="${not #lists.isEmpty(adminnotice)}">
                                     <td colspan="3">공지사항이 없습니다.</td>
@@ -161,7 +176,7 @@
         displayDate();
     </script>
 
-    <!-- cookie를 활용한 메모장. -->
+    <!-- localstorge를 활용한 메모장. -->
     <script>
         // 페이지가 로드될 때 기존 메모가 있으면 불러와서 출력하기 위한 함수
         window.onload = function () {

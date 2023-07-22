@@ -1,8 +1,10 @@
 package com.kidsplace.kidsplace.controller;
 
+import com.kidsplace.kidsplace.commons.AdminNoticeVO;
 import com.kidsplace.kidsplace.commons.FaqVO;
 import com.kidsplace.kidsplace.commons.NoticeVO;
 import com.kidsplace.kidsplace.commons.Pagination;
+import com.kidsplace.kidsplace.commons.QnaVO;
 import com.kidsplace.kidsplace.service.CommunityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -171,5 +173,113 @@ public class CommunityController {
             return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
         }
     }
+
+    // Q&A 페이지 이동 및 리스트 구현
+    @GetMapping("/qna")
+    public String Qna (Model model
+                    , @RequestParam(name = "page", required = false, defaultValue = "1") int page
+                    , @ModelAttribute("search") QnaVO qnaVO){
+        // 임시 리스트
+        // List<QnaVO> noticelist = communityService.qnaList();
+        // model.addAttribute("qna", qnalist);
+        // 페이징 처리
+        int qnaCount = communityService.qnaCount(qnaVO);
+        Pagination pagination = new Pagination(qnaCount, page);
+        List<QnaVO> qnalist = communityService.qnaPaging(pagination, qnaVO);
+        model.addAttribute("qna", qnalist);
+        model.addAttribute("page", pagination);
+        // 검색조건 유지를 위한 값
+        model.addAttribute("search", qnaVO);
+        // System.out.println(pagination.toString());
+        return "community/qna";
+    }
+
+    // Q&A 작성 페이지 이동
+    @GetMapping("/qnaWrite")
+    public String QnaWrite(){
+        return "community/qnaWrite";
+    }
+
+    // Q&A 작성
+    @PostMapping("/qnaWrite")
+    public ResponseEntity<Boolean> qnaWrite(@RequestBody QnaVO qnaVO){
+        try{
+            communityService.qnaWrite(qnaVO);
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } catch (Exception e){
+            logger.error("Q&A 정보 저장에 실패하였습니다.");
+            e.printStackTrace();
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // Q&A 상세 페이지 이동
+    @GetMapping("/qnaDetail")
+    public String QnaDetail (int qNum, Model model){
+       // logger.warn(String.valueOf(qNum));
+        QnaVO qnaVO = communityService.qnaRead(qNum);
+        model.addAttribute("qnaDetail", qnaVO);
+        return "community/qnaDetail";
+    }
+
+    // Q&A 삭제처리
+    @PostMapping("/qnaDelete")
+    public ResponseEntity<Boolean> QaqDelete(@RequestBody QnaVO qnaVO){
+        try{
+            boolean result = communityService.qaqDelete(qnaVO);
+            if(result){
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e){
+            logger.error("Q&A 삭제에 실패하였습니다.");
+            e.printStackTrace();
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // Q&A 답변작성 페이지 이동
+    @GetMapping("/qnaAnswer")
+    public String QnaAnswer(int qNum, Model model){
+        QnaVO qnaVO = communityService.qnaRead(qNum);
+        model.addAttribute("qnaDetail", qnaVO);
+        return "community/qnaAnswer";
+    }
+
+    // Q&A 답변작성
+    @PostMapping("/qnaAnswer")
+    public ResponseEntity<Boolean> qnaAnswer(@RequestBody QnaVO qnaVO){
+        try{
+            boolean result = communityService.qnaAnswer(qnaVO);
+            if(result){
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e){
+            logger.error("Q&A 답변 정보 저장에 실패하였습니다.");
+            e.printStackTrace();
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // Q&A 답변삭제
+    @PostMapping("/qnaAnswerDelete")
+    public ResponseEntity<Boolean> qnaAnswerDelete(@RequestBody QnaVO qnaVO){
+        try{
+            boolean result = communityService.qnaAnswerDelete(qnaVO);
+            if(result){
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e){
+            logger.error("Q&A 답변 삭제에 실패하였습니다.");
+            e.printStackTrace();
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
 }

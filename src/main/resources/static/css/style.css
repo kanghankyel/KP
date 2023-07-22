@@ -1706,6 +1706,99 @@ ul,li{
     padding: 20px;
     box-sizing: border-box;
 }
+/* templates/community/qna */
+.qna_searchBox{
+    padding-left: 30%;
+}
+.qna_searchBox form{
+    display: flex;
+}
+.qna_searchBox form input{
+    margin-right: 30px;
+}
+.qna_searchBox form input:nth-child(3){
+    margin-right: 0px;
+}
+.qnaAdminBtn{
+    width: 50px;
+    height: 25px;
+    border: none;
+    border-radius: 5px;
+    background-color: royalblue;
+    font-size: 12px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.qnaAdminBtn:hover{
+    background-color: tomato;
+}
+/* templates/community/qnaDetail */
+.board_qna{
+    margin-bottom: 30px;
+}
+.qnaBtn{
+    width: 75%;
+    margin: 0 auto;
+    text-align: right;
+    margin-bottom: 50px;
+}
+.qnaBtn input{
+    width: 80px;
+    height: 25px;
+    border: none;
+    border-radius: 5px;
+    background-color: tomato;
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.qnaBtn input:hover{
+    background-color: royalblue;
+}
+.qnaAnswer{
+    width: 900px;
+    margin: 0 auto;
+    margin-bottom: 150px;
+}
+.qnaAnswer textarea{
+    width: 100%;
+    height: auto;
+    border-top: 5px double #222;
+    border-bottom: 5px double #222;
+    background-color: #f5f5f5;
+    border-right: none;
+    border-left: none;
+    outline: none;
+    padding: 25px 15px;
+    box-sizing: border-box;
+    resize: none;
+    min-height: 250px;
+    overflow-y: hidden;
+    margin-bottom: 30px;
+}
+.qnaAnswer>div{
+    text-align: right;
+}
+.qnaAnswer>div input{
+    width: 80px;
+    height: 25px;
+    border: none;
+    border-radius: 5px;
+    background-color: royalblue;
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.qnaAnswer>div input:hover{
+    background-color: tomato;
+}
+.qnaAnswer>div input:nth-child(1){
+    margin-right: 30px;
+}
+/* templates/community/qnaWrite */
 /* templates/ticket/ticketBuy */
 .ticket_board{
     width: 1200px;
@@ -2022,7 +2115,7 @@ ul,li{
     background-color: #f5f5f5;
 }
 .admin_info_table td{
-    width: 212px;
+    width: 213px;
     font-size: 14px;
     letter-spacing: 1px;
     border: 1px solid #aaa;
@@ -2085,7 +2178,7 @@ ul,li{
     border-radius: 5px;
 }
 .admin_day_box{
-    width: 150px;
+    width: 152px;
     border: 4px solid tomato;
     border-radius: 5px;
 }
@@ -2166,10 +2259,13 @@ ul,li{
     font-size: 15px;
 }
 .admin_thirdwrap>div:nth-child(1)>div:nth-child(1) table td:nth-child(1) div{
-    width: 100%;
+    width: 85%;
     height: 100%;
     line-height: 40px;
     padding: 0px 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .admin_thirdwrap>div:nth-child(1)>div:nth-child(1) table td:nth-child(2){
     width: 20%;
@@ -2199,8 +2295,6 @@ ul,li{
     font-size: 13px;
     line-height: 30px;
 }
-
-
 .admin_thirdwrap>div:nth-child(2){
 
 }
@@ -2224,10 +2318,13 @@ ul,li{
     font-size: 15px;
 }
 .admin_thirdwrap>div:nth-child(2)>div:nth-child(1) table td:nth-child(1) div{
-    width: 100%;
+    width: 85%;
     height: 100%;
     line-height: 40px;
     padding: 0px 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .admin_thirdwrap>div:nth-child(2)>div:nth-child(1) table td:nth-child(2){
     width: 20%;

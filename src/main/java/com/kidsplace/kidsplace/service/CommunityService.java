@@ -4,6 +4,7 @@ import com.kidsplace.kidsplace.commons.AdminNoticeVO;
 import com.kidsplace.kidsplace.commons.FaqVO;
 import com.kidsplace.kidsplace.commons.NoticeVO;
 import com.kidsplace.kidsplace.commons.Pagination;
+import com.kidsplace.kidsplace.commons.QnaVO;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -62,7 +63,34 @@ public interface CommunityService {
     // 사내공지사항 수정
     Boolean adminNoticeEdit(AdminNoticeVO adminNoticeVO);
 
+    // 사내공지사항 삭제
+    boolean adminNoticeDelete(AdminNoticeVO adminNoticeVO);
+
     // 관리자페이지 사내공지사항 리스트
     List<AdminNoticeVO> adminNotice();
+
+    // 관리자페이지 Q&A 리스트
+    List<QnaVO> adminQna();
+
+    // Qna 리스트 페이징
+    List<QnaVO> qnaPaging(Pagination pagination, QnaVO qnaVO);
+
+    // Qna 리스트 카운팅
+    int qnaCount(QnaVO qnaVO);
+
+    // Qna 작성
+    void qnaWrite(QnaVO qnaVO);
+
+    // Qna 상세
+    QnaVO qnaRead(int qNum);
+
+    // Qna 삭제
+    boolean qaqDelete(QnaVO qnaVO);
+
+    // Qna 답변작성
+    boolean qnaAnswer(QnaVO qnaVO);
+
+    // Qna 답변삭제
+    boolean qnaAnswerDelete(QnaVO qnaVO);
 
 }

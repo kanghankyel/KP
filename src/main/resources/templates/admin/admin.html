@@ -107,9 +107,9 @@
                     </div>
                 </article>
 
-                <article class="admin_secondwrap">
+                <!-- <article class="admin_secondwrap">
                     <div>판매그래프</div>
-                </article>
+                </article> -->
 
                 <article class="admin_thirdwrap">
                     <div>
@@ -120,7 +120,7 @@
                                     <td><a th:href="@{/admin/adminNoticeDetail(aNum = ${adminnotice.aNum})}"><div th:text="${adminnotice.aDate}"></div></a></td>
                                 </tr>
                                 <tr th:unless="${not #lists.isEmpty(adminnotice)}">
-                                    <td colspan="3">공지사항이 없습니다.</td>
+                                    <td colspan="2">공지사항이 없습니다.</td>
                                 </tr>
                             </table>
                         </div>
@@ -131,17 +131,17 @@
                     <div>
                         <div>
                             <table>
-                                <tr th:each="adminnotice : ${adminnotice}" th:if="${not #lists.isEmpty(adminnotice)}">
-                                    <td><a th:href="@{/admin/adminNoticeDetail(aNum = ${adminnotice.aNum})}"><div th:text="${adminnotice.aTitle}"></div></a></td>
-                                    <td><a th:href="@{/admin/adminNoticeDetail(aNum = ${adminnotice.aNum})}"><div th:text="${adminnotice.aDate}"></div></a></td>
+                                <tr th:each="adminqna : ${adminqna}" th:if="${not #lists.isEmpty(adminqna)}">
+                                    <td><a th:href="@{/community/qnaDetail(qNum = ${adminqna.qNum})}"><div th:text="${adminqna.qQuestionTitle}"></div></a></td>
+                                    <td><a th:href="@{/community/qnaDetail(qNum = ${adminqna.qNum})}"><div th:text="${adminqna.qQuestionDate}"></div></a></td>
                                 </tr>
-                                <tr th:unless="${not #lists.isEmpty(adminnotice)}">
-                                    <td colspan="3">공지사항이 없습니다.</td>
+                                <tr th:unless="${not #lists.isEmpty(adminqna)}">
+                                    <td colspan="2">등록된 Q&A가 없습니다.</td>
                                 </tr>
                             </table>
                         </div>
                         <div>
-                            <a th:href="@{../community/notice}">+ 고객공지사항 더보기</a>
+                            <a th:href="@{../community/qna}">+ Q&A 더보기</a>
                         </div>
                     </div>
                 </article>

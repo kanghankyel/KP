@@ -68,13 +68,12 @@
 
         function adminNoticeDeleteComplete(){
             const urlParams = new URLSearchParams(location.search);
-            let nNum = urlParams.get("nNum");
-            console.log(nNum);
+            let aNum = urlParams.get("aNum");
             fetch(urlparam + '/admin/adminNoticeDelete', {
                 method: 'post',
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
-                    aNum: nNum,
+                    aNum: aNum,
                     aCategory: document.getElementById("deleteCategory").value,
                     aWriter: document.getElementById("deleteWriter").value,
                     aTitle: document.getElementById("deleteTitle").value,

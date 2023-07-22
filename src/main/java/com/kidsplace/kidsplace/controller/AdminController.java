@@ -21,6 +21,7 @@ import com.kidsplace.kidsplace.commons.AdminNoticeVO;
 import com.kidsplace.kidsplace.commons.AuthVO;
 import com.kidsplace.kidsplace.commons.NoticeVO;
 import com.kidsplace.kidsplace.commons.Pagination;
+import com.kidsplace.kidsplace.commons.QnaVO;
 import com.kidsplace.kidsplace.commons.TicketDetailVO;
 import com.kidsplace.kidsplace.commons.TicketVO;
 import com.kidsplace.kidsplace.commons.UserVO;
@@ -63,6 +64,9 @@ public class AdminController {
         // 관리자페이지 사내공지사항 리스트
         List<AdminNoticeVO> adminnotice = communityService.adminNotice();
         model.addAttribute("adminnotice", adminnotice);
+        // 관리자페이지 Q&A 리스트
+        List<QnaVO> adminqna = communityService.adminQna();
+        model.addAttribute("adminqna", adminqna);
         return "admin/admin";
     }
 
@@ -416,6 +420,23 @@ public class AdminController {
             }
         } catch (Exception e){
             logger.error("사내공지사항 정보 수정에 실패하였습니다.");
+            e.printStackTrace();
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // 관리자페이지 사내공지사항삭제
+    @PostMapping("/adminNoticeDelete")
+    public ResponseEntity<Boolean> adminNoticeDelete(@RequestBody AdminNoticeVO adminNoticeVO){
+        try{
+            boolean result = communityService.adminNoticeDelete(adminNoticeVO);
+            if(result){
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e){
+            logger.error("사내공지사항 정보 삭제에 실패하였습니다.");
             e.printStackTrace();
             return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
         }

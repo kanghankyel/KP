@@ -25,6 +25,24 @@
         <result property="fDelete" column="fDelete" />
     </resultMap>
 
+    <resultMap id="qnaMap" type="com.kidsplace.kidsplace.commons.QnaVO">
+        <result property="qNum" column="qNum" />
+        <result property="qPhonenum" column="qPhonenum" />
+        <result property="qPassword" column="qPassword" />
+        <result property="qQuestionWriter" column="qQuestionWriter" />
+        <result property="qQuestionTitle" column="qQuestionTitle" />
+        <result property="qQuestionContent" column="qQuestionContent" />
+        <result property="qQuestionDate" column="qQuestionDate" />
+        <result property="qQuestionDeletedate" column="qQuestionDeletedate" />
+        <result property="qQuestionDelete" column="qQuestionDelete" />
+        <result property="qAnswerWriter" column="qAnswerWriter" />
+        <result property="qAnswerTitle" column="qAnswerTitle" />
+        <result property="qAnswerContent" column="qAnswerContent" />
+        <result property="qAnswerDate" column="qAnswerDate" />
+        <result property="qAnswerDeletedate" column="qAnswerDeletedate" />
+        <result property="qAnswerDelete" column="qAnswerDelete" />
+    </resultMap>
+
     <resultMap id="adminNoticeMap" type="com.kidsplace.kidsplace.commons.AdminNoticeVO">
         <result property="aNum" column="aNum" />
         <result property="aCategory" column="aCategory" />
@@ -266,7 +284,7 @@
     </select>
 
     <!-- 사내공지사항 작성 -->
-    <select id="adminNoticeWrite">
+    <insert id="adminNoticeWrite">
         INSERT INTO
             kidslandAdminNotice(
                 aNum
@@ -280,7 +298,7 @@
             , #{aWriter}
             , #{aTitle}
             , #{aContent})
-    </select>
+    </insert>
 
     <!-- 사내공지사항 상세 -->
     <select id="adminNoticeRead" resultMap="adminNoticeMap">
@@ -314,6 +332,16 @@
             aNum = #{aNum}
     </update>
 
+    <!-- 사내공지사항 삭제 -->
+    <update id="adminNoticeDelete">
+        UPDATE
+            kidslandAdminNotice
+        SET
+            aDelete = 'Y'
+        WHERE
+            aNum = #{aNum}
+    </update>
+
     <!-- 관리자페이지 사내공지사항 리스트 -->
     <select id="adminNotice" resultMap="adminNoticeMap">
         SELECT
@@ -329,4 +357,140 @@
         LIMIT
             6
     </select>
+
+    <!-- 관리자페이지 Q&A 리스트 -->
+    <select id="adminQna" resultMap="qnaMap">
+        SELECT
+            qNum
+           ,qQuestionTitle
+           ,date_format(qQuestionDate, '%Y.%m.%d') AS qQuestionDate
+        FROM
+            kidslandQna
+        WHERE
+            qQuestionDelete = 'N'
+        ORDER BY
+            qNum DESC
+        LIMIT
+            6
+    </select>
+
+    <!-- qna 리스트 페이징 -->
+    <select id="qnaPaging" resultMap="qnaMap">
+        SELECT
+            qNum
+           ,qQuestionWriter
+           ,qPhonenum
+           ,qPassword
+           ,qQuestionTitle
+           ,date_format(qQuestionDate, '%Y-%m-%d') AS qQuestionDate
+        FROM
+            kidslandQna
+        WHERE
+            qQuestionDelete = 'N'
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(qnaVO.qPhonenum)">
+                AND qPhonenum LIKE CONCAT('%', #{qnaVO.qPhonenum}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(qnaVO.qQuestionWriter)">
+                AND qQuestionWriter LIKE CONCAT('%', #{qnaVO.qQuestionWriter}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(qnaVO.qQuestionTitle)">
+                AND qQuestionTitle LIKE CONCAT('%', #{qnaVO.qQuestionTitle}, '%')
+            </if>
+        ORDER BY
+            qNum DESC
+        LIMIT
+            #{pagination.limitStart}, #{pagination.recordSize}
+    </select>
+
+    <!-- qna 리스트 카운팅 -->
+    <select id="qnaCount" resultType="int">
+        SELECT
+            count(*)
+        FROM
+            kidslandQna
+        WHERE
+            qQuestionDelete = 'N'
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(qnaVO.qPhonenum)">
+                AND qPhonenum LIKE CONCAT('%', #{qnaVO.qPhonenum}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(qnaVO.qQuestionWriter)">
+                AND qQuestionWriter LIKE CONCAT('%', #{qnaVO.qQuestionWriter}, '%')
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(qnaVO.qQuestionTitle)">
+                AND qQuestionTitle LIKE CONCAT('%', #{qnaVO.qQuestionTitle}, '%')
+            </if>
+    </select>
+
+    <!-- Qna 작성 -->
+    <insert id="qnaWrite">
+        INSERT INTO
+            kidslandQna(
+                qNum
+               ,qQuestionWriter
+               ,qPhonenum
+               ,qPassword
+               ,qQuestionTitle
+               ,qQuestionContent)
+        VALUES
+            ((SELECT resultTable.resultNum FROM (SELECT IFNULL(MAX(qNum), 0) + 1 AS resultNum FROM kidslandQna) resultTable)
+            , #{qQuestionWriter}
+            , #{qPhonenum}
+            , #{qPassword}
+            , #{qQuestionTitle}
+            , #{qQuestionContent})
+    </insert>
+
+    <!-- Qna 상세 -->
+    <select id="qnaRead" resultMap="qnaMap">
+        SELECT
+            qNum
+           ,qPhonenum
+           ,qPassword
+           ,qQuestionWriter
+           ,qQuestionTitle
+           ,qQuestionContent
+           ,date_format(qQuestionDate, '%Y/%m/%d') AS qQuestionDate
+           ,qAnswerWriter
+           ,qAnswerTitle
+           ,qAnswerContent
+           ,date_format(qAnswerDate, '%Y/%m/%d') AS qAnswerDate
+        FROM
+            kidslandQna
+        WHERE
+            qQuestionDelete = 'N'
+        AND
+            qNum = #{qNum, jdbcType=VARCHAR}
+    </select>
+
+    <!-- Qna 삭제 -->
+    <update id="qnaDelete">
+        UPDATE
+            kidslandQna
+        SET
+            qQuestionDelete = 'Y'
+        WHERE
+            qNum = #{qNum}
+    </update>
+
+    <!-- Qna 답변작성 -->
+    <update id="qnaAnswer">
+        UPDATE
+            kidslandQna
+        SET
+            qAnswerWriter = #{qAnswerWriter}
+          , qAnswerDate = CURRENT_TIMESTAMP
+          , qAnswerContent = #{qAnswerContent}
+        WHERE
+            qNum = #{qNum}
+    </update>
+
+    <!-- Qna 답변삭제 -->
+    <update id="qnaAnswerDelete">
+        UPDATE
+            kidslandQna
+        SET
+            qAnswerContent = NULL
+        WHERE
+            qNum = #{qNum}
+    </update>
 </mapper>

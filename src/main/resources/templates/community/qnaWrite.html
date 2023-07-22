@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+    <div th:include="./fragment/head"></div>
+    <div th:include="./fragment/header"></div>
+    <div th:include="./fragment/nav"></div>
+
+    <div class="content">
+        <div class="image_banner">
+            <div class="image_banner_bg">
+                <img th:src="@{/image/notice_banner.jpg}" alt="">
+                <h1>Q &nbsp; & &nbsp; A &nbsp; 작 &nbsp; 성</h1>
+            </div>
+            <div class="page_nav">
+                <span><a th:href="@{/}"><i class="fa-solid fa-house"></i></a></span>
+                <span><a th:href="@{/community/qna}">키즈월드커뮤니티 &nbsp; <i class="fa-solid fa-caret-down"></i></a></span>
+                <span><a th:href="@{/community/qnaWrite}">Q&A작성 &nbsp; <i class="fa-solid fa-caret-down"></i></a></span>
+            </div>
+        </div>
+        <div class="inner">
+            <h2>Q&A 작성</h2>
+            <hr>
+            <table class="board_write_table qna_board">
+                <tr>
+                    <th>제목</th>
+                    <td colspan="3"><input type="text" id="inputTitle"></td>                    
+                </tr>
+                <tr>
+                    <th>작성자</th>
+                    <td><input type="text" id="inputWriter"></td>
+                    <th>전화번호</th>
+                    <td><input type="text" id="inputPhonenum" placeholder="'-'없이 번호만 입력하세요."></td>
+                </tr>
+                <tr>
+                    <th>비밀번호</th>
+                    <td colspan="3"><input type="password" id="inputPassword" placeholder="4~10자리 이내로 입력하세요."></td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td colspan="3">
+                        <textarea name="qna_textarea" id="inputContent"></textarea>
+                    </td>
+                </tr>
+            </table>
+            <div class="board_write_table_btn_box">
+                <div class="board_table_btn"><input type="button" value="작 성" onclick="qnaWriteComplete()"></div>
+                <div class="board_table_btn"><input type="button" value="취 소" onclick="qnaWriteCancel()"></div>
+            </div>
+        </div>
+    </div>
+
+    <div th:include="./fragment/footer"></div>
+
+
+
+    <!--  script  -->
+    <script>
+        function qnaWriteComplete(){
+            const title = document.getElementById("inputTitle").value;
+            const writer = document.getElementById("inputWriter").value;
+            const phonenum = document.getElementById("inputPhonenum").value;
+            const password = document.getElementById("inputPassword").value;
+            const content = document.getElementById("inputContent").value;
+            if (title.trim() === "") {
+                alert("제목을 입력하세요.");
+                document.getElementById("inputTitle").focus();
+                return;
+            }
+            if (writer.trim() === "") {
+                alert("이름을 입력하세요.");
+                document.getElementById("inputWriter").focus();
+                return;
+            }
+            if (phonenum.trim() === "") {
+                alert("전화번호를 입력하세요.");
+                document.getElementById("inputPhonenum").focus();
+                return;
+            }
+            if (!/^\d+$/.test(phonenum)) {
+                alert("전화번호는 숫자만 입력하세요.");
+                document.getElementById("inputPhonenum").focus();
+                return;
+            }
+            if (password.trim() === "") {
+                alert("비밀번호를 입력하세요.");
+                document.getElementById("inputPassword").focus();
+                return;
+            }
+            if (password.length < 4 || password.length > 10) {
+                alert("비밀번호는 4~10자리 이내로 입력하세요.");
+                document.getElementById("inputPassword").focus();
+                return;
+            }
+            if (content.trim() === "") {
+                alert("내용을 입력하세요.");
+                document.getElementById("inputContent").focus();
+                return;
+            }
+            
+
+            fetch(urlparam + '/community/qnaWrite', {
+                method: 'post',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    qQuestionWriter: document.getElementById("inputWriter").value,
+                    qPhonenum: document.getElementById("inputPhonenum").value,
+                    qPassword: document.getElementById("inputPassword").value,
+                    qQuestionTitle: document.getElementById("inputTitle").value,
+                    qQuestionContent: document.getElementById("inputContent").value
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        console.log(data);
+                        alert("Q&A 작성이 완료되었습니다.");
+                        location.href = urlparam + "/community/qna";
+                    }else{
+                        alert("Q&A 작성에 실패하였습니다. 다시 시도해주세요.");
+                    }
+                })
+                .catch((error) => console.log(error));
+        }
+    </script>
+
+    <script>
+        function qnaWriteCancel(){
+            alert("Q&A 작성을 취소하였습니다.");
+            history.back();
+        }
+    </script>
+</body>
+</html>

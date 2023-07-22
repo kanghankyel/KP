@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+    <div th:include="./fragment/head"></div>
+    <div th:include="./fragment/header"></div>
+    <div th:include="./fragment/nav"></div>
+
+    <div class="content">
+        <div class="image_banner">
+            <div class="image_banner_bg">
+                <img th:src="@{/image/notice_banner.jpg}" alt="">
+                <h1>Q &nbsp; & &nbsp; A &nbsp; 상 &nbsp; 세</h1>
+            </div>
+            <div class="page_nav">
+                <span><a th:href="@{/}"><i class="fa-solid fa-house"></i></a></span>
+                <span><a th:href="@{/community/qna}">키즈월드커뮤니티 &nbsp; <i class="fa-solid fa-caret-down"></i></a></span>
+                <span><a th:href="@{/community/qnaDetail}">Q&A상세 &nbsp; <i class="fa-solid fa-caret-down"></i></a></span>
+            </div>
+        </div>
+        
+        <div class="inner">
+            <div class="pointBox pointBox_noticedetail">
+                <div class="point_middletext">Q&A 상세</div>
+                <span class="point_hr"></span>
+            </div>
+
+            <div>
+                <table class="board_write_table board_detail_table board_qna">
+                    <tr th:each="qnaDetail : ${qnaDetail}">
+                        <th class="left_td">제목</th>
+                        <td colspan="3" id="deleteTitle" th:text="${qnaDetail.qQuestionTitle}"></td>                    
+                    </tr>
+                    <tr>
+                        <th class="left_td">작성자</th>
+                        <td id="deleteCategory" th:text="${qnaDetail.qQuestionWriter}"></td>
+                        <th>전화번호</th>
+                        <td id="deleteWriter" th:text="${qnaDetail.qPhonenum}"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <textarea id="deleteContent" class="left_td" th:text="${qnaDetail.qQuestionContent}" readonly></textarea>
+                        </td>
+                    </tr>
+                </table>
+                <div class="qnaBtn">
+                    <input type="button" value="삭 제" onclick="qnaDeleteYN()">
+                </div>
+            </div>
+
+            <div class="pointBox pointBox_noticedetail">
+                <div class="point_admintext">관리자 답변</div>
+                <span class="point_hr"></span>
+            </div>
+            <div class="qnaAnswer">
+                <div>
+                    <span>작성자 : </span>
+                    <span th:text="${qnaDetail.qAnswerWriter}"></span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span>작성일 : </span>
+                    <span th:text="${qnaDetail.qAnswerDate}"></span>
+                </div>
+                <textarea id="qnaTextarea" th:text="${qnaDetail.qAnswerContent}" placeholder="등록된 답변이 없습니다..." oninput="autoResize()" readonly></textarea>
+                <div>
+                    <input type="button" sec:authorize="hasRole('ROLE_ADMIN')" value="작 성" th:onclick="|location.href='@{/community/qnaAnswer(qNum = ${qnaDetail.qNum})}'|">
+                    <input type="button" sec:authorize="hasRole('ROLE_ADMIN')" value="삭 제" onclick="qnaAnswerDeleteYN()">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:include="./fragment/footer"></div>
+
+
+
+    <!--  script  -->
+    <!-- qnaQuestion 삭제 script -->
+    <script>
+        function qnaDeleteYN(){
+            let DeleteYN = confirm("삭제하시겠습니까?")
+            if(DeleteYN){
+                qnaDeleteComplete();
+            }else{
+                alert("취소되었습니다.");
+            }
+        }
+
+        function qnaDeleteComplete(){
+            const urlParams = new URLSearchParams(location.search);
+            let qNum = urlParams.get("qNum");
+            // console.log(qNum);
+            fetch(urlparam + '/community/qnaDelete', {
+                method: 'post',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    qNum: qNum
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    console.log(data);
+                    alert("Q&A 삭제가 완료되었습니다.");
+                    location.href = urlparam + "/community/qna";
+                }else{
+                    alert("Q&A 삭제에 실패하였습니다. 다시 시도해주세요.");
+                }
+            })
+            .catch((error) => console.log(error));
+        }
+    </script>
+
+    <!-- qnaAnswer 삭제 script -->
+    <script>
+        function qnaAnswerDeleteYN(){
+            let DeleteYN = confirm("답변을 삭제하시겠습니까?")
+            if(DeleteYN){
+                qnaAnswerDeleteComplete();
+            }else{
+                alert("답변 삭제가 취소되었습니다.");
+            }
+        }
+
+        function qnaAnswerDeleteComplete(){
+            const urlParams = new URLSearchParams(location.search);
+            let qNum = urlParams.get("qNum");
+            fetch(urlparam + '/community/qnaAnswerDelete', {
+                method: 'post',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    qNum: qNum
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    console.log(data);
+                    alert("Q&A 답변 삭제가 완료되었습니다.");
+                    location.reload();
+                }else{
+                    alert("Q&A 답변 삭제에 실패하였습니다. 다시 시도해주세요.");
+                }
+            })
+            .catch((error) => console.log(error));
+        }
+    </script>
+
+    <!-- textarea 높이 조절 script -->
+    <script>
+        function autoResize() {
+            const textarea = document.getElementById("qnaTextarea");
+            textarea.style.height = "auto"; // 초기 높이로 설정
+            textarea.style.height = textarea.scrollHeight + "px"; // 스크롤 높이에 맞춰 조절
+        }
+        // 페이지 로드 후에도 처음 높이를 조절하기 위해 이벤트를 발생시킴
+        window.onload = autoResize;
+  </script>
+</body>
+</html>

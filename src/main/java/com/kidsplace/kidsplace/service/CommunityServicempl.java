@@ -4,6 +4,7 @@ import com.kidsplace.kidsplace.commons.AdminNoticeVO;
 import com.kidsplace.kidsplace.commons.FaqVO;
 import com.kidsplace.kidsplace.commons.NoticeVO;
 import com.kidsplace.kidsplace.commons.Pagination;
+import com.kidsplace.kidsplace.commons.QnaVO;
 import com.kidsplace.kidsplace.dao.CommunityDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -212,6 +213,24 @@ public class CommunityServicempl implements CommunityService {
     }
 
     @Override
+    public boolean adminNoticeDelete(AdminNoticeVO adminNoticeVO) {
+        // logger.warn("사내공지사항 삭제처리 데이터");
+        // logger.warn(String.valueOf(adminNoticeVO));
+        try{
+            int result = communityDAO.adminNoticeDelete(adminNoticeVO);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            logger.error("사내공지사항 삭제 데이터 오류");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
     public List<AdminNoticeVO> adminNotice() {
         // logger.info("get List with adminNoticeDTO");
         // return communityDAO.adminNotice();
@@ -223,4 +242,101 @@ public class CommunityServicempl implements CommunityService {
         }
     }
 
+    @Override
+    public List<QnaVO> adminQna() {
+        // logger.info("get List with adminQnaDTO");
+        // return communityDAO.adminQna();
+        try {
+            return communityDAO.adminQna();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public List<QnaVO> qnaPaging(Pagination pagination, QnaVO qnaVO) {
+        // logger.info("get List with SearchDTO");
+        // return communityDAO.qnaPaging(pagination, qnaVO);
+        try {
+            return communityDAO.qnaPaging(pagination, qnaVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public int qnaCount(QnaVO qnaVO) {
+        // System.out.println("adminNoticeCount : " + communityDAO.qnaCount());
+        return communityDAO.qnaCount(qnaVO);
+    }
+
+    @Override
+    public void qnaWrite(QnaVO qnaVO) {
+        communityDAO.qnaWrite(qnaVO);
+    }
+
+    @Override
+    public QnaVO qnaRead(int qNum) {
+        // logger.warn(String.valueOf(qNum));
+        QnaVO qnaVO = communityDAO.qnaRead(qNum);
+        return qnaVO;
+    }
+
+    @Override
+    public boolean qaqDelete(QnaVO qnaVO) {
+        // logger.warn("Q&A 삭제처리 데이터");
+        // logger.warn(String.valueOf(qnaVO));
+        try{
+            int result = communityDAO.qnaDelete(qnaVO);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            logger.error("Q&A 삭제 데이터 오류");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean qnaAnswer(QnaVO qnaVO) {
+        // logger.warn("Q&A 답변 데이터");
+        // logger.warn(String.valueOf(qnaVO));
+        try{
+            int result = communityDAO.qnaAnswer(qnaVO);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            logger.error("Q&A 답변 작성 데이터 오류");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean qnaAnswerDelete(QnaVO qnaVO) {
+        // logger.warn("Q&A 답변 삭제처리 데이터");
+        // logger.warn(String.valueOf(qnaVO));
+        try{
+            int result = communityDAO.qnaAnswerDelete(qnaVO);
+            if (result > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            logger.error("Q&A 답변 삭제 데이터 오류");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    
 }

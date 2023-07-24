@@ -50,7 +50,7 @@
                     </div>
                 </li> -->
                 <li>
-                    <a th:href="@{../community/notice}">공지사항</a>
+                    <a th:href="@{/community/notice}">공지사항</a>
                     <div class="sub_nav">
                         <ul>
                             <li><a th:href="@{/community/notice}">공지드립니다</a></li>
@@ -59,26 +59,26 @@
                     </div>
                 </li>
                 <li>
-                    <a th:href="@{#}">이벤트</a>
+                    <a th:href="@{/community/event}">이벤트</a>
                     <div class="sub_nav">
                         <ul>
-                            <li><a th:href="@{#}">진행중인 이벤트</a></li>
-                            <li><a th:href="@{#}">예정된 이벤트</a></li>
-                            <li><a th:href="@{#}">종료된 이벤트</a></li>
+                            <li><a th:href="@{/community/event}">진행중인 이벤트</a></li>
+                            <li><a th:href="@{/community/event}">예정된 이벤트</a></li>
+                            <li><a th:href="@{/community/event}">종료된 이벤트</a></li>
                         </ul>
                     </div>
                 </li>
                 <li>
-                    <a th:href="@{../community/qna}">키즈월드커뮤니티</a>
+                    <a th:href="@{/community/qna}">키즈월드커뮤니티</a>
                     <div class="sub_nav">
                         <ul>
                             <li><a th:href="@{/community/qna}">1:1상담</a></li>
-                            <li><a th:href="@{#}">가맹문의</a></li>
+                            <li><a th:href="@{/community/joincompany}">가맹문의</a></li>
                         </ul>
                     </div>
                 </li>
                 <li>
-                    <a th:href="@{../ticket/ticketBuy}" onclick="return checkAuthentication()">티켓예매</a>
+                    <a th:href="@{/ticket/ticketBuy}" onclick="return checkAuthentication()">티켓예매</a>
                 </li>
             </ul>
         </div>

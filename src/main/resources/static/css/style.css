@@ -525,8 +525,10 @@ footer .inner>div:nth-child(4){
     overflow: hidden;
     position: relative;
     width: 100%;
+    min-width: 1200px;
     height: 350px;
     user-select: none;
+    margin: 0 auto;
 }
 .slide_item{
     display: flex;
@@ -711,14 +713,15 @@ ul,li{
 .content2{
     margin-bottom: 100px;
     position: relative;
-    display: flex;
-    justify-content: center;
 }
-.content2 article{
-    width: 100%;
+.content2 .content2Wrap{
+    position: relative;
+    width: 1200px;
+    height: 600px;
+    margin: 0 auto;
 }
 .content2 .content2Table{
-    width: 1200px;
+    width: 100%;
     height: 600px;
     border-collapse: separate;
     border-spacing: 15px 15px;
@@ -737,11 +740,6 @@ ul,li{
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-.content2 .content2Wrap{
-    position: relative;
-    width: 1200px;
-    height: 600px;
 }
 .content2 .imageBox{
     position: relative;
@@ -3002,3 +3000,14 @@ ul,li{
 
 
 
+
+
+
+
+.imsi_div{
+    margin: 0 auto;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

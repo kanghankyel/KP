@@ -281,5 +281,17 @@ public class CommunityController {
         }
     }
 
+    // EVENT 페이지 이동
+    @GetMapping("/event")
+    public String Event(){
+        return "community/event";
+    }
+
+    // 가맹문의 페이지 이동
+    @GetMapping("/joincompany")
+    public String Joincompany(){
+        return "community/joincompany";
+    }
+
 
 }

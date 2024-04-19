@@ -1,10 +1,7 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=200&section=header&text=Kids%20Place&fontColor=f7f5f5&fontSize=55&fontAlign=71&fontAlignY=40&desc=Made.By%20강한결&descSize=18&descAlign=78" />
 
 <p align="center">
-  <a href="#" target="blank"><img src="https://github.com/kanghankyel/KP/assets/100983731/8ec86807-9440-42c3-9266-afa32f6ab0c3" width="190" alt="kidsplace Logo" /></a>
-<!--   <a href="#" target="blank"><img src="https://i.namu.wiki/i/GP340LROqlXMM4Q4rFPfd5O2Bgon0azdciSt1jZm_eheWVCVNp77L9T6XOSyASgFD0qx10Me9IWyXO3UYDKC4ffR8IYytz-0YfkMUABkUjIzmJi8yUn-g_daVo7BnjRgWlj9X7s1b9U6ukPVpE4fyA.svg" width="150" alt="DrunkWhale Logo" /></a>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="http://118.67.133.203:3001/swagger" target="blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Swagger-logo.png" width="150" alt="Swagger Logo" /></a> -->
+  <a href="http://kanghangyeol.com/" target="blank"><img src="https://github.com/kanghankyel/KP/assets/100983731/8ec86807-9440-42c3-9266-afa32f6ab0c3" width="190" alt="kidsplace Logo" /></a>
 </p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
@@ -26,7 +23,7 @@
 
 ## 설명
 
-> 티켓팅과 현장결제라는 아이디어에서 착안하여, 키즈월드행사라는 소재를 이용해 회원이 이용할 수 있는 커뮤니티와, 티켓예매시스템, 모든 정보들을 관리할 수 있는 콘텐츠관리시스템(CMS)를 구현한 애플리케이션 <a href="[http://118.67.133.203:3001/swagger](http://kanghangyeol.com/)" target="_blank">"키즈월드(KidsPlace)"</a> 프로젝트입니다.
+> 티켓팅과 현장결제라는 아이디어에서 착안하여, 키즈월드행사라는 소재를 이용해 회원이 이용할 수 있는 커뮤니티와, 티켓예매시스템, 모든 정보들을 관리할 수 있는 콘텐츠관리시스템(CMS)를 구현한 애플리케이션 <a href="http://kanghangyeol.com/" target="_blank">"키즈월드(KidsPlace)"</a> 프로젝트입니다.
 > 
 > 본 프로젝트는 JAVA기반의 SpringBoot 프레임워크로 Backend 부분을, HTML, CSS, Thymeleaf템플릿엔진을 베이스로 Frontend부분이 제작되었습니다.
 

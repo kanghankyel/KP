@@ -1,9 +1,10 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=200&section=header&text=Kids%20Place&fontColor=f7f5f5&fontSize=55&fontAlign=71&fontAlignY=40&desc=Made.By%20강한결&descSize=18&descAlign=78" />
 
 <p align="center">
-  <a href="#" target="blank"><img src="https://i.namu.wiki/i/GP340LROqlXMM4Q4rFPfd5O2Bgon0azdciSt1jZm_eheWVCVNp77L9T6XOSyASgFD0qx10Me9IWyXO3UYDKC4ffR8IYytz-0YfkMUABkUjIzmJi8yUn-g_daVo7BnjRgWlj9X7s1b9U6ukPVpE4fyA.svg" width="150" alt="DrunkWhale Logo" /></a>
+  <a href="#" target="blank"><img src="https://github.com/kanghankyel/KP/assets/100983731/8ec86807-9440-42c3-9266-afa32f6ab0c3" width="190" alt="kidsplace Logo" /></a>
+<!--   <a href="#" target="blank"><img src="https://i.namu.wiki/i/GP340LROqlXMM4Q4rFPfd5O2Bgon0azdciSt1jZm_eheWVCVNp77L9T6XOSyASgFD0qx10Me9IWyXO3UYDKC4ffR8IYytz-0YfkMUABkUjIzmJi8yUn-g_daVo7BnjRgWlj9X7s1b9U6ukPVpE4fyA.svg" width="150" alt="DrunkWhale Logo" /></a>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="http://118.67.133.203:3001/swagger" target="blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Swagger-logo.png" width="150" alt="Swagger Logo" /></a>
+  <a href="http://118.67.133.203:3001/swagger" target="blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Swagger-logo.png" width="150" alt="Swagger Logo" /></a> -->
 </p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
@@ -65,6 +66,9 @@
 >> - 회원관리 시스템을 구현하여, 회원검색, 블락, 삭제를 통해 관리자단에서 회원관리에 용이.
 >> - 티켓관리 시스템을 구현하여, 티켓검색, 티켓추가, 수정, 삭제와 회원구매티켓목록 관리를 보다 쉽게 시각화하여 구현.
 >> - 집계정산을 통해 티켓예매를 통해 산출된 데이터들을 정제하여 확인할 수 있게 구성.
+>>
+> ERD 구성
+>> ![KP_ERD](https://github.com/kanghankyel/KP/assets/100983731/b1fcd7b6-2c16-4cf4-9b9a-16587f7536b5)
 
 ## 제작
 

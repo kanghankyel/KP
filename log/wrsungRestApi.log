@@ -1,0 +1,711 @@
+2024-06-09 15:55:02.865 INFO  [restartedMain] [c.k.kidsplace.KidsplaceApplication] - Starting KidsplaceApplication using Java 11.0.17 on ganghangyeol-ui-MacBookAir.local with PID 94735 (/Users/ganghangyeol/Desktop/kidsplace/build/classes/java/main started by ganghangyeol in /Users/ganghangyeol/Desktop/kidsplace)
+2024-06-09 15:55:02.866 INFO  [restartedMain] [c.k.kidsplace.KidsplaceApplication] - No active profile set, falling back to 1 default profile: "default"
+2024-06-09 15:55:03.048 INFO  [restartedMain] [o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-06-09 15:55:03.049 INFO  [restartedMain] [o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-06-09 15:55:03.469 INFO  [restartedMain] [o.s.d.r.c.RepositoryConfigurationDelegate] - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2024-06-09 15:55:03.479 INFO  [restartedMain] [o.s.d.r.c.RepositoryConfigurationDelegate] - Finished Spring Data repository scanning in 6 ms. Found 0 JDBC repository interfaces.
+2024-06-09 15:55:03.931 INFO  [restartedMain] [o.s.b.w.embedded.tomcat.TomcatWebServer] - Tomcat initialized with port(s): 8090 (http)
+2024-06-09 15:55:03.938 INFO  [restartedMain] [o.apache.coyote.http11.Http11NioProtocol] - Initializing ProtocolHandler ["http-nio-8090"]
+2024-06-09 15:55:03.939 INFO  [restartedMain] [org.apache.catalina.core.StandardService] - Starting service [Tomcat]
+2024-06-09 15:55:03.939 INFO  [restartedMain] [org.apache.catalina.core.StandardEngine] - Starting Servlet engine: [Apache Tomcat/9.0.71]
+2024-06-09 15:55:03.993 INFO  [restartedMain] [o.a.c.c.C.[Tomcat].[localhost].[/]] - Initializing Spring embedded WebApplicationContext
+2024-06-09 15:55:03.993 INFO  [restartedMain] [o.s.b.w.s.c.ServletWebServerApplicationContext] - Root WebApplicationContext: initialization completed in 944 ms
+2024-06-09 15:55:04.534 INFO  [restartedMain] [o.s.s.web.DefaultSecurityFilterChain] - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@38c8076e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6d39d004, org.springframework.security.web.context.SecurityContextPersistenceFilter@7c1ee7b7, org.springframework.security.web.header.HeaderWriterFilter@17879a2e, org.springframework.security.web.authentication.logout.LogoutFilter@1e75afd0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1f351553, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@414daece, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7a45539e, org.springframework.security.web.session.SessionManagementFilter@216dbf4f, org.springframework.security.web.access.ExceptionTranslationFilter@7a47b468, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7f4d4bf5]
+2024-06-09 15:55:04.724 INFO  [restartedMain] [o.s.b.a.w.s.WelcomePageHandlerMapping] - Adding welcome page: class path resource [static/index.html]
+2024-06-09 15:55:05.015 INFO  [restartedMain] [com.zaxxer.hikari.HikariDataSource] - HikariPool-1 - Starting...
+2024-06-09 15:55:05.348 INFO  [restartedMain] [log4jdbc.log4j2] - 1. Connection opened. {executed in 319ms} 
+2024-06-09 15:55:05.349 INFO  [restartedMain] [log4jdbc.log4j2] - 1. Connection.new Connection returned 
+2024-06-09 15:55:05.349 INFO  [restartedMain] [log4jdbc.log4j2] - 1. Connection.getNetworkTimeout() returned 0
+2024-06-09 15:55:05.361 INFO  [restartedMain] [log4jdbc.log4j2] - 1. Connection.isReadOnly() returned false
+2024-06-09 15:55:05.361 INFO  [restartedMain] [log4jdbc.log4j2] - 1. Connection.getAutoCommit() returned true
+2024-06-09 15:55:05.374 INFO  [restartedMain] [log4jdbc.log4j2] - 1. Connection.isValid(1) returned true
+2024-06-09 15:55:05.388 INFO  [restartedMain] [log4jdbc.log4j2] - 1. Connection.getTransactionIsolation() returned 4
+2024-06-09 15:55:05.389 INFO  [restartedMain] [com.zaxxer.hikari.HikariDataSource] - HikariPool-1 - Start completed.
+2024-06-09 15:55:05.397 INFO  [restartedMain] [log4jdbc.log4j2] - 1. Connection.getMetaData() returned com.mysql.cj.jdbc.DatabaseMetaData@4d14afa3
+2024-06-09 15:55:05.405 INFO  [restartedMain] [log4jdbc.log4j2] - 1. Connection.clearWarnings() returned 
+2024-06-09 15:55:05.518 INFO  [restartedMain] [o.s.b.d.a.OptionalLiveReloadServer] - LiveReload server is running on port 35729
+2024-06-09 15:55:05.530 INFO  [restartedMain] [o.apache.coyote.http11.Http11NioProtocol] - Starting ProtocolHandler ["http-nio-8090"]
+2024-06-09 15:55:05.551 INFO  [restartedMain] [o.s.b.w.embedded.tomcat.TomcatWebServer] - Tomcat started on port(s): 8090 (http) with context path ''
+2024-06-09 15:55:05.560 INFO  [restartedMain] [c.k.kidsplace.KidsplaceApplication] - Started KidsplaceApplication in 3.089 seconds (JVM running for 3.445)
+2024-06-09 15:55:05.627 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 2. Connection opened. {executed in 133ms} 
+2024-06-09 15:55:05.628 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 2. Connection.new Connection returned 
+2024-06-09 15:55:05.642 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 2. Connection.isReadOnly() returned false
+2024-06-09 15:55:05.642 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 2. Connection.getAutoCommit() returned true
+2024-06-09 15:55:05.766 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 3. Connection opened. {executed in 124ms} 
+2024-06-09 15:55:05.766 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 3. Connection.new Connection returned 
+2024-06-09 15:55:05.780 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 3. Connection.isReadOnly() returned false
+2024-06-09 15:55:05.780 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 3. Connection.getAutoCommit() returned true
+2024-06-09 15:55:05.909 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 4. Connection opened. {executed in 129ms} 
+2024-06-09 15:55:05.909 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 4. Connection.new Connection returned 
+2024-06-09 15:55:05.922 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 4. Connection.isReadOnly() returned false
+2024-06-09 15:55:05.923 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 4. Connection.getAutoCommit() returned true
+2024-06-09 15:55:06.052 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 5. Connection opened. {executed in 129ms} 
+2024-06-09 15:55:06.052 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 5. Connection.new Connection returned 
+2024-06-09 15:55:06.065 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 5. Connection.isReadOnly() returned false
+2024-06-09 15:55:06.065 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 5. Connection.getAutoCommit() returned true
+2024-06-09 15:55:06.192 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 6. Connection opened. {executed in 127ms} 
+2024-06-09 15:55:06.193 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 6. Connection.new Connection returned 
+2024-06-09 15:55:06.208 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 6. Connection.isReadOnly() returned false
+2024-06-09 15:55:06.208 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 6. Connection.getAutoCommit() returned true
+2024-06-09 15:55:06.332 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 7. Connection opened. {executed in 124ms} 
+2024-06-09 15:55:06.333 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 7. Connection.new Connection returned 
+2024-06-09 15:55:06.346 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 7. Connection.isReadOnly() returned false
+2024-06-09 15:55:06.346 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 7. Connection.getAutoCommit() returned true
+2024-06-09 15:55:06.462 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 8. Connection opened. {executed in 116ms} 
+2024-06-09 15:55:06.462 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 8. Connection.new Connection returned 
+2024-06-09 15:55:06.474 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 8. Connection.isReadOnly() returned false
+2024-06-09 15:55:06.474 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 8. Connection.getAutoCommit() returned true
+2024-06-09 15:55:06.593 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 9. Connection opened. {executed in 118ms} 
+2024-06-09 15:55:06.593 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 9. Connection.new Connection returned 
+2024-06-09 15:55:06.609 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 9. Connection.isReadOnly() returned false
+2024-06-09 15:55:06.610 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 9. Connection.getAutoCommit() returned true
+2024-06-09 15:55:06.740 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 10. Connection opened. {executed in 130ms} 
+2024-06-09 15:55:06.740 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 10. Connection.new Connection returned 
+2024-06-09 15:55:06.769 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 10. Connection.isReadOnly() returned false
+2024-06-09 15:55:06.769 INFO  [HikariPool-1 connection adder] [log4jdbc.log4j2] - 10. Connection.getAutoCommit() returned true
+2024-06-09 15:55:34.425 INFO  [http-nio-8090-exec-1] [o.a.c.c.C.[Tomcat].[localhost].[/]] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-06-09 15:55:34.425 INFO  [http-nio-8090-exec-1] [o.s.web.servlet.DispatcherServlet] - Initializing Servlet 'dispatcherServlet'
+2024-06-09 15:55:34.427 INFO  [http-nio-8090-exec-1] [o.s.web.servlet.DispatcherServlet] - Completed initialization in 2 ms
+2024-06-09 15:55:34.467 INFO  [http-nio-8090-exec-1] [c.k.kidsplace.controller.HomeController] - 방문자의 IP 주소: 0:0:0:0:0:0:0:1
+2024-06-09 15:55:34.492 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.isValid(2) returned true
+2024-06-09 15:55:34.492 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.getAutoCommit() returned true
+2024-06-09 15:55:34.505 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.new PreparedStatement returned 
+2024-06-09 15:55:34.505 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.prepareStatement(INSERT INTO
+            kidslandIP(vIpAddress)
+        VALUES
+            (
+                ?
+            )) returned net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy@733a7e4c
+2024-06-09 15:55:34.508 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.setString(1, "0:0:0:0:0:0:0:1") returned 
+2024-06-09 15:55:34.553 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. INSERT INTO kidslandIP(vIpAddress) VALUES ( '0:0:0:0:0:0:0:1' )  {executed in 44 ms}
+2024-06-09 15:55:34.553 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.execute() returned false
+2024-06-09 15:55:34.553 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.getUpdateCount() returned 1
+2024-06-09 15:55:34.553 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.close() returned 
+2024-06-09 15:55:34.553 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.clearWarnings() returned 
+2024-06-09 15:55:34.554 INFO  [http-nio-8090-exec-1] [c.k.kidsplace.service.IpServicempl] - service단에서 호출된 ip: 0:0:0:0:0:0:0:1
+2024-06-09 15:55:34.593 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.getAutoCommit() returned true
+2024-06-09 15:55:34.594 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.new PreparedStatement returned 
+2024-06-09 15:55:34.594 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.prepareStatement(SELECT
+            count(*)
+        FROM
+            kidslandNotice
+        WHERE
+            nDelete = 'N') returned net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy@74c62c4d
+2024-06-09 15:55:34.611 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. SELECT count(*) FROM kidslandNotice WHERE nDelete = 'N'  {executed in 17 ms}
+2024-06-09 15:55:34.611 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.execute() returned true
+2024-06-09 15:55:34.614 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.new ResultSet returned 
+2024-06-09 15:55:34.614 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.getResultSet() returned net.sf.log4jdbc.sql.jdbcapi.ResultSetSpy@7e666f3
+2024-06-09 15:55:34.618 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getMetaData() returned com.mysql.cj.jdbc.result.ResultSetMetaData@6c1e0058 - Field level information: 
+	com.mysql.cj.result.Field@5f713c67[dbName=null,tableName=null,originalTableName=null,columnName=count(*),originalColumnName=null,mysqlType=8(FIELD_TYPE_BIGINT),sqlType=-5,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+2024-06-09 15:55:34.619 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getType() returned 1003
+2024-06-09 15:55:34.619 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.619 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.620 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(count(*)) returned 113
+2024-06-09 15:55:34.621 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.622 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 
+|---------|
+|count(*) |
+|---------|
+|113      |
+|---------|
+
+2024-06-09 15:55:34.622 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned false
+2024-06-09 15:55:34.622 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.close() returned void
+2024-06-09 15:55:34.622 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.getMetaData() returned com.mysql.cj.jdbc.DatabaseMetaData@3e8bf097
+2024-06-09 15:55:34.622 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.getMoreResults() returned false
+2024-06-09 15:55:34.622 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.getUpdateCount() returned -1
+2024-06-09 15:55:34.622 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.close() returned 
+2024-06-09 15:55:34.623 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.clearWarnings() returned 
+2024-06-09 15:55:34.625 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.getAutoCommit() returned true
+2024-06-09 15:55:34.625 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.new PreparedStatement returned 
+2024-06-09 15:55:34.625 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.prepareStatement(SELECT
+            nNum
+           ,nCategory
+           ,nWriter
+           ,nTitle
+           ,nContent
+           ,date_format(nDate, '%Y-%m-%d') AS nDate
+           ,nDelete
+        FROM
+            kidslandNotice
+        WHERE
+            nDelete = 'N'
+            
+             
+             
+             
+        ORDER BY
+            nNum DESC
+        LIMIT
+            ?, ?) returned net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy@33f7bb74
+2024-06-09 15:55:34.626 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.setInt(1, 0) returned 
+2024-06-09 15:55:34.626 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.setInt(2, 10) returned 
+2024-06-09 15:55:34.643 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. SELECT nNum ,nCategory ,nWriter ,nTitle ,nContent ,date_format(nDate, '%Y-%m-%d') AS nDate 
+,nDelete FROM kidslandNotice WHERE nDelete = 'N' ORDER BY nNum DESC LIMIT 0, 10  {executed in 17 ms}
+2024-06-09 15:55:34.643 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.execute() returned true
+2024-06-09 15:55:34.643 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.new ResultSet returned 
+2024-06-09 15:55:34.643 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.getResultSet() returned net.sf.log4jdbc.sql.jdbcapi.ResultSetSpy@72a32dfc
+2024-06-09 15:55:34.643 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getMetaData() returned com.mysql.cj.jdbc.result.ResultSetMetaData@74813f11 - Field level information: 
+	com.mysql.cj.result.Field@631445d5[dbName=KIDS,tableName=kidslandNotice,originalTableName=kidslandNotice,columnName=nNum,originalColumnName=nNum,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags= PRIMARY_KEY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@576771ed[dbName=KIDS,tableName=kidslandNotice,originalTableName=kidslandNotice,columnName=nCategory,originalColumnName=nCategory,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=45, charsetName=UTF-8]
+	com.mysql.cj.result.Field@3c406a30[dbName=KIDS,tableName=kidslandNotice,originalTableName=kidslandNotice,columnName=nWriter,originalColumnName=nWriter,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=45, charsetName=UTF-8]
+	com.mysql.cj.result.Field@4144a31e[dbName=KIDS,tableName=kidslandNotice,originalTableName=kidslandNotice,columnName=nTitle,originalColumnName=nTitle,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=45, charsetName=UTF-8]
+	com.mysql.cj.result.Field@bf7c0e[dbName=KIDS,tableName=kidslandNotice,originalTableName=kidslandNotice,columnName=nContent,originalColumnName=nContent,mysqlType=252(FIELD_TYPE_TEXT),sqlType=-1,flags= BLOB, charsetIndex=45, charsetName=UTF-8]
+	com.mysql.cj.result.Field@6cbb9ded[dbName=null,tableName=null,originalTableName=null,columnName=nDate,originalColumnName=null,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=45, charsetName=UTF-8]
+	com.mysql.cj.result.Field@53956ba0[dbName=KIDS,tableName=kidslandNotice,originalTableName=kidslandNotice,columnName=nDelete,originalColumnName=nDelete,mysqlType=254(FIELD_TYPE_CHAR),sqlType=1,flags=, charsetIndex=8, charsetName=WINDOWS-1252]
+2024-06-09 15:55:34.643 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getType() returned 1003
+2024-06-09 15:55:34.643 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.643 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.644 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(nNum) returned 113
+2024-06-09 15:55:34.644 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nCategory) returned 이벤트
+2024-06-09 15:55:34.644 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nWriter) returned 관리자
+2024-06-09 15:55:34.644 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nTitle) returned 키즈월드 어린이 사진촬영 대회 안내
+2024-06-09 15:55:34.644 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nContent) returned 키즈월드에서 어린이 사진촬영 대회를 개최합니다. 
+아름다운 순간을 사진으로 담아보세요!
+2024-06-09 15:55:34.644 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDate) returned 2023-10-10
+2024-06-09 15:55:34.645 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDelete) returned N
+2024-06-09 15:55:34.645 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.645 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.645 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(nNum) returned 112
+2024-06-09 15:55:34.645 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nCategory) returned 안내
+2024-06-09 15:55:34.645 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nWriter) returned 관리자
+2024-06-09 15:55:34.645 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nTitle) returned 키즈월드 신규 초등창작마을 안내
+2024-06-09 15:55:34.646 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nContent) returned 키즈월드에 초등창작마을이 새롭게 오픈되었습니다. 
+창의력을 키우는 다양한 활동을 해보세요!
+2024-06-09 15:55:34.646 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDate) returned 2023-06-13
+2024-06-09 15:55:34.646 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDelete) returned N
+2024-06-09 15:55:34.646 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.646 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.646 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(nNum) returned 111
+2024-06-09 15:55:34.646 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nCategory) returned 안내
+2024-06-09 15:55:34.646 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nWriter) returned 관리자
+2024-06-09 15:55:34.647 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nTitle) returned 키즈월드 신규 공룡박물관 오픈 안내
+2024-06-09 15:55:34.647 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nContent) returned 키즈월드에 공룡박물관이 새롭게 오픈되었습니다. 
+공룡의 세계에 대해 알아보세요!
+2024-06-09 15:55:34.647 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDate) returned 2023-06-13
+2024-06-09 15:55:34.647 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDelete) returned N
+2024-06-09 15:55:34.647 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.647 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.647 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(nNum) returned 110
+2024-06-09 15:55:34.647 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nCategory) returned 공지
+2024-06-09 15:55:34.647 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nWriter) returned 관리자
+2024-06-09 15:55:34.648 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nTitle) returned 키즈월드 신규 아쿠아리움 오픈 안내
+2024-06-09 15:55:34.648 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nContent) returned 키즈월드에 아쿠아리움이 새롭게 오픈되었습니다. 
+신비로운 해양 생물들을 만나보세요!
+2024-06-09 15:55:34.648 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDate) returned 2023-06-13
+2024-06-09 15:55:34.648 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDelete) returned N
+2024-06-09 15:55:34.648 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.648 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.648 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(nNum) returned 109
+2024-06-09 15:55:34.648 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nCategory) returned 이벤트
+2024-06-09 15:55:34.648 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nWriter) returned 관리자
+2024-06-09 15:55:34.648 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nTitle) returned 키즈월드 어린이 놀이 동영상 공모전 안내
+2024-06-09 15:55:34.648 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nContent) returned 키즈월드에서 어린이 놀이 동영상 공모전을 개최합니다. 
+재미있는 놀이를 동영상으로 찍어보세요!
+2024-06-09 15:55:34.649 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDate) returned 2023-06-13
+2024-06-09 15:55:34.649 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDelete) returned N
+2024-06-09 15:55:34.649 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.649 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.649 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(nNum) returned 108
+2024-06-09 15:55:34.649 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nCategory) returned 안내
+2024-06-09 15:55:34.649 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nWriter) returned 관리자
+2024-06-09 15:55:34.649 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nTitle) returned 키즈월드 신규 테마파크 오픈 안내
+2024-06-09 15:55:34.649 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nContent) returned 키즈월드에 테마파크가 새롭게 오픈되었습니다. 
+환상적인 어드벤처를 즐겨보세요!
+2024-06-09 15:55:34.649 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDate) returned 2023-06-13
+2024-06-09 15:55:34.649 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDelete) returned N
+2024-06-09 15:55:34.649 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.649 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.649 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(nNum) returned 107
+2024-06-09 15:55:34.649 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nCategory) returned 안내
+2024-06-09 15:55:34.650 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nWriter) returned 관리자
+2024-06-09 15:55:34.650 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nTitle) returned 키즈월드 신규 어린이 피아노 강습 안내
+2024-06-09 15:55:34.650 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nContent) returned 키즈월드에서 어린이를 위한 피아노 강습 프로그램을 제공합니다.
+음악적인 재능을 키워보세요!
+2024-06-09 15:55:34.650 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDate) returned 2023-06-13
+2024-06-09 15:55:34.650 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDelete) returned N
+2024-06-09 15:55:34.650 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.650 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.650 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(nNum) returned 106
+2024-06-09 15:55:34.650 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nCategory) returned 공지
+2024-06-09 15:55:34.650 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nWriter) returned 관리자
+2024-06-09 15:55:34.650 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nTitle) returned 키즈월드 신규 미니 자동차 레이스장 안내
+2024-06-09 15:55:34.650 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nContent) returned 키즈월드에 미니 자동차 레이스장이 새롭게 오픈되었습니다. 
+재미있는 경주를 즐겨보세요!
+2024-06-09 15:55:34.650 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDate) returned 2023-06-13
+2024-06-09 15:55:34.650 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDelete) returned N
+2024-06-09 15:55:34.650 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.650 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.651 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(nNum) returned 105
+2024-06-09 15:55:34.651 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nCategory) returned 이벤트
+2024-06-09 15:55:34.651 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nWriter) returned 관리자
+2024-06-09 15:55:34.651 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nTitle) returned 키즈월드 겨울 캠프 안내
+2024-06-09 15:55:34.651 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nContent) returned 겨울 방학 기간 동안 키즈월드에서 다양한 캠프 프로그램을 운영합니다. 
+즐거운 겨울을 보내보세요!
+2024-06-09 15:55:34.651 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDate) returned 2023-06-13
+2024-06-09 15:55:34.651 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDelete) returned N
+2024-06-09 15:55:34.651 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.651 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.651 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(nNum) returned 104
+2024-06-09 15:55:34.651 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nCategory) returned 안내
+2024-06-09 15:55:34.651 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nWriter) returned 관리자
+2024-06-09 15:55:34.651 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nTitle) returned 키즈월드 신규 스포츠 체험장 안내
+2024-06-09 15:55:34.651 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nContent) returned 키즈월드에 스포츠 체험장이 새롭게 오픈되었습니다. 
+다양한 스포츠를 체험해보세요!
+2024-06-09 15:55:34.651 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDate) returned 2023-06-13
+2024-06-09 15:55:34.651 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDelete) returned N
+2024-06-09 15:55:34.651 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.653 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 
+|-----|----------|--------|-----------------------|-------------------------------------------------------|-----------|--------|
+|nnum |ncategory |nwriter |ntitle                 |ncontent                                               |ndate      |ndelete |
+|-----|----------|--------|-----------------------|-------------------------------------------------------|-----------|--------|
+|113  |이벤트       |관리자     |키즈월드 어린이 사진촬영 대회 안내    |키즈월드에서 어린이 사진촬영 대회를 개최합니다. 
+아름다운 순간을 사진으로 담아보세요!       |2023-10-10 |N       |
+|112  |안내        |관리자     |키즈월드 신규 초등창작마을 안내      |키즈월드에 초등창작마을이 새롭게 오픈되었습니다. 
+창의력을 키우는 다양한 활동을 해보세요!     |2023-06-13 |N       |
+|111  |안내        |관리자     |키즈월드 신규 공룡박물관 오픈 안내    |키즈월드에 공룡박물관이 새롭게 오픈되었습니다. 
+공룡의 세계에 대해 알아보세요!           |2023-06-13 |N       |
+|110  |공지        |관리자     |키즈월드 신규 아쿠아리움 오픈 안내    |키즈월드에 아쿠아리움이 새롭게 오픈되었습니다. 
+신비로운 해양 생물들을 만나보세요!         |2023-06-13 |N       |
+|109  |이벤트       |관리자     |키즈월드 어린이 놀이 동영상 공모전 안내 |키즈월드에서 어린이 놀이 동영상 공모전을 개최합니다. 
+재미있는 놀이를 동영상으로 찍어보세요!   |2023-06-13 |N       |
+|108  |안내        |관리자     |키즈월드 신규 테마파크 오픈 안내     |키즈월드에 테마파크가 새롭게 오픈되었습니다. 
+환상적인 어드벤처를 즐겨보세요!            |2023-06-13 |N       |
+|107  |안내        |관리자     |키즈월드 신규 어린이 피아노 강습 안내  |키즈월드에서 어린이를 위한 피아노 강습 프로그램을 제공합니다.
+음악적인 재능을 키워보세요!     |2023-06-13 |N       |
+|106  |공지        |관리자     |키즈월드 신규 미니 자동차 레이스장 안내 |키즈월드에 미니 자동차 레이스장이 새롭게 오픈되었습니다. 
+재미있는 경주를 즐겨보세요!       |2023-06-13 |N       |
+|105  |이벤트       |관리자     |키즈월드 겨울 캠프 안내          |겨울 방학 기간 동안 키즈월드에서 다양한 캠프 프로그램을 운영합니다. 
+즐거운 겨울을 보내보세요! |2023-06-13 |N       |
+|104  |안내        |관리자     |키즈월드 신규 스포츠 체험장 안내     |키즈월드에 스포츠 체험장이 새롭게 오픈되었습니다. 
+다양한 스포츠를 체험해보세요!          |2023-06-13 |N       |
+|-----|----------|--------|-----------------------|-------------------------------------------------------|-----------|--------|
+
+2024-06-09 15:55:34.654 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned false
+2024-06-09 15:55:34.654 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.close() returned void
+2024-06-09 15:55:34.654 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.getMetaData() returned com.mysql.cj.jdbc.DatabaseMetaData@58d86025
+2024-06-09 15:55:34.654 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.getMoreResults() returned false
+2024-06-09 15:55:34.654 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.getUpdateCount() returned -1
+2024-06-09 15:55:34.655 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.close() returned 
+2024-06-09 15:55:34.655 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.clearWarnings() returned 
+2024-06-09 15:55:34.655 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.getAutoCommit() returned true
+2024-06-09 15:55:34.656 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.new PreparedStatement returned 
+2024-06-09 15:55:34.656 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.prepareStatement(SELECT
+            count(*)
+        FROM
+            kidslandFaq
+        WHERE
+            fDelete = 'N') returned net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy@5d8f422d
+2024-06-09 15:55:34.670 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. SELECT count(*) FROM kidslandFaq WHERE fDelete = 'N'  {executed in 14 ms}
+2024-06-09 15:55:34.670 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.execute() returned true
+2024-06-09 15:55:34.670 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.new ResultSet returned 
+2024-06-09 15:55:34.670 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.getResultSet() returned net.sf.log4jdbc.sql.jdbcapi.ResultSetSpy@4ded20e6
+2024-06-09 15:55:34.670 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getMetaData() returned com.mysql.cj.jdbc.result.ResultSetMetaData@20200eeb - Field level information: 
+	com.mysql.cj.result.Field@3b629b82[dbName=null,tableName=null,originalTableName=null,columnName=count(*),originalColumnName=null,mysqlType=8(FIELD_TYPE_BIGINT),sqlType=-5,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+2024-06-09 15:55:34.671 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getType() returned 1003
+2024-06-09 15:55:34.671 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.671 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.671 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(count(*)) returned 15
+2024-06-09 15:55:34.671 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.671 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 
+|---------|
+|count(*) |
+|---------|
+|15       |
+|---------|
+
+2024-06-09 15:55:34.671 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned false
+2024-06-09 15:55:34.671 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.close() returned void
+2024-06-09 15:55:34.671 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.getMetaData() returned com.mysql.cj.jdbc.DatabaseMetaData@3895d184
+2024-06-09 15:55:34.671 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.getMoreResults() returned false
+2024-06-09 15:55:34.671 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.getUpdateCount() returned -1
+2024-06-09 15:55:34.671 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.close() returned 
+2024-06-09 15:55:34.671 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.clearWarnings() returned 
+2024-06-09 15:55:34.673 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.getAutoCommit() returned true
+2024-06-09 15:55:34.674 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.new PreparedStatement returned 
+2024-06-09 15:55:34.674 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.prepareStatement(SELECT
+            fNum
+           ,uNum
+           ,fTitle
+           ,fContent
+           ,fDate
+           ,fUpdate
+           ,fDeleteDate
+           ,fDelete
+        FROM
+            kidslandFaq
+        WHERE
+            fDelete = 'N'
+        ORDER BY
+            fNum DESC
+        LIMIT
+            ?, ?) returned net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy@54d04996
+2024-06-09 15:55:34.674 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.setInt(1, 0) returned 
+2024-06-09 15:55:34.674 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.setInt(2, 10) returned 
+2024-06-09 15:55:34.687 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. SELECT fNum ,uNum ,fTitle ,fContent ,fDate ,fUpdate ,fDeleteDate ,fDelete FROM kidslandFaq 
+WHERE fDelete = 'N' ORDER BY fNum DESC LIMIT 0, 10  {executed in 13 ms}
+2024-06-09 15:55:34.687 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.execute() returned true
+2024-06-09 15:55:34.687 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.new ResultSet returned 
+2024-06-09 15:55:34.687 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.getResultSet() returned net.sf.log4jdbc.sql.jdbcapi.ResultSetSpy@113e25bf
+2024-06-09 15:55:34.687 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getMetaData() returned com.mysql.cj.jdbc.result.ResultSetMetaData@59b793b0 - Field level information: 
+	com.mysql.cj.result.Field@51e394a0[dbName=KIDS,tableName=kidslandFaq,originalTableName=kidslandFaq,columnName=fNum,originalColumnName=fNum,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags= PRIMARY_KEY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@7a9ebf3[dbName=KIDS,tableName=kidslandFaq,originalTableName=kidslandFaq,columnName=uNum,originalColumnName=uNum,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@675a2564[dbName=KIDS,tableName=kidslandFaq,originalTableName=kidslandFaq,columnName=fTitle,originalColumnName=fTitle,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=45, charsetName=UTF-8]
+	com.mysql.cj.result.Field@295002c[dbName=KIDS,tableName=kidslandFaq,originalTableName=kidslandFaq,columnName=fContent,originalColumnName=fContent,mysqlType=252(FIELD_TYPE_LONGTEXT),sqlType=-1,flags= BLOB, charsetIndex=45, charsetName=UTF-8]
+	com.mysql.cj.result.Field@4f1ed24a[dbName=KIDS,tableName=kidslandFaq,originalTableName=kidslandFaq,columnName=fDate,originalColumnName=fDate,mysqlType=7(FIELD_TYPE_TIMESTAMP),sqlType=93,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@7a04e29[dbName=KIDS,tableName=kidslandFaq,originalTableName=kidslandFaq,columnName=fUpdate,originalColumnName=fUpdate,mysqlType=7(FIELD_TYPE_TIMESTAMP),sqlType=93,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@31e72abc[dbName=KIDS,tableName=kidslandFaq,originalTableName=kidslandFaq,columnName=fDeleteDate,originalColumnName=fDeleteDate,mysqlType=7(FIELD_TYPE_TIMESTAMP),sqlType=93,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@1bd9c8cc[dbName=KIDS,tableName=kidslandFaq,originalTableName=kidslandFaq,columnName=fDelete,originalColumnName=fDelete,mysqlType=254(FIELD_TYPE_CHAR),sqlType=1,flags=, charsetIndex=45, charsetName=UTF-8]
+2024-06-09 15:55:34.687 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getType() returned 1003
+2024-06-09 15:55:34.687 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.687 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.687 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fNum) returned 15
+2024-06-09 15:55:34.687 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(uNum) returned 1
+2024-06-09 15:55:34.688 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fTitle) returned 어린이 놀이 시설 이용 시 안전 절차는 어떻게 되나요?
+2024-06-09 15:55:34.688 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fContent) returned 어린이 놀이 시설 이용 시 안전을 위해 다양한 절차가 있습니다. 관리자의 안내에 따라 안전 장비 착용, 놀이 시설의 안전 확인, 보호자의 동반 등을 준수해주시기 바랍니다.
+2024-06-09 15:55:34.688 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDate) returned 2023-06-13 18:39:46
+2024-06-09 15:55:34.688 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fUpdate) returned void
+2024-06-09 15:55:34.689 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDeleteDate) returned void
+2024-06-09 15:55:34.689 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDelete) returned N
+2024-06-09 15:55:34.689 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.689 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.689 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fNum) returned 14
+2024-06-09 15:55:34.689 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(uNum) returned 1
+2024-06-09 15:55:34.689 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fTitle) returned 키즈월드에서 주최하는 이벤트는 어떤 것들이 있나요?
+2024-06-09 15:55:34.689 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fContent) returned 키즈월드에서는 다양한 주제로 이벤트를 개최합니다. 체험 이벤트, 공연, 워크샵 등 다양한 프로그램을 통해 즐거운 시간을 보낼 수 있습니다. 이벤트 페이지를 확인하여 참여해보세요.
+2024-06-09 15:55:34.689 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDate) returned 2023-06-13 18:39:31
+2024-06-09 15:55:34.689 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fUpdate) returned void
+2024-06-09 15:55:34.689 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDeleteDate) returned void
+2024-06-09 15:55:34.689 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDelete) returned N
+2024-06-09 15:55:34.689 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.689 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.689 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fNum) returned 13
+2024-06-09 15:55:34.690 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(uNum) returned 1
+2024-06-09 15:55:34.690 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fTitle) returned 어린이 놀이 시설 이용 시 예약이 필요한가요?
+2024-06-09 15:55:34.690 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fContent) returned 일부 어린이 놀이 시설은 예약이 필요할 수 있습니다. 사전 예약 시스템을 통해 원하는 날짜와 시간에 이용하실 수 있으니 홈페이지나 고객센터를 통해 확인해주세요.
+2024-06-09 15:55:34.690 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDate) returned 2023-06-13 18:38:54
+2024-06-09 15:55:34.690 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fUpdate) returned void
+2024-06-09 15:55:34.690 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDeleteDate) returned void
+2024-06-09 15:55:34.690 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDelete) returned N
+2024-06-09 15:55:34.690 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.690 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.690 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fNum) returned 12
+2024-06-09 15:55:34.690 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(uNum) returned 1
+2024-06-09 15:55:34.690 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fTitle) returned 키즈월드에서 제공되는 교육 프로그램은 어떤 것들이 있나요?
+2024-06-09 15:55:34.690 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fContent) returned 키즈월드에서는 다양한 교육 프로그램을 제공합니다. 예술, 과학, 체육 등 다양한 분야의 교육 프로그램을 통해 어린이의 다양한 관심과 능력을 개발할 수 있습니다.
+2024-06-09 15:55:34.690 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDate) returned 2023-06-13 18:38:36
+2024-06-09 15:55:34.691 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fUpdate) returned void
+2024-06-09 15:55:34.691 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDeleteDate) returned void
+2024-06-09 15:55:34.691 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDelete) returned N
+2024-06-09 15:55:34.691 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.691 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.691 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fNum) returned 11
+2024-06-09 15:55:34.691 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(uNum) returned 1
+2024-06-09 15:55:34.691 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fTitle) returned 키즈월드 멤버십 혜택은 어떤 것들이 있나요?"
+2024-06-09 15:55:34.691 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fContent) returned 키즈월드 멤버십은 다양한 혜택을 제공합니다. 회원 전용 이벤트, 할인 혜택, 특별한 프로그램 참여 등 다양한 혜택을 누릴 수 있으니 멤버십에 가입해보세요.
+2024-06-09 15:55:34.691 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDate) returned 2023-06-13 18:38:25
+2024-06-09 15:55:34.691 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fUpdate) returned void
+2024-06-09 15:55:34.691 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDeleteDate) returned void
+2024-06-09 15:55:34.691 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDelete) returned N
+2024-06-09 15:55:34.691 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.691 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.691 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fNum) returned 10
+2024-06-09 15:55:34.691 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(uNum) returned 1
+2024-06-09 15:55:34.691 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fTitle) returned 키즈월드 회원탈퇴는 어떻게 할 수 있나요?
+2024-06-09 15:55:34.691 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fContent) returned 회원탈퇴를 원하신다면 로그인 후 마이페이지에서 회원탈퇴 버튼을 클릭하여 진행하실 수 있습니다. 회원탈퇴 시에는 주의사항을 숙지하고 진행해주세요.
+2024-06-09 15:55:34.692 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDate) returned 2023-06-13 18:36:50
+2024-06-09 15:55:34.692 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fUpdate) returned void
+2024-06-09 15:55:34.692 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDeleteDate) returned void
+2024-06-09 15:55:34.692 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDelete) returned N
+2024-06-09 15:55:34.692 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.692 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.692 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fNum) returned 9
+2024-06-09 15:55:34.692 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(uNum) returned 1
+2024-06-09 15:55:34.693 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fTitle) returned 어린이 생일파티 예약은 어떻게 하면 되나요?
+2024-06-09 15:55:34.693 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fContent) returned 어린이 생일파티 예약을 원하신다면 홈페이지의 예약 페이지를 확인해주세요. 원하는 날짜와 시간, 인원 등을 선택하여 예약을 진행하실 수 있습니다.
+2024-06-09 15:55:34.693 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDate) returned 2023-06-13 18:36:37
+2024-06-09 15:55:34.693 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fUpdate) returned void
+2024-06-09 15:55:34.693 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDeleteDate) returned void
+2024-06-09 15:55:34.693 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDelete) returned N
+2024-06-09 15:55:34.693 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.693 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.694 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fNum) returned 8
+2024-06-09 15:55:34.694 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(uNum) returned 1
+2024-06-09 15:55:34.694 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fTitle) returned 키즈월드의 환불 정책은 어떻게 되나요?
+2024-06-09 15:55:34.694 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fContent) returned 환불 정책은 상품 또는 서비스에 따라 다를 수 있습니다. 구매한 상품 또는 서비스의 환불 정책을 확인하고, 환불 요청이 필요한 경우 고객센터로 문의해주세요.
+2024-06-09 15:55:34.694 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDate) returned 2023-06-13 18:36:23
+2024-06-09 15:55:34.694 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fUpdate) returned void
+2024-06-09 15:55:34.694 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDeleteDate) returned void
+2024-06-09 15:55:34.694 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDelete) returned N
+2024-06-09 15:55:34.694 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.694 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.694 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fNum) returned 7
+2024-06-09 15:55:34.694 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(uNum) returned 1
+2024-06-09 15:55:34.694 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fTitle) returned 어린이 놀이 시설 이용 시 주의사항이 있나요?
+2024-06-09 15:55:34.694 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fContent) returned 어린이 놀이 시설을 이용할 때에는 안전을 위해 주의사항을 지켜주시기 바랍니다. 선생님 또는 보호자의 동반 및 지시를 따르고, 놀이기구 사용 시 안전 장비를 착용해주세요.
+2024-06-09 15:55:34.695 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDate) returned 2023-06-13 18:36:12
+2024-06-09 15:55:34.695 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fUpdate) returned void
+2024-06-09 15:55:34.695 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDeleteDate) returned void
+2024-06-09 15:55:34.695 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDelete) returned N
+2024-06-09 15:55:34.695 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.695 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:55:34.695 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fNum) returned 6
+2024-06-09 15:55:34.695 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(uNum) returned 1
+2024-06-09 15:55:34.695 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fTitle) returned 키즈월드 이용 중 문제가 발생했어요. 어떻게 도움을 받을 수 있나요?
+2024-06-09 15:55:34.695 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fContent) returned 키즈월드 이용 중 문제가 발생하셨다면 고객센터로 문의해주세요. 전화, 이메일, 온라인 채팅 등을 통해 문제 상황을 상세히 설명하고 도움을 받으실 수 있습니다.
+2024-06-09 15:55:34.695 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDate) returned 2023-06-13 18:36:00
+2024-06-09 15:55:34.695 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fUpdate) returned void
+2024-06-09 15:55:34.695 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDeleteDate) returned void
+2024-06-09 15:55:34.695 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(fDelete) returned N
+2024-06-09 15:55:34.695 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:55:34.697 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 
+|-----|-----|---------------------------------------|----------------------------------------------------------------------------------------------------|--------------------|--------|------------|--------|
+|fnum |unum |ftitle                                 |fcontent                                                                                            |fdate               |fupdate |fdeletedate |fdelete |
+|-----|-----|---------------------------------------|----------------------------------------------------------------------------------------------------|--------------------|--------|------------|--------|
+|15   |1    |어린이 놀이 시설 이용 시 안전 절차는 어떻게 되나요?         |어린이 놀이 시설 이용 시 안전을 위해 다양한 절차가 있습니다. 관리자의 안내에 따라 안전 장비 착용, 놀이 시설의 안전 확인, 보호자의 동반 등을 준수해주시기 바랍니다.     |2023-06-13 18:39:46 |null    |null        |N       |
+|14   |1    |키즈월드에서 주최하는 이벤트는 어떤 것들이 있나요?           |키즈월드에서는 다양한 주제로 이벤트를 개최합니다. 체험 이벤트, 공연, 워크샵 등 다양한 프로그램을 통해 즐거운 시간을 보낼 수 있습니다. 이벤트 페이지를 확인하여 참여해보세요. |2023-06-13 18:39:31 |null    |null        |N       |
+|13   |1    |어린이 놀이 시설 이용 시 예약이 필요한가요?              |일부 어린이 놀이 시설은 예약이 필요할 수 있습니다. 사전 예약 시스템을 통해 원하는 날짜와 시간에 이용하실 수 있으니 홈페이지나 고객센터를 통해 확인해주세요.           |2023-06-13 18:38:54 |null    |null        |N       |
+|12   |1    |키즈월드에서 제공되는 교육 프로그램은 어떤 것들이 있나요?       |키즈월드에서는 다양한 교육 프로그램을 제공합니다. 예술, 과학, 체육 등 다양한 분야의 교육 프로그램을 통해 어린이의 다양한 관심과 능력을 개발할 수 있습니다.           |2023-06-13 18:38:36 |null    |null        |N       |
+|11   |1    |키즈월드 멤버십 혜택은 어떤 것들이 있나요?"              |키즈월드 멤버십은 다양한 혜택을 제공합니다. 회원 전용 이벤트, 할인 혜택, 특별한 프로그램 참여 등 다양한 혜택을 누릴 수 있으니 멤버십에 가입해보세요.              |2023-06-13 18:38:25 |null    |null        |N       |
+|10   |1    |키즈월드 회원탈퇴는 어떻게 할 수 있나요?                |회원탈퇴를 원하신다면 로그인 후 마이페이지에서 회원탈퇴 버튼을 클릭하여 진행하실 수 있습니다. 회원탈퇴 시에는 주의사항을 숙지하고 진행해주세요.                    |2023-06-13 18:36:50 |null    |null        |N       |
+|9    |1    |어린이 생일파티 예약은 어떻게 하면 되나요?               |어린이 생일파티 예약을 원하신다면 홈페이지의 예약 페이지를 확인해주세요. 원하는 날짜와 시간, 인원 등을 선택하여 예약을 진행하실 수 있습니다.                    |2023-06-13 18:36:37 |null    |null        |N       |
+|8    |1    |키즈월드의 환불 정책은 어떻게 되나요?                  |환불 정책은 상품 또는 서비스에 따라 다를 수 있습니다. 구매한 상품 또는 서비스의 환불 정책을 확인하고, 환불 요청이 필요한 경우 고객센터로 문의해주세요.             |2023-06-13 18:36:23 |null    |null        |N       |
+|7    |1    |어린이 놀이 시설 이용 시 주의사항이 있나요?              |어린이 놀이 시설을 이용할 때에는 안전을 위해 주의사항을 지켜주시기 바랍니다. 선생님 또는 보호자의 동반 및 지시를 따르고, 놀이기구 사용 시 안전 장비를 착용해주세요.      |2023-06-13 18:36:12 |null    |null        |N       |
+|6    |1    |키즈월드 이용 중 문제가 발생했어요. 어떻게 도움을 받을 수 있나요? |키즈월드 이용 중 문제가 발생하셨다면 고객센터로 문의해주세요. 전화, 이메일, 온라인 채팅 등을 통해 문제 상황을 상세히 설명하고 도움을 받으실 수 있습니다.            |2023-06-13 18:36:00 |null    |null        |N       |
+|-----|-----|---------------------------------------|----------------------------------------------------------------------------------------------------|--------------------|--------|------------|--------|
+
+2024-06-09 15:55:34.698 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned false
+2024-06-09 15:55:34.698 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.close() returned void
+2024-06-09 15:55:34.699 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.getMetaData() returned com.mysql.cj.jdbc.DatabaseMetaData@654e9b8b
+2024-06-09 15:55:34.699 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.getMoreResults() returned false
+2024-06-09 15:55:34.699 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.getUpdateCount() returned -1
+2024-06-09 15:55:34.699 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.close() returned 
+2024-06-09 15:55:34.699 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.clearWarnings() returned 
+2024-06-09 15:56:23.391 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.isValid(2) returned true
+2024-06-09 15:56:23.392 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.getAutoCommit() returned true
+2024-06-09 15:56:23.393 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.new PreparedStatement returned 
+2024-06-09 15:56:23.393 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.prepareStatement(SELECT
+            count(*)
+        FROM
+            kidslandNotice
+        WHERE
+            nDelete = 'N') returned net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy@2164f55
+2024-06-09 15:56:23.408 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. SELECT count(*) FROM kidslandNotice WHERE nDelete = 'N'  {executed in 15 ms}
+2024-06-09 15:56:23.409 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.execute() returned true
+2024-06-09 15:56:23.409 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.new ResultSet returned 
+2024-06-09 15:56:23.409 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.getResultSet() returned net.sf.log4jdbc.sql.jdbcapi.ResultSetSpy@35d41c10
+2024-06-09 15:56:23.409 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getMetaData() returned com.mysql.cj.jdbc.result.ResultSetMetaData@4ed00d3e - Field level information: 
+	com.mysql.cj.result.Field@139bfa86[dbName=null,tableName=null,originalTableName=null,columnName=count(*),originalColumnName=null,mysqlType=8(FIELD_TYPE_BIGINT),sqlType=-5,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+2024-06-09 15:56:23.409 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getType() returned 1003
+2024-06-09 15:56:23.410 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:56:23.410 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:56:23.410 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(count(*)) returned 113
+2024-06-09 15:56:23.410 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:56:23.411 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 
+|---------|
+|count(*) |
+|---------|
+|113      |
+|---------|
+
+2024-06-09 15:56:23.411 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned false
+2024-06-09 15:56:23.411 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.close() returned void
+2024-06-09 15:56:23.411 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.getMetaData() returned com.mysql.cj.jdbc.DatabaseMetaData@36e6cfa3
+2024-06-09 15:56:23.411 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.getMoreResults() returned false
+2024-06-09 15:56:23.412 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.getUpdateCount() returned -1
+2024-06-09 15:56:23.412 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.close() returned 
+2024-06-09 15:56:23.412 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.clearWarnings() returned 
+2024-06-09 15:56:23.413 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.getAutoCommit() returned true
+2024-06-09 15:56:23.414 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.new PreparedStatement returned 
+2024-06-09 15:56:23.414 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.prepareStatement(SELECT
+            nNum
+           ,nCategory
+           ,nWriter
+           ,nTitle
+           ,nContent
+           ,date_format(nDate, '%Y-%m-%d') AS nDate
+           ,nDelete
+        FROM
+            kidslandNotice
+        WHERE
+            nDelete = 'N'
+            
+             
+             
+             
+        ORDER BY
+            nNum DESC
+        LIMIT
+            ?, ?) returned net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy@78919dbc
+2024-06-09 15:56:23.415 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.setInt(1, 0) returned 
+2024-06-09 15:56:23.416 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.setInt(2, 10) returned 
+2024-06-09 15:56:23.435 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. SELECT nNum ,nCategory ,nWriter ,nTitle ,nContent ,date_format(nDate, '%Y-%m-%d') AS nDate 
+,nDelete FROM kidslandNotice WHERE nDelete = 'N' ORDER BY nNum DESC LIMIT 0, 10  {executed in 19 ms}
+2024-06-09 15:56:23.435 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.execute() returned true
+2024-06-09 15:56:23.435 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.new ResultSet returned 
+2024-06-09 15:56:23.435 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.getResultSet() returned net.sf.log4jdbc.sql.jdbcapi.ResultSetSpy@349217e2
+2024-06-09 15:56:23.435 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getMetaData() returned com.mysql.cj.jdbc.result.ResultSetMetaData@2cd7176c - Field level information: 
+	com.mysql.cj.result.Field@2ccc5e82[dbName=KIDS,tableName=kidslandNotice,originalTableName=kidslandNotice,columnName=nNum,originalColumnName=nNum,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags= PRIMARY_KEY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@58444ada[dbName=KIDS,tableName=kidslandNotice,originalTableName=kidslandNotice,columnName=nCategory,originalColumnName=nCategory,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=45, charsetName=UTF-8]
+	com.mysql.cj.result.Field@7ccd6b37[dbName=KIDS,tableName=kidslandNotice,originalTableName=kidslandNotice,columnName=nWriter,originalColumnName=nWriter,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=45, charsetName=UTF-8]
+	com.mysql.cj.result.Field@68356fb5[dbName=KIDS,tableName=kidslandNotice,originalTableName=kidslandNotice,columnName=nTitle,originalColumnName=nTitle,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=45, charsetName=UTF-8]
+	com.mysql.cj.result.Field@26c3147f[dbName=KIDS,tableName=kidslandNotice,originalTableName=kidslandNotice,columnName=nContent,originalColumnName=nContent,mysqlType=252(FIELD_TYPE_TEXT),sqlType=-1,flags= BLOB, charsetIndex=45, charsetName=UTF-8]
+	com.mysql.cj.result.Field@5cab88e7[dbName=null,tableName=null,originalTableName=null,columnName=nDate,originalColumnName=null,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=45, charsetName=UTF-8]
+	com.mysql.cj.result.Field@4ba8d496[dbName=KIDS,tableName=kidslandNotice,originalTableName=kidslandNotice,columnName=nDelete,originalColumnName=nDelete,mysqlType=254(FIELD_TYPE_CHAR),sqlType=1,flags=, charsetIndex=8, charsetName=WINDOWS-1252]
+2024-06-09 15:56:23.436 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getType() returned 1003
+2024-06-09 15:56:23.436 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:56:23.436 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:56:23.436 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(nNum) returned 113
+2024-06-09 15:56:23.436 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nCategory) returned 이벤트
+2024-06-09 15:56:23.436 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nWriter) returned 관리자
+2024-06-09 15:56:23.436 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nTitle) returned 키즈월드 어린이 사진촬영 대회 안내
+2024-06-09 15:56:23.436 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nContent) returned 키즈월드에서 어린이 사진촬영 대회를 개최합니다. 
+아름다운 순간을 사진으로 담아보세요!
+2024-06-09 15:56:23.437 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDate) returned 2023-10-10
+2024-06-09 15:56:23.437 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDelete) returned N
+2024-06-09 15:56:23.437 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:56:23.437 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:56:23.437 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(nNum) returned 112
+2024-06-09 15:56:23.437 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nCategory) returned 안내
+2024-06-09 15:56:23.437 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nWriter) returned 관리자
+2024-06-09 15:56:23.437 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nTitle) returned 키즈월드 신규 초등창작마을 안내
+2024-06-09 15:56:23.437 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nContent) returned 키즈월드에 초등창작마을이 새롭게 오픈되었습니다. 
+창의력을 키우는 다양한 활동을 해보세요!
+2024-06-09 15:56:23.437 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDate) returned 2023-06-13
+2024-06-09 15:56:23.437 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDelete) returned N
+2024-06-09 15:56:23.437 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:56:23.437 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:56:23.438 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(nNum) returned 111
+2024-06-09 15:56:23.438 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nCategory) returned 안내
+2024-06-09 15:56:23.438 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nWriter) returned 관리자
+2024-06-09 15:56:23.438 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nTitle) returned 키즈월드 신규 공룡박물관 오픈 안내
+2024-06-09 15:56:23.438 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nContent) returned 키즈월드에 공룡박물관이 새롭게 오픈되었습니다. 
+공룡의 세계에 대해 알아보세요!
+2024-06-09 15:56:23.438 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDate) returned 2023-06-13
+2024-06-09 15:56:23.438 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDelete) returned N
+2024-06-09 15:56:23.438 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:56:23.438 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:56:23.438 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(nNum) returned 110
+2024-06-09 15:56:23.438 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nCategory) returned 공지
+2024-06-09 15:56:23.438 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nWriter) returned 관리자
+2024-06-09 15:56:23.438 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nTitle) returned 키즈월드 신규 아쿠아리움 오픈 안내
+2024-06-09 15:56:23.438 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nContent) returned 키즈월드에 아쿠아리움이 새롭게 오픈되었습니다. 
+신비로운 해양 생물들을 만나보세요!
+2024-06-09 15:56:23.439 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDate) returned 2023-06-13
+2024-06-09 15:56:23.439 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDelete) returned N
+2024-06-09 15:56:23.439 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:56:23.439 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:56:23.439 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(nNum) returned 109
+2024-06-09 15:56:23.439 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nCategory) returned 이벤트
+2024-06-09 15:56:23.439 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nWriter) returned 관리자
+2024-06-09 15:56:23.439 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nTitle) returned 키즈월드 어린이 놀이 동영상 공모전 안내
+2024-06-09 15:56:23.439 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nContent) returned 키즈월드에서 어린이 놀이 동영상 공모전을 개최합니다. 
+재미있는 놀이를 동영상으로 찍어보세요!
+2024-06-09 15:56:23.439 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDate) returned 2023-06-13
+2024-06-09 15:56:23.439 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDelete) returned N
+2024-06-09 15:56:23.439 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:56:23.439 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:56:23.440 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(nNum) returned 108
+2024-06-09 15:56:23.441 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nCategory) returned 안내
+2024-06-09 15:56:23.442 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nWriter) returned 관리자
+2024-06-09 15:56:23.442 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nTitle) returned 키즈월드 신규 테마파크 오픈 안내
+2024-06-09 15:56:23.443 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nContent) returned 키즈월드에 테마파크가 새롭게 오픈되었습니다. 
+환상적인 어드벤처를 즐겨보세요!
+2024-06-09 15:56:23.443 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDate) returned 2023-06-13
+2024-06-09 15:56:23.444 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDelete) returned N
+2024-06-09 15:56:23.445 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:56:23.445 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:56:23.446 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(nNum) returned 107
+2024-06-09 15:56:23.447 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nCategory) returned 안내
+2024-06-09 15:56:23.447 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nWriter) returned 관리자
+2024-06-09 15:56:23.447 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nTitle) returned 키즈월드 신규 어린이 피아노 강습 안내
+2024-06-09 15:56:23.447 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nContent) returned 키즈월드에서 어린이를 위한 피아노 강습 프로그램을 제공합니다.
+음악적인 재능을 키워보세요!
+2024-06-09 15:56:23.447 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDate) returned 2023-06-13
+2024-06-09 15:56:23.447 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDelete) returned N
+2024-06-09 15:56:23.447 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:56:23.447 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:56:23.448 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(nNum) returned 106
+2024-06-09 15:56:23.448 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nCategory) returned 공지
+2024-06-09 15:56:23.449 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nWriter) returned 관리자
+2024-06-09 15:56:23.449 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nTitle) returned 키즈월드 신규 미니 자동차 레이스장 안내
+2024-06-09 15:56:23.449 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nContent) returned 키즈월드에 미니 자동차 레이스장이 새롭게 오픈되었습니다. 
+재미있는 경주를 즐겨보세요!
+2024-06-09 15:56:23.449 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDate) returned 2023-06-13
+2024-06-09 15:56:23.449 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDelete) returned N
+2024-06-09 15:56:23.449 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:56:23.449 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:56:23.449 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(nNum) returned 105
+2024-06-09 15:56:23.449 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nCategory) returned 이벤트
+2024-06-09 15:56:23.449 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nWriter) returned 관리자
+2024-06-09 15:56:23.449 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nTitle) returned 키즈월드 겨울 캠프 안내
+2024-06-09 15:56:23.449 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nContent) returned 겨울 방학 기간 동안 키즈월드에서 다양한 캠프 프로그램을 운영합니다. 
+즐거운 겨울을 보내보세요!
+2024-06-09 15:56:23.449 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDate) returned 2023-06-13
+2024-06-09 15:56:23.449 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDelete) returned N
+2024-06-09 15:56:23.450 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:56:23.450 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned true
+2024-06-09 15:56:23.450 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getInt(nNum) returned 104
+2024-06-09 15:56:23.450 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nCategory) returned 안내
+2024-06-09 15:56:23.450 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nWriter) returned 관리자
+2024-06-09 15:56:23.450 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nTitle) returned 키즈월드 신규 스포츠 체험장 안내
+2024-06-09 15:56:23.450 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nContent) returned 키즈월드에 스포츠 체험장이 새롭게 오픈되었습니다. 
+다양한 스포츠를 체험해보세요!
+2024-06-09 15:56:23.450 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDate) returned 2023-06-13
+2024-06-09 15:56:23.450 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.getString(nDelete) returned N
+2024-06-09 15:56:23.450 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.isClosed() returned false
+2024-06-09 15:56:23.452 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 
+|-----|----------|--------|-----------------------|-------------------------------------------------------|-----------|--------|
+|nnum |ncategory |nwriter |ntitle                 |ncontent                                               |ndate      |ndelete |
+|-----|----------|--------|-----------------------|-------------------------------------------------------|-----------|--------|
+|113  |이벤트       |관리자     |키즈월드 어린이 사진촬영 대회 안내    |키즈월드에서 어린이 사진촬영 대회를 개최합니다. 
+아름다운 순간을 사진으로 담아보세요!       |2023-10-10 |N       |
+|112  |안내        |관리자     |키즈월드 신규 초등창작마을 안내      |키즈월드에 초등창작마을이 새롭게 오픈되었습니다. 
+창의력을 키우는 다양한 활동을 해보세요!     |2023-06-13 |N       |
+|111  |안내        |관리자     |키즈월드 신규 공룡박물관 오픈 안내    |키즈월드에 공룡박물관이 새롭게 오픈되었습니다. 
+공룡의 세계에 대해 알아보세요!           |2023-06-13 |N       |
+|110  |공지        |관리자     |키즈월드 신규 아쿠아리움 오픈 안내    |키즈월드에 아쿠아리움이 새롭게 오픈되었습니다. 
+신비로운 해양 생물들을 만나보세요!         |2023-06-13 |N       |
+|109  |이벤트       |관리자     |키즈월드 어린이 놀이 동영상 공모전 안내 |키즈월드에서 어린이 놀이 동영상 공모전을 개최합니다. 
+재미있는 놀이를 동영상으로 찍어보세요!   |2023-06-13 |N       |
+|108  |안내        |관리자     |키즈월드 신규 테마파크 오픈 안내     |키즈월드에 테마파크가 새롭게 오픈되었습니다. 
+환상적인 어드벤처를 즐겨보세요!            |2023-06-13 |N       |
+|107  |안내        |관리자     |키즈월드 신규 어린이 피아노 강습 안내  |키즈월드에서 어린이를 위한 피아노 강습 프로그램을 제공합니다.
+음악적인 재능을 키워보세요!     |2023-06-13 |N       |
+|106  |공지        |관리자     |키즈월드 신규 미니 자동차 레이스장 안내 |키즈월드에 미니 자동차 레이스장이 새롭게 오픈되었습니다. 
+재미있는 경주를 즐겨보세요!       |2023-06-13 |N       |
+|105  |이벤트       |관리자     |키즈월드 겨울 캠프 안내          |겨울 방학 기간 동안 키즈월드에서 다양한 캠프 프로그램을 운영합니다. 
+즐거운 겨울을 보내보세요! |2023-06-13 |N       |
+|104  |안내        |관리자     |키즈월드 신규 스포츠 체험장 안내     |키즈월드에 스포츠 체험장이 새롭게 오픈되었습니다. 
+다양한 스포츠를 체험해보세요!          |2023-06-13 |N       |
+|-----|----------|--------|-----------------------|-------------------------------------------------------|-----------|--------|
+
+2024-06-09 15:56:23.454 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.next() returned false
+2024-06-09 15:56:23.455 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. ResultSet.close() returned void
+2024-06-09 15:56:23.455 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.getMetaData() returned com.mysql.cj.jdbc.DatabaseMetaData@3c1947db
+2024-06-09 15:56:23.455 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.getMoreResults() returned false
+2024-06-09 15:56:23.455 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.getUpdateCount() returned -1
+2024-06-09 15:56:23.455 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. PreparedStatement.close() returned 
+2024-06-09 15:56:23.455 INFO  [http-nio-8090-exec-1] [log4jdbc.log4j2] - 1. Connection.clearWarnings() returned 
+2024-06-09 15:57:58.244 INFO  [SpringApplicationShutdownHook] [com.zaxxer.hikari.HikariDataSource] - HikariPool-1 - Shutdown initiated...
+2024-06-09 15:57:58.248 INFO  [HikariPool-1 connection closer] [log4jdbc.log4j2] - 1. Connection closed. {executed in 3ms} 
+2024-06-09 15:57:58.248 INFO  [HikariPool-1 connection closer] [log4jdbc.log4j2] - 1. Connection.close() returned 
+2024-06-09 15:57:58.251 INFO  [HikariPool-1 connection closer] [log4jdbc.log4j2] - 2. Connection closed. {executed in 2ms} 
+2024-06-09 15:57:58.252 INFO  [HikariPool-1 connection closer] [log4jdbc.log4j2] - 2. Connection.close() returned 
+2024-06-09 15:57:58.253 INFO  [HikariPool-1 connection closer] [log4jdbc.log4j2] - 3. Connection closed. {executed in 1ms} 
+2024-06-09 15:57:58.253 INFO  [HikariPool-1 connection closer] [log4jdbc.log4j2] - 3. Connection.close() returned 
+2024-06-09 15:57:58.254 INFO  [HikariPool-1 connection closer] [log4jdbc.log4j2] - 4. Connection closed. {executed in 1ms} 
+2024-06-09 15:57:58.255 INFO  [HikariPool-1 connection closer] [log4jdbc.log4j2] - 4. Connection.close() returned 
+2024-06-09 15:57:58.256 INFO  [HikariPool-1 connection closer] [log4jdbc.log4j2] - 5. Connection closed. {executed in 1ms} 
+2024-06-09 15:57:58.256 INFO  [HikariPool-1 connection closer] [log4jdbc.log4j2] - 5. Connection.close() returned 
+2024-06-09 15:57:58.257 INFO  [HikariPool-1 connection closer] [log4jdbc.log4j2] - 6. Connection closed. {executed in 1ms} 
+2024-06-09 15:57:58.257 INFO  [HikariPool-1 connection closer] [log4jdbc.log4j2] - 6. Connection.close() returned 
+2024-06-09 15:57:58.258 INFO  [HikariPool-1 connection closer] [log4jdbc.log4j2] - 7. Connection closed. {executed in 1ms} 
+2024-06-09 15:57:58.258 INFO  [HikariPool-1 connection closer] [log4jdbc.log4j2] - 7. Connection.close() returned 
+2024-06-09 15:57:58.258 INFO  [HikariPool-1 connection closer] [log4jdbc.log4j2] - 8. Connection closed. {executed in 0ms} 
+2024-06-09 15:57:58.259 INFO  [HikariPool-1 connection closer] [log4jdbc.log4j2] - 8. Connection.close() returned 
+2024-06-09 15:57:58.259 INFO  [HikariPool-1 connection closer] [log4jdbc.log4j2] - 9. Connection closed. {executed in 0ms} 
+2024-06-09 15:57:58.259 INFO  [HikariPool-1 connection closer] [log4jdbc.log4j2] - 9. Connection.close() returned 
+2024-06-09 15:57:58.260 INFO  [HikariPool-1 connection closer] [log4jdbc.log4j2] - 10. Connection closed. {executed in 0ms} 
+2024-06-09 15:57:58.260 INFO  [HikariPool-1 connection closer] [log4jdbc.log4j2] - 10. Connection.close() returned 
+2024-06-09 15:57:58.260 INFO  [SpringApplicationShutdownHook] [com.zaxxer.hikari.HikariDataSource] - HikariPool-1 - Shutdown completed.
